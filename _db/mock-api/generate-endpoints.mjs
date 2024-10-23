@@ -49,4 +49,4 @@ const endpoints = {
 
 console.log(JSON.stringify(endpoints));
 
-// node src/_db/mock-api/generate-endpoints.mjs > src/_db/mock-api/endpoints.json
+// node _db/mock-api/generate-endpoints.mjs > _db/mock-api/endpoints.json
