@@ -25,7 +25,7 @@ export interface IHometown {
   city: string | null;
 }
 
-export interface IRiderInfo {
+export interface IRider {
   id: number;
   currentTeam?: string;
   name: IRiderName;
@@ -39,9 +39,22 @@ export interface IRiderInfo {
   topResults?: any[];
 }
 
+export interface ItblRider {
+  id: number;
+  firstName: string;
+  lastName: string;
+  dob: string;
+  country: string;
+  hometown: string;
+  photo: string;
+  strava: string;
+  insta: string;
+  about: string;     
+}
+
 export default class RiderService {
-  static #buildRider(rider: any): IRiderInfo {
-    const newRider: IRiderInfo = {
+  static #buildRider(rider: any): IRider {
+    const newRider: IRider = {
       id: rider.id,
       currentTeam: "Some Team",
       name: {
@@ -73,7 +86,7 @@ export default class RiderService {
   }
 
   static async getRiders() {
-    const riders = await RiderDAO.getRiders();
+    const riders: any[] = await RiderDAO.getRidersWithPrisma();
     return this.#mapRiders(riders);
   }
 }

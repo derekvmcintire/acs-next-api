@@ -1,4 +1,4 @@
-INSERT INTO tblRider (
+INSERT INTO tblrider (
   firstName,
   lastName,
   dob,
@@ -18,3 +18,5 @@ VALUES (
   '6021015',
   'Just some pretty good cyclist'
 )
+
+-- \i ~/codebase/acs-next-api/sql/insert-tblRider.sql
