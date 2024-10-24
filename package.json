@@ -17,8 +17,9 @@
     "next": "15.0.0",
     "pg": "^8.13.0",
     "prettier": "^3.3.3",
-    "react": "19.0.0-rc-65a56d0e-20241020",
-    "react-dom": "19.0.0-rc-65a56d0e-20241020"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "swagger-ui-react": "^5.17.14"
   },
   "devDependencies": {
     "@types/dotenv": "^6.1.1",
@@ -26,6 +27,7 @@
     "@types/pg": "^8.11.10",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/swagger-ui-react": "^4.18.3",
     "eslint": "^8",
     "eslint-config-next": "15.0.0",
     "typescript": "^5"
