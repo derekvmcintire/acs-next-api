@@ -11,13 +11,16 @@
     "api:generate": "node _db/mock-api/generate-endpoints.mjs > _db/mock-api/endpoints.json"
   },
   "dependencies": {
+    "dotenv": "^16.4.5",
     "next": "15.0.0",
     "pg": "^8.13.0",
     "react": "19.0.0-rc-65a56d0e-20241020",
     "react-dom": "19.0.0-rc-65a56d0e-20241020"
   },
   "devDependencies": {
+    "@types/dotenv": "^6.1.1",
     "@types/node": "^20",
+    "@types/pg": "^8.11.10",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
