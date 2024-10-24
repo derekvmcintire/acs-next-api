@@ -1,0 +1,17 @@
+.swagger-container {
+  padding: 20px;
+  max-width: 1200px; /* Adjust the max width as needed */
+  margin: 0 auto; /* Center the container */
+}
+
+.swagger-ui {
+  border: 1px solid #eaeaea; /* Add a border */
+  border-radius: 5px; /* Rounded corners */
+  overflow: hidden; /* Hide overflow */
+}
+
+@media (max-width: 768px) {
+  .swagger-container {
+    padding: 10px;
+  }
+}
