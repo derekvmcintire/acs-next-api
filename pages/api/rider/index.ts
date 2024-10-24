@@ -1,17 +1,16 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import pool from "../db";
+import RiderService from "@/app/Services/rider";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
   if (req.method === "GET") {
-    // Get all riders
     try {
-      const { rows } = await pool.query("SELECT * FROM public.tblRider");
-      res.status(200).json(rows);
+      const riders = await RiderService.getRiders();
+      res.status(200).json(riders);
     } catch (error) {
-      console.error("Database query error:", error);
       res.status(500).json({ error: "Internal Server Error" });
     }
   } else if (req.method === "POST") {
