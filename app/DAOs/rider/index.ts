@@ -10,6 +10,4 @@ export default class RiderDAO {
       throw new Error("Database query error");
     }
   }
-
-  // You can add more methods for other operations like getRiderById, createRider, updateRider, etc.
 }
