@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import pool from "../db";
 import RiderService from "@/app/Services/rider";
+import { IGetRidersParams } from "@/app/Services/rider/types";
 
 export default async function handler(
   req: NextApiRequest,
@@ -8,10 +9,20 @@ export default async function handler(
 ) {
   if (req.method === "GET") {
     try {
-      const riders = await RiderService.getRiders();
+      const { team, country, name, ids } = req.query;
+
+      const params: IGetRidersParams = {
+        teamName: typeof team === "string" ? team : undefined,
+        country: typeof country === "string" ? country : undefined,
+        name: typeof name === "string" ? name : undefined,
+        ids: typeof ids === "string" ? ids.split(",").map(Number) : undefined,
+      };
+
+      const riders = await RiderService.getRiders(params);
+
       res.status(200).json(riders);
     } catch (error) {
-      res.status(500).json({ error: "Internal Server Error" });
+      res.status(500).json({ error: `Internal Server Error: ${error}` });
     }
   } else if (req.method === "POST") {
     // Create a new rider

@@ -1,6 +1,12 @@
 declare module "swagger-ui-react" {
   import { FC } from "react";
 
-  export const SwaggerUI: FC<any>;
+  interface SwaggerUIProps {
+    url?: string;
+    swaggerDoc?: object;
+    presets?: (typeof SwaggerUIStandalonePreset)[];
+  }
+
+  export const SwaggerUI: FC<SwaggerUIProps>;
   export default SwaggerUI;
 }
