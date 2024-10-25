@@ -58,8 +58,8 @@ export default class RiderService {
       id: rider.id,
       currentTeam: "Some Team",
       name: {
-        first: rider.firstname,
-        last: rider.lastname,
+        first: rider.firstName,
+        last: rider.lastName,
       },
       teams: [],
       socials: {
