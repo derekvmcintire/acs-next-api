@@ -49,7 +49,7 @@ export interface ItblRider {
   photo: string;
   strava: string;
   insta: string;
-  about: string;     
+  about: string;
 }
 
 export default class RiderService {
