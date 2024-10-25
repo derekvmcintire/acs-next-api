@@ -7,9 +7,9 @@ const prisma = new PrismaClient();
 
 // Clear Database
 const clearDB = async () => {
-  const deleteTeams = await prisma.team.deleteMany();
-  const deleteRiders = await prisma.rider.deleteMany();
-  return [deleteTeams, deleteRiders];
+  prisma.team.deleteMany().then(() => {
+    prisma.rider.deleteMany()
+  })
 }
 
 // Create and insert Teams
