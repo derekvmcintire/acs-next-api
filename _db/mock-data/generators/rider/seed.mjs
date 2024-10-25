@@ -1,10 +1,44 @@
 import { PrismaClient } from '@prisma/client';
 import { buildMockRacerInfo } from './build-rider.mjs';
+import { generateRandomTeam } from "../helper-functions.mjs";
+
 
 const prisma = new PrismaClient();
 
+// Clear Database
+const clearDB = async () => {
+  prisma.team.deleteMany().then(() => {
+    prisma.rider.deleteMany()
+  })
+}
+
+// Create and insert Teams
+const teams = [];
+
+const insertTeam = async (data) => {
+  await prisma.team.create({
+    data: {
+      name: data.name,
+      year: 2024,
+      url: '',
+      description: `${data.name} is a racing community. We help each other keep things dialed on and off the bike to realize one another\'s  athletic goals.`
+    }
+  })
+}
+
+const createTeams = () => {
+  for (let i=0; i < 10; i++) {
+      const newTeam = {
+          name: generateRandomTeam(4)
+      }
+      insertTeam(newTeam)
+  }
+  return teams;
+}
+
+// Create and insert Riders
 const insertRider = async (data) => {
-  await prisma.tblRider.create({
+  await prisma.rider.create({
     data: {
         firstName: data.firstName,
         lastName: data.lastName,
@@ -27,8 +61,11 @@ const createRiders = () => {
 }
 
 async function main() {
-  createRiders();
-
+  clearDB().then(() => {
+    createTeams();
+  }).then(() => {
+    createRiders();
+  });
 }
 
 main()

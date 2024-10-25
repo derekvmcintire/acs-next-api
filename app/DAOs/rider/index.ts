@@ -17,7 +17,7 @@ export default class RiderDAO {
   static async getRidersWithPrisma() {
     try {
       // const riders = await prisma.tblRider.findMany();
-      const riders = await prisma.tblRider.findMany();
+      const riders = await prisma.rider.findMany();
       return riders;
     } catch (error) {
       console.error("Database query error:", error);
