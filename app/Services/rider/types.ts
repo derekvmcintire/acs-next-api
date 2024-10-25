@@ -1,3 +1,5 @@
+import { Rider as PrismaRider } from "@prisma/client";
+
 export interface IRiderName {
   first: string;
   last: string;
@@ -41,4 +43,35 @@ export interface IGetRidersParams {
   country?: string;
   name?: string;
   ids?: number[];
+  id?: number;
 }
+
+export type RiderRow = Pick<
+  PrismaRider,
+  | "id"
+  | "firstName"
+  | "lastName"
+  | "dob"
+  | "country"
+  | "hometown"
+  | "photo"
+  | "strava"
+  | "insta"
+  | "about"
+>;
+
+export type RiderWhereInput = {
+  id?: { in?: number[] };
+  JoinRiderTeam?: {
+    some: {
+      team: {
+        name: string;
+      };
+    };
+  };
+  country?: string;
+  OR?: Array<{
+    firstName?: { contains: string; mode?: "insensitive" };
+    lastName?: { contains: string; mode?: "insensitive" };
+  }>;
+};

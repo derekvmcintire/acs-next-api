@@ -1,23 +1,7 @@
-import { IGetRidersParams } from "@/app/Services/rider/types";
+import { IGetRidersParams, RiderWhereInput } from "@/app/Services/rider/types";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
-
-type RiderWhereInput = {
-  id?: { in?: number[] };
-  JoinRiderTeam?: {
-    some: {
-      team: {
-        name: string;
-      };
-    };
-  };
-  country?: string;
-  OR?: Array<{
-    firstName?: { contains: string; mode?: "insensitive" };
-    lastName?: { contains: string; mode?: "insensitive" };
-  }>;
-};
 
 export default class RiderDAO {
   static async getAllRiders() {
@@ -30,12 +14,20 @@ export default class RiderDAO {
     }
   }
 
-  static async getRiders({ teamName, country, name, ids }: IGetRidersParams) {
+  static async getRiders({
+    teamName,
+    country,
+    name,
+    ids,
+    id,
+  }: IGetRidersParams) {
     try {
       const whereClause: RiderWhereInput = {};
 
       if (ids && ids.length > 0) {
         whereClause.id = { in: ids };
+      } else if (id) {
+        whereClause.id = { in: [id] };
       }
 
       if (teamName) {

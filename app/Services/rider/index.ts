@@ -1,20 +1,5 @@
 import RiderDAO from "@/app/DAOs/rider";
-import { IGetRidersParams, IRider } from "./types";
-import { Rider as PrismaRider } from "@prisma/client"; // Adjust the import path as needed
-
-export type RiderRow = Pick<
-  PrismaRider,
-  | "id"
-  | "firstName"
-  | "lastName"
-  | "dob"
-  | "country"
-  | "hometown"
-  | "photo"
-  | "strava"
-  | "insta"
-  | "about"
->;
+import { IGetRidersParams, IRider, RiderRow } from "./types";
 
 export default class RiderService {
   static #buildRider(rider: RiderRow): IRider {
