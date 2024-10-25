@@ -96,14 +96,14 @@ model NoPlaceCodeType {
 // Join Tables
 
 model Result {
-  id                Int             @id @default(autoincrement())
-  event             Event           @relation(fields: [eventId], references: [id])
+  id                Int              @id @default(autoincrement())
+  event             Event            @relation(fields: [eventId], references: [id])
   eventId           Int
-  rider             Rider           @relation(fields: [riderId], references: [id])
+  rider             Rider            @relation(fields: [riderId], references: [id])
   riderId           Int
-  resultType        ResultType      @relation(fields: [resultTypeId], references: [id])
+  resultType        ResultType       @relation(fields: [resultTypeId], references: [id])
   resultTypeId      Int
-  noPlaceCodeType   NoPlaceCodeType @relation(fields: [noPlaceCodeTypeId], references: [id])
+  noPlaceCodeType   NoPlaceCodeType? @relation(fields: [noPlaceCodeTypeId], references: [id])
   noPlaceCodeTypeId Int
   lap               Int?
   place             Int?
