@@ -13,15 +13,116 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model tblRider {
-  id        Int @id @default(autoincrement())
-  firstName String?
-  lastName  String?
-  dob       String?
-  country   String?
-  hometown  String?
-  photo     String?
-  strava    String?
-  insta     String?
-  about     String?
+// Main Resources
+
+model Rider {
+  id                Int                 @id @default(autoincrement())
+  firstName         String?
+  lastName          String?
+  dob               String?
+  country           String?
+  hometown          String?
+  photo             String?
+  strava            String?
+  insta             String?
+  about             String?
+  Result            Result[]
+  JoinRiderCategory JoinRiderCategory[]
+  JoinRiderTeam     JoinRiderTeam[]
+}
+
+model Event {
+  id     Int      @id @default(autoincrement())
+  name   String
+  Race   Race[]
+  Result Result[]
+}
+
+model Race {
+  id         Int      @id @default(autoincrement())
+  event      Event    @relation(fields: [eventId], references: [id])
+  eventId    Int
+  raceType   RaceType @relation(fields: [raceTypeId], references: [id])
+  raceTypeId Int
+  startDate  String
+  endDate    String?
+  location   String?
+}
+
+model Team {
+  id            Int             @id @default(autoincrement())
+  name          String
+  year          Int
+  url           String?
+  description   String?
+  JoinRiderTeam JoinRiderTeam[]
+}
+
+model Category {
+  id          Int     @id @default(autoincrement())
+  disicpline  String
+  name        String
+  description String?
+
+  JoinRiderCategory JoinRiderCategory[]
+}
+
+// Pick List Tables
+
+model RaceType {
+  id          Int     @id @default(autoincrement())
+  name        String
+  description String?
+
+  Race Race[]
+}
+
+model ResultType {
+  id          Int     @id @default(autoincrement())
+  name        String
+  description String?
+
+  Result Result[]
+}
+
+model NoPlaceCodeType {
+  id          Int     @id @default(autoincrement())
+  name        String
+  description String?
+
+  Result Result[]
+}
+
+// Join Tables
+
+model Result {
+  id                Int             @id @default(autoincrement())
+  event             Event           @relation(fields: [eventId], references: [id])
+  eventId           Int
+  rider             Rider           @relation(fields: [riderId], references: [id])
+  riderId           Int
+  resultType        ResultType      @relation(fields: [resultTypeId], references: [id])
+  resultTypeId      Int
+  noPlaceCodeType   NoPlaceCodeType @relation(fields: [noPlaceCodeTypeId], references: [id])
+  noPlaceCodeTypeId Int
+  lap               Int?
+  place             Int?
+  time              String?
+  points            Int?
+}
+
+model JoinRiderCategory {
+  id         Int      @id @default(autoincrement())
+  rider      Rider    @relation(fields: [riderId], references: [id])
+  riderId    Int
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
+}
+
+model JoinRiderTeam {
+  id      Int   @id @default(autoincrement())
+  rider   Rider @relation(fields: [riderId], references: [id])
+  riderId Int
+  team    Team  @relation(fields: [teamId], references: [id])
+  teamId  Int
 }
