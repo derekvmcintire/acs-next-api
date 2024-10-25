@@ -61,9 +61,11 @@ const createRiders = () => {
 }
 
 async function main() {
-  const cleared = await clearDB();
-  createTeams();
-  createRiders();
+  clearDB().then(() => {
+    createTeams();
+  }).then(() => {
+    createRiders();
+  });
 }
 
 main()
