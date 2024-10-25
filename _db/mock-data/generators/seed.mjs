@@ -13,8 +13,9 @@ async function main() {
   await createRaceTypes(prisma);
   await createNoPlaceCodeTypes(prisma);
   await createCategories(prisma);
-  await createRiders(prisma);
   await createTeams(prisma);
+  await createRiders(prisma);
+  
 
 
   await createRaces(prisma);
