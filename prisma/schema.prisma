@@ -13,8 +13,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Main Resources
+generator docs {
+  provider = "node node_modules/prisma-docs-generator"
+}
 
+/// Main Resources
 model Rider {
   id                Int                 @id @default(autoincrement())
   firstName         String?
@@ -67,8 +70,7 @@ model Category {
   JoinRiderCategory JoinRiderCategory[]
 }
 
-// Pick List Tables
-
+/// Pick List Tables
 model RaceType {
   id          Int     @id @default(autoincrement())
   name        String
@@ -93,8 +95,7 @@ model NoPlaceCodeType {
   Result Result[]
 }
 
-// Join Tables
-
+/// Join Tables
 model Result {
   id                Int              @id @default(autoincrement())
   event             Event            @relation(fields: [eventId], references: [id])
