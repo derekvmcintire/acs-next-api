@@ -1,10 +1,10 @@
-import RiderDAO from "@/app/DAOs/rider";
+import RiderDAO from "@/api/daos/rider";
 import {
   IGetRidersParams,
   IRider,
   JoinRiderTeamRow,
   RiderRow,
-} from "./types";
+} from "../../types/rider/types";
 
 export default class RiderService {
   static #buildRiderTeam(teams: JoinRiderTeamRow[]) {

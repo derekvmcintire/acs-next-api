@@ -53,6 +53,7 @@ export interface IGetRidersParams {
   id?: number;
 }
 
+// DB Table Row Types
 export type TeamRow = Pick<PrismaTeam, "year" | "name">;
 
 export type JoinRiderTeamRow = {

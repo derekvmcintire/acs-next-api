@@ -15,9 +15,6 @@ async function main() {
   await createCategories(prisma);
   await createTeams(prisma);
   await createRiders(prisma);
-  
-
-
   await createRaces(prisma);
 }
 

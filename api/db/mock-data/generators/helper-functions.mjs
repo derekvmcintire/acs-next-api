@@ -34,6 +34,7 @@ export const getFutureDateTimestamp = (startDate, days) => {
 /******************************/
 
 export const generateRandomDateTimestamp = (year = new Date().getFullYear()) => {
+
   const startTimestamp = new Date(year, 0, 1).getTime();
   const endTimestamp = new Date(year, 11, 31).getTime();
 
@@ -42,6 +43,19 @@ export const generateRandomDateTimestamp = (year = new Date().getFullYear()) => 
 
   return new Date(randomTimestamp).toDateString();
 };
+
+/****************************** */
+
+export const generateRandomDateInPast = (n = 10) => {
+  const currentDate = new Date();
+  const endDate = currentDate.getTime();
+  const startDate = new Date(currentDate.setFullYear(currentDate.getFullYear() - n)).getTime();
+
+  const randomTimestamp = Math.random() * (endDate - startDate) + startDate;
+
+  const randomDate = new Date(randomTimestamp);
+  return randomDate.toDateString();
+}
 
 /******************************/
 
@@ -64,7 +78,7 @@ export const getRandomBirthday = () => {
 /******************************/
 
 export const getRandomPastYear = (n) => {
-  const currentYear = new Date().getFullYear();
+  const currentYear = new Date().getFullYear(); 
   const startYear = currentYear - n;
   const randomYear = Math.floor(Math.random() * (currentYear - startYear + 1)) + startYear;
 

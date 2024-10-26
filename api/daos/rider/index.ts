@@ -1,4 +1,4 @@
-import { IGetRidersParams, RiderWhereInput } from "@/app/Services/rider/types";
+import { IGetRidersParams, RiderWhereInput } from "@/api/types/rider/types";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();

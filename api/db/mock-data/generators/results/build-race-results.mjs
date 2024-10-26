@@ -1,7 +1,7 @@
 import { buildMockStagesForStageRace } from './build-stage-race-results.mjs';
-import { generateRandomNumber, generateRandomString, getFutureDateTimestamp, generateRandomDateTimestamp } from '../helper-functions.mjs';
+import { generateRandomNumber, getFutureDateTimestamp, generateRandomDateInPast } from '../helper-functions.mjs';
 import { floorMap } from '../helper-functions.mjs';
-import { COUNTRIES, CITIES } from '../../constants/hometowns.mjs';
+import { CITIES } from '../../constants/hometowns.mjs';
 import { PREFIXES, POSTFIXES, SEPARATORS } from '../../constants/races.mjs';
 
 
@@ -29,7 +29,7 @@ export const buildRaceName = () => {
 }
 
 export const buildMockRace = (raceType = 'road') => {
-  const startDate = generateRandomDateTimestamp();
+  const startDate = generateRandomDateInPast(6);
   const endDate =
     raceType === 'stage' ? String(getFutureDateTimestamp(new Date(startDate), 3)) : null;
   const racers = generateRandomNumber(85);

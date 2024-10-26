@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import RiderService from "@/app/Services/rider";
-import { IGetRidersParams } from "@/app/Services/rider/types";
+import RiderService from "@/api/services/rider";
+import { IGetRidersParams } from "@/api/types/rider/types";
 
 export default async function handler(
   req: NextApiRequest,
