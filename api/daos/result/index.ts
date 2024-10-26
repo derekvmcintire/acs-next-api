@@ -24,7 +24,7 @@ export default class ResultDAO {
           noPlaceCodeType: true,
         },
       });
-      
+
       return results;
     } catch (error) {
       console.error("Database query error:", error);
