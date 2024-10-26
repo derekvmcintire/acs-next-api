@@ -1,4 +1,10 @@
-import { Rider as PrismaRider } from "@prisma/client";
+import {
+  Rider as PrismaRider,
+  Team as PrismaTeam,
+  JoinRiderTeam as PrismaJoinRiderTeam,
+} from "@prisma/client";
+
+// Rider Data Types
 
 export interface IRiderName {
   first: string;
@@ -38,6 +44,7 @@ export interface IRider {
   wins?: number;
 }
 
+// Request Types
 export interface IGetRidersParams {
   teamName?: string;
   country?: string;
@@ -45,6 +52,15 @@ export interface IGetRidersParams {
   ids?: number[];
   id?: number;
 }
+
+export type TeamRow = Pick<PrismaTeam, "year" | "name">;
+
+export type JoinRiderTeamRow = {
+  id: number;
+  riderId: number;
+  teamId: number;
+  team: TeamRow;
+};
 
 export type RiderRow = Pick<
   PrismaRider,
@@ -58,8 +74,11 @@ export type RiderRow = Pick<
   | "strava"
   | "insta"
   | "about"
->;
+> & {
+  JoinRiderTeam: JoinRiderTeamRow[];
+};
 
+// Query Building Types
 export type RiderWhereInput = {
   id?: { in?: number[] };
   JoinRiderTeam?: {

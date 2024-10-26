@@ -1,16 +1,32 @@
 import RiderDAO from "@/app/DAOs/rider";
-import { IGetRidersParams, IRider, RiderRow } from "./types";
+import {
+  IGetRidersParams,
+  IRider,
+  JoinRiderTeamRow,
+  RiderRow,
+} from "./types";
 
 export default class RiderService {
+  static #buildRiderTeam(teams: JoinRiderTeamRow[]) {
+    return teams.map((row: JoinRiderTeamRow) => {
+      return {
+        year: row.team.year,
+        name: row.team.name,
+      };
+    });
+  }
+
   static #buildRider(rider: RiderRow): IRider {
+    const teams = this.#buildRiderTeam(rider.JoinRiderTeam || []);
+    const currentTeam = teams && teams.length > 0 ? teams[0]?.name : "";
     const newRider: IRider = {
       id: rider.id,
-      currentTeam: "Some Team",
+      currentTeam: currentTeam,
       name: {
         first: rider.firstName || "",
         last: rider.lastName || "",
       },
-      teams: [],
+      teams,
       socials: {
         strava: rider.strava || "",
         insta: rider.insta || "",
