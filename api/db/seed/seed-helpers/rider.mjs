@@ -1,11 +1,12 @@
 import { buildMockRacerInfo } from '../../generators/rider/build-rider.mjs';
 import { generateRandomNumber } from '../../generators/helper-functions.mjs';
+import { NUMBER_OF_RIDERS } from '../constants.mjs';
 
 export const createRiders = async (client) => {
   const teams = await client.team.findMany();
   const categories = await client.category.findMany();
   
-  for (let i=1; i < 100; i++) {
+  for (let i=1; i < NUMBER_OF_RIDERS; i++) {
     const riderTeamId = teams[generateRandomNumber(teams.length - 1)].id;
     const riderCategoryId = categories[generateRandomNumber(categories.length - 1)].id;
     const data = buildMockRacerInfo();
