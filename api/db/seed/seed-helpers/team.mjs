@@ -1,4 +1,4 @@
-import { generateRandomTeam } from '../helper-functions.mjs';
+import { generateRandomTeam } from '../../generators/helper-functions.mjs';
 
 export const createTeams = async (client) => {
   for (let i=0; i < 10; i++) {

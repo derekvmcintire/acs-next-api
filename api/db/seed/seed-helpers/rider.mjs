@@ -1,5 +1,5 @@
-import { buildMockRacerInfo } from '../rider/build-rider.mjs';
-import { generateRandomNumber } from '../helper-functions.mjs';
+import { buildMockRacerInfo } from '../../generators/rider/build-rider.mjs';
+import { generateRandomNumber } from '../../generators/helper-functions.mjs';
 
 export const createRiders = async (client) => {
   const teams = await client.team.findMany();
