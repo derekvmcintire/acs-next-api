@@ -1,23 +1,26 @@
 export async function clearDB(prisma) {
   try {
     await prisma.$transaction([
-      // Delete records from join tables first to avoid foreign key constraints
       prisma.JoinRiderCategory.deleteMany(),
       prisma.JoinRiderTeam.deleteMany(),
       prisma.Result.deleteMany(),
-
-      // Then delete from the main resource tables
       prisma.Race.deleteMany(),
       prisma.Event.deleteMany(),
       prisma.Team.deleteMany(),
       prisma.Category.deleteMany(),
       prisma.Rider.deleteMany(),
-      
-      // Finally delete from the pick list tables
       prisma.RaceType.deleteMany(),
       prisma.ResultType.deleteMany(),
       prisma.NoPlaceCodeType.deleteMany(),
     ]);
+
+    await prisma.$executeRaw`ALTER SEQUENCE "Rider_id_seq" RESTART WITH 1`;
+    await prisma.$executeRaw`ALTER SEQUENCE "Event_id_seq" RESTART WITH 1`;
+    await prisma.$executeRaw`ALTER SEQUENCE "Race_id_seq" RESTART WITH 1`;
+    await prisma.$executeRaw`ALTER SEQUENCE "Team_id_seq" RESTART WITH 1`;
+    await prisma.$executeRaw`ALTER SEQUENCE "Category_id_seq" RESTART WITH 1`;
+    await prisma.$executeRaw`ALTER SEQUENCE "Result_id_seq" RESTART WITH 1`;
+    // Add similar statements for other tables as needed.
 
     console.log("All records cleared successfully.");
   } catch (error) {

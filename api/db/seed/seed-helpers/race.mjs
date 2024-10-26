@@ -1,13 +1,22 @@
-import { buildMockRace } from '../results/build-race-results.mjs';
+import { buildMockRace } from '../../generators/results/build-race-results.mjs';
+import { NUMBER_OF_RACES, NUMBER_OF_RESULTS, NUMBER_OF_RIDERS } from '../constants.mjs';
+import {generateRandomNumber} from '../../generators/helper-functions.mjs';
+
+const getRandomPagination = () => {
+  const start = generateRandomNumber((NUMBER_OF_RIDERS - NUMBER_OF_RESULTS)) - 1;
+  const end = start + NUMBER_OF_RESULTS;
+  return {
+    skip: start,
+    take: end,
+  }
+}
 
 export const createRaces = async (client) => {
-  // First get types from picklist
   const firstRaceType = await client.raceType.findFirst();
   const firstResultType = await client.resultType.findFirst();
   const firstNoPlaceCodeType = await client.noPlaceCodeType.findFirst();
 
-  // build 100 mock races with results
-  for (let i=0; i < 100; i++) {
+  for (let i=0; i < NUMBER_OF_RACES; i++) {
     const race = buildMockRace();
     const event = {
         name: race.name,
@@ -25,26 +34,30 @@ export const createRaces = async (client) => {
           location: race.name
         }
       })
-      // get 25 riders and loop through to create results
-      const racers = await client.rider.findMany({
-        skip: 0,
-        take: 25
-      })
-      racers.forEach( async (racer, index) => {
-        // create a result for each racer
+
+      const racers = await client.rider.findMany(getRandomPagination())
+      const places = Array.from({ length: NUMBER_OF_RESULTS }, (_, i) => i + 1);
+
+      racers.forEach( async (racer) => {
+        const randomPlaceIndex = generateRandomNumber(places.length - 1);
+        const randomPlace = places[randomPlaceIndex];
+        places.splice(randomPlaceIndex, 1);
+
         const result = {
           event: {connect: {id: createdRace.eventId}},
           rider: {connect: {id: racer.id}},
           resultType: {connect: {id: firstResultType.id}},
           noPlaceCodeType: {connect: {id: firstNoPlaceCodeType.id}},
           lap: null,
-          place: index + 1,
+          place: randomPlace,
           time: '',
           points: null,
         }
+
         await client.result.create({
           data: result
         })
+
       })
   }
 }
