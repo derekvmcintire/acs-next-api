@@ -1,0 +1,25 @@
+import { NextRequest, NextResponse } from "next/server";
+import prisma from "@/prisma/prisma";
+import ResultDAO from "@/app/_daos/result";
+import ResultService from "@/app/_services/result";
+
+export default class ResultController {
+  static async getResultsByRiderId(
+    request: NextRequest,
+  ): Promise<NextResponse> {
+    try {
+      const riderId = request.nextUrl.searchParams.get("riderId");
+
+      const resultDao = new ResultDAO(prisma);
+      const resultService = new ResultService(resultDao);
+      const results = await resultService.getResultsByRiderId(Number(riderId));
+
+      return NextResponse.json(results, { status: 200 });
+    } catch (error) {
+      return NextResponse.json(
+        { error: `Internal Server Error: ${error}` },
+        { status: 500 },
+      );
+    }
+  }
+}

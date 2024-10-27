@@ -1,4 +1,4 @@
-import { IGetRidersParams, RiderWhereInput } from "@/api/types/rider/types";
+import { IGetRidersParams, RiderWhereInput } from "@/app/_types/rider/types";
 import { PrismaClient } from "@prisma/client";
 
 export default class RiderDAO {

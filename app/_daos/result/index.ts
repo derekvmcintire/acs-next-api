@@ -1,12 +1,12 @@
-import { IRiderResultsRow } from "@/api/types/result/types";
+import { IRiderResultsRow } from "@/app/_types/result/types";
 import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient();
-
 export default class ResultDAO {
-  static async getRiderResults(riderId: number): Promise<IRiderResultsRow[]> {
+  constructor(private prisma: PrismaClient) {}
+
+  async getRiderResults(riderId: number): Promise<IRiderResultsRow[]> {
     try {
-      const results = await prisma.result.findMany({
+      const results = await this.prisma.result.findMany({
         where: {
           riderId: riderId,
         },
@@ -32,9 +32,9 @@ export default class ResultDAO {
     }
   }
 
-  static async countResultsByEventId(eventId: number) {
+  async countResultsByEventId(eventId: number) {
     try {
-      const resultCount = await prisma.result.count({
+      const resultCount = await this.prisma.result.count({
         where: {
           eventId: eventId,
         },

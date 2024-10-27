@@ -1,8 +1,4 @@
-import {
-  Rider as PrismaRider,
-  Team as PrismaTeam,
-  JoinRiderTeam as PrismaJoinRiderTeam,
-} from "@prisma/client";
+import { Rider as PrismaRider, Team as PrismaTeam } from "@prisma/client";
 
 // Rider Data Types
 
