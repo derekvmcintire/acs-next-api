@@ -7,16 +7,16 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-    // Set CORS headers
-    res.setHeader("Access-Control-Allow-Origin", "*"); // Allow all origins (for development only)
-    res.setHeader("Access-Control-Allow-Methods", "GET, POST");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  
-    if (req.method === "OPTIONS") {
-      // Handle preflight requests
-      return res.status(200).end();
-    }
-    
+  const { ALLOWED_ORIGINS } = process.env as NodeJS.ProcessEnv;
+
+  res.setHeader("Access-Control-Allow-Origin", ALLOWED_ORIGINS || "");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+
   if (req.method === "GET") {
     try {
       const { team, country, name, ids } = req.query;
