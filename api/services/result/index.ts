@@ -5,7 +5,6 @@ import { getYearFromDateString } from "@/api/utility/helper-functions";
 export default class ResultService {
   static async #buildResult(result: any): Promise<IResult> {
     const resultCount = await ResultDAO.countResultsByEventId(result.eventId);
-
     return {
       name: result.event.name,
       type: result.event.Race[0].raceType.name,
@@ -15,7 +14,7 @@ export default class ResultService {
       place: result.place,
       time: result.time,
       points: result.points,
-      noPlaceCode: result.noPlaceCodeType?.name,
+      noPlaceCode: result.place > 0 ? null : result.noPlaceCodeType?.name,
       lap: result.lap,
       resultType: result.resultType.name,
       eventId: result.event.id,
