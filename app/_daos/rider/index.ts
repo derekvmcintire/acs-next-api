@@ -2,8 +2,10 @@ import { IGetRidersParams, RiderWhereInput } from "@/app/_types/rider/types";
 import { PrismaClient } from "@prisma/client";
 
 export default class RiderDAO {
+  // Constructor
   constructor(private prisma: PrismaClient) {}
 
+  // Private Class Method #buildWhereClause
   #buildWhereClause(params: IGetRidersParams) {
     const { teamName, country, name, ids, id } = params;
 
@@ -39,6 +41,7 @@ export default class RiderDAO {
     return whereClause;
   }
 
+  // Public Class Method getRiders
   async getRiders(params: IGetRidersParams) {
     try {
       const riders = await this.prisma.rider.findMany({

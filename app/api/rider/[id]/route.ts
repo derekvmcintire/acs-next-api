@@ -1,5 +1,5 @@
+import { getRiderById } from "@/app/_controllers/rider";
 import corsMiddleware from "@/app/_middleware/cors";
-import RiderController from "@/app/_controllers/rider";
 import { NextRequest } from "next/server";
 
 type RiderByRiderIdParams = {
@@ -18,7 +18,7 @@ export async function GET(
     return headers;
   }
 
-  const response = await RiderController.getRiderById(params);
+  const response = await getRiderById(params);
   headers.forEach((value, key) => response.headers.set(key, value));
 
   return response;

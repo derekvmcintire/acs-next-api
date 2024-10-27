@@ -2,8 +2,10 @@ import { IRiderResultsRow } from "@/app/_types/result/types";
 import { PrismaClient } from "@prisma/client";
 
 export default class ResultDAO {
+  // Constructor
   constructor(private prisma: PrismaClient) {}
 
+  // Public Class Method - getRiderResults
   async getRiderResults(riderId: number): Promise<IRiderResultsRow[]> {
     try {
       const results = await this.prisma.result.findMany({
@@ -32,6 +34,7 @@ export default class ResultDAO {
     }
   }
 
+  // Public CLass Method countResultsByEventId
   async countResultsByEventId(eventId: number) {
     try {
       const resultCount = await this.prisma.result.count({

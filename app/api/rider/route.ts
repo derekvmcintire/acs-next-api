@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
-import RiderController from "@/app/_controllers/rider";
 import corsMiddleware from "@/app/_middleware/cors";
+import { getMultipleRiders } from "@/app/_controllers/rider";
 
 export async function GET(request: NextRequest) {
   const headers = corsMiddleware(request);
@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
     return headers;
   }
 
-  const response = await RiderController.getRider(request);
+  const response = await getMultipleRiders(request);
   headers.forEach((value, key) => response.headers.set(key, value));
 
   return response;

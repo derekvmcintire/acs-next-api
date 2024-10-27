@@ -7,12 +7,15 @@ import {
 import { getYearFromDateString } from "@/app/_utility/helper-functions";
 
 export default class ResultService {
+  // Constructor
   constructor(private resultDao: ResultDAO) {}
 
+  // Private Class Method #buildResult
   async #buildResult(result: IRiderResultsRow): Promise<IResult> {
     const resultCount = await this.resultDao.countResultsByEventId(
       result.eventId,
     );
+
     return {
       name: result?.event?.name,
       type: result?.event?.Race[0]?.raceType?.name,
@@ -34,6 +37,7 @@ export default class ResultService {
     };
   }
 
+  // Private Class Method #mapResults
   async #mapResults(results: IRiderResultsRow[]): Promise<IResultYear[]> {
     const yearMap: Record<number, IResult[]> = {};
 
@@ -59,6 +63,7 @@ export default class ResultService {
     return resultYears;
   }
 
+  // Public Class Method getResultsByRiderId
   async getResultsByRiderId(riderId: number) {
     const rows: IRiderResultsRow[] = await this.resultDao.getRiderResults(
       Number(riderId),
