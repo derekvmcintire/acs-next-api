@@ -7,7 +7,11 @@ import {
 } from "../../types/rider/types";
 
 export default class RiderService {
-  static #buildRiderTeam(teams: JoinRiderTeamRow[]) {
+  constructor(private riderDao: RiderDAO) {
+    this.riderDao = riderDao;
+  }
+
+  #buildRiderTeam(teams: JoinRiderTeamRow[]) {
     return teams.map((row: JoinRiderTeamRow) => {
       return {
         year: row.team.year,
@@ -16,7 +20,7 @@ export default class RiderService {
     });
   }
 
-  static #buildRider(rider: RiderRow): IRider {
+  #buildRider(rider: RiderRow): IRider {
     const teams = this.#buildRiderTeam(rider.JoinRiderTeam || []);
     const currentTeam = teams && teams.length > 0 ? teams[0]?.name : "";
     const newRider: IRider = {
@@ -43,14 +47,14 @@ export default class RiderService {
     return newRider;
   }
 
-  static #mapRiders(riders: RiderRow[]) {
+  #mapRiders(riders: RiderRow[]) {
     return riders.map((rider: RiderRow) => {
       return this.#buildRider(rider);
     });
   }
 
-  static async getRiders(params: IGetRidersParams) {
-    const riders: RiderRow[] = await RiderDAO.getRiders(params);
+  async getRiders(params: IGetRidersParams) {
+    const riders: RiderRow[] = await this.riderDao.getRiders(params);
     return this.#mapRiders(riders);
   }
 }
