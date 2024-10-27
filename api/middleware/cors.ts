@@ -9,7 +9,7 @@ export default function corsMiddleware(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  res.setHeader("Access-Control-Allow-Origin", ALLOWED_ORIGINS);
+  res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
