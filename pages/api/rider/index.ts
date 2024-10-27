@@ -7,9 +7,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const { ALLOWED_ORIGINS } = process.env as NodeJS.ProcessEnv;
-
-  res.setHeader("Access-Control-Allow-Origin", ALLOWED_ORIGINS || "");
+  res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
