@@ -63,4 +63,12 @@ export default class RiderService {
     const riders: RiderRow[] = await this.riderDao.getRiders(params);
     return this.#mapRiders(riders);
   }
+
+  async getRiderById(id: number) {
+    const rider: RiderRow | null = await this.riderDao.getRiderById(id);
+    if (!rider) {
+      return null;
+    }
+    return this.#buildRider(rider);
+  }
 }

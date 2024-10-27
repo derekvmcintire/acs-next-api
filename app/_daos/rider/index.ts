@@ -69,4 +69,32 @@ export default class RiderDAO {
       throw new Error("Database query error");
     }
   }
+
+  async getRiderById(id: number) {
+    try {
+      const rider = await this.prisma.rider.findUnique({
+        where: { id: id },
+        include: {
+          JoinRiderTeam: {
+            include: {
+              team: {
+                select: {
+                  id: true,
+                  name: true,
+                  year: true,
+                  url: true,
+                  description: true,
+                },
+              },
+            },
+          },
+        },
+      });
+
+      return rider;
+    } catch (error) {
+      console.error("Database query error:", error);
+      throw new Error("Database query error");
+    }
+  }
 }
