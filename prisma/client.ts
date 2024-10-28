@@ -1,10 +1,14 @@
+import { PrismaDatabaseClient } from "@/app/_interfaces/IDatabaseClient";
 import { PrismaClient } from "@prisma/client";
 
 // Ensure that the PrismaClient instance is available globally in development
-const prisma = globalThis.prisma || new PrismaClient();
+const prismaClient = globalThis.prisma || new PrismaClient();
 
 if (process.env.NODE_ENV !== "production") {
-  globalThis.prisma = prisma;
+  globalThis.prisma = prismaClient;
 }
 
-export default prisma;
+// Wrap PrismaClient with PrismaDatabaseClient and export as IDatabaseClient
+const databaseClient = new PrismaDatabaseClient(prismaClient);
+
+export default databaseClient;

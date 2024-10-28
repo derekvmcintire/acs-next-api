@@ -1,10 +1,10 @@
-import { IDatabaseClient } from "@/app/_interfaces/IDatabaseClient";
 import { IRiderDAO } from "@/app/_interfaces/IRiderDAO";
+import { IRiderRepository } from "@/app/_interfaces/IRiderRepository";
 import { IGetRidersParams, RiderWhereInput } from "@/app/_types/rider/types";
 
 export default class RiderDAO implements IRiderDAO {
   // Constructor
-  constructor(private prisma: IDatabaseClient) {}
+  constructor(private riderRepo: IRiderRepository) {}
 
   // Private Class Property #filterHandlers
   #filterHandlers: {
@@ -50,7 +50,7 @@ export default class RiderDAO implements IRiderDAO {
   // Public Class Method getRiders
   async getRiders(params: IGetRidersParams) {
     try {
-      const riders = await this.prisma.rider.findMany({
+      const riders = await this.riderRepo.findMany({
         where: this.#buildWhereClause(params),
         include: {
           JoinRiderTeam: {
@@ -79,7 +79,7 @@ export default class RiderDAO implements IRiderDAO {
   // Public Class Method getRiderById
   async getRiderById(id: number) {
     try {
-      const rider = await this.prisma.rider.findUnique({
+      const rider = await this.riderRepo.findUnique({
         where: { id: id },
         include: {
           JoinRiderTeam: {

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import prisma from "@/prisma/client";
+import databaseClient from "@/prisma/client";
 import ResultDAO from "@/app/_daos/result";
 import ResultService from "@/app/_services/result";
 
@@ -9,7 +9,7 @@ export async function getResultsByRiderId(
   try {
     const riderId = request.nextUrl.searchParams.get("riderId");
 
-    const resultDao = new ResultDAO(prisma);
+    const resultDao = new ResultDAO(databaseClient.result);
     const resultService = new ResultService(resultDao);
     const results = await resultService.getResultsByRiderId(Number(riderId));
 
