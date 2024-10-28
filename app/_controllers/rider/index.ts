@@ -2,8 +2,9 @@ import RiderDAO from "@/app/_daos/rider";
 import RiderService from "@/app/_services/rider";
 import { IGetRidersParams } from "@/app/_types/rider/types";
 import { NextRequest, NextResponse } from "next/server";
-import prisma from "@/prisma/prisma";
+import prisma from "@/prisma/client";
 import { RiderByRiderIdParams } from "@/app/api/rider/[id]/route";
+import { PrismaDatabaseClient } from "@/app/_interfaces/IDatabaseClient";
 
 export async function getMultipleRiders(
   request: NextRequest,
@@ -38,7 +39,8 @@ export async function getRiderById(
     const { params } = context;
     const { id } = await params;
 
-    const riderDao = new RiderDAO(prisma);
+    const prismaClient = new PrismaDatabaseClient(prisma);
+    const riderDao = new RiderDAO(prismaClient);
     const riderService = new RiderService(riderDao);
     const rider = await riderService.getRiderById(Number(id));
 

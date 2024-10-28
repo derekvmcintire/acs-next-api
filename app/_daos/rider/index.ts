@@ -1,9 +1,10 @@
+import { IDatabaseClient } from "@/app/_interfaces/IDatabaseClient";
+import { IRiderDAO } from "@/app/_interfaces/IRiderDAO";
 import { IGetRidersParams, RiderWhereInput } from "@/app/_types/rider/types";
-import { PrismaClient } from "@prisma/client";
 
-export default class RiderDAO {
+export default class RiderDAO implements IRiderDAO {
   // Constructor
-  constructor(private prisma: PrismaClient) {}
+  constructor(private prisma: IDatabaseClient) {}
 
   // Private Class Property #filterHandlers
   #filterHandlers: {
