@@ -1,25 +1,29 @@
 import { Prisma, PrismaClient } from "@prisma/client";
+import { IRiderRepository } from "./IRiderRepository";
+import { IResultRepository } from "./IResultRepository";
 
 export interface IDatabaseClient {
-  rider: {
-    findMany(args: Prisma.RiderFindManyArgs): Promise<any>;
-    findUnique(args: Prisma.RiderFindUniqueArgs): Promise<any>;
-  };
-  result: {
-    findMany(args: Prisma.ResultFindManyArgs): Promise<any>;
-    findUnique(args: Prisma.ResultFindUniqueArgs): Promise<any>;
-    count(args: Prisma.ResultCountArgs): Promise<number>; // Include the count method
-  };
+  rider: IRiderRepository;
+  result: IResultRepository;
 }
 
 export class PrismaDatabaseClient implements IDatabaseClient {
   constructor(private prisma: PrismaClient) {}
 
-  get rider() {
-    return this.prisma.rider;
+  get rider(): IRiderRepository {
+    return {
+      findMany: (args: Prisma.RiderFindManyArgs) =>
+        this.prisma.rider.findMany(args),
+      findUnique: (args: Prisma.RiderFindUniqueArgs) =>
+        this.prisma.rider.findUnique(args),
+    };
   }
 
-  get result() {
-    return this.prisma.result;
+  get result(): IResultRepository {
+    return {
+      findMany: (args: Prisma.ResultFindManyArgs) =>
+        this.prisma.result.findMany(args),
+      count: (args: Prisma.ResultCountArgs) => this.prisma.result.count(args),
+    };
   }
 }

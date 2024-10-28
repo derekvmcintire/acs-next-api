@@ -1,15 +1,15 @@
-import { IDatabaseClient } from "@/app/_interfaces/IDatabaseClient";
 import { IResultDAO } from "@/app/_interfaces/IResultDAO";
+import { IResultRepository } from "@/app/_interfaces/IResultRepository";
 import { IRiderResultsRow } from "@/app/_types/result/types";
 
 export default class ResultDAO implements IResultDAO {
   // Constructor
-  constructor(private prisma: IDatabaseClient) {}
+  constructor(private resultRepo: IResultRepository) {}
 
   // Public Class Method - getRiderResults
   async getRiderResults(riderId: number): Promise<IRiderResultsRow[]> {
     try {
-      const results = await this.prisma.result.findMany({
+      const results = await this.resultRepo.findMany({
         where: {
           riderId: riderId,
         },
@@ -38,7 +38,7 @@ export default class ResultDAO implements IResultDAO {
   // Public CLass Method countResultsByEventId
   async countResultsByEventId(eventId: number) {
     try {
-      const resultCount = await this.prisma.result.count({
+      const resultCount = await this.resultRepo.count({
         where: {
           eventId: eventId,
         },
