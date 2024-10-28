@@ -1,9 +1,10 @@
+import { IDatabaseClient } from "@/app/_interfaces/IDatabaseClient";
+import { IResultDAO } from "@/app/_interfaces/IResultDAO";
 import { IRiderResultsRow } from "@/app/_types/result/types";
-import { PrismaClient } from "@prisma/client";
 
-export default class ResultDAO {
+export default class ResultDAO implements IResultDAO {
   // Constructor
-  constructor(private prisma: PrismaClient) {}
+  constructor(private prisma: IDatabaseClient) {}
 
   // Public Class Method - getRiderResults
   async getRiderResults(riderId: number): Promise<IRiderResultsRow[]> {

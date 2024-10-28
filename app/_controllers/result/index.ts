@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import prisma from "@/prisma/prisma";
+import prisma from "@/prisma/client";
 import ResultDAO from "@/app/_daos/result";
 import ResultService from "@/app/_services/result";
 
