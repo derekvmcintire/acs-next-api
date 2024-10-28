@@ -3,6 +3,7 @@ import RiderService from "@/app/_services/rider";
 import { IGetRidersParams } from "@/app/_types/rider/types";
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/prisma/prisma";
+import { RiderByRiderIdParams } from "@/app/api/rider/[id]/route";
 
 export async function getMultipleRiders(
   request: NextRequest,
@@ -30,25 +31,22 @@ export async function getMultipleRiders(
   }
 }
 
-export async function getRiderById({
-  id,
-}: {
-  id: string;
-}): Promise<NextResponse> {
+export async function getRiderById(
+  context: RiderByRiderIdParams,
+): Promise<NextResponse> {
   try {
-    const queryParams = {
-      id: id ? Number(id) : undefined,
-    };
+    const { params } = context;
+    const { id } = await params;
 
     const riderDao = new RiderDAO(prisma);
     const riderService = new RiderService(riderDao);
-    const rows = await riderService.getRiders(queryParams);
+    const rider = await riderService.getRiderById(Number(id));
 
-    if (rows.length === 0) {
+    if (!rider) {
       return NextResponse.json({ error: "Rider not found" }, { status: 404 });
     }
 
-    return NextResponse.json(rows[0], { status: 200 });
+    return NextResponse.json(rider, { status: 200 });
   } catch (error) {
     console.error("Database query error:", error);
     return NextResponse.json(

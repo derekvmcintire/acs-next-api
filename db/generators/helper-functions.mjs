@@ -7,7 +7,7 @@ export const floorMap = (decimalValue, maxValue) => {
     return 0;
   }
   return Math.floor(decimalValue * maxValue) + 1;
-}
+};
 
 /******************************/
 
