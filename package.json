@@ -11,7 +11,7 @@
     "api:generate": "node _db/mock-api/generate-endpoints.mjs > _db/mock-api/endpoints.json",
     "prettier:check": "prettier --check \"**/*.{ts,tsx}\"",
     "prettier": "prettier --write \"**/*.{ts,tsx}\"",
-    "seed": "ts-node api/db/seed/index.mjs"
+    "seed": "ts-node db/seed/index.mjs"
   },
   "dependencies": {
     "@prisma/client": "^5.21.1",

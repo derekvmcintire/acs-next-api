@@ -39,7 +39,7 @@ export const createRaces = async (client) => {
       const places = Array.from({ length: NUMBER_OF_RIDERS }, (_, i) => i + 1);
 
       racers.forEach( async (racer) => {
-        const randomPlaceIndex = generateRandomNumber(places.length - 1);
+        const randomPlaceIndex = generateRandomNumber(places.length) - 1;
         const randomPlace = places[randomPlaceIndex];
         places.splice(randomPlaceIndex, 1);
         
