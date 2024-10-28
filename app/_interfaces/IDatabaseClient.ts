@@ -5,6 +5,11 @@ export interface IDatabaseClient {
     findMany(args: Prisma.RiderFindManyArgs): Promise<any>;
     findUnique(args: Prisma.RiderFindUniqueArgs): Promise<any>;
   };
+  result: {
+    findMany(args: Prisma.ResultFindManyArgs): Promise<any>;
+    findUnique(args: Prisma.ResultFindUniqueArgs): Promise<any>;
+    count(args: Prisma.ResultCountArgs): Promise<number>; // Include the count method
+  };
 }
 
 export class PrismaDatabaseClient implements IDatabaseClient {
@@ -12,5 +17,9 @@ export class PrismaDatabaseClient implements IDatabaseClient {
 
   get rider() {
     return this.prisma.rider;
+  }
+
+  get result() {
+    return this.prisma.result;
   }
 }
