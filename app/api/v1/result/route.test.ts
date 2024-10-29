@@ -18,8 +18,8 @@ describe("GET /api/result/", () => {
 
     const request = new NextRequest(mockGetRiderResultsURL);
     const apiResponse = await GET(request);
-
     expect(apiResponse.status).toBe(200);
+
     const data = await apiResponse.json();
     expect(data).toEqual(mockResultsData);
   });
@@ -30,8 +30,8 @@ describe("GET /api/result/", () => {
 
     const request = new NextRequest(mockGetRiderResultsURL);
     const apiResponse = await GET(request);
-
     expect(apiResponse.status).toBe(404);
+
     const data = await apiResponse.json();
     expect(data).toEqual({
       error: getResultsNotFoundErrorMessage(mockErrorMessage),
@@ -44,8 +44,8 @@ describe("GET /api/result/", () => {
 
     const request = new NextRequest(mockGetRiderResultsURL);
     const apiResponse = await GET(request);
-
     expect(apiResponse.status).toBe(500);
+
     const data = await apiResponse.json();
     expect(data).toEqual({
       error: getInternalServerErrorMessage(mockErrorMessage),
