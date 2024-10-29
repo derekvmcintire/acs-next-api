@@ -8,7 +8,7 @@ import {
   getRiderNotFoundErrorMessage,
 } from "@/app/_constants/errors";
 
-// Mocking the controller function directly
+// Mocking the controller module directly
 jest.mock("../../../../_controllers/rider");
 
 const mockId = mockGetRiderByIdResponse.id;
@@ -24,8 +24,8 @@ describe("GET /api/rider/[id]", () => {
 
     const request = new NextRequest(mockURL);
     const apiResponse = await GET(request, context);
-
     expect(apiResponse.status).toBe(200);
+
     const data = await apiResponse.json();
     expect(data).toEqual(mockGetRiderByIdResponse);
   });
@@ -35,8 +35,8 @@ describe("GET /api/rider/[id]", () => {
 
     const request = new NextRequest(mockURL);
     const apiResponse = await GET(request, context);
-
     expect(apiResponse.status).toBe(404);
+
     const data = await apiResponse.json();
     expect(data).toEqual({
       error: getRiderNotFoundErrorMessage(String(mockId)),
@@ -49,8 +49,8 @@ describe("GET /api/rider/[id]", () => {
 
     const request = new NextRequest(mockURL);
     const apiResponse = await GET(request, context);
-
     expect(apiResponse.status).toBe(500);
+
     const data = await apiResponse.json();
     expect(data).toEqual({
       error: getInternalServerErrorMessage(mockErrorMessage),
