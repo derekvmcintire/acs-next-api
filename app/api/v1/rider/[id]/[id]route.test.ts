@@ -2,7 +2,7 @@ import { GET as GET } from "./route";
 import { NextRequest } from "next/server";
 import { getRiderById } from "@/app/_controllers/rider";
 import { jest } from "@jest/globals";
-import { mockGetRiderByIdResponse } from "../mock-data";
+import { mockGetRiderByIdResponse } from "../../../../_constants/mock-data/rider-mock-data";
 import {
   getInternalServerErrorMessage,
   getRiderNotFoundErrorMessage,

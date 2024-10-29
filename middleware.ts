@@ -1,17 +1,17 @@
-// middleware.ts
 import { NextRequest, NextResponse } from "next/server";
-import { getCorsHeaders } from "./app/_middleware/cors";
-import { getRequestURL } from "./app/_middleware/latest";
+import { setCorsHeaders } from "./app/_middleware/cors";
+import { getUrlWithVersion } from "./app/_middleware/latest";
 
 export function middleware(request: NextRequest) {
-  const headers = getCorsHeaders();
+  const headers = setCorsHeaders();
 
   if (request.method === "OPTIONS") {
     return new Response(null, { status: 200, headers });
   }
 
-  const url = getRequestURL(request);
-  const response = NextResponse.rewrite(url, { headers });
+  const response = NextResponse.rewrite(getUrlWithVersion(request), {
+    headers,
+  });
   return response;
 }
 

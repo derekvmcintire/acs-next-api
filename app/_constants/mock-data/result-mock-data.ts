@@ -67,3 +67,8 @@ export const mockResultsData: IRacerHistory = {
     },
   ],
 };
+
+export const mockEmptyResultsData: IRacerHistory = {
+  riderId: 18,
+  results: [],
+};
