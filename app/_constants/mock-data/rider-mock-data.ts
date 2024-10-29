@@ -197,3 +197,7 @@ export const mockGetAllRidersResponse = [
     wins: 43,
   },
 ];
+
+export const mockGetMultipleRiderParams = {
+  teamName: "Human",
+};
