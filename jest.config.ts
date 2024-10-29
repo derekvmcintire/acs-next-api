@@ -9,4 +9,6 @@ module.exports = {
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/$1", // Adjusting according to your folder structure
   },
+  collectCoverage: true,
+  coverageDirectory: '.coverage',
 };
