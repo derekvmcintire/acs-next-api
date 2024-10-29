@@ -1,21 +1,16 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
+import { API_PATH, LATEST_PATH, LATEST_VERSION } from "../_constants/urls";
 
-const LATEST_VERSION = "v1";
-
-export function middleware(request: NextRequest) {
+export function getRequestURL(request: NextRequest) {
   const url = request.nextUrl.clone();
   const path = url.pathname;
 
-  if (path.startsWith("/api/latest")) {
-    url.pathname = path.replace("/api/latest", `/api/${LATEST_VERSION}`);
-
-    return NextResponse.rewrite(url);
+  if (path.startsWith(`${API_PATH}${LATEST_PATH}`)) {
+    url.pathname = path.replace(
+      `${API_PATH}${LATEST_PATH}`,
+      `${API_PATH}/${LATEST_VERSION}`,
+    );
   }
 
-  return NextResponse.next();
+  return url;
 }
-
-// Apply this middleware only to API routes
-export const config = {
-  matcher: "/api/:path*",
-};
