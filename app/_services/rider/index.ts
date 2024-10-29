@@ -63,16 +63,23 @@ export default class RiderService {
 
   // Public Class Method getRiders
   async getRiders(params: IGetRidersParams) {
-    const riders: RiderRow[] = await this.riderDao.getRiders(params);
-    return this.#mapRiders(riders);
+    try {
+      const riders: RiderRow[] = await this.riderDao.getRiders(params);
+      return this.#mapRiders(riders);
+    } catch (error) {
+      throw new Error(String(error));
+    }
   }
 
   async getRiderById(id: number) {
-    const rider: RiderRow | null = await this.riderDao.getRiderById(id);
-    if (!rider) {
-      return null;
+    try {
+      const rider: RiderRow | null = await this.riderDao.getRiderById(id);
+      if (!rider) {
+        return null;
+      }
+      return this.#buildRider(rider);
+    } catch (error) {
+      throw new Error(String(error));
     }
-    console.log("rider is: ", rider);
-    return this.#buildRider(rider);
   }
 }

@@ -1,5 +1,6 @@
 import ResultDAO from "@/app/_daos/result";
 import {
+  IRacerHistory,
   IResult,
   IResultYear,
   IRiderResultsRow,
@@ -12,34 +13,38 @@ export default class ResultService {
 
   // Private Class Method #buildResult
   async #buildResult(result: IRiderResultsRow): Promise<IResult> {
-    const resultCount = await this.resultDao.countResultsByEventId(
-      result.eventId,
-    );
+    try {
+      const resultCount = await this.resultDao.countResultsByEventId(
+        result.eventId,
+      );
 
-    const race =
-      result?.event?.Race && result?.event?.Race[0]
-        ? result?.event?.Race[0]
-        : null;
+      const race =
+        result?.event?.Race && result?.event?.Race[0]
+          ? result?.event?.Race[0]
+          : null;
 
-    return {
-      name: result?.event?.name || "",
-      place: result?.place || undefined,
-      time: result?.time || undefined,
-      points: result?.points || 0,
-      noPlaceCode:
-        result?.place && result?.place > 0
-          ? "NA"
-          : result?.noPlaceCodeType?.name,
-      lap: result?.lap || undefined,
-      resultType: result?.resultType?.name || "",
-      eventId: result?.event?.id || 0,
-      category: "1",
-      racers: resultCount,
-      type: race && race?.raceType?.name ? race.raceType.name : "",
-      startDate: race ? race.startDate : "",
-      endDate: race && race?.endDate ? race?.endDate : undefined,
-      location: race && race?.location ? race?.location : undefined,
-    };
+      return {
+        name: result?.event?.name || "",
+        place: result?.place || undefined,
+        time: result?.time || undefined,
+        points: result?.points || 0,
+        noPlaceCode:
+          result?.place && result?.place > 0
+            ? "NA"
+            : result?.noPlaceCodeType?.name,
+        lap: result?.lap || undefined,
+        resultType: result?.resultType?.name || "",
+        eventId: result?.event?.id || 0,
+        category: "1",
+        racers: resultCount,
+        type: race && race?.raceType?.name ? race.raceType.name : "",
+        startDate: race ? race.startDate : "",
+        endDate: race && race?.endDate ? race?.endDate : undefined,
+        location: race && race?.location ? race?.location : undefined,
+      };
+    } catch (error) {
+      throw new Error(String(error));
+    }
   }
 
   // Private Class Method #mapResults
@@ -69,17 +74,18 @@ export default class ResultService {
   }
 
   // Public Class Method getResultsByRiderId
-  async getResultsByRiderId(riderId: number) {
-    const rows: IRiderResultsRow[] = await this.resultDao.getRiderResults(
-      Number(riderId),
-    );
-    if (!rows) {
-      return [];
+  async getResultsByRiderId(riderId: number): Promise<IRacerHistory> {
+    try {
+      const rows: IRiderResultsRow[] = await this.resultDao.getRiderResults(
+        Number(riderId),
+      );
+      const results = await this.#mapResults(rows);
+      return {
+        riderId,
+        results,
+      };
+    } catch (error) {
+      throw new Error(String(error));
     }
-    const results = await this.#mapResults(rows);
-    return {
-      riderId,
-      results,
-    };
   }
 }
