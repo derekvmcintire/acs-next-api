@@ -1,3 +1,4 @@
 *.js linguist-language=JavaScript
+*.mjs linguist-language=JavaScript
 *.ts linguist-language=TypeScript
 *.html linguist-language=HTML
