@@ -24,7 +24,7 @@ export interface IResultYear {
 }
 
 export interface IRacerHistory {
-  racerId: number;
+  riderId: number;
   results: IResultYear[];
 }
 

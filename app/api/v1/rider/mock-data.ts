@@ -11,10 +11,13 @@ export const mockGetRiderByIdResponse = {
     {
       year: 2024,
       name: "Human dsm-firmenich",
+      id: 1,
+      url: "",
+      description: "",
     },
   ],
   socials: {
-    strava: 917822,
+    strava: "917822",
     insta: "es",
   },
   categories: [

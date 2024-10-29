@@ -10,5 +10,5 @@ module.exports = {
     "^@/(.*)$": "<rootDir>/$1", // Adjusting according to your folder structure
   },
   collectCoverage: true,
-  coverageDirectory: 'coverage',
+  coverageDirectory: "coverage",
 };

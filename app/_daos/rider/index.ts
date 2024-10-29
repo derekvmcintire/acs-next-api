@@ -1,5 +1,6 @@
-import { IRiderDAO } from "@/app/_interfaces/IRiderDAO";
-import { IRiderRepository } from "@/app/_interfaces/IRiderRepository";
+import { getDatabaseQueryErrorMessage } from "@/app/_constants/errors";
+import { IRiderDAO } from "@/app/_daos/rider/IRiderDAO";
+import { IRiderRepository } from "@/app/_database/types/rider/IRiderRepository";
 import {
   IGetRidersParams,
   RiderRow,
@@ -72,11 +73,9 @@ export default class RiderDAO implements IRiderDAO {
           },
         },
       })) as RiderRow[];
-      console.log("GAT MENY RIDAHS: ", [riders[0], riders[1]]);
       return riders;
     } catch (error) {
-      console.error("Database query error:", error);
-      throw new Error("Database query error");
+      throw new Error(getDatabaseQueryErrorMessage(String(error)));
     }
   }
 
@@ -103,8 +102,7 @@ export default class RiderDAO implements IRiderDAO {
       })) as RiderRow;
       return rider;
     } catch (error) {
-      console.error("Database query error:", error);
-      throw new Error("Database query error");
+      throw new Error(getDatabaseQueryErrorMessage(String(error)));
     }
   }
 }

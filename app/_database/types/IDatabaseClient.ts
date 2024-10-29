@@ -1,6 +1,6 @@
 import { Prisma, PrismaClient } from "@prisma/client";
-import { IRiderRepository } from "./IRiderRepository";
-import { IResultRepository } from "./IResultRepository";
+import { IRiderRepository } from "./rider/IRiderRepository";
+import { IResultRepository } from "./result/IResultRepository";
 
 export interface IDatabaseClient {
   rider: IRiderRepository;

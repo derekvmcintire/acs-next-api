@@ -1,5 +1,6 @@
-import { IResultDAO } from "@/app/_interfaces/IResultDAO";
-import { IResultRepository } from "@/app/_interfaces/IResultRepository";
+import { getDatabaseQueryErrorMessage } from "@/app/_constants/errors";
+import { IResultDAO } from "@/app/_daos/result/IResultDAO";
+import { IResultRepository } from "@/app/_database/types/result/IResultRepository";
 import { IRiderResultsRow } from "@/app/_types/result/types";
 
 export default class ResultDAO implements IResultDAO {
@@ -29,8 +30,7 @@ export default class ResultDAO implements IResultDAO {
       })) as IRiderResultsRow[];
       return results;
     } catch (error) {
-      console.error("Database query error:", error);
-      throw new Error("Database query error");
+      throw new Error(getDatabaseQueryErrorMessage(String(error)));
     }
   }
 
@@ -45,8 +45,7 @@ export default class ResultDAO implements IResultDAO {
 
       return resultCount;
     } catch (error) {
-      console.error("Database query error:", error);
-      throw new Error("Database query error");
+      throw new Error(getDatabaseQueryErrorMessage(String(error)));
     }
   }
 }
