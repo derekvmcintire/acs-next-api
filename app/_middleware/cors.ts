@@ -1,15 +1,16 @@
-const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS || "*";
+import {
+  ALLOW_ORIGIN_HEADER_NAME,
+  ALLOWED_ORIGINS,
+  ALLOW_METHODS_HEADER_NAME,
+  ALLOWED_METHODS,
+  ALLOW_HEADERS_HEADER_NAME,
+  ALLOWED_HEADERS,
+} from "../_constants/headers";
 
-export default function corsMiddleware(req: Request) {
+export function getCorsHeaders() {
   const headers = new Headers();
-  headers.set("Access-Control-Allow-Origin", ALLOWED_ORIGINS);
-  headers.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  headers.set("Access-Control-Allow-Headers", "Content-Type");
-
-  // Handle preflight request
-  if (req.method === "OPTIONS") {
-    return new Response(null, { status: 200, headers });
-  }
-
+  headers.set(ALLOW_ORIGIN_HEADER_NAME, ALLOWED_ORIGINS);
+  headers.set(ALLOW_METHODS_HEADER_NAME, ALLOWED_METHODS);
+  headers.set(ALLOW_HEADERS_HEADER_NAME, ALLOWED_HEADERS);
   return headers;
 }
