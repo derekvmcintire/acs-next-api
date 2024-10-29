@@ -1,6 +1,10 @@
 import { IRiderDAO } from "@/app/_interfaces/IRiderDAO";
 import { IRiderRepository } from "@/app/_interfaces/IRiderRepository";
-import { IGetRidersParams, RiderWhereInput } from "@/app/_types/rider/types";
+import {
+  IGetRidersParams,
+  RiderRow,
+  RiderWhereInput,
+} from "@/app/_types/rider/types";
 
 export default class RiderDAO implements IRiderDAO {
   // Constructor
@@ -50,7 +54,7 @@ export default class RiderDAO implements IRiderDAO {
   // Public Class Method getRiders
   async getRiders(params: IGetRidersParams) {
     try {
-      const riders = await this.riderRepo.findMany({
+      const riders = (await this.riderRepo.findMany({
         where: this.#buildWhereClause(params),
         include: {
           JoinRiderTeam: {
@@ -67,8 +71,8 @@ export default class RiderDAO implements IRiderDAO {
             },
           },
         },
-      });
-
+      })) as RiderRow[];
+      console.log("GAT MENY RIDAHS: ", [riders[0], riders[1]]);
       return riders;
     } catch (error) {
       console.error("Database query error:", error);
@@ -79,7 +83,7 @@ export default class RiderDAO implements IRiderDAO {
   // Public Class Method getRiderById
   async getRiderById(id: number) {
     try {
-      const rider = await this.riderRepo.findUnique({
+      const rider = (await this.riderRepo.findUnique({
         where: { id: id },
         include: {
           JoinRiderTeam: {
@@ -96,8 +100,7 @@ export default class RiderDAO implements IRiderDAO {
             },
           },
         },
-      });
-
+      })) as RiderRow;
       return rider;
     } catch (error) {
       console.error("Database query error:", error);
