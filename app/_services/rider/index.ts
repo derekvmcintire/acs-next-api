@@ -19,6 +19,9 @@ export default class RiderService {
       return {
         year: row.team.year,
         name: row.team.name,
+        id: row.team.id,
+        url: row.team.url || "",
+        description: row.team.description || "",
       };
     });
   }
@@ -69,6 +72,7 @@ export default class RiderService {
     if (!rider) {
       return null;
     }
+    console.log("rider is: ", rider);
     return this.#buildRider(rider);
   }
 }

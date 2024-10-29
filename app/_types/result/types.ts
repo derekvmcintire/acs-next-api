@@ -39,7 +39,7 @@ export interface IRaceRow {
   id: number;
   eventId: number;
   raceTypeId: number;
-  raceType: IPickTypeRow;
+  raceType?: IPickTypeRow;
   startDate: string;
   endDate: string | null;
   location: string | null;
@@ -48,7 +48,7 @@ export interface IRaceRow {
 export interface IEventRow {
   id: number;
   name: string;
-  Race: IRaceRow[];
+  Race?: IRaceRow[];
 }
 
 export interface IRiderResultsRow {
@@ -57,9 +57,9 @@ export interface IRiderResultsRow {
   riderId: number;
   resultTypeId: number;
   noPlaceCodeTypeId: number | null;
-  event: IEventRow;
-  resultType: IPickTypeRow;
-  noPlaceCodeType: IPickTypeRow | null;
+  event?: IEventRow;
+  resultType?: IPickTypeRow;
+  noPlaceCodeType?: IPickTypeRow | null;
   lap: number | null;
   place: number | null;
   time: string | null;

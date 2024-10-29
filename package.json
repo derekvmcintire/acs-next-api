@@ -7,11 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "typecheck": "tsc --noEmit",
     "api": "json-server --watch _db/mock-api/endpoints.json --port 8000",
     "api:generate": "node _db/mock-api/generate-endpoints.mjs > _db/mock-api/endpoints.json",
     "prettier:check": "prettier --check \"**/*.{ts,tsx}\"",
     "prettier": "prettier --write \"**/*.{ts,tsx}\"",
-    "seed": "ts-node db/seed/index.mjs"
+    "seed": "ts-node db/seed/index.mjs",
+    "jest": "npx jest"
   },
   "dependencies": {
     "@prisma/client": "^5.21.1",
@@ -28,6 +30,7 @@
   },
   "devDependencies": {
     "@types/dotenv": "^6.1.1",
+    "@types/jest": "^29.5.14",
     "@types/node": "^20",
     "@types/pg": "^8.11.10",
     "@types/react": "^18",
@@ -35,7 +38,9 @@
     "@types/swagger-ui-react": "^4.18.3",
     "eslint": "^8",
     "eslint-config-next": "15.0.0",
+    "jest": "^29.7.0",
     "prisma-docs-generator": "^0.8.0",
+    "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3"
   }

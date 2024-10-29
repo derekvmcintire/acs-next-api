@@ -7,9 +7,9 @@ export default class ResultDAO implements IResultDAO {
   constructor(private resultRepo: IResultRepository) {}
 
   // Public Class Method - getRiderResults
-  async getRiderResults(riderId: number): Promise<IRiderResultsRow[]> {
+  async getRiderResults(riderId: number) {
     try {
-      const results = await this.resultRepo.findMany({
+      const results = (await this.resultRepo.findMany({
         where: {
           riderId: riderId,
         },
@@ -26,8 +26,7 @@ export default class ResultDAO implements IResultDAO {
           resultType: true,
           noPlaceCodeType: true,
         },
-      });
-
+      })) as IRiderResultsRow[];
       return results;
     } catch (error) {
       console.error("Database query error:", error);
@@ -38,11 +37,11 @@ export default class ResultDAO implements IResultDAO {
   // Public CLass Method countResultsByEventId
   async countResultsByEventId(eventId: number) {
     try {
-      const resultCount = await this.resultRepo.count({
+      const resultCount = (await this.resultRepo.count({
         where: {
           eventId: eventId,
         },
-      });
+      })) as number;
 
       return resultCount;
     } catch (error) {

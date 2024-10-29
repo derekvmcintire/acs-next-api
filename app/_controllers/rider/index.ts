@@ -3,7 +3,7 @@ import RiderService from "@/app/_services/rider";
 import { IGetRidersParams } from "@/app/_types/rider/types";
 import { NextRequest, NextResponse } from "next/server";
 import databaseClient from "@/prisma/client";
-import { RiderByRiderIdParams } from "@/app/api/rider/[id]/route";
+import { GetRiderByRiderIdParams } from "@/app/api/rider/[id]/route";
 
 export async function getMultipleRiders(
   request: NextRequest,
@@ -32,7 +32,7 @@ export async function getMultipleRiders(
 }
 
 export async function getRiderById(
-  context: RiderByRiderIdParams,
+  context: GetRiderByRiderIdParams,
 ): Promise<NextResponse> {
   try {
     const { params } = context;

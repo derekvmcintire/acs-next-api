@@ -16,12 +16,13 @@ export default class ResultService {
       result.eventId,
     );
 
+    const race =
+      result?.event?.Race && result?.event?.Race[0]
+        ? result?.event?.Race[0]
+        : null;
+
     return {
-      name: result?.event?.name,
-      type: result?.event?.Race[0]?.raceType?.name,
-      startDate: result?.event?.Race[0]?.startDate,
-      endDate: result?.event?.Race[0]?.endDate || undefined,
-      location: result?.event?.Race[0]?.location || undefined,
+      name: result?.event?.name || "",
       place: result?.place || undefined,
       time: result?.time || undefined,
       points: result?.points || 0,
@@ -30,10 +31,14 @@ export default class ResultService {
           ? "NA"
           : result?.noPlaceCodeType?.name,
       lap: result?.lap || undefined,
-      resultType: result?.resultType?.name,
-      eventId: result?.event?.id,
+      resultType: result?.resultType?.name || "",
+      eventId: result?.event?.id || 0,
       category: "1",
       racers: resultCount,
+      type: race && race?.raceType?.name ? race.raceType.name : "",
+      startDate: race ? race.startDate : "",
+      endDate: race && race?.endDate ? race?.endDate : undefined,
+      location: race && race?.location ? race?.location : undefined,
     };
   }
 
@@ -68,6 +73,9 @@ export default class ResultService {
     const rows: IRiderResultsRow[] = await this.resultDao.getRiderResults(
       Number(riderId),
     );
+    if (!rows) {
+      return [];
+    }
     const results = await this.#mapResults(rows);
     return {
       riderId,

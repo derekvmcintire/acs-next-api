@@ -1,5 +1,3 @@
-import { Rider as PrismaRider, Team as PrismaTeam } from "@prisma/client";
-
 // Rider Data Types
 
 export interface IRiderName {
@@ -8,8 +6,11 @@ export interface IRiderName {
 }
 
 export interface ITeam {
-  year: number;
+  id: number;
   name: string;
+  year: number;
+  url: string | null;
+  description: string | null;
 }
 
 export interface ISocials {
@@ -50,30 +51,35 @@ export interface IGetRidersParams {
 }
 
 // DB Table Row Types
-export type TeamRow = Pick<PrismaTeam, "year" | "name">;
 
-export type JoinRiderTeamRow = {
+export interface TeamRow {
+  id: number;
+  name: string;
+  year: number;
+  url: string | null;
+  description: string | null;
+}
+
+export interface JoinRiderTeamRow {
   id: number;
   riderId: number;
   teamId: number;
   team: TeamRow;
-};
+}
 
-export type RiderRow = Pick<
-  PrismaRider,
-  | "id"
-  | "firstName"
-  | "lastName"
-  | "dob"
-  | "country"
-  | "hometown"
-  | "photo"
-  | "strava"
-  | "insta"
-  | "about"
-> & {
-  JoinRiderTeam: JoinRiderTeamRow[];
-};
+export interface RiderRow {
+  id: number;
+  firstName: string | null;
+  lastName: string | null;
+  dob: string | null;
+  country: string | null;
+  hometown: string | null;
+  photo: string | null;
+  strava: string | null;
+  insta: string | null;
+  about: string | null;
+  JoinRiderTeam?: JoinRiderTeamRow[] | null;
+}
 
 // Query Building Types
 export type RiderWhereInput = {
