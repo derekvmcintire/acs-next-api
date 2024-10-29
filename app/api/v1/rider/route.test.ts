@@ -4,7 +4,7 @@ import { NextRequest } from "next/server";
 import { mockGetAllRidersResponse } from "./mock-data";
 import { getInternalServerErrorMessage } from "@/app/_constants/errors";
 
-// Mocking the controller function directly
+// Mocking the controller module directly
 jest.mock("../../../_controllers/rider");
 
 const mockGetMultipleRidersURL = "http://localhost/api/latest/rider/?ids=25,26";

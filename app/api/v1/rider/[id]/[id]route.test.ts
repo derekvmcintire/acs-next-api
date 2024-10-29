@@ -8,7 +8,7 @@ import {
   getRiderNotFoundErrorMessage,
 } from "@/app/_constants/errors";
 
-// Mocking the controller function directly
+// Mocking the controller module directly
 jest.mock("../../../../_controllers/rider");
 
 const mockId = mockGetRiderByIdResponse.id;
