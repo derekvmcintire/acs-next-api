@@ -18,7 +18,6 @@ export const generateRandomNumber = (max = 1000) => floorMap(Math.random(), max)
 export const generateRandomString = (maxLength = 15) => {
   const characters = 'abcdefghijklmnopqrstuvwxyz';
 
-  // const length = Math.floor(Math.random() * maxLength) + 1;
   const length = floorMap(Math.random(), maxLength);
   const randomIndex = () => Math.floor(Math.random() * characters.length);
 

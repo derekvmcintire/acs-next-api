@@ -8,7 +8,6 @@ if (process.env.NODE_ENV !== "production") {
   globalThis.prisma = prismaClient;
 }
 
-// Wrap PrismaClient with PrismaDatabaseClient and export as IDatabaseClient
 const databaseClient = new PrismaDatabaseClient(prismaClient);
 
 export default databaseClient;

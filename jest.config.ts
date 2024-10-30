@@ -1,4 +1,3 @@
-// jest.config.js
 module.exports = {
   preset: "ts-jest",
   testEnvironment: "node",
@@ -7,7 +6,7 @@ module.exports = {
   },
   moduleFileExtensions: ["ts", "js", "json", "node"],
   moduleNameMapper: {
-    "^@/(.*)$": "<rootDir>/$1", // Adjusting according to your folder structure
+    "^@/(.*)$": "<rootDir>/$1",
   },
   collectCoverage: true,
   coverageDirectory: "coverage",
