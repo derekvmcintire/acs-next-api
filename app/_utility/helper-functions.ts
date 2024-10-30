@@ -4,12 +4,12 @@ export const getYearFromDateString = (dateString: string): number => {
   const isoDateTimeMatch = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z?$/; // ISO DateTime format
 
   let date;
-  
+
   // Parse as UTC if matches common formats
   if (isoDateMatch.test(dateString)) {
     date = new Date(`${dateString}T00:00:00Z`);
   } else if (isoDateTimeMatch.test(dateString)) {
-    date = new Date(dateString.endsWith('Z') ? dateString : `${dateString}Z`);
+    date = new Date(dateString.endsWith("Z") ? dateString : `${dateString}Z`);
   } else {
     // Attempt natural language parsing
     date = new Date(dateString);
