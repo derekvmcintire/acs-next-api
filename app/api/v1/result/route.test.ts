@@ -4,28 +4,30 @@ import {
   getInternalServerErrorMessage,
   getResultsNotFoundErrorMessage,
 } from "@/app/_constants/errors";
-import { mockResultsData } from "../../../_constants/mock-data/result-mock-data";
+import {
+  mockRacerHistory,
+  mockRiderId,
+} from "../../../_constants/mock-data/result-mock-data";
 import { getResultsByRiderId } from "@/app/_controllers/result";
 
 // Mocking the controller module directly
 jest.mock("../../../_controllers/result");
 
-const mockGetRiderResultsURL = "http://localhost/api/latest/result?riderId=18";
+const mockGetRiderResultsURL = `http://localhost/api/latest/result?riderId=${mockRiderId}`;
 
 describe("GET /api/result/", () => {
   it("should return results for a rider", async () => {
-    jest.mocked(getResultsByRiderId).mockResolvedValueOnce(mockResultsData);
+    jest.mocked(getResultsByRiderId).mockResolvedValueOnce(mockRacerHistory);
 
     const request = new NextRequest(mockGetRiderResultsURL);
     const apiResponse = await GET(request);
     expect(apiResponse.status).toBe(200);
 
     const data = await apiResponse.json();
-    expect(data).toEqual(mockResultsData);
+    expect(data).toEqual(mockRacerHistory);
   });
 
-  it.skip("should return 404 on results not found", async () => {
-    const mockErrorMessage = "Error message";
+  it("should return 404 on results not found", async () => {
     jest.mocked(getResultsByRiderId).mockResolvedValueOnce(null);
 
     const request = new NextRequest(mockGetRiderResultsURL);
@@ -34,7 +36,7 @@ describe("GET /api/result/", () => {
 
     const data = await apiResponse.json();
     expect(data).toEqual({
-      error: getResultsNotFoundErrorMessage(mockErrorMessage),
+      error: getResultsNotFoundErrorMessage(String(mockRiderId)),
     });
   });
 

@@ -6,8 +6,8 @@ export interface IEvent {
 export interface IResult extends IEvent {
   type: string;
   startDate: string;
-  endDate?: string;
-  location?: string;
+  endDate?: string | null;
+  location?: string | null;
   resultType: string;
   lap?: number;
   place?: number;
@@ -57,8 +57,8 @@ export interface IRiderResultsRow {
   riderId: number;
   resultTypeId: number;
   noPlaceCodeTypeId: number | null;
-  event?: IEventRow;
-  resultType?: IPickTypeRow;
+  event?: IEventRow | null;
+  resultType?: IPickTypeRow | null;
   noPlaceCodeType?: IPickTypeRow | null;
   lap: number | null;
   place: number | null;

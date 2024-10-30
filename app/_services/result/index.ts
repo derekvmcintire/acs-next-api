@@ -1,3 +1,4 @@
+import { mockCategory } from "@/app/_constants/mock-data/result-mock-data";
 import ResultDAO from "@/app/_daos/result";
 import {
   IRacerHistory,
@@ -11,8 +12,8 @@ export default class ResultService {
   // Constructor
   constructor(private resultDao: ResultDAO) {}
 
-  // Private Class Method #buildResult
-  async #buildResult(result: IRiderResultsRow): Promise<IResult> {
+  // Class Method buildResult
+  async buildResult(result: IRiderResultsRow): Promise<IResult> {
     try {
       const resultCount = await this.resultDao.countResultsByEventId(
         result.eventId,
@@ -23,10 +24,10 @@ export default class ResultService {
           ? result?.event?.Race[0]
           : null;
 
-      return {
+      const build = {
         name: result?.event?.name || "",
         place: result?.place || undefined,
-        time: result?.time || undefined,
+        time: result?.time || "",
         points: result?.points || 0,
         noPlaceCode:
           result?.place && result?.place > 0
@@ -35,25 +36,27 @@ export default class ResultService {
         lap: result?.lap || undefined,
         resultType: result?.resultType?.name || "",
         eventId: result?.event?.id || 0,
-        category: "1",
+        category: mockCategory,
         racers: resultCount,
         type: race && race?.raceType?.name ? race.raceType.name : "",
         startDate: race ? race.startDate : "",
-        endDate: race && race?.endDate ? race?.endDate : undefined,
-        location: race && race?.location ? race?.location : undefined,
+        endDate: race && race?.endDate ? race?.endDate : null,
+        location: race && race?.location ? race?.location : null,
       };
+
+      return build;
     } catch (error) {
       throw new Error(String(error));
     }
   }
 
-  // Private Class Method #mapResults
-  async #mapResults(results: IRiderResultsRow[]): Promise<IResultYear[]> {
+  // Class Method mapResults
+  async mapResults(results: IRiderResultsRow[]): Promise<IResultYear[]> {
     const yearMap: Record<number, IResult[]> = {};
 
     await Promise.all(
       results.map(async (result: IRiderResultsRow) => {
-        const mappedResult = await this.#buildResult(result);
+        const mappedResult = await this.buildResult(result);
         const year = getYearFromDateString(mappedResult.startDate);
 
         if (!yearMap[year]) {
@@ -79,7 +82,7 @@ export default class ResultService {
       const rows: IRiderResultsRow[] = await this.resultDao.getRiderResults(
         Number(riderId),
       );
-      const results = await this.#mapResults(rows);
+      const results = await this.mapResults(rows);
       return {
         riderId,
         results,
