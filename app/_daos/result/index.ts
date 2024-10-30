@@ -28,6 +28,7 @@ export default class ResultDAO implements IResultDAO {
           noPlaceCodeType: true,
         },
       })) as IRiderResultsRow[];
+      console.log("use this for mock data: ", results);
       return results;
     } catch (error) {
       throw new Error(getDatabaseQueryErrorMessage(String(error)));
