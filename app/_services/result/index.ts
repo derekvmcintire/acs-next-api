@@ -1,4 +1,4 @@
-import { mockCategory } from "@/app/_constants/mock-data/result-mock-data";
+import { mockCategory } from "@/app/_constants/mock-data/result/mock-values";
 import ResultDAO from "@/app/_daos/result";
 import {
   IRacerHistory,

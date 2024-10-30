@@ -1,34 +1,34 @@
 import {
-  IEventRow,
   IPickTypeRow,
   IRaceRow,
-  IRacerHistory,
+  IEventRow,
+  IRiderResultsRow,
   IResult,
   IResultYear,
-  IRiderResultsRow,
+  IRacerHistory,
 } from "@/app/_types/result/types";
-
-// Mock Values
-export const mockEventName = "Tour Barentu";
-export const mockCategory = "1";
-export const mockCount = 5;
-export const mockResultId = 3;
-const mockNoPlaceCodeId = 2;
-const mockResultTypeId = 1;
-const mockRaceTypeId = 1;
-const mockRaceId = 4;
-export const mockRiderId = 1;
-const mockEventId = 31;
-const mockEndDate = null;
-const mockStartDateTwentyOne = "Wed Nov 07 2021";
-const mockStartDateTwentyTwo = "Wed Nov 07 2022";
-const mockLocation = "Boston, mA";
-const mockLap = 1;
-const mockPlace = 3;
-const mockTime = "";
-const mockPoints = 300;
-export const mockYearTwentyOne = 2021;
-export const mockYearTwentyTwo = 2022;
+import {
+  mockNoPlaceCodeId,
+  mockResultTypeId,
+  mockRaceTypeId,
+  mockRaceId,
+  mockEventId,
+  mockStartDateTwentyOne,
+  mockEndDate,
+  mockLocation,
+  mockStartDateTwentyTwo,
+  mockLap,
+  mockPlace,
+  mockTime,
+  mockPoints,
+  mockCategory,
+  mockCount,
+  mockEventName,
+  mockResultId,
+  mockRiderId,
+  mockYearTwentyOne,
+  mockYearTwentyTwo,
+} from "./mock-values";
 
 // mock IPickTypeRow values
 const mockNoPlaceCodeType: IPickTypeRow = {

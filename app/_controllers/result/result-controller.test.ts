@@ -5,7 +5,7 @@ import { IRacerHistory } from "@/app/_types/result/types";
 import {
   mockEmptyRacerHistory,
   mockRacerHistory,
-} from "@/app/_constants/mock-data/result-mock-data";
+} from "@/app/_constants/mock-data/result/mock-models";
 import { getResultsByRiderId } from ".";
 
 jest.mock("@/app/_database/client", () => ({

@@ -1,15 +1,17 @@
 import {
   expectedBuildFromMockSingleRiderResultTwentyOne,
-  mockCount,
   mockExpectedResultYears,
   mockGetRiderResultsQueryResponse,
   mockRacerHistory,
-  mockRiderId,
   mockSingleRiderResultRowTwentyOne,
   mockSingleRiderResultRowTwentyTwo,
+} from "@/app/_constants/mock-data/result/mock-models";
+import {
+  mockCount,
+  mockRiderId,
   mockYearTwentyOne,
   mockYearTwentyTwo,
-} from "@/app/_constants/mock-data/result-mock-data";
+} from "@/app/_constants/mock-data/result/mock-values"
 import ResultDAO from "@/app/_daos/result";
 import databaseClient from "@/app/_database/client";
 import ResultService from "@/app/_services/result";
