@@ -105,4 +105,27 @@ export default class RiderDAO implements IRiderDAO {
       throw new Error(getDatabaseQueryErrorMessage(String(error)));
     }
   }
+
+  // Public Class Method createRider
+  async createRider(riderData: RiderRow) {
+    try {
+      const newRider = await this.riderRepo.create({
+        data: {
+          firstName: riderData.firstName,
+          lastName: riderData.lastName,
+          dob: riderData.dob,
+          country: riderData.country,
+          hometown: riderData.hometown,
+          photo: riderData.photo,
+          strava: riderData.strava,
+          insta: riderData.insta,
+          about: riderData.about,
+        },
+      });
+
+      return newRider;
+    } catch (error) {
+      throw new Error(getDatabaseQueryErrorMessage(String(error)));
+    }
+  }
 }

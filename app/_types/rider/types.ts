@@ -68,7 +68,7 @@ export interface JoinRiderTeamRow {
 }
 
 export interface RiderRow {
-  id: number;
+  id?: number;
   firstName: string | null;
   lastName: string | null;
   dob: string | null;

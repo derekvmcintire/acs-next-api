@@ -1,6 +1,6 @@
 import RiderDAO from "@/app/_daos/rider";
 import RiderService from "@/app/_services/rider";
-import { IGetRidersParams, IRider } from "@/app/_types/rider/types";
+import { IGetRidersParams, IRider, RiderRow } from "@/app/_types/rider/types";
 import databaseClient from "@/app/_database/client";
 
 export async function getMultipleRiders(
@@ -22,6 +22,18 @@ export async function getRiderById(id: number): Promise<IRider | null> {
     const riderDao = new RiderDAO(databaseClient.rider);
     const riderService = new RiderService(riderDao);
     const rider = await riderService.getRiderById(Number(id));
+
+    return rider;
+  } catch (error) {
+    throw new Error(String(error));
+  }
+}
+
+export async function createRider(riderData: RiderRow) {
+  try {
+    const riderDao = new RiderDAO(databaseClient.rider);
+    const riderService = new RiderService(riderDao);
+    const rider = await riderService.createRider(riderData);
 
     return rider;
   } catch (error) {
