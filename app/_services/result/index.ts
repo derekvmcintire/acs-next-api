@@ -76,7 +76,7 @@ export default class ResultService {
     return resultYears;
   }
 
-  // Public Class Method getResultsByRiderId
+  // Class Method getResultsByRiderId
   async getResultsByRiderId(riderId: number): Promise<IRacerHistory> {
     try {
       const rows: IRiderResultsRow[] = await this.resultDao.getRiderResults(
