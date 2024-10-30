@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
 
   try {
     const results = await getResultsByRiderId(Number(riderId));
-    if (!results) {
+    if (results === null) {
       return NextResponse.json(
         { error: getResultsNotFoundErrorMessage(String(riderId)) },
         { status: 404 },

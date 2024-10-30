@@ -1,5 +1,6 @@
 import RiderDAO from "@/app/_daos/rider";
 import {
+  AssignRiderToTeamParams,
   IGetRidersParams,
   IRider,
   ITeam,
@@ -93,6 +94,16 @@ export default class RiderService {
       const rider = await this.riderDao.createRider(riderData);
 
       return rider;
+    } catch (error) {
+      throw new Error(String(error));
+    }
+  }
+
+  async assignRiderToTeam(data: AssignRiderToTeamParams) {
+    try {
+      const row = await this.riderDao.assignRiderToTeam(data);
+
+      return row;
     } catch (error) {
       throw new Error(String(error));
     }

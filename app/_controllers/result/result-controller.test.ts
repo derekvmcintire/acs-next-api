@@ -1,7 +1,6 @@
 import ResultDAO from "@/app/_daos/result";
 import ResultService from "@/app/_services/result";
 import databaseClient from "@/app/_database/client";
-import { IRacerHistory } from "@/app/_types/result/types";
 import {
   mockEmptyRacerHistory,
   mockRacerHistory,
@@ -33,14 +32,13 @@ describe("getResultsByRiderId", () => {
     expect(result).toEqual(mockRacerHistory);
   });
 
-  it("should return null if no results are found", async () => {
-    const mockRiderHistory: IRacerHistory = mockEmptyRacerHistory;
+  it("should return empty history if no results are found", async () => {
     mockResultService.getResultsByRiderId = jest
       .fn()
-      .mockResolvedValue(mockRiderHistory);
+      .mockResolvedValue(mockEmptyRacerHistory);
 
     const result = await getResultsByRiderId(riderId);
-    expect(result).toBeNull();
+    expect(result).toEqual(mockEmptyRacerHistory);
   });
 
   it("should throw an error if an exception occurs", async () => {

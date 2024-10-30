@@ -13,10 +13,6 @@ export async function getResultsByRiderId(
       Number(riderId),
     );
 
-    if (riderHistory.results.length < 1) {
-      return null;
-    }
-
     return riderHistory;
   } catch (error) {
     throw new Error(String(error));
