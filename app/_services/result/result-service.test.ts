@@ -11,7 +11,7 @@ import {
   mockRiderId,
   mockYearTwentyOne,
   mockYearTwentyTwo,
-} from "@/app/_constants/mock-data/result/mock-values"
+} from "@/app/_constants/mock-data/result/mock-values";
 import ResultDAO from "@/app/_daos/result";
 import databaseClient from "@/app/_database/client";
 import ResultService from "@/app/_services/result";

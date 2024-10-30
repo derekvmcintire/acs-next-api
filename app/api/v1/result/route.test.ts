@@ -4,12 +4,8 @@ import {
   getInternalServerErrorMessage,
   getResultsNotFoundErrorMessage,
 } from "@/app/_constants/errors";
-import {
-  mockRacerHistory,
-} from "../../../_constants/mock-data/result/mock-models";
-import {
-  mockRiderId,
-} from "../../../_constants/mock-data/result/mock-values";
+import { mockRacerHistory } from "../../../_constants/mock-data/result/mock-models";
+import { mockRiderId } from "../../../_constants/mock-data/result/mock-values";
 import { getResultsByRiderId } from "@/app/_controllers/result";
 
 // Mocking the controller module directly
