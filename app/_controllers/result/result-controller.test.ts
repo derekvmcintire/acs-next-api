@@ -3,8 +3,8 @@ import ResultService from "@/app/_services/result";
 import databaseClient from "@/app/_database/client";
 import { IRacerHistory } from "@/app/_types/result/types";
 import {
-  mockEmptyResultsData,
-  mockResultsData,
+  mockEmptyRacerHistory,
+  mockRacerHistory,
 } from "@/app/_constants/mock-data/result-mock-data";
 import { getResultsByRiderId } from ".";
 
@@ -27,14 +27,14 @@ describe("getResultsByRiderId", () => {
   it("should return rider history if results are found", async () => {
     mockResultService.getResultsByRiderId = jest
       .fn()
-      .mockResolvedValue(mockResultsData);
+      .mockResolvedValue(mockRacerHistory);
 
     const result = await getResultsByRiderId(riderId);
-    expect(result).toEqual(mockResultsData);
+    expect(result).toEqual(mockRacerHistory);
   });
 
   it("should return null if no results are found", async () => {
-    const mockRiderHistory: IRacerHistory = mockEmptyResultsData;
+    const mockRiderHistory: IRacerHistory = mockEmptyRacerHistory;
     mockResultService.getResultsByRiderId = jest
       .fn()
       .mockResolvedValue(mockRiderHistory);

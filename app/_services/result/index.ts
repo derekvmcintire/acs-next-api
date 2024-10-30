@@ -19,18 +19,15 @@ export default class ResultService {
         result.eventId,
       );
 
-      console.log('result starting out as: ', result)
       const race =
         result?.event?.Race && result?.event?.Race[0]
           ? result?.event?.Race[0]
           : null;
-      
-      console.log('race coming through! ', race)
 
       const build = {
         name: result?.event?.name || "",
         place: result?.place || undefined,
-        time: result?.time || undefined,
+        time: result?.time || "",
         points: result?.points || 0,
         noPlaceCode:
           result?.place && result?.place > 0
@@ -46,7 +43,7 @@ export default class ResultService {
         endDate: race && race?.endDate ? race?.endDate : null,
         location: race && race?.location ? race?.location : null,
       };
-      console.log('build iz: ', build);
+
       return build;
     } catch (error) {
       throw new Error(String(error));

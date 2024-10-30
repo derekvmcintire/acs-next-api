@@ -1,78 +1,14 @@
-import { IEvent, IEventRow, IRacerHistory, IRiderResultsRow } from "@/app/_types/result/types";
+import {
+  IEventRow,
+  IPickTypeRow,
+  IRaceRow,
+  IRacerHistory,
+  IResult,
+  IResultYear,
+  IRiderResultsRow,
+} from "@/app/_types/result/types";
 
-export const mockResultsData: IRacerHistory = {
-  riderId: 18,
-  results: [
-    {
-      year: 2018,
-      races: [
-        {
-          name: "Ronde Van Copenhagen",
-          place: 47,
-          points: 0,
-          noPlaceCode: "NA",
-          resultType: "default",
-          eventId: 46,
-          category: "1",
-          racers: 38,
-          type: "Road",
-          startDate: "Fri Nov 30 2018",
-          location: "Ronde Van Copenhagen",
-        },
-        {
-          name: "De Lille",
-          place: 27,
-          points: 0,
-          noPlaceCode: "NA",
-          resultType: "default",
-          eventId: 63,
-          category: "1",
-          racers: 39,
-          type: "Road",
-          startDate: "Wed Nov 21 2018",
-          location: "De Lille",
-        },
-      ],
-    },
-    {
-      year: 2019,
-      races: [
-        {
-          name: "Chrono des Vienna",
-          place: 25,
-          points: 0,
-          noPlaceCode: "NA",
-          resultType: "default",
-          eventId: 94,
-          category: "1",
-          racers: 34,
-          type: "Road",
-          startDate: "Mon Nov 19 20189",
-          location: "Chrono des Vienna",
-        },
-        {
-          name: "Wollongong to Oulu",
-          place: 3,
-          points: 0,
-          noPlaceCode: "NA",
-          resultType: "default",
-          eventId: 117,
-          category: "1",
-          racers: 33,
-          type: "Road",
-          startDate: "Wed Nov 07 2019",
-          location: "Wollongong to Oulu",
-        },
-      ],
-    },
-  ],
-};
-
-export const mockEmptyResultsData: IRacerHistory = {
-  riderId: 18,
-  results: [],
-};
-
+// Mock Values
 export const mockEventName = "Tour Barentu";
 export const mockCategory = "1";
 export const mockCount = 5;
@@ -81,127 +17,163 @@ const mockNoPlaceCodeId = 2;
 const mockResultTypeId = 1;
 const mockRaceTypeId = 1;
 const mockRaceId = 4;
-const mockRiderId = 1;
+export const mockRiderId = 1;
 const mockEventId = 31;
+const mockEndDate = null;
+const mockStartDateTwentyOne = "Wed Nov 07 2021";
+const mockStartDateTwentyTwo = "Wed Nov 07 2022";
+const mockLocation = "Boston, mA";
+const mockLap = 1;
+const mockPlace = 3;
+const mockTime = "";
+const mockPoints = 300;
+export const mockYearTwentyOne = 2021;
+export const mockYearTwentyTwo = 2022;
 
-export const mockRace = {
+// mock IPickTypeRow values
+const mockNoPlaceCodeType: IPickTypeRow = {
+  id: mockNoPlaceCodeId,
+  name: "NA",
+  description: "Participant Placed",
+};
+const mockResultType: IPickTypeRow = {
+  id: mockResultTypeId,
+  name: "default",
+  description: "Default Result Type",
+};
+const mockRaceType: IPickTypeRow = {
+  id: mockRaceTypeId,
+  name: "road",
+  description: "Some race",
+};
+
+// mock IRaceRow values
+export const mockRaceTwentyOne: IRaceRow = {
   id: mockRaceId,
   eventId: mockEventId,
   raceTypeId: mockRaceTypeId,
-  raceType: { id: mockRaceTypeId, name: "road", description: "Some race" },
-  startDate: "Wed Nov 07 2019",
-  endDate: null,
-  location: null,
+  raceType: mockRaceType,
+  startDate: mockStartDateTwentyOne,
+  endDate: mockEndDate,
+  location: mockLocation,
 };
 
-// export const mockRaceRow = {
-//   id: mockRaceId;
-//   eventId: number;
-//   raceTypeId: number;
-//   raceType?: IPickTypeRow;
-//   startDate: string;
-//   endDate: string | null;
-//   location: string | null;
-// }
+export const mockRaceTwentyTwo: IRaceRow = {
+  id: mockRaceId,
+  eventId: mockEventId,
+  raceTypeId: mockRaceTypeId,
+  raceType: mockRaceType,
+  startDate: mockStartDateTwentyTwo,
+  endDate: mockEndDate,
+  location: mockLocation,
+};
 
-const mockEvent: IEventRow = { id: mockEventId, name: mockEventName, Race: [mockRace] };
+// mock IEventRow values
+const mockEventTwentyOne: IEventRow = {
+  id: mockEventId,
+  name: mockEventName,
+  Race: [mockRaceTwentyOne],
+};
+const mockEventTwentyTwo: IEventRow = {
+  id: mockEventId,
+  name: mockEventName,
+  Race: [mockRaceTwentyTwo],
+};
 
-export const mockSingleRiderResult = {
+// mock IRiderResultsRow values
+export const mockSingleRiderResultRowTwentyOne: IRiderResultsRow = {
   id: mockResultId,
   eventId: mockEventId,
   riderId: mockRiderId,
   resultTypeId: mockResultTypeId,
   noPlaceCodeTypeId: mockNoPlaceCodeId,
-  lap: 1,
-  place: 5,
-  time: "",
-  points: 10,
-  event: mockEvent,
-  resultType: { id: mockResultTypeId, name: "default", description: "Default Result Type" },
-  noPlaceCodeType: { id: mockNoPlaceCodeId, name: "NA", description: "Participant Placed" },
+  lap: mockLap,
+  place: mockPlace,
+  time: mockTime,
+  points: mockPoints,
+  event: mockEventTwentyOne,
+  resultType: mockResultType,
+  noPlaceCodeType: mockNoPlaceCodeType,
 };
 
-
-export const mockSingleResultRow: IRiderResultsRow = {
-  place: mockSingleRiderResult.place,
-  time: mockSingleRiderResult.time,
-  points: mockSingleRiderResult.points,
-  lap: mockSingleRiderResult.lap,
-  eventId: mockSingleRiderResult.eventId,
+export const mockSingleRiderResultRowTwentyTwo: IRiderResultsRow = {
   id: mockResultId,
-  riderId: mockSingleRiderResult.id,
-  resultTypeId: mockSingleRiderResult.resultType.id,
-  noPlaceCodeTypeId: mockSingleRiderResult.noPlaceCodeType.id,
-  event: mockSingleRiderResult.event,
-}
+  eventId: mockEventId,
+  riderId: mockRiderId,
+  resultTypeId: mockResultTypeId,
+  noPlaceCodeTypeId: mockNoPlaceCodeId,
+  lap: mockLap,
+  place: mockPlace,
+  time: mockTime,
+  points: mockPoints,
+  event: mockEventTwentyTwo,
+  resultType: mockResultType,
+  noPlaceCodeType: mockNoPlaceCodeType,
+};
 
-export const expectedBuildFromMockSingleRiderResult = {
+export const mockGetRiderResultsQueryResponse: IRiderResultsRow[] = [
+  mockSingleRiderResultRowTwentyOne,
+  mockSingleRiderResultRowTwentyTwo,
+];
+
+// mock IResult values
+export const expectedBuildFromMockSingleRiderResultTwentyOne: IResult = {
   name: mockEventName,
-  place: mockSingleRiderResult.place,
-  time: mockSingleRiderResult.time,
-  points: mockSingleRiderResult.points,
-  noPlaceCode: mockSingleRiderResult.noPlaceCodeType.name,
-  lap: mockSingleRiderResult.lap,
-  resultType: mockSingleRiderResult.resultType.name,
-  eventId: mockSingleRiderResult.eventId,
+  place: mockPlace,
+  time: mockTime,
+  points: mockPoints,
+  noPlaceCode: mockNoPlaceCodeType.name,
+  lap: mockLap,
+  resultType: mockResultType.name,
+  eventId: mockSingleRiderResultRowTwentyOne.eventId,
   category: mockCategory,
   racers: mockCount,
-  type: mockRace.raceType.name,
-  startDate: mockRace.startDate,
-  endDate: mockRace.endDate,
-  location: mockRace.location,
-}
+  type: mockRaceType.name,
+  startDate: mockStartDateTwentyOne,
+  endDate: mockEndDate,
+  location: mockLocation,
+};
 
-// export const expectedBuildFromMockSingleRiderResult = {
+export const expectedBuildFromMockSingleRiderResultTwentyTwo: IResult = {
+  name: mockEventName,
+  place: mockPlace,
+  time: mockTime,
+  points: mockPoints,
+  noPlaceCode: mockNoPlaceCodeType.name,
+  lap: mockLap,
+  resultType: mockResultType.name,
+  eventId: mockSingleRiderResultRowTwentyTwo.eventId,
+  category: mockCategory,
+  racers: mockCount,
+  type: mockRaceType.name,
+  startDate: mockStartDateTwentyTwo,
+  endDate: mockEndDate,
+  location: mockLocation,
+};
 
-//   id: mockResultId,
-//   riderId: mockSingleRiderResult.id,
-//   resultTypeId: mockSingleRiderResult.resultType.id,
-//   noPlaceCodeTypeId: mockSingleRiderResult.noPlaceCodeType.id,
-// };
+// mock IResultYear values
+export const mockExpectedResultsYearTwentyOne: IResultYear = {
+  year: mockYearTwentyOne,
+  races: [expectedBuildFromMockSingleRiderResultTwentyOne],
+};
 
+export const mockExpectedResultsYearTwentyTwo: IResultYear = {
+  year: mockYearTwentyTwo,
+  races: [expectedBuildFromMockSingleRiderResultTwentyTwo],
+};
 
-export const mockGetRiderResultsQueryResponse = [
-  {
-    id: 1028,
-    eventId: 31,
-    riderId: 2,
-    resultTypeId: 56,
-    noPlaceCodeTypeId: 56,
-    lap: undefined,
-    place: 5,
-    time: "",
-    points: 1,
-    event: { id: 31, name: "Tour Barentu", Race: [mockRace] },
-    resultType: { id: 56, name: "default", description: "Default Result Type" },
-    noPlaceCodeType: { id: 56, name: "NA", description: "Participant Placed" },
-  },
-  {
-    id: 142,
-    eventId: 5,
-    riderId: 2,
-    resultTypeId: 56,
-    noPlaceCodeTypeId: 56,
-    lap: undefined,
-    place: 32,
-    time: "",
-    points: 1,
-    event: { id: 5, name: "Grands Prix de Jakarta", Race: [mockRace] },
-    resultType: { id: 56, name: "default", description: "Default Result Type" },
-    noPlaceCodeType: { id: 56, name: "NA", description: "Participant Placed" },
-  },
-  {
-    id: 443,
-    eventId: 14,
-    riderId: 2,
-    resultTypeId: 56,
-    noPlaceCodeTypeId: 56,
-    lap: undefined,
-    place: 14,
-    time: "",
-    points: 1,
-    event: { id: 14, name: "De Cobar", Race: [mockRace] },
-    resultType: { id: 56, name: "default", description: "Default Result Type" },
-    noPlaceCodeType: { id: 56, name: "NA", description: "Participant Placed" },
-  },
+export const mockExpectedResultYears: IResultYear[] = [
+  mockExpectedResultsYearTwentyOne,
+  mockExpectedResultsYearTwentyTwo,
 ];
+
+// mock IRacerHistory values
+export const mockEmptyRacerHistory: IRacerHistory = {
+  riderId: mockRiderId,
+  results: [],
+};
+
+export const mockRacerHistory: IRacerHistory = {
+  riderId: mockRiderId,
+  results: mockExpectedResultYears,
+};
