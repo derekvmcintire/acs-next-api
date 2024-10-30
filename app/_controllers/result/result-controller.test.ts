@@ -50,4 +50,5 @@ describe("getResultsByRiderId", () => {
       "Database error",
     );
   });
+  
 });
