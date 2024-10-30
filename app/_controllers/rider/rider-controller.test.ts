@@ -6,7 +6,7 @@ import {
   mockGetAllRidersResponse,
   mockGetMultipleRiderParams,
   mockGetRiderByIdResponse,
-} from "@/app/_constants/mock-data/rider-mock-data";
+} from "@/app/_constants/mock-data/rider/mock-models";
 
 jest.mock("@/app/_database/client", () => ({
   rider: jest.fn(),
