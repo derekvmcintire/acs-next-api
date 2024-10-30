@@ -50,6 +50,11 @@ export interface IGetRidersParams {
   id?: number;
 }
 
+export interface AssignRiderToTeamParams {
+  riderId: number;
+  teamId: number;
+}
+
 // DB Table Row Types
 
 export interface TeamRow {

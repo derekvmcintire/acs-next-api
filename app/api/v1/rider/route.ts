@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createRider, getMultipleRiders } from "@/app/_controllers/rider";
-import { IGetRidersParams, RiderRow } from "@/app/_types/rider/types";
+import { IGetRidersParams } from "@/app/_types/rider/types";
 import { getInternalServerErrorMessage } from "@/app/_constants/errors";
 
 export async function GET(request: NextRequest) {
@@ -36,16 +36,3 @@ export async function POST(request: NextRequest) {
     );
   }
 }
-
-// Mock data for POST request to create a rider
-// {
-//   "firstName": "Mipper",
-//   "lastName": "Mopperson",
-//   "dob": "1990-01-01",
-//   "country": "USA",
-//   "hometown": "New York, NY",
-//   "photo": "https://www.procyclingstats.com/images/riders/bp/bf/julian-alaphilippe-2024.jpeg",
-//   "strava": "87935790234",
-//   "insta": "portamip",
-//   "about": "It reaaaallly bothered me."
-// }

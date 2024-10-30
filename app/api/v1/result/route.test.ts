@@ -4,7 +4,10 @@ import {
   getInternalServerErrorMessage,
   getResultsNotFoundErrorMessage,
 } from "@/app/_constants/errors";
-import { mockRacerHistory } from "../../../_constants/mock-data/result/mock-models";
+import {
+  mockEmptyRacerHistory,
+  mockRacerHistory,
+} from "../../../_constants/mock-data/result/mock-models";
 import { mockRiderId } from "../../../_constants/mock-data/result/mock-values";
 import { getResultsByRiderId } from "@/app/_controllers/result";
 
@@ -23,6 +26,19 @@ describe("GET /api/result/", () => {
 
     const data = await apiResponse.json();
     expect(data).toEqual(mockRacerHistory);
+  });
+
+  it("should return 200 on empty results", async () => {
+    jest
+      .mocked(getResultsByRiderId)
+      .mockResolvedValueOnce(mockEmptyRacerHistory);
+
+    const request = new NextRequest(mockGetRiderResultsURL);
+    const apiResponse = await GET(request);
+    expect(apiResponse.status).toBe(200);
+
+    const data = await apiResponse.json();
+    expect(data).toEqual(mockEmptyRacerHistory);
   });
 
   it("should return 404 on results not found", async () => {
