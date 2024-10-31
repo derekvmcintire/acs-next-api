@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createResult, getResultsByRiderId } from "@/app/_controllers/result";
 import {
-  getInternalServerErrorMessage,
+  CREATE_RESULT_INVALID_REQUEST,
   getResultsNotFoundErrorMessage,
 } from "@/app/_constants/errors";
 import { BaseResult } from "@/app/_types/result/database/base-types";
@@ -19,41 +19,38 @@ export async function GET(request: NextRequest) {
     }
     return NextResponse.json(results, { status: 200 });
   } catch (error) {
-    return NextResponse.json(
-      { error: getInternalServerErrorMessage(String(error)) },
-      { status: 500 },
-    );
+    return NextResponse.json({ error: String(error) }, { status: 500 });
   }
 }
 
 export async function POST(request: NextRequest) {
-  const {
-    eventId,
-    riderId,
-    resultTypeId,
-    noPlaceCodeTypeId,
-    lap,
-    place,
-    time,
-    points,
-  }: BaseResult = await request.json();
-
   try {
+    // Parse the request body
+    const body: Partial<BaseResult> = await request.json();
+
+    const { eventId, riderId, resultTypeId } = body;
+    if (eventId == null || riderId == null || resultTypeId == null) {
+      return NextResponse.json(
+        { error: CREATE_RESULT_INVALID_REQUEST },
+        { status: 400 },
+      );
+    }
+
     const row = await createResult({
       eventId: Number(eventId),
       riderId: Number(riderId),
       resultTypeId: Number(resultTypeId),
-      noPlaceCodeTypeId: noPlaceCodeTypeId ? Number(noPlaceCodeTypeId) : 0,
-      lap,
-      place,
-      time,
-      points,
+      noPlaceCodeTypeId: body.noPlaceCodeTypeId
+        ? Number(body.noPlaceCodeTypeId)
+        : 0,
+      lap: body?.lap || null,
+      place: body?.place || null,
+      time: body?.time || null,
+      points: body?.points || null,
     });
+
     return NextResponse.json(row, { status: 200 });
   } catch (error) {
-    return NextResponse.json(
-      { error: getInternalServerErrorMessage(String(error)) },
-      { status: 500 },
-    );
+    return NextResponse.json({ error: String(error) }, { status: 500 });
   }
 }
