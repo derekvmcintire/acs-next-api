@@ -1,13 +1,9 @@
 import { Prisma, PrismaClient } from "@prisma/client";
-import { IRiderRepository } from "./rider/IRiderRepository";
-import { IResultRepository } from "./result/IResultRepository";
-import { IEventRepository } from "./event/IEventRepository";
-import { IRaceRepository } from "./event/IRaceRepository";
-
-export interface IDatabaseClient {
-  rider: IRiderRepository;
-  result: IResultRepository;
-}
+import { IRiderRepository } from "../_types/result/database/IRiderRepository";
+import { IResultRepository } from "../_types/result/database/IResultRepository";
+import { IEventRepository } from "../_types/event/database/IEventRepository";
+import { IRaceRepository } from "../_types/event/database/IRaceRepository";
+import { IDatabaseClient } from "../_types/database/types";
 
 export class PrismaDatabaseClient implements IDatabaseClient {
   constructor(private prisma: PrismaClient) {}

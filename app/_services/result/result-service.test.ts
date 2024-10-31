@@ -13,14 +13,14 @@ import {
   mockYearTwentyTwo,
 } from "@/app/_constants/mock-data/result/mock-values";
 import ResultDAO from "@/app/_daos/result";
-import databaseClient from "@/app/_database/client";
+import databaseClient from "@/app/_database/get-client";
 import ResultService from "@/app/_services/result";
 import { IResult, IResultYear, IRacerHistory } from "@/app/_types/result/types";
 import { getYearFromDateString } from "@/app/_utility/helper-functions";
 
 jest.mock("@/app/_daos/result");
 jest.mock("@/app/_utility/helper-functions");
-jest.mock("@/app/_database/client", () => ({
+jest.mock("@/app/_database/get-client", () => ({
   result: jest.fn(),
 }));
 

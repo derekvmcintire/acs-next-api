@@ -1,7 +1,7 @@
 import { getDatabaseQueryErrorMessage } from "@/app/_constants/errors";
-import { IResultDAO } from "@/app/_daos/result/IResultDAO";
-import { IResultRepository } from "@/app/_database/types/result/IResultRepository";
-import { IRiderResultsRow } from "@/app/_types/result/types";
+import { IResultDAO } from "@/app/_types/result/database/IResultDAO";
+import { IResultRepository } from "@/app/_types/result/database/IResultRepository";
+import { RiderResultRow } from "@/app/_types/result/database/base-types";
 
 export default class ResultDAO implements IResultDAO {
   // Constructor
@@ -27,7 +27,7 @@ export default class ResultDAO implements IResultDAO {
           resultType: true,
           noPlaceCodeType: true,
         },
-      })) as IRiderResultsRow[];
+      })) as RiderResultRow[];
       console.log("use this for mock data: ", results);
       return results;
     } catch (error) {

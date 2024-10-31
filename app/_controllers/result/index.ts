@@ -1,4 +1,4 @@
-import databaseClient from "@/app/_database/client";
+import databaseClient from "@/app/_database/get-client";
 import ResultDAO from "@/app/_daos/result";
 import ResultService from "@/app/_services/result";
 import { IRacerHistory } from "@/app/_types/result/types";

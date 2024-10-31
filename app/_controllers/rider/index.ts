@@ -6,7 +6,7 @@ import {
   IRider,
   RiderRow,
 } from "@/app/_types/rider/types";
-import databaseClient from "@/app/_database/client";
+import databaseClient from "@/app/_database/get-client";
 
 const getRiderService = (): RiderService => {
   const riderDao = new RiderDAO(databaseClient.rider);

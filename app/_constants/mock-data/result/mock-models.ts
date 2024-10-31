@@ -1,12 +1,4 @@
-import {
-  IPickTypeRow,
-  IRaceRow,
-  IEventRow,
-  IRiderResultsRow,
-  IResult,
-  IResultYear,
-  IRacerHistory,
-} from "@/app/_types/result/types";
+import { IResult, IResultYear, IRacerHistory } from "@/app/_types/result/types";
 import {
   mockNoPlaceCodeId,
   mockResultTypeId,
@@ -29,6 +21,11 @@ import {
   mockYearTwentyOne,
   mockYearTwentyTwo,
 } from "./mock-values";
+import {
+  IPickTypeRow,
+  RiderResultRow,
+} from "@/app/_types/result/database/base-types";
+import { EventRow, RaceRow } from "@/app/_types/event/database/base-types";
 
 // mock IPickTypeRow values
 const mockNoPlaceCodeType: IPickTypeRow = {
@@ -48,7 +45,7 @@ const mockRaceType: IPickTypeRow = {
 };
 
 // mock IRaceRow values
-export const mockRaceTwentyOne: IRaceRow = {
+export const mockRaceTwentyOne: RaceRow = {
   id: mockRaceId,
   eventId: mockEventId,
   raceTypeId: mockRaceTypeId,
@@ -58,7 +55,7 @@ export const mockRaceTwentyOne: IRaceRow = {
   location: mockLocation,
 };
 
-export const mockRaceTwentyTwo: IRaceRow = {
+export const mockRaceTwentyTwo: RaceRow = {
   id: mockRaceId,
   eventId: mockEventId,
   raceTypeId: mockRaceTypeId,
@@ -69,19 +66,19 @@ export const mockRaceTwentyTwo: IRaceRow = {
 };
 
 // mock IEventRow values
-const mockEventTwentyOne: IEventRow = {
+const mockEventTwentyOne: EventRow = {
   id: mockEventId,
   name: mockEventName,
   Race: [mockRaceTwentyOne],
 };
-const mockEventTwentyTwo: IEventRow = {
+const mockEventTwentyTwo: EventRow = {
   id: mockEventId,
   name: mockEventName,
   Race: [mockRaceTwentyTwo],
 };
 
 // mock IRiderResultsRow values
-export const mockSingleRiderResultRowTwentyOne: IRiderResultsRow = {
+export const mockSingleRiderResultRowTwentyOne: RiderResultRow = {
   id: mockResultId,
   eventId: mockEventId,
   riderId: mockRiderId,
@@ -96,7 +93,7 @@ export const mockSingleRiderResultRowTwentyOne: IRiderResultsRow = {
   noPlaceCodeType: mockNoPlaceCodeType,
 };
 
-export const mockSingleRiderResultRowTwentyTwo: IRiderResultsRow = {
+export const mockSingleRiderResultRowTwentyTwo: RiderResultRow = {
   id: mockResultId,
   eventId: mockEventId,
   riderId: mockRiderId,
@@ -111,7 +108,7 @@ export const mockSingleRiderResultRowTwentyTwo: IRiderResultsRow = {
   noPlaceCodeType: mockNoPlaceCodeType,
 };
 
-export const mockGetRiderResultsQueryResponse: IRiderResultsRow[] = [
+export const mockGetRiderResultsQueryResponse: RiderResultRow[] = [
   mockSingleRiderResultRowTwentyOne,
   mockSingleRiderResultRowTwentyTwo,
 ];

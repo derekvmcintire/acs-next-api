@@ -1,5 +1,5 @@
 import EventDAO from "@/app/_daos/event";
-import databaseClient from "@/app/_database/client";
+import databaseClient from "@/app/_database/get-client";
 import EventService from "@/app/_services/event";
 import { CreateRaceArgs } from "@/app/_types/event/types";
 

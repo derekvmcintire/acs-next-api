@@ -1,4 +1,4 @@
-import { PrismaDatabaseClient } from "@/app/_database/types/IDatabaseClient";
+import { PrismaDatabaseClient } from "@/app/_database/PrismaDatabaseClient";
 import { PrismaClient } from "@prisma/client";
 
 // Ensure that the PrismaClient instance is available globally in development

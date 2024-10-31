@@ -1,13 +1,13 @@
 import ResultDAO from "@/app/_daos/result";
 import ResultService from "@/app/_services/result";
-import databaseClient from "@/app/_database/client";
+import databaseClient from "@/app/_database/get-client";
 import {
   mockEmptyRacerHistory,
   mockRacerHistory,
 } from "@/app/_constants/mock-data/result/mock-models";
 import { getResultsByRiderId } from ".";
 
-jest.mock("@/app/_database/client", () => ({
+jest.mock("@/app/_database/get-client", () => ({
   result: jest.fn(),
 }));
 jest.mock("@/app/_daos/result");

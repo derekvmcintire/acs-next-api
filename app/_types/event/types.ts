@@ -1,16 +1,8 @@
-export interface EventRow {
-  id: number;
-  name: string;
-}
+import { IPickTypeRow } from "../result/database/base-types";
+import { BaseEvent, BaseRace, RaceRow } from "./database/base-types";
 
-export interface RaceRow {
-  id: number;
-  eventId: number;
-  raceTypeId: number;
-  startDate: string;
-  endDate?: string | null;
-  location?: string | null;
-}
+export type CreateRaceArgs = Omit<BaseEvent, "id"> & BaseRace;
 
-export type CreateRaceArgs = Omit<EventRow, "id"> &
-  Omit<Omit<RaceRow, "id">, "eventId">;
+export interface IRace extends RaceRow {
+  raceType: IPickTypeRow;
+}

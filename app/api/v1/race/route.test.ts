@@ -1,12 +1,12 @@
 import { NextRequest } from "next/server";
 import { createRace } from "@/app/_controllers/event";
 import { getInternalServerErrorMessage } from "@/app/_constants/errors";
-import { RaceRow } from "@/app/_types/event/types";
 import { POST } from "./route";
 import {
   mockCreateRaceArgs,
   mockCreateRaceResponse,
 } from "@/app/_constants/mock-data/race/mock-models";
+import { RaceRow } from "@/app/_types/event/database/base-types";
 
 jest.mock("@/app/_controllers/event");
 jest.mock("@/app/_constants/errors");

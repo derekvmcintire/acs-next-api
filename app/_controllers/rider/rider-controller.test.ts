@@ -1,6 +1,6 @@
 import RiderDAO from "@/app/_daos/rider";
 import RiderService from "@/app/_services/rider";
-import databaseClient from "@/app/_database/client";
+import databaseClient from "@/app/_database/get-client";
 import { getMultipleRiders, getRiderById } from ".";
 import {
   mockGetAllRidersResponse,
@@ -8,7 +8,7 @@ import {
   mockGetRiderByIdResponse,
 } from "@/app/_constants/mock-data/rider/mock-models";
 
-jest.mock("@/app/_database/client", () => ({
+jest.mock("@/app/_database/get-client", () => ({
   rider: jest.fn(),
 }));
 jest.mock("@/app/_daos/rider");
