@@ -16,6 +16,9 @@ export class PrismaDatabaseClient implements IDatabaseClient {
         this.prisma.rider.findMany(args),
       findUnique: (args: Prisma.RiderFindUniqueArgs) =>
         this.prisma.rider.findUnique(args),
+      create: (args: Prisma.RiderCreateArgs) => this.prisma.rider.create(args),
+      createJoin: (args: Prisma.JoinRiderTeamCreateArgs) =>
+        this.prisma.joinRiderTeam.create(args),
     };
   }
 

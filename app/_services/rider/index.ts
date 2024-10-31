@@ -1,5 +1,6 @@
 import RiderDAO from "@/app/_daos/rider";
 import {
+  AssignRiderToTeamParams,
   IGetRidersParams,
   IRider,
   ITeam,
@@ -30,6 +31,11 @@ export default class RiderService {
   #buildRider(rider: RiderRow): IRider {
     const teams: ITeam[] = this.#buildRiderTeam(rider.JoinRiderTeam || []);
     const currentTeam = teams && teams.length > 0 ? teams[0]?.name : "";
+
+    if (!rider || !rider.id) {
+      throw new Error("Missing rider id");
+    }
+
     const newRider: IRider = {
       id: rider.id,
       currentTeam: currentTeam,
@@ -78,6 +84,26 @@ export default class RiderService {
         return null;
       }
       return this.#buildRider(rider);
+    } catch (error) {
+      throw new Error(String(error));
+    }
+  }
+
+  async createRider(riderData: RiderRow) {
+    try {
+      const rider = await this.riderDao.createRider(riderData);
+
+      return rider;
+    } catch (error) {
+      throw new Error(String(error));
+    }
+  }
+
+  async assignRiderToTeam(data: AssignRiderToTeamParams) {
+    try {
+      const row = await this.riderDao.assignRiderToTeam(data);
+
+      return row;
     } catch (error) {
       throw new Error(String(error));
     }

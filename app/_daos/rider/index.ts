@@ -2,6 +2,7 @@ import { getDatabaseQueryErrorMessage } from "@/app/_constants/errors";
 import { IRiderDAO } from "@/app/_daos/rider/IRiderDAO";
 import { IRiderRepository } from "@/app/_database/types/rider/IRiderRepository";
 import {
+  AssignRiderToTeamParams,
   IGetRidersParams,
   RiderRow,
   RiderWhereInput,
@@ -101,6 +102,44 @@ export default class RiderDAO implements IRiderDAO {
         },
       })) as RiderRow;
       return rider;
+    } catch (error) {
+      throw new Error(getDatabaseQueryErrorMessage(String(error)));
+    }
+  }
+
+  // Public Class Method createRider
+  async createRider(riderData: RiderRow) {
+    try {
+      const newRider = await this.riderRepo.create({
+        data: {
+          firstName: riderData.firstName,
+          lastName: riderData.lastName,
+          dob: riderData.dob,
+          country: riderData.country,
+          hometown: riderData.hometown,
+          photo: riderData.photo,
+          strava: riderData.strava,
+          insta: riderData.insta,
+          about: riderData.about,
+        },
+      });
+
+      return newRider;
+    } catch (error) {
+      throw new Error(getDatabaseQueryErrorMessage(String(error)));
+    }
+  }
+
+  async assignRiderToTeam(params: AssignRiderToTeamParams) {
+    const { riderId, teamId } = params;
+    try {
+      const newJoin = await this.riderRepo.createJoin({
+        data: {
+          riderId: riderId,
+          teamId: teamId,
+        },
+      });
+      return newJoin;
     } catch (error) {
       throw new Error(getDatabaseQueryErrorMessage(String(error)));
     }

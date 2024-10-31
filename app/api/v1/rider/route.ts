@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getMultipleRiders } from "@/app/_controllers/rider";
+import { createRider, getMultipleRiders } from "@/app/_controllers/rider";
 import { IGetRidersParams } from "@/app/_types/rider/types";
 import { getInternalServerErrorMessage } from "@/app/_constants/errors";
 
@@ -15,6 +15,20 @@ export async function GET(request: NextRequest) {
   try {
     const riders = await getMultipleRiders(params);
     return NextResponse.json(riders, { status: 200 });
+  } catch (error) {
+    return NextResponse.json(
+      { error: getInternalServerErrorMessage(String(error)) },
+      { status: 500 },
+    );
+  }
+}
+
+export async function POST(request: NextRequest) {
+  const params = await request.json();
+
+  try {
+    const rider = await createRider(params);
+    return NextResponse.json(rider, { status: 200 });
   } catch (error) {
     return NextResponse.json(
       { error: getInternalServerErrorMessage(String(error)) },
