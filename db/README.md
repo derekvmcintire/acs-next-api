@@ -17,3 +17,15 @@
   "about": "It reaaaallly bothered me."
 }
 ```
+
+#### POST http://localhost:8080/api/latest/race
+
+```
+{
+      "name": "Boston to Burlington",
+      "raceTypeId": 56,
+      "startDate": "Fri Apr 12 2024",
+      "endDate": null,
+      "location": "Boston, MA",
+    }
+```
