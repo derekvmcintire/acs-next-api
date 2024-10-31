@@ -1,5 +1,5 @@
 import { Prisma, PrismaClient } from "@prisma/client";
-import { IRiderRepository } from "../_types/result/database/IRiderRepository";
+import { IRiderRepository } from "../_types/rider/database/IRiderRepository";
 import { IResultRepository } from "../_types/result/database/IResultRepository";
 import { IEventRepository } from "../_types/event/database/IEventRepository";
 import { IRaceRepository } from "../_types/event/database/IRaceRepository";
@@ -25,6 +25,8 @@ export class PrismaDatabaseClient implements IDatabaseClient {
       findMany: (args: Prisma.ResultFindManyArgs) =>
         this.prisma.result.findMany(args),
       count: (args: Prisma.ResultCountArgs) => this.prisma.result.count(args),
+      create: (args: Prisma.ResultCreateArgs) =>
+        this.prisma.result.create(args),
     };
   }
 

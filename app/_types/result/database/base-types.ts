@@ -17,6 +17,10 @@ export interface BaseResult {
   points: number | null;
 }
 
+export interface CreatedResult extends BaseResult {
+  id: number;
+}
+
 export interface RiderResultRow extends BaseResult {
   id: number;
   event?: EventRow | null;

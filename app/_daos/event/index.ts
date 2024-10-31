@@ -19,7 +19,7 @@ export default class EventDAO implements IEventDAO {
           name: eventData.name,
         },
       });
-      
+
       return newEvent;
     } catch (error) {
       throw new Error(getDatabaseQueryErrorMessage(String(error)));
@@ -29,7 +29,7 @@ export default class EventDAO implements IEventDAO {
   // Public Class Method createRace
   async createRace(raceData: CreateRaceArgs) {
     try {
-      const newEvent= await this.createEvent({name: raceData.name})
+      const newEvent = await this.createEvent({ name: raceData.name });
 
       const newRace = await this.raceRepo.create({
         data: {
