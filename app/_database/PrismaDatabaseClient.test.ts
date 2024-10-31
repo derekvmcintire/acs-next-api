@@ -1,5 +1,5 @@
 import { Prisma, PrismaClient } from "@prisma/client";
-import { PrismaDatabaseClient } from "./IDatabaseClient";
+import { PrismaDatabaseClient } from "./PrismaDatabaseClient";
 import {
   mockEventId,
   mockRiderId,

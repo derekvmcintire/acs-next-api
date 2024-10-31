@@ -1,6 +1,6 @@
 import { getDatabaseQueryErrorMessage } from "@/app/_constants/errors";
-import { IRiderDAO } from "@/app/_daos/rider/IRiderDAO";
-import { IRiderRepository } from "@/app/_database/types/rider/IRiderRepository";
+import { IRiderDAO } from "@/app/_types/rider/database/IRiderDAO";
+import { IRiderRepository } from "@/app/_types/result/database/IRiderRepository";
 import {
   AssignRiderToTeamParams,
   IGetRidersParams,
