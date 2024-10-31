@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client";
-import { EventRow } from "./base-types";
+import { BaseEvent } from "./base-types";
 
 export interface IEventRepository {
-  create(args: Prisma.EventCreateArgs): Promise<EventRow | null>;
+  create(args: Prisma.EventCreateArgs): Promise<BaseEvent>;
 }

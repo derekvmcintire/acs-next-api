@@ -3,6 +3,7 @@ import { IEventDAO } from "../../_types/event/database/IEventDAO";
 import { IEventRepository } from "@/app/_types/event/database/IEventRepository";
 import { IRaceRepository } from "@/app/_types/event/database/IRaceRepository";
 import { CreateRaceArgs } from "@/app/_types/event/types";
+import { CreateEventArgs } from "@/app/_types/event/database/base-types";
 
 export default class EventDAO implements IEventDAO {
   // Constructor
@@ -11,18 +12,24 @@ export default class EventDAO implements IEventDAO {
     private raceRepo: IRaceRepository,
   ) {}
 
-  // Public Class Method createRace
-  async createRace(raceData: CreateRaceArgs) {
+  async createEvent(eventData: CreateEventArgs) {
     try {
       const newEvent = await this.eventRepo.create({
         data: {
-          name: raceData.name,
+          name: eventData.name,
         },
       });
+      
+      return newEvent;
+    } catch (error) {
+      throw new Error(getDatabaseQueryErrorMessage(String(error)));
+    }
+  }
 
-      if (!newEvent) {
-        throw new Error(getDatabaseQueryErrorMessage("Failed to create event"));
-      }
+  // Public Class Method createRace
+  async createRace(raceData: CreateRaceArgs) {
+    try {
+      const newEvent= await this.createEvent({name: raceData.name})
 
       const newRace = await this.raceRepo.create({
         data: {
