@@ -22,6 +22,8 @@ export interface EventRow extends BaseEvent {
   Race?: RaceRow[];
 }
 
+export type CreateEventArgs = Omit<BaseEvent, "id">;
+
 export interface CreateRaceArgs extends Omit<BaseEvent, "id">, BaseRace {
   eventId?: number;
 }

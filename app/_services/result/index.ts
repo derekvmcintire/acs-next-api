@@ -1,6 +1,9 @@
 import { mockCategory } from "@/app/_constants/mock-data/result/mock-values";
 import ResultDAO from "@/app/_daos/result";
-import { RiderResultRow } from "@/app/_types/result/database/base-types";
+import {
+  BaseResult,
+  RiderResultRow,
+} from "@/app/_types/result/database/base-types";
 import { IRacerHistory, IResult, IResultYear } from "@/app/_types/result/types";
 import { getYearFromDateString } from "@/app/_utility/helper-functions";
 
@@ -83,6 +86,15 @@ export default class ResultService {
         riderId,
         results,
       };
+    } catch (error) {
+      throw new Error(String(error));
+    }
+  }
+
+  async createResult(resultData: BaseResult) {
+    try {
+      const race = this.resultDao.createResult(resultData);
+      return race;
     } catch (error) {
       throw new Error(String(error));
     }

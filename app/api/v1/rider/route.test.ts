@@ -2,7 +2,6 @@ import { GET } from "@/app/api/v1/rider/route";
 import { getMultipleRiders } from "@/app/_controllers/rider";
 import { NextRequest } from "next/server";
 import { mockGetAllRidersResponse } from "../../../_constants/mock-data/rider/mock-models";
-import { getInternalServerErrorMessage } from "@/app/_constants/errors";
 
 // Mocking the controller module directly
 jest.mock("../../../_controllers/rider");
@@ -34,7 +33,7 @@ describe("GET /api/rider/", () => {
     expect(apiResponse.status).toBe(500);
     const data = await apiResponse.json();
     expect(data).toEqual({
-      error: getInternalServerErrorMessage(mockErrorMessage),
+      error: mockErrorMessage,
     });
   });
 });

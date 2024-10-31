@@ -1,7 +1,7 @@
-import { GET } from "@/app/api/v1/result/route";
+import { GET, POST } from "@/app/api/v1/result/route";
 import { NextRequest } from "next/server";
 import {
-  getInternalServerErrorMessage,
+  CREATE_RESULT_INVALID_REQUEST,
   getResultsNotFoundErrorMessage,
 } from "@/app/_constants/errors";
 import {
@@ -9,7 +9,7 @@ import {
   mockRacerHistory,
 } from "../../../_constants/mock-data/result/mock-models";
 import { mockRiderId } from "../../../_constants/mock-data/result/mock-values";
-import { getResultsByRiderId } from "@/app/_controllers/result";
+import { createResult, getResultsByRiderId } from "@/app/_controllers/result";
 
 // Mocking the controller module directly
 jest.mock("../../../_controllers/result");
@@ -64,7 +64,69 @@ describe("GET /api/result/", () => {
 
     const data = await apiResponse.json();
     expect(data).toEqual({
-      error: getInternalServerErrorMessage(mockErrorMessage),
+      error: mockErrorMessage,
+    });
+  });
+});
+
+describe("POST /api/result/", () => {
+  const validRequestBody = {
+    eventId: 1,
+    riderId: 2,
+    resultTypeId: 3,
+    noPlaceCodeTypeId: null,
+    lap: 5,
+    place: 1,
+    time: "02:15:00",
+    points: 10,
+  };
+
+  it("should create a new result and return 200", async () => {
+    const mockCreatedResult = { id: 1, ...validRequestBody };
+    jest.mocked(createResult).mockResolvedValueOnce(mockCreatedResult);
+
+    const request = new NextRequest("http://localhost/api/latest/result", {
+      method: "POST",
+      body: JSON.stringify(validRequestBody),
+    });
+    const response = await POST(request);
+
+    expect(response.status).toBe(200);
+    const data = await response.json();
+    expect(data).toEqual(mockCreatedResult);
+  });
+
+  it("should return 500 if creation fails", async () => {
+    const mockErrorMessage = "Database error";
+    jest
+      .mocked(createResult)
+      .mockRejectedValueOnce(new Error(mockErrorMessage));
+
+    const request = new NextRequest("http://localhost/api/latest/result", {
+      method: "POST",
+      body: JSON.stringify(validRequestBody),
+    });
+    const response = await POST(request);
+
+    expect(response.status).toBe(500);
+    const data = await response.json();
+    expect(data).toEqual({
+      error: `Error: ${mockErrorMessage}`,
+    });
+  });
+
+  it("should return 400 if required fields are missing", async () => {
+    const invalidRequestBody = { ...validRequestBody, riderId: undefined };
+    const request = new NextRequest("http://localhost/api/latest/result", {
+      method: "POST",
+      body: JSON.stringify(invalidRequestBody),
+    });
+    const response = await POST(request);
+
+    expect(response.status).toBe(400);
+    const data = await response.json();
+    expect(data).toEqual({
+      error: CREATE_RESULT_INVALID_REQUEST,
     });
   });
 });

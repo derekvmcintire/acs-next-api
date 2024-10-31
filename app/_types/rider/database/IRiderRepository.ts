@@ -1,5 +1,5 @@
 import { JoinRiderTeam, Prisma } from "@prisma/client";
-import { RiderRow } from "../../rider/types";
+import { RiderRow } from "../types";
 
 export interface IRiderRepository {
   findMany(args: Prisma.RiderFindManyArgs): Promise<RiderRow[] | null>;

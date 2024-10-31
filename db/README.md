@@ -29,3 +29,18 @@
       "location": "Boston, MA",
     }
 ```
+
+#### POST http://localhost:8080/api/latest/result
+
+```
+{
+      "eventId": 1,
+      "riderId": 1,
+      "resultTypeId": 56,
+      "noPlaceCodeTypeId": 56,
+      "lap": 1,
+      "place": 4,
+      "time": "",
+      "points": 1
+    }
+```
