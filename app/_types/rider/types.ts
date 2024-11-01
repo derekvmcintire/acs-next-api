@@ -86,8 +86,12 @@ export interface RiderRow {
   JoinRiderTeam?: JoinRiderTeamRow[] | null;
 }
 
-// Query Building Types
-export type RiderWhereInput = {
+export interface NameRiderWhereInput {
+  firstName?: { contains: string; mode?: "insensitive" };
+  lastName?: { contains: string; mode?: "insensitive" };
+}
+
+export interface BaseRiderWhereInput {
   id?: { in?: number[] };
   JoinRiderTeam?: {
     some: {
@@ -97,25 +101,9 @@ export type RiderWhereInput = {
     };
   };
   country?: string;
-  OR?: Array<{
-    firstName?: { contains: string; mode?: "insensitive" };
-    lastName?: { contains: string; mode?: "insensitive" };
-  }>;
-  AND?: Array<{
-    firstName?: { contains: string; mode?: "insensitive" };
-    lastName?: { contains: string; mode?: "insensitive" };
-    id?: { in?: number[] };
-    JoinRiderTeam?: {
-      some: {
-        team: {
-          name: string;
-        };
-      };
-    };
-    country?: string;
-    OR?: Array<{
-      firstName?: { contains: string; mode?: "insensitive" };
-      lastName?: { contains: string; mode?: "insensitive" };
-    }>;
-  }>;
-};
+  OR?: Array<NameRiderWhereInput>;
+}
+
+export interface RiderWhereInput extends BaseRiderWhereInput {
+  AND?: Array<BaseRiderWhereInput & NameRiderWhereInput>;
+}
