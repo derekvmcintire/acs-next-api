@@ -104,5 +104,18 @@ export type RiderWhereInput = {
   AND?: Array<{
     firstName?: { contains: string; mode?: "insensitive" };
     lastName?: { contains: string; mode?: "insensitive" };
+    id?: { in?: number[] };
+    JoinRiderTeam?: {
+      some: {
+        team: {
+          name: string;
+        };
+      };
+    };
+    country?: string;
+    OR?: Array<{
+      firstName?: { contains: string; mode?: "insensitive" };
+      lastName?: { contains: string; mode?: "insensitive" };
+    }>;
   }>;
 };
