@@ -101,4 +101,8 @@ export type RiderWhereInput = {
     firstName?: { contains: string; mode?: "insensitive" };
     lastName?: { contains: string; mode?: "insensitive" };
   }>;
+  AND?: Array<{
+    firstName?: { contains: string; mode?: "insensitive" };
+    lastName?: { contains: string; mode?: "insensitive" };
+  }>;
 };

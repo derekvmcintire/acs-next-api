@@ -12,6 +12,29 @@ export default class RiderDAO implements IRiderDAO {
   // Constructor
   constructor(private riderRepo: IRiderRepository) {}
 
+  #buildNameFilter(name: string): RiderWhereInput {
+    const nameParts = name.split(" ");
+    if (nameParts.length === 1) {
+      // Single name part, search within firstName or lastName
+      return {
+        OR: [
+          { firstName: { contains: nameParts[0], mode: "insensitive" } },
+          { lastName: { contains: nameParts[0], mode: "insensitive" } },
+        ],
+      };
+    } else {
+      // Multiple name parts, check each part in both fields
+      return {
+        AND: nameParts.map((part) => ({
+          OR: [
+            { firstName: { contains: part, mode: "insensitive" } },
+            { lastName: { contains: part, mode: "insensitive" } },
+          ],
+        })),
+      };
+    }
+  }
+
   // Private Class Property #filterHandlers
   #filterHandlers: {
     ids?: (value: number[]) => RiderWhereInput;
@@ -28,12 +51,7 @@ export default class RiderDAO implements IRiderDAO {
       },
     }),
     country: (country) => ({ country: country }),
-    name: (name) => ({
-      OR: [
-        { firstName: { contains: name, mode: "insensitive" } },
-        { lastName: { contains: name, mode: "insensitive" } },
-      ],
-    }),
+    name: (name) => this.#buildNameFilter(name),
   };
 
   // Private Class Method #buildWhereClause

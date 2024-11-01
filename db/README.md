@@ -20,6 +20,8 @@
 
 #### POST http://localhost:8080/api/latest/race
 
+Request Data:
+
 ```
 {
       "name": "Boston to Burlington",
@@ -28,6 +30,19 @@
       "endDate": null,
       "location": "Boston, MA",
     }
+```
+
+Response Data:
+
+```
+{
+    "id": 505,
+    "eventId": 505,
+    "raceTypeId": 56,
+    "startDate": "Fri Apr 12 2024",
+    "endDate": null,
+    "location": "Northfield, MA"
+}
 ```
 
 #### POST http://localhost:8080/api/latest/result
