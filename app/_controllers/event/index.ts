@@ -18,3 +18,14 @@ export async function createRace(raceData: CreateRaceArgs) {
     throw new Error(String(error));
   }
 }
+
+export async function getRaceByName(name: string) {
+  try {
+    const eventService = getEventService();
+    const race = await eventService.getRaceByName(name);
+
+    return race;
+  } catch (error) {
+    throw new Error(String(error));
+  }
+}

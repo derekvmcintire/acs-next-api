@@ -16,6 +16,7 @@ export interface RaceRow extends Omit<BaseRace, "name"> {
   id: number;
   eventId: number;
   raceType?: IPickTypeRow;
+  event?: BaseEvent;
 }
 
 export interface EventRow extends BaseEvent {
