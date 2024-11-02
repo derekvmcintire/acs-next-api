@@ -41,6 +41,8 @@ export class PrismaDatabaseClient implements IDatabaseClient {
       create: (args: Prisma.RaceCreateArgs) => this.prisma.race.create(args),
       findMany: (args: Prisma.RaceFindManyArgs) =>
         this.prisma.race.findMany(args),
+      findUnique: (args: Prisma.RaceFindUniqueArgs) =>
+        this.prisma.race.findUnique(args),
     };
   }
 }
