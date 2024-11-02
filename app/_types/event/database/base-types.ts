@@ -30,5 +30,8 @@ export interface CreateRaceArgs extends Omit<BaseEvent, "id">, BaseRace {
 }
 
 export type CreateRaceQueryArgs = {
-  data: Omit<CreateRaceArgs, "name">;
+  data: Omit<CreateRaceArgs, "name"> & {
+    eventId: number;
+    raceTypeId: number; // Ensure this is a required field
+  };
 };

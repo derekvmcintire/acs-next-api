@@ -9,4 +9,5 @@ export interface IEventDAO {
   createRace(raceData: CreateRaceArgs): Promise<RaceRow | null>;
   createEvent(eventData: CreateEventArgs): Promise<BaseEvent>;
   getRaceByName(eventName: string): Promise<RaceRow[]>;
+  getRaceById(id: number): Promise<RaceRow | null>;
 }
