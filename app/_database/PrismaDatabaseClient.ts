@@ -39,6 +39,8 @@ export class PrismaDatabaseClient implements IDatabaseClient {
   get race(): IRaceRepository {
     return {
       create: (args: Prisma.RaceCreateArgs) => this.prisma.race.create(args),
+      findMany: (args: Prisma.RaceFindManyArgs) =>
+        this.prisma.race.findMany(args),
     };
   }
 }

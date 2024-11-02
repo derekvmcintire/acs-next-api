@@ -46,4 +46,32 @@ export default class EventDAO implements IEventDAO {
       throw new Error(getDatabaseQueryErrorMessage(String(error)));
     }
   }
+
+  async getRaceByName(eventName: string) {
+    try {
+      const nameParts = eventName.split(" ");
+
+      const race = await this.raceRepo.findMany({
+        where: {
+          event: {
+            AND: nameParts.map((partialName: string) => ({
+              name: {
+                contains: partialName,
+                mode: "insensitive",
+              },
+            })),
+          },
+        },
+        include: {
+          event: true,
+          raceType: true,
+        },
+      });
+
+      console.log("reeturning race: ", race);
+      return race;
+    } catch (error) {
+      throw new Error(getDatabaseQueryErrorMessage(String(error)));
+    }
+  }
 }
