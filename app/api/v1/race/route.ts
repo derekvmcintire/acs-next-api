@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getInternalServerErrorMessage } from "@/app/_constants/errors";
 import { createRace, getRaceByName } from "@/app/_controllers/event";
-import { CreateRaceArgs, GetRaceArgs } from "@/app/_types/event/types";
+import { CreateRaceArgs } from "@/app/_types/event/types";
 
 export async function POST(request: NextRequest) {
   const { name, raceTypeId, startDate, endDate, location }: CreateRaceArgs =
