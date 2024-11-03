@@ -1,10 +1,7 @@
 import { getDatabaseQueryErrorMessage } from "@/app/_constants/errors";
 import { IResultDAO } from "@/app/_types/result/database/IResultDAO";
 import { IResultRepository } from "@/app/_types/result/database/IResultRepository";
-import {
-  BaseResult,
-  RiderResultRow,
-} from "@/app/_types/result/database/base-types";
+import { CreateResultArgs, IResult } from "@/app/_types/result/types";
 
 export default class ResultDAO implements IResultDAO {
   // Constructor
@@ -30,7 +27,7 @@ export default class ResultDAO implements IResultDAO {
           resultType: true,
           noPlaceCodeType: true,
         },
-      })) as RiderResultRow[];
+      })) as IResult[];
       return results;
     } catch (error) {
       throw new Error(getDatabaseQueryErrorMessage(String(error)));
@@ -52,7 +49,7 @@ export default class ResultDAO implements IResultDAO {
     }
   }
 
-  async createResult(resultData: BaseResult) {
+  async createResult(resultData: CreateResultArgs) {
     const { eventId, riderId } = resultData;
     if (!eventId || !riderId) {
       throw new Error("Can not create a Result without eventId and riderId");

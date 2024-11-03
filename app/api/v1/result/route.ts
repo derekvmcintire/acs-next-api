@@ -4,7 +4,7 @@ import {
   CREATE_RESULT_INVALID_REQUEST,
   getResultsNotFoundErrorMessage,
 } from "@/app/_constants/errors";
-import { BaseResult } from "@/app/_types/result/database/base-types";
+import { CreateResultArgs } from "@/app/_types/result/types";
 
 export async function GET(request: NextRequest) {
   const riderId = request.nextUrl.searchParams.get("riderId");
@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     // Parse the request body
-    const body: Partial<BaseResult> = await request.json();
+    const body: Partial<CreateResultArgs> = await request.json();
 
     const { eventId, riderId, resultTypeId } = body;
     if (eventId == null || riderId == null || resultTypeId == null) {

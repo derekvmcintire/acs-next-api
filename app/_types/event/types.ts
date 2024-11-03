@@ -1,4 +1,4 @@
-import { IPickTypeRow } from "../result/database/base-types";
+import { IPickTypeRow } from "../database/types";
 
 // Base Types
 export interface BaseEvent {

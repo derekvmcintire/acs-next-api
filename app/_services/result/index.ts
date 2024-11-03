@@ -1,10 +1,12 @@
 import { mockCategory } from "@/app/_constants/mock-data/result/mock-values";
 import ResultDAO from "@/app/_daos/result";
 import {
-  BaseResult,
-  RiderResultRow,
-} from "@/app/_types/result/database/base-types";
-import { IRacerHistory, IResult, IResultYear } from "@/app/_types/result/types";
+  CreateResultArgs,
+  IRacerHistory,
+  IResult,
+  IResultYear,
+  TransformedRace,
+} from "@/app/_types/result/types";
 import { getYearFromDateString } from "@/app/_utility/helper-functions";
 
 export default class ResultService {
@@ -12,7 +14,7 @@ export default class ResultService {
   constructor(private resultDao: ResultDAO) {}
 
   // Class Method buildResult
-  async buildResult(result: RiderResultRow): Promise<IResult> {
+  async buildResult(result: IResult): Promise<TransformedRace> {
     const { eventId } = result;
 
     if (!eventId) {
@@ -53,11 +55,11 @@ export default class ResultService {
   }
 
   // Class Method mapResults
-  async mapResults(results: RiderResultRow[]): Promise<IResultYear[]> {
-    const yearMap: Record<number, IResult[]> = {};
+  async mapResults(results: IResult[]): Promise<IResultYear[]> {
+    const yearMap: Record<number, TransformedRace[]> = {};
 
     await Promise.all(
-      results.map(async (result: RiderResultRow) => {
+      results.map(async (result: IResult) => {
         const mappedResult = await this.buildResult(result);
         const year = getYearFromDateString(mappedResult.startDate);
 
@@ -81,7 +83,7 @@ export default class ResultService {
   // Class Method getResultsByRiderId
   async getResultsByRiderId(riderId: number): Promise<IRacerHistory> {
     try {
-      const rows: RiderResultRow[] = await this.resultDao.getRiderResults(
+      const rows: IResult[] = await this.resultDao.getRiderResults(
         Number(riderId),
       );
       const results = await this.mapResults(rows);
@@ -94,7 +96,7 @@ export default class ResultService {
     }
   }
 
-  async createResult(resultData: BaseResult) {
+  async createResult(resultData: CreateResultArgs) {
     try {
       const race = this.resultDao.createResult(resultData);
       return race;

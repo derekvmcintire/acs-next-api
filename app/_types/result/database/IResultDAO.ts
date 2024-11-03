@@ -1,11 +1,7 @@
-import {
-  BaseResult,
-  CreatedResult,
-  RiderResultRow,
-} from "@/app/_types/result/database/base-types";
+import { CreateResultArgs, CreatedResult, IResult } from "../types";
 
 export interface IResultDAO {
-  getRiderResults(riderId: number): Promise<RiderResultRow[] | null>;
+  getRiderResults(riderId: number): Promise<IResult[] | null>;
   countResultsByEventId(eventId: number): Promise<number>;
-  createResult(resultData: BaseResult): Promise<CreatedResult>;
+  createResult(resultData: CreateResultArgs): Promise<CreatedResult>;
 }
