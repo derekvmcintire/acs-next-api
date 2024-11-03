@@ -2,13 +2,13 @@ import { getDatabaseQueryErrorMessage } from "@/app/_constants/errors";
 import { IEventDAO } from "../../_types/event/database/IEventDAO";
 import { IEventRepository } from "@/app/_types/event/database/IEventRepository";
 import { IRaceRepository } from "@/app/_types/event/database/IRaceRepository";
-import { CreateRaceArgs } from "@/app/_types/event/types";
 import {
   CreateEventArgs,
+  CreateRaceArgs,
   GetRaceFilters,
-  RaceRow,
+  IRace,
   RaceWhereInput,
-} from "@/app/_types/event/database/base-types";
+} from "@/app/_types/event/types";
 
 export default class EventDAO implements IEventDAO {
   // Constructor
@@ -31,7 +31,7 @@ export default class EventDAO implements IEventDAO {
     }
   }
 
-  async getRaceById(id: number): Promise<RaceRow | null> {
+  async getRaceById(id: number): Promise<IRace | null> {
     try {
       return await this.raceRepo.findUnique({
         where: { id },
@@ -42,7 +42,7 @@ export default class EventDAO implements IEventDAO {
     }
   }
 
-  async createRace(raceData: CreateRaceArgs): Promise<RaceRow | null> {
+  async createRace(raceData: CreateRaceArgs): Promise<IRace | null> {
     if (!raceData.eventId) {
       throw new Error(
         getDatabaseQueryErrorMessage("Unable to create Race without eventId"),

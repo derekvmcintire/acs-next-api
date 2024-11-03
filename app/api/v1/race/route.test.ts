@@ -6,13 +6,13 @@ import {
   mockCreateRaceArgs,
   mockCreateRaceResponse,
 } from "@/app/_constants/mock-data/race/mock-models";
-import { RaceRow } from "@/app/_types/event/database/base-types";
+import { IRace } from "@/app/_types/event/types";
 
 jest.mock("@/app/_controllers/event");
 jest.mock("@/app/_constants/errors");
 
 describe("POST /race", () => {
-  const mockCreateRace = createRace as jest.Mock<Promise<RaceRow>>;
+  const mockCreateRace = createRace as jest.Mock<Promise<IRace>>;
   const mockGetInternalServerErrorMessage =
     getInternalServerErrorMessage as jest.Mock<string>;
 

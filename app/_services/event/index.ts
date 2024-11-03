@@ -1,6 +1,5 @@
 import EventDAO from "@/app/_daos/event";
-import { GetRaceFilters } from "@/app/_types/event/database/base-types";
-import { CreateRaceArgs } from "@/app/_types/event/types";
+import { CreateRaceArgs, GetRaceFilters } from "@/app/_types/event/types";
 import dayjs from "dayjs";
 
 export default class EventService {

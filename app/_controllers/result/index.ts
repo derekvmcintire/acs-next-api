@@ -1,11 +1,11 @@
 import databaseClient from "@/app/_database/get-client";
 import ResultDAO from "@/app/_daos/result";
 import ResultService from "@/app/_services/result";
-import { IRacerHistory } from "@/app/_types/result/types";
 import {
-  BaseResult,
+  CreateResultArgs,
   CreatedResult,
-} from "@/app/_types/result/database/base-types";
+  IRacerHistory,
+} from "@/app/_types/result/types";
 
 const getResultService = (): ResultService => {
   const resultDao = new ResultDAO(databaseClient.result);
@@ -27,7 +27,7 @@ export async function getResultsByRiderId(
 }
 
 export async function createResult(
-  resultData: BaseResult,
+  resultData: CreateResultArgs,
 ): Promise<CreatedResult> {
   try {
     const resultService = getResultService();

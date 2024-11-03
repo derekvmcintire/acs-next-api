@@ -7,3 +7,9 @@ export interface IDatabaseClient {
   result: IResultRepository;
   race: IRaceRepository;
 }
+
+export interface IPickTypeRow {
+  id: number;
+  name: string;
+  description: string | null;
+}

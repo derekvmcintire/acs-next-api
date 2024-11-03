@@ -1,4 +1,4 @@
-import { CreateRaceArgs } from "@/app/_types/event/types";
+import { CreateRaceArgs, IRace } from "@/app/_types/event/types";
 import {
   mockRaceName,
   mockRaceTypeId,
@@ -8,7 +8,6 @@ import {
   mockId,
   mockEventId,
 } from "./mock-values";
-import { RaceRow } from "@/app/_types/event/database/base-types";
 
 export const mockCreateRaceArgs: CreateRaceArgs = {
   name: mockRaceName,
@@ -18,7 +17,7 @@ export const mockCreateRaceArgs: CreateRaceArgs = {
   location: mockLocation,
 };
 
-export const mockCreateRaceResponse: RaceRow = {
+export const mockCreateRaceResponse: IRace = {
   id: mockId,
   eventId: mockEventId,
   raceTypeId: mockRaceTypeId,

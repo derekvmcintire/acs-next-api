@@ -1,4 +1,9 @@
-import { IResult, IResultYear, IRacerHistory } from "@/app/_types/result/types";
+import {
+  IResultYear,
+  IRacerHistory,
+  TransformedRace,
+  IResult,
+} from "@/app/_types/result/types";
 import {
   mockNoPlaceCodeId,
   mockResultTypeId,
@@ -21,11 +26,8 @@ import {
   mockYearTwentyOne,
   mockYearTwentyTwo,
 } from "./mock-values";
-import {
-  IPickTypeRow,
-  RiderResultRow,
-} from "@/app/_types/result/database/base-types";
-import { EventRow, RaceRow } from "@/app/_types/event/database/base-types";
+import { IEvent, IRace } from "@/app/_types/event/types";
+import { IPickTypeRow } from "@/app/_types/database/types";
 
 // mock IPickTypeRow values
 const mockNoPlaceCodeType: IPickTypeRow = {
@@ -45,7 +47,7 @@ const mockRaceType: IPickTypeRow = {
 };
 
 // mock IRaceRow values
-export const mockRaceTwentyOne: RaceRow = {
+export const mockRaceTwentyOne: IRace = {
   id: mockRaceId,
   eventId: mockEventId,
   raceTypeId: mockRaceTypeId,
@@ -55,7 +57,7 @@ export const mockRaceTwentyOne: RaceRow = {
   location: mockLocation,
 };
 
-export const mockRaceTwentyTwo: RaceRow = {
+export const mockRaceTwentyTwo: IRace = {
   id: mockRaceId,
   eventId: mockEventId,
   raceTypeId: mockRaceTypeId,
@@ -66,19 +68,19 @@ export const mockRaceTwentyTwo: RaceRow = {
 };
 
 // mock IEventRow values
-const mockEventTwentyOne: EventRow = {
+const mockEventTwentyOne: IEvent = {
   id: mockEventId,
   name: mockEventName,
   Race: [mockRaceTwentyOne],
 };
-const mockEventTwentyTwo: EventRow = {
+const mockEventTwentyTwo: IEvent = {
   id: mockEventId,
   name: mockEventName,
   Race: [mockRaceTwentyTwo],
 };
 
 // mock IRiderResultsRow values
-export const mockSingleRiderResultRowTwentyOne: RiderResultRow = {
+export const mockSingleRiderResultRowTwentyOne: IResult = {
   id: mockResultId,
   eventId: mockEventId,
   riderId: mockRiderId,
@@ -93,7 +95,7 @@ export const mockSingleRiderResultRowTwentyOne: RiderResultRow = {
   noPlaceCodeType: mockNoPlaceCodeType,
 };
 
-export const mockSingleRiderResultRowTwentyTwo: RiderResultRow = {
+export const mockSingleRiderResultRowTwentyTwo: IResult = {
   id: mockResultId,
   eventId: mockEventId,
   riderId: mockRiderId,
@@ -108,45 +110,47 @@ export const mockSingleRiderResultRowTwentyTwo: RiderResultRow = {
   noPlaceCodeType: mockNoPlaceCodeType,
 };
 
-export const mockGetRiderResultsQueryResponse: RiderResultRow[] = [
+export const mockGetRiderResultsQueryResponse: IResult[] = [
   mockSingleRiderResultRowTwentyOne,
   mockSingleRiderResultRowTwentyTwo,
 ];
 
-// mock IResult values
-export const expectedBuildFromMockSingleRiderResultTwentyOne: IResult = {
-  name: mockEventName,
-  place: mockPlace,
-  time: mockTime,
-  points: mockPoints,
-  noPlaceCode: mockNoPlaceCodeType.name,
-  lap: mockLap,
-  resultType: mockResultType.name,
-  eventId: mockSingleRiderResultRowTwentyOne.eventId,
-  category: mockCategory,
-  racers: mockCount,
-  type: mockRaceType.name,
-  startDate: mockStartDateTwentyOne,
-  endDate: mockEndDate,
-  location: mockLocation,
-};
+// mock TransformedRace values
+export const expectedBuildFromMockSingleRiderResultTwentyOne: TransformedRace =
+  {
+    name: mockEventName,
+    place: mockPlace,
+    time: mockTime,
+    points: mockPoints,
+    noPlaceCode: mockNoPlaceCodeType.name,
+    lap: mockLap,
+    resultType: mockResultType.name,
+    eventId: mockEventId,
+    category: mockCategory,
+    racers: mockCount,
+    type: mockRaceType.name,
+    startDate: mockStartDateTwentyOne,
+    endDate: mockEndDate,
+    location: mockLocation,
+  };
 
-export const expectedBuildFromMockSingleRiderResultTwentyTwo: IResult = {
-  name: mockEventName,
-  place: mockPlace,
-  time: mockTime,
-  points: mockPoints,
-  noPlaceCode: mockNoPlaceCodeType.name,
-  lap: mockLap,
-  resultType: mockResultType.name,
-  eventId: mockSingleRiderResultRowTwentyTwo.eventId,
-  category: mockCategory,
-  racers: mockCount,
-  type: mockRaceType.name,
-  startDate: mockStartDateTwentyTwo,
-  endDate: mockEndDate,
-  location: mockLocation,
-};
+export const expectedBuildFromMockSingleRiderResultTwentyTwo: TransformedRace =
+  {
+    name: mockEventName,
+    place: mockPlace,
+    time: mockTime,
+    points: mockPoints,
+    noPlaceCode: mockNoPlaceCodeType.name,
+    lap: mockLap,
+    resultType: mockResultType.name,
+    eventId: mockEventId,
+    category: mockCategory,
+    racers: mockCount,
+    type: mockRaceType.name,
+    startDate: mockStartDateTwentyTwo,
+    endDate: mockEndDate,
+    location: mockLocation,
+  };
 
 // mock IResultYear values
 export const mockExpectedResultsYearTwentyOne: IResultYear = {
