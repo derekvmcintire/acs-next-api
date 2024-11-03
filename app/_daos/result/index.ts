@@ -53,11 +53,16 @@ export default class ResultDAO implements IResultDAO {
   }
 
   async createResult(resultData: BaseResult) {
+    const { eventId, riderId } = resultData;
+    if (!eventId || !riderId) {
+      throw new Error("Can not create a Result without eventId and riderId");
+    }
+
     try {
       const result = await this.resultRepo.create({
         data: {
-          eventId: resultData.eventId,
-          riderId: resultData.riderId,
+          eventId: eventId,
+          riderId: riderId,
           resultTypeId: resultData.resultTypeId,
           noPlaceCodeTypeId: resultData?.noPlaceCodeTypeId || 0,
           lap: resultData.lap,

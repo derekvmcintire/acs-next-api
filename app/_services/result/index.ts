@@ -13,10 +13,13 @@ export default class ResultService {
 
   // Class Method buildResult
   async buildResult(result: RiderResultRow): Promise<IResult> {
+    const { eventId } = result;
+
+    if (!eventId) {
+      throw new Error("Can not count results without eventId");
+    }
     try {
-      const resultCount = await this.resultDao.countResultsByEventId(
-        result.eventId,
-      );
+      const resultCount = await this.resultDao.countResultsByEventId(eventId);
 
       const race =
         result?.event?.Race && result?.event?.Race[0]

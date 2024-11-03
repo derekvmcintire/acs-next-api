@@ -1,55 +1,57 @@
-import { IPickTypeRow } from "../../result/database/base-types";
+// import { IPickTypeRow } from "../../result/database/base-types";
 
-export interface BaseEvent {
-  id: number;
-  name: string;
-}
+// // Base Types
+// export interface BaseEvent {
+//   name: string;
+// }
 
-export interface BaseRace extends Omit<BaseEvent, "id"> {
-  raceTypeId?: number;
-  startDate: string;
-  endDate?: string | null;
-  location?: string | null;
-}
+// export interface BaseRace extends BaseEvent {
+//   raceTypeId?: number;
+//   eventId?: number;
+//   startDate: string;
+//   endDate?: string | null;
+//   location?: string | null;
+// }
 
-export interface RaceRow extends Omit<BaseRace, "name"> {
-  id: number;
-  eventId: number;
-  raceType?: IPickTypeRow;
-  event?: BaseEvent;
-}
+// // Resource Types
+// export interface Race extends Omit<BaseRace, "name"> {
+//   id: number;
+//   eventId: number;
+//   raceType?: IPickTypeRow;
+//   event?: BaseEvent;
+// }
 
-export interface EventRow extends BaseEvent {
-  Race?: RaceRow[];
-}
+// export interface Event extends BaseEvent {
+//   id: number;
+//   Race?: Race[];
+// }
 
-export type CreateEventArgs = Omit<BaseEvent, "id">;
+// // Create Event Argument
+// export type CreateEventArgs = BaseEvent;
+// export type CreateRaceArgs = BaseRace;
 
-export interface CreateRaceArgs extends Omit<BaseEvent, "id">, BaseRace {
-  eventId?: number;
-}
+// // Query Types
+// export type CreateRaceQueryArgs = {
+//   data: Omit<CreateRaceArgs, "name"> & {
+//     eventId: number;
+//     raceTypeId: number; // Ensure this is a required field
+//   };
+// };
 
-export type CreateRaceQueryArgs = {
-  data: Omit<CreateRaceArgs, "name"> & {
-    eventId: number;
-    raceTypeId: number; // Ensure this is a required field
-  };
-};
+// export type DateRangeFilter = { from: string; to: string };
 
-export type DateRangeFilter = { from: string; to: string };
+// export type GetRaceFilters = {
+//   eventName?: string;
+//   id?: number;
+//   location?: string;
+//   startDateRange?: DateRangeFilter;
+// };
 
-export type GetRaceFilters = {
-  eventName?: string;
-  id?: number;
-  location?: string;
-  startDateRange?: DateRangeFilter;
-};
-
-export interface RaceWhereInput {
-  event?: {
-    AND?: Array<{ name: { contains: string; mode?: "insensitive" } }>;
-  };
-  id?: number;
-  location?: { contains: string; mode?: "insensitive" };
-  startDate?: { gte: string; lte: string };
-}
+// export interface RaceWhereInput {
+//   event?: {
+//     AND?: Array<{ name: { contains: string; mode?: "insensitive" } }>;
+//   };
+//   id?: number;
+//   location?: { contains: string; mode?: "insensitive" };
+//   startDate?: { gte: string; lte: string };
+// }

@@ -1,8 +1,7 @@
 import EventDAO from "@/app/_daos/event";
 import databaseClient from "@/app/_database/get-client";
 import EventService from "@/app/_services/event";
-import { GetRaceFilters } from "@/app/_types/event/database/base-types";
-import { CreateRaceArgs } from "@/app/_types/event/types";
+import { CreateRaceArgs, GetRaceFilters } from "@/app/_types/event/types";
 
 const getEventService = (): EventService => {
   const eventDao = new EventDAO(databaseClient.event, databaseClient.race);

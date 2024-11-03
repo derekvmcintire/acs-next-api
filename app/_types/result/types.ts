@@ -1,9 +1,9 @@
-export interface IEvent {
-  eventId: number;
-  name: string;
-}
+// export interface IEvent {
+//   eventId: number;
+//   name: string;
+// }
 
-export interface IResult extends IEvent {
+export interface IResult {
   type: string;
   startDate: string;
   endDate?: string | null;
@@ -16,6 +16,8 @@ export interface IResult extends IEvent {
   racers?: number;
   noPlaceCode?: string;
   category: string;
+  name: string;
+  eventId: number;
 }
 
 export interface IResultYear {

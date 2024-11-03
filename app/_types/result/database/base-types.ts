@@ -1,4 +1,4 @@
-import { BaseEvent, EventRow } from "../../event/database/base-types";
+import { BaseEvent, IEvent } from "../../event/types";
 
 export interface IPickTypeRow {
   id: number;
@@ -7,7 +7,7 @@ export interface IPickTypeRow {
 }
 
 export interface BaseResult {
-  eventId: number;
+  eventId?: number;
   riderId: number;
   resultTypeId: number;
   noPlaceCodeTypeId: number | null;
@@ -23,9 +23,9 @@ export interface CreatedResult extends BaseResult {
 
 export interface RiderResultRow extends BaseResult {
   id: number;
-  event?: EventRow | null;
+  event?: IEvent | null;
   resultType?: IPickTypeRow | null;
   noPlaceCodeType?: IPickTypeRow | null;
 }
 
-export type CreateResultArgs = Omit<BaseEvent, "id"> & BaseResult;
+export type CreateResultArgs = BaseEvent & BaseResult;

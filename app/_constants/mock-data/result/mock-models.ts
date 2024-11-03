@@ -25,7 +25,7 @@ import {
   IPickTypeRow,
   RiderResultRow,
 } from "@/app/_types/result/database/base-types";
-import { EventRow, RaceRow } from "@/app/_types/event/database/base-types";
+import { IEvent, IRace } from "@/app/_types/event/types";
 
 // mock IPickTypeRow values
 const mockNoPlaceCodeType: IPickTypeRow = {
@@ -45,7 +45,7 @@ const mockRaceType: IPickTypeRow = {
 };
 
 // mock IRaceRow values
-export const mockRaceTwentyOne: RaceRow = {
+export const mockRaceTwentyOne: IRace = {
   id: mockRaceId,
   eventId: mockEventId,
   raceTypeId: mockRaceTypeId,
@@ -55,7 +55,7 @@ export const mockRaceTwentyOne: RaceRow = {
   location: mockLocation,
 };
 
-export const mockRaceTwentyTwo: RaceRow = {
+export const mockRaceTwentyTwo: IRace = {
   id: mockRaceId,
   eventId: mockEventId,
   raceTypeId: mockRaceTypeId,
@@ -66,12 +66,12 @@ export const mockRaceTwentyTwo: RaceRow = {
 };
 
 // mock IEventRow values
-const mockEventTwentyOne: EventRow = {
+const mockEventTwentyOne: IEvent = {
   id: mockEventId,
   name: mockEventName,
   Race: [mockRaceTwentyOne],
 };
-const mockEventTwentyTwo: EventRow = {
+const mockEventTwentyTwo: IEvent = {
   id: mockEventId,
   name: mockEventName,
   Race: [mockRaceTwentyTwo],
@@ -122,7 +122,7 @@ export const expectedBuildFromMockSingleRiderResultTwentyOne: IResult = {
   noPlaceCode: mockNoPlaceCodeType.name,
   lap: mockLap,
   resultType: mockResultType.name,
-  eventId: mockSingleRiderResultRowTwentyOne.eventId,
+  eventId: mockEventId,
   category: mockCategory,
   racers: mockCount,
   type: mockRaceType.name,
@@ -139,7 +139,7 @@ export const expectedBuildFromMockSingleRiderResultTwentyTwo: IResult = {
   noPlaceCode: mockNoPlaceCodeType.name,
   lap: mockLap,
   resultType: mockResultType.name,
-  eventId: mockSingleRiderResultRowTwentyTwo.eventId,
+  eventId: mockEventId,
   category: mockCategory,
   racers: mockCount,
   type: mockRaceType.name,
