@@ -10,7 +10,6 @@ import {
 import { getYearFromDateString } from "@/app/_utility/helper-functions";
 
 export default class ResultService {
-  // Constructor
   constructor(private resultDao: ResultDAO) {}
 
   // Class Method buildResult
