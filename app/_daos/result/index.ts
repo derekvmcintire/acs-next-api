@@ -8,7 +8,6 @@ import {
 } from "@/app/_types/result/types";
 
 export default class ResultDAO implements IResultDAO {
-  // Constructor
   constructor(private resultRepo: IResultRepository) {}
 
   // Public Class Method - getRiderResults
@@ -78,13 +77,13 @@ export default class ResultDAO implements IResultDAO {
     }
   }
 
-  async assignCategoryToResult(args: AssignCategoryToResultArgs) {
-    const { resultId, categoryId } = args;
+  async assignCategoryToResult(joinData: AssignCategoryToResultArgs) {
+    console.log('****************args is************************: ', joinData)
     try {
       const newJoin = await this.resultRepo.createJoin({
         data: {
-          resultId: resultId,
-          categoryId: categoryId,
+          resultId: joinData.resultId,
+          categoryId: joinData.categoryId,
         },
       });
       return newJoin;

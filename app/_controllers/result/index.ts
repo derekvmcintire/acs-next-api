@@ -37,7 +37,7 @@ export async function createResult(
       categories.forEach((id) => {
         const success = resultService.assignCategoryToResult({
           resultId: result.id,
-          categoryId: id,
+          categoryId: Number(id),
         });
         if (!success) {
           throw new Error("Failed to create entry in JoinResultCategory");

@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
       place: body?.place || null,
       time: body?.time || null,
       points: body?.points || null,
-      categories: categories ? categories.map(Number) : undefined,
+      categories: categories || [],
     });
 
     return NextResponse.json(row, { status: 200 });

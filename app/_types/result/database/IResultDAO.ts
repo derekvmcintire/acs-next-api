@@ -6,6 +6,6 @@ export interface IResultDAO {
   countResultsByEventId(eventId: number): Promise<number>;
   createResult(resultData: CreateResultArgs): Promise<CreatedResult>;
   assignCategoryToResult(
-    args: AssignCategoryToResultArgs,
+    params: AssignCategoryToResultArgs,
   ): Promise<JoinResultCategory | null>;
 }
