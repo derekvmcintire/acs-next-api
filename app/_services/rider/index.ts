@@ -3,10 +3,9 @@ import {
   AssignRiderToTeamParams,
   IGetRidersParams,
   IRider,
-  ITeam,
-  JoinRiderTeamRow,
   RiderRow,
 } from "../../_types/rider/types";
+import { ITeam, JoinRiderTeamRow } from "@/app/_types/team/types";
 
 export default class RiderService {
   // Constructor

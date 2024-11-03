@@ -1,28 +1,22 @@
+import { ITeam, JoinRiderTeamRow } from "../team/types";
+
 // Rider Data Types
-export interface IRiderName {
+export interface SubRiderName {
   first: string;
   last: string;
 }
 
-export interface ITeam {
-  id: number;
-  name: string;
-  year: number;
-  url: string | null;
-  description: string | null;
-}
-
-export interface ISocials {
+export interface SubRiderSocials {
   strava?: string;
   insta?: string;
 }
 
-export interface ICategory {
+export interface SubRiderCategory {
   discipline: string;
   category: number;
 }
 
-export interface IHometown {
+export interface SubRiderHometown {
   country: string | null;
   city: string | null;
 }
@@ -30,11 +24,11 @@ export interface IHometown {
 export interface IRider {
   id: number;
   currentTeam?: string | null;
-  name: IRiderName;
+  name: SubRiderName;
   teams?: ITeam[] | null;
-  socials: ISocials;
-  categories: ICategory[];
-  hometown: IHometown;
+  socials: SubRiderSocials;
+  categories: SubRiderCategory[];
+  hometown: SubRiderHometown;
   dob: string;
   photo: string;
   wins?: number;
@@ -52,23 +46,6 @@ export interface IGetRidersParams {
 export interface AssignRiderToTeamParams {
   riderId: number;
   teamId: number;
-}
-
-// DB Table Row Types
-
-export interface TeamRow {
-  id: number;
-  name: string;
-  year: number;
-  url: string | null;
-  description: string | null;
-}
-
-export interface JoinRiderTeamRow {
-  id: number;
-  riderId: number;
-  teamId: number;
-  team: TeamRow;
 }
 
 export interface RiderRow {
