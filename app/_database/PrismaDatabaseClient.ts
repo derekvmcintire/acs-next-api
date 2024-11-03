@@ -4,6 +4,7 @@ import { IResultRepository } from "../_types/result/database/IResultRepository";
 import { IEventRepository } from "../_types/event/database/IEventRepository";
 import { IRaceRepository } from "../_types/event/database/IRaceRepository";
 import { IDatabaseClient } from "../_types/database/types";
+import { ICategoryRepository } from "../_types/category/database/ICategoryRepository";
 
 export class PrismaDatabaseClient implements IDatabaseClient {
   constructor(private prisma: PrismaClient) {}
@@ -43,6 +44,12 @@ export class PrismaDatabaseClient implements IDatabaseClient {
         this.prisma.race.findMany(args),
       findUnique: (args: Prisma.RaceFindUniqueArgs) =>
         this.prisma.race.findUnique(args),
+    };
+  }
+
+  get category(): ICategoryRepository {
+    return {
+      findMany: () => this.prisma.category.findMany(),
     };
   }
 }

@@ -13,6 +13,7 @@ export interface BaseResult {
 export interface CreateResultArgs extends BaseResult {
   resultTypeId: number;
   noPlaceCodeTypeId: number | null;
+  categories?: number[] | null;
 }
 
 export interface ResultRow extends CreateResultArgs {

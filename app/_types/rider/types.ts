@@ -1,4 +1,4 @@
-import { ITeam, JoinRiderTeamRow } from "../team/types";
+import { ITeam, JoinRiderTeamRow } from "@/app/_types/team/types";
 
 // Rider Data Types
 export interface SubRiderName {
