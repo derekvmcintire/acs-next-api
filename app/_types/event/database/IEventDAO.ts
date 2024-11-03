@@ -8,6 +8,6 @@ import { CreateRaceArgs } from "@/app/_types/event/types";
 export interface IEventDAO {
   createRace(raceData: CreateRaceArgs): Promise<RaceRow | null>;
   createEvent(eventData: CreateEventArgs): Promise<BaseEvent>;
-  getRaceByName(eventName: string): Promise<RaceRow[]>;
+  getRace(GetRaceFilters: any): Promise<RaceRow[]>;
   getRaceById(id: number): Promise<RaceRow | null>;
 }

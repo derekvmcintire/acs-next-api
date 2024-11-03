@@ -1,4 +1,5 @@
 import EventDAO from "@/app/_daos/event";
+import { GetRaceFilters } from "@/app/_types/event/database/base-types";
 import { CreateRaceArgs } from "@/app/_types/event/types";
 
 export default class EventService {
@@ -13,9 +14,9 @@ export default class EventService {
     }
   }
 
-  async getRaceByName(name: string) {
+  async getRace(filters: GetRaceFilters) {
     try {
-      const race = await this.eventDao.getRaceByName(name);
+      const race = await this.eventDao.getRace(filters);
       return race;
     } catch (error) {
       throw new Error(String(error));

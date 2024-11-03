@@ -35,3 +35,10 @@ export type CreateRaceQueryArgs = {
     raceTypeId: number; // Ensure this is a required field
   };
 };
+
+export type GetRaceFilters = {
+  eventName?: string;
+  id?: number;
+  location?: string;
+  startDateRange?: { from: string; to: string };
+};
