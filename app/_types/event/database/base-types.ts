@@ -36,9 +36,20 @@ export type CreateRaceQueryArgs = {
   };
 };
 
+export type DateRangeFilter = { from: string; to: string };
+
 export type GetRaceFilters = {
   eventName?: string;
   id?: number;
   location?: string;
-  startDateRange?: { from: string; to: string };
+  startDateRange?: DateRangeFilter;
 };
+
+export interface RaceWhereInput {
+  event?: {
+    AND?: Array<{ name: { contains: string; mode?: "insensitive" } }>;
+  };
+  id?: number;
+  location?: { contains: string; mode?: "insensitive" };
+  startDate?: { gte: string; lte: string };
+}

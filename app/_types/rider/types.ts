@@ -1,5 +1,4 @@
 // Rider Data Types
-
 export interface IRiderName {
   first: string;
   last: string;
