@@ -67,7 +67,8 @@ model Category {
   name        String
   description String?
 
-  JoinRiderCategory JoinRiderCategory[]
+  JoinRiderCategory  JoinRiderCategory[]
+  JoinResultCategory JoinResultCategory[]
 }
 
 /// Pick List Tables
@@ -97,19 +98,20 @@ model NoPlaceCodeType {
 
 /// Join Tables
 model Result {
-  id                Int              @id @default(autoincrement())
-  event             Event            @relation(fields: [eventId], references: [id])
-  eventId           Int
-  rider             Rider            @relation(fields: [riderId], references: [id])
-  riderId           Int
-  resultType        ResultType       @relation(fields: [resultTypeId], references: [id])
-  resultTypeId      Int
-  noPlaceCodeType   NoPlaceCodeType? @relation(fields: [noPlaceCodeTypeId], references: [id])
-  noPlaceCodeTypeId Int
-  lap               Int?
-  place             Int?
-  time              String?
-  points            Int?
+  id                 Int                  @id @default(autoincrement())
+  event              Event                @relation(fields: [eventId], references: [id])
+  eventId            Int
+  rider              Rider                @relation(fields: [riderId], references: [id])
+  riderId            Int
+  resultType         ResultType           @relation(fields: [resultTypeId], references: [id])
+  resultTypeId       Int
+  noPlaceCodeType    NoPlaceCodeType?     @relation(fields: [noPlaceCodeTypeId], references: [id])
+  noPlaceCodeTypeId  Int
+  lap                Int?
+  place              Int?
+  time               String?
+  points             Int?
+  JoinResultCategory JoinResultCategory[]
 }
 
 model JoinRiderCategory {
@@ -126,4 +128,12 @@ model JoinRiderTeam {
   riderId Int
   team    Team  @relation(fields: [teamId], references: [id])
   teamId  Int
+}
+
+model JoinResultCategory {
+  id         Int      @id @default(autoincrement())
+  result     Result   @relation(fields: [resultId], references: [id])
+  resultId   Int
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
 }

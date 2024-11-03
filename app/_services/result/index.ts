@@ -1,6 +1,7 @@
 import { mockCategory } from "@/app/_constants/mock-data/result/mock-values";
 import ResultDAO from "@/app/_daos/result";
 import {
+  AssignCategoryToResultArgs,
   CreateResultArgs,
   IRacerHistory,
   IResult,
@@ -99,6 +100,15 @@ export default class ResultService {
     try {
       const race = this.resultDao.createResult(resultData);
       return race;
+    } catch (error) {
+      throw new Error(String(error));
+    }
+  }
+
+  async assignCategoryToResult(args: AssignCategoryToResultArgs) {
+    try {
+      const result = this.resultDao.assignCategoryToResult(args);
+      return result;
     } catch (error) {
       throw new Error(String(error));
     }

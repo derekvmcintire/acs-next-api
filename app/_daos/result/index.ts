@@ -1,7 +1,11 @@
 import { getDatabaseQueryErrorMessage } from "@/app/_constants/errors";
 import { IResultDAO } from "@/app/_types/result/database/IResultDAO";
 import { IResultRepository } from "@/app/_types/result/database/IResultRepository";
-import { CreateResultArgs, IResult } from "@/app/_types/result/types";
+import {
+  AssignCategoryToResultArgs,
+  CreateResultArgs,
+  IResult,
+} from "@/app/_types/result/types";
 
 export default class ResultDAO implements IResultDAO {
   // Constructor
@@ -69,6 +73,21 @@ export default class ResultDAO implements IResultDAO {
         },
       });
       return result;
+    } catch (error) {
+      throw new Error(getDatabaseQueryErrorMessage(String(error)));
+    }
+  }
+
+  async assignCategoryToResult(args: AssignCategoryToResultArgs) {
+    const { resultId, categoryId } = args;
+    try {
+      const newJoin = await this.resultRepo.createJoin({
+        data: {
+          resultId: resultId,
+          categoryId: categoryId,
+        },
+      });
+      return newJoin;
     } catch (error) {
       throw new Error(getDatabaseQueryErrorMessage(String(error)));
     }

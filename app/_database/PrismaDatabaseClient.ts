@@ -28,6 +28,8 @@ export class PrismaDatabaseClient implements IDatabaseClient {
       count: (args: Prisma.ResultCountArgs) => this.prisma.result.count(args),
       create: (args: Prisma.ResultCreateArgs) =>
         this.prisma.result.create(args),
+      createJoin: (args: Prisma.JoinResultCategoryCreateArgs) =>
+        this.prisma.joinResultCategory.create(args),
     };
   }
 
