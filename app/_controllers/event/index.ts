@@ -1,6 +1,7 @@
 import EventDAO from "@/app/_daos/event";
 import databaseClient from "@/app/_database/get-client";
 import EventService from "@/app/_services/event";
+import { GetRaceFilters } from "@/app/_types/event/database/base-types";
 import { CreateRaceArgs } from "@/app/_types/event/types";
 
 const getEventService = (): EventService => {
@@ -19,10 +20,10 @@ export async function createRace(raceData: CreateRaceArgs) {
   }
 }
 
-export async function getRaceByName(name: string) {
+export async function getRace(filters: GetRaceFilters) {
   try {
     const eventService = getEventService();
-    const race = await eventService.getRaceByName(name);
+    const race = await eventService.getRace(filters);
 
     return race;
   } catch (error) {

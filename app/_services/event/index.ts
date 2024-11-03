@@ -1,21 +1,32 @@
 import EventDAO from "@/app/_daos/event";
+import { GetRaceFilters } from "@/app/_types/event/database/base-types";
 import { CreateRaceArgs } from "@/app/_types/event/types";
+import dayjs from "dayjs";
 
 export default class EventService {
   constructor(private eventDao: EventDAO) {}
 
   async createRace(raceData: CreateRaceArgs) {
-    try {
-      const race = await this.eventDao.createRace(raceData);
-      return race;
-    } catch (error) {
-      throw new Error(String(error));
-    }
+    const formattedStartDate = dayjs(raceData.startDate, "MM-DD-YYYY").format(
+      "YYYY-MM-DD",
+    );
+    const formattedEndDate = raceData.endDate
+      ? dayjs(raceData.endDate, "MM-DD-YYYY").format("YYYY-MM-DD")
+      : null;
+
+    const event = await this.eventDao.createEvent({ name: raceData.name });
+
+    return this.eventDao.createRace({
+      ...raceData,
+      eventId: event.id,
+      startDate: formattedStartDate,
+      endDate: formattedEndDate,
+    });
   }
 
-  async getRaceByName(name: string) {
+  async getRace(filters: GetRaceFilters) {
     try {
-      const race = await this.eventDao.getRaceByName(name);
+      const race = await this.eventDao.getRace(filters);
       return race;
     } catch (error) {
       throw new Error(String(error));
