@@ -25,7 +25,6 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    // Parse the request body
     const body: Partial<CreateResultArgs> = await request.json();
 
     const { eventId, riderId, resultTypeId } = body;
