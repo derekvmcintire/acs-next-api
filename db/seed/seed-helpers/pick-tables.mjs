@@ -49,7 +49,7 @@ export const createCategories = async (client) => {
     const category = {
       disicpline: 'Gran Fondo',
       name: `${gender} ${text}`,
-      description: `Gran Fondo age group from ${start} to ${end} for gender ${gender}`
+      description: `Gran Fondo age group from ${start} to ${end} for ${gender}`
     }
     await client.category.create({
             data: category
