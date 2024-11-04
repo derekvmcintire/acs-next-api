@@ -1,4 +1,4 @@
-import { GET } from "@/app/api/v1/rider/route";
+import { GET } from "@/app/api/v1/riders/route";
 import { getMultipleRiders } from "@/app/_controllers/rider";
 import { NextRequest } from "next/server";
 import { mockGetAllRidersResponse } from "../../../_constants/mock-data/rider/mock-models";
