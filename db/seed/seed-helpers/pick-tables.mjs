@@ -13,7 +13,7 @@ export const GF_AGE_GROUPS = [
   { start: 60, end: 64, text: '60-64' },
   { start: 64, end: 69, text: '65-69' },
   { start: 70, end: 74, text: '70-74' },
-  { start: 75, end: 999, text: '75 and Over' }
+  { start: 75, end: 999, text: '75 and Over' },
   { start: 1, end: 22, text: 'Under 23'},
   { start: 1, end: 17, text: 'Juniors'},
   { start: 1, end: 999, text: 'Open'},
