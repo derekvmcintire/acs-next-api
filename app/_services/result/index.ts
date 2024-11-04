@@ -96,6 +96,17 @@ export default class ResultService {
     }
   }
 
+  async getResultsByEventId(eventId: number): Promise<IResult[]> {
+    try {
+      const results: IResult[] = await this.resultDao.getEventResults(
+        Number(eventId),
+      );
+      return results;
+    } catch (error) {
+      throw new Error(String(error));
+    }
+  }
+
   async createResult(resultData: CreateResultArgs) {
     try {
       const race = this.resultDao.createResult(resultData);

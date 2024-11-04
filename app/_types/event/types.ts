@@ -2,6 +2,7 @@ import { IPickTypeRow } from "../database/types";
 
 // Base Types
 export interface BaseEvent {
+  id?: number;
   name: string;
 }
 
@@ -23,7 +24,6 @@ export interface IRace extends Omit<BaseRace, "name"> {
 
 export interface IEvent extends BaseEvent {
   // look for duplicate in result types
-  id: number;
   Race?: IRace[];
 }
 

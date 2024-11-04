@@ -37,6 +37,32 @@ export default class ResultDAO implements IResultDAO {
     }
   }
 
+  async getEventResults(eventId: number) {
+    try {
+      const results = (await this.resultRepo.findMany({
+        where: {
+          eventId: eventId,
+        },
+        include: {
+          event: {
+            include: {
+              Race: {
+                include: {
+                  raceType: true,
+                },
+              },
+            },
+          },
+          resultType: true,
+          noPlaceCodeType: true,
+        },
+      })) as IResult[];
+      return results;
+    } catch (error) {
+      throw new Error(getDatabaseQueryErrorMessage(String(error)));
+    }
+  }
+
   // Public CLass Method countResultsByEventId
   async countResultsByEventId(eventId: number) {
     try {
