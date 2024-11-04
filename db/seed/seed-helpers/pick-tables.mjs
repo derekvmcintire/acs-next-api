@@ -36,9 +36,9 @@ export const GF_AGE_GROUPS = [
 ];
 
 export const GF_CATEGORIES = GF_AGE_GROUPS.reduce((cats, ag) => {
-  const mGroup = {...ag, gender: "M"};
-  const fGroup = {...ag, gender: "F"};
-  const nbGroup = {...ag, gender: "NB"};
+  const mGroup = {...ag, gender: "Men"};
+  const fGroup = {...ag, gender: "Women"};
+  const nbGroup = {...ag, gender: "Non Binary"};
   return [...cats, mGroup, fGroup, nbGroup];
 }, [])
 
@@ -48,7 +48,7 @@ export const createCategories = async (client) => {
     const { gender, text, start, end } = gfCat;
     const category = {
       disicpline: 'Gran Fondo',
-      name: `${gender}${text}`,
+      name: `${gender} ${text}`,
       description: `Gran Fondo age group from ${start} to ${end} for gender ${gender}`
     }
     await client.category.create({
