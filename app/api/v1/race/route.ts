@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
 
   if (to && from) {
     filters.startDateRange = { from: from, to: to };
- q  }
+  }
 
   try {
     const row = await getRace(filters);
