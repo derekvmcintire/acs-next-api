@@ -78,7 +78,7 @@ export default class ResultDAO implements IResultDAO {
   }
 
   async assignCategoryToResult(joinData: AssignCategoryToResultArgs) {
-    console.log('****************args is************************: ', joinData)
+    console.log("****************args is************************: ", joinData);
     try {
       const newJoin = await this.resultRepo.createJoin({
         data: {
