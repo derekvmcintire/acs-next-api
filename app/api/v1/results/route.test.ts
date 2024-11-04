@@ -1,4 +1,4 @@
-import { GET, POST } from "@/app/api/v1/result/route";
+import { GET, POST } from "@/app/api/v1/results/route";
 import { NextRequest } from "next/server";
 import {
   CREATE_RESULT_INVALID_REQUEST,

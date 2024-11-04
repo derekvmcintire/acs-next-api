@@ -11,7 +11,7 @@ import { IRace } from "@/app/_types/event/types";
 jest.mock("@/app/_controllers/event");
 jest.mock("@/app/_constants/errors");
 
-describe("POST /race", () => {
+describe("POST /races", () => {
   const mockCreateRace = createRace as jest.Mock<Promise<IRace>>;
   const mockGetInternalServerErrorMessage =
     getInternalServerErrorMessage as jest.Mock<string>;

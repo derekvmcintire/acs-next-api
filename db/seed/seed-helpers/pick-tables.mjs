@@ -13,7 +13,7 @@ export const GF_AGE_GROUPS = [
   { start: 60, end: 64, text: '60-64' },
   { start: 64, end: 69, text: '65-69' },
   { start: 70, end: 74, text: '70-74' },
-  { start: 75, end: 999, text: '75 and Over' }
+  { start: 75, end: 999, text: '75 and Over' },
   { start: 1, end: 22, text: 'Under 23'},
   { start: 1, end: 17, text: 'Juniors'},
   { start: 1, end: 999, text: 'Open'},
@@ -36,9 +36,9 @@ export const GF_AGE_GROUPS = [
 ];
 
 export const GF_CATEGORIES = GF_AGE_GROUPS.reduce((cats, ag) => {
-  const mGroup = {...ag, gender: "M"};
-  const fGroup = {...ag, gender: "F"};
-  const nbGroup = {...ag, gender: "NB"};
+  const mGroup = {...ag, gender: "Men"};
+  const fGroup = {...ag, gender: "Women"};
+  const nbGroup = {...ag, gender: "Non Binary"};
   return [...cats, mGroup, fGroup, nbGroup];
 }, [])
 
@@ -48,8 +48,8 @@ export const createCategories = async (client) => {
     const { gender, text, start, end } = gfCat;
     const category = {
       disicpline: 'Gran Fondo',
-      name: `${gender}${text}`,
-      description: `Gran Fondo age group from ${start} to ${end} for gender ${gender}`
+      name: `${gender} ${text}`,
+      description: `Gran Fondo age group from ${start} to ${end} for ${gender}`
     }
     await client.category.create({
             data: category

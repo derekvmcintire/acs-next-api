@@ -2,7 +2,7 @@
 
 ### Mock Data for creating resources through postman
 
-#### POST http://localhost:8080/api/latest/rider
+#### POST http://localhost:8080/api/latest/riders
 
 ```
 {
@@ -18,7 +18,7 @@
 }
 ```
 
-#### POST http://localhost:8080/api/latest/race
+#### POST http://localhost:8080/api/latest/races
 
 Request Data:
 
@@ -45,7 +45,7 @@ Response Data:
 }
 ```
 
-#### POST http://localhost:8080/api/latest/result
+#### POST http://localhost:8080/api/latest/results
 
 ```
 {
