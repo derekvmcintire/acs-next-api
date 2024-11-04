@@ -8,6 +8,7 @@ import {
 
 export interface IResultDAO {
   getRiderResults(riderId: number): Promise<IResult[] | null>;
+  getEventResults(eventId: number): Promise<IResult[] | null>;
   countResultsByEventId(eventId: number): Promise<number>;
   createResult(resultData: CreateResultArgs): Promise<CreatedResult>;
   assignCategoryToResult(
