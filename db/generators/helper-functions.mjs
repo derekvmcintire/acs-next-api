@@ -53,7 +53,8 @@ export const generateRandomDateInPast = (n = 10) => {
   const randomTimestamp = Math.random() * (endDate - startDate) + startDate;
 
   const randomDate = new Date(randomTimestamp);
-  return randomDate.toDateString();
+
+  return dayjs(randomDate, "MM-DD-YYYY").format("YYYY-MM-DD");
 }
 
 /******************************/
