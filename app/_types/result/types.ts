@@ -52,3 +52,8 @@ export interface IRacerHistory {
   riderId: number;
   results: IResultYear[];
 }
+
+export interface AssignCategoryToResultArgs {
+  resultId: number;
+  categoryId: number;
+}

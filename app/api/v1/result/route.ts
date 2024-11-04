@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
   try {
     const body: Partial<CreateResultArgs> = await request.json();
 
-    const { eventId, riderId, resultTypeId } = body;
+    const { eventId, riderId, resultTypeId, categories } = body;
     if (eventId == null || riderId == null || resultTypeId == null) {
       return NextResponse.json(
         { error: CREATE_RESULT_INVALID_REQUEST },
@@ -46,6 +46,7 @@ export async function POST(request: NextRequest) {
       place: body?.place || null,
       time: body?.time || null,
       points: body?.points || null,
+      categories: categories || [],
     });
 
     return NextResponse.json(row, { status: 200 });
