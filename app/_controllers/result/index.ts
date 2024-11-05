@@ -41,6 +41,10 @@ export async function getResultsByRaceId(
     const eventService = getEventService();
     const race = await eventService.getRace({ id: raceId });
 
+    if (!race || !race[0]) {
+      throw new Error(`Failed to get race with id: ${raceId}`);
+    }
+
     const { event } = race[0];
 
     if (!event || !event?.id) {
