@@ -1,5 +1,6 @@
 import { IPickTypeRow } from "../database/types";
 import { IEvent } from "../event/types";
+import { TransformedRider } from "../rider/types";
 
 export interface BaseResult {
   eventId: number;
@@ -29,6 +30,7 @@ export interface IResult extends ResultRow {
   event?: IEvent | null;
   resultType?: IPickTypeRow | null;
   noPlaceCodeType?: IPickTypeRow | null;
+  rider?: TransformedRider;
 }
 
 export interface TransformedRace extends Omit<BaseResult, "riderId"> {

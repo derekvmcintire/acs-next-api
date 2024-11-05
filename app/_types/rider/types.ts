@@ -21,17 +21,30 @@ export interface SubRiderHometown {
   city: string | null;
 }
 
-export interface IRider {
-  id: number;
+export interface BaseRider {
+  id?: number;
+  dob: string;
+  photo: string;
+}
+
+export interface IRider extends BaseRider {
   currentTeam?: string | null;
   name: SubRiderName;
   teams?: ITeam[] | null;
   socials: SubRiderSocials;
   categories: SubRiderCategory[];
   hometown: SubRiderHometown;
-  dob: string;
-  photo: string;
   wins?: number;
+}
+
+export interface TransformedRider extends BaseRider {
+  firstName: string;
+  lastName: string;
+  country: string;
+  hometown: string;
+  strava: string;
+  insta: string;
+  about: string;
 }
 
 // Request Types

@@ -44,6 +44,7 @@ export default class ResultDAO implements IResultDAO {
           eventId: eventId,
         },
         include: {
+          rider: true,
           event: {
             include: {
               Race: {

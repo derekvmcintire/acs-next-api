@@ -7,6 +7,7 @@ import {
   mockGetMultipleRiderParams,
   mockGetRiderByIdResponse,
 } from "@/app/_constants/mock-data/rider/mock-models";
+import { mockRiderId } from "@/app/_constants/mock-data/result/mock-values";
 
 jest.mock("@/app/_database/get-client", () => ({
   rider: jest.fn(),
@@ -56,7 +57,7 @@ describe("RiderController", () => {
     it("should return a rider if found", async () => {
       riderServiceMock.getRiderById.mockResolvedValue(mockGetRiderByIdResponse);
 
-      const result = await getRiderById(mockGetRiderByIdResponse.id);
+      const result = await getRiderById(mockRiderId);
       expect(result).toEqual(mockGetRiderByIdResponse);
     });
 
