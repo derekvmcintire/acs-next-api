@@ -3,6 +3,7 @@ import { IEvent } from "../event/types";
 import { TransformedRider } from "../rider/types";
 
 export interface BaseResult {
+  id?: number;
   eventId: number;
   riderId: number;
   lap?: number | null;
