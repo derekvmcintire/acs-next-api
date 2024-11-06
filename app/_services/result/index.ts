@@ -29,6 +29,7 @@ export default class ResultService {
           : null;
 
       const build = {
+        id: race?.id,
         name: result?.event?.name || "",
         place: result?.place || undefined,
         time: result?.time || "",

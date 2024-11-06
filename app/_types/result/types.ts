@@ -3,6 +3,7 @@ import { IEvent } from "../event/types";
 import { TransformedRider } from "../rider/types";
 
 export interface BaseResult {
+  id?: number;
   eventId: number;
   riderId: number;
   lap?: number | null;
@@ -18,12 +19,12 @@ export interface CreateResultArgs extends BaseResult {
 }
 
 export interface ResultRow extends CreateResultArgs {
-  id: number;
+  id?: number;
 }
 
 // @TODO Deprecate and replace with ResultRow
 export interface CreatedResult extends BaseResult {
-  id: number;
+  id?: number;
 }
 
 export interface IResult extends ResultRow {

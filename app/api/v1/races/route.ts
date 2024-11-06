@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
 export async function GET(request: NextRequest) {
   const filters: GetRaceFilters = {
     eventName: request.nextUrl.searchParams.get("name") || undefined,
-    id: Number(request.nextUrl.searchParams.get("id")) || undefined,
+    eventId: Number(request.nextUrl.searchParams.get("eventid")) || undefined,
     location: request.nextUrl.searchParams.get("location") || undefined,
   };
 
