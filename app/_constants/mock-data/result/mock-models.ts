@@ -21,7 +21,6 @@ import {
   mockCategory,
   mockCount,
   mockEventName,
-  mockResultId,
   mockRiderId,
   mockYearTwentyOne,
   mockYearTwentyTwo,

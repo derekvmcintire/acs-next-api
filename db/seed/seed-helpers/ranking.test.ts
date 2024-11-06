@@ -1,4 +1,4 @@
-import { calculatePoints } from "./ranking";
+import { calculatePoints } from "./ranking.mjs";
 
 describe("calculatePoints", () => {
   test("should award maximum points for 1st place", () => {

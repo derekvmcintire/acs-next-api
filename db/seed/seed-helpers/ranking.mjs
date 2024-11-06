@@ -2,7 +2,7 @@
 ACS Point System
 Top 10% of finishers receive points.
 */
-export function calculatePoints(totalRacers: number, position: number): number {
+export function calculatePoints(totalRacers, position) {
   if (position < 1 || position > totalRacers) {
     throw new Error(
       "Position must be between 1 and the total number of racers.",
