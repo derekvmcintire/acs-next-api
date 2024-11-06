@@ -1,7 +1,7 @@
 import { buildMockRace } from '../../generators/results/build-race-results.mjs';
 import { NUMBER_OF_RACES, NUMBER_OF_RESULTS, NUMBER_OF_RIDERS } from '../constants.mjs';
-import {generateRandomNumber} from '../../generators/helper-functions.mjs';
-import {calculatePoints} from './ranking.ts';
+import { generateRandomNumber } from '../../generators/helper-functions.mjs';
+import { calculatePoints } from './ranking.mjs';
 
 const getRandomPagination = () => {
   const start = generateRandomNumber((NUMBER_OF_RIDERS - NUMBER_OF_RESULTS)) - 1;
@@ -53,7 +53,7 @@ export const createRaces = async (client) => {
           lap: null,
           place: randomPlace,
           time: '',
-          points: points,
+          points,
         }
 
         await client.result.create({

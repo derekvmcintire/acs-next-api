@@ -32,7 +32,7 @@
   "include": [
     "./**/*.ts",
     ".next/types/**/*.ts"
-  ],
+, "db/seed/seed-helpers/ranking.mjs"  ],
   "exclude": [
     "node_modules"
   ]
