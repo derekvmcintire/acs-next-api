@@ -19,12 +19,12 @@ export interface CreateResultArgs extends BaseResult {
 }
 
 export interface ResultRow extends CreateResultArgs {
-  id: number;
+  id?: number;
 }
 
 // @TODO Deprecate and replace with ResultRow
 export interface CreatedResult extends BaseResult {
-  id: number;
+  id?: number;
 }
 
 export interface IResult extends ResultRow {

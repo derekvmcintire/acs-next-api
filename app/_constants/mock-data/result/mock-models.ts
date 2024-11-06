@@ -58,7 +58,7 @@ export const mockRaceTwentyOne: IRace = {
 };
 
 export const mockRaceTwentyTwo: IRace = {
-  id: mockRaceId,
+  id: mockRaceId, // this is potentially confusing - is this a race or a result? really it will be used as a combination of the two in a riders race history
   eventId: mockEventId,
   raceTypeId: mockRaceTypeId,
   raceType: mockRaceType,
@@ -81,7 +81,6 @@ const mockEventTwentyTwo: IEvent = {
 
 // mock IRiderResultsRow values
 export const mockSingleRiderResultRowTwentyOne: IResult = {
-  id: mockResultId,
   eventId: mockEventId,
   riderId: mockRiderId,
   resultTypeId: mockResultTypeId,
@@ -96,7 +95,6 @@ export const mockSingleRiderResultRowTwentyOne: IResult = {
 };
 
 export const mockSingleRiderResultRowTwentyTwo: IResult = {
-  id: mockResultId,
   eventId: mockEventId,
   riderId: mockRiderId,
   resultTypeId: mockResultTypeId,
@@ -118,6 +116,7 @@ export const mockGetRiderResultsQueryResponse: IResult[] = [
 // mock TransformedRace values
 export const expectedBuildFromMockSingleRiderResultTwentyOne: TransformedRace =
   {
+    id: mockRaceId,
     name: mockEventName,
     place: mockPlace,
     time: mockTime,
@@ -136,6 +135,7 @@ export const expectedBuildFromMockSingleRiderResultTwentyOne: TransformedRace =
 
 export const expectedBuildFromMockSingleRiderResultTwentyTwo: TransformedRace =
   {
+    id: mockRaceId,
     name: mockEventName,
     place: mockPlace,
     time: mockTime,

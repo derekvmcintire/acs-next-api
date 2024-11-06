@@ -61,9 +61,19 @@ export async function createResult(
   try {
     const resultService = getResultService();
     const result = await resultService.createResult(resultData);
+
+    if (!result || !result.id) {
+      throw new Error("Failed to create result");
+    }
+
     const { categories } = resultData;
-    if (categories && categories.length > 0 && result.id) {
+
+    if (categories && categories.length > 0) {
       categories.forEach((id) => {
+        if (!result.id) {
+          throw new Error("No result id available");
+        }
+
         const success = resultService.assignCategoryToResult({
           resultId: result.id,
           categoryId: Number(id),

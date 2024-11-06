@@ -78,6 +78,7 @@ export default class EventDAO implements IEventDAO {
         })),
       };
     }
+    if (filters.eventId) where.eventId = filters.eventId;
     if (filters.id) where.id = filters.id;
     if (filters.location)
       where.location = { contains: filters.location, mode: "insensitive" };
