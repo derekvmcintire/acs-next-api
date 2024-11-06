@@ -83,6 +83,7 @@ export async function createResult(
         }
       });
     }
+
     return result;
   } catch (error) {
     throw new Error(String(error));
