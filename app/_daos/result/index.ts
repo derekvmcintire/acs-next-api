@@ -37,6 +37,54 @@ export default class ResultDAO implements IResultDAO {
     }
   }
 
+  async getResultsForYear(year: number) {
+    try {
+      const results = await this.resultRepo.findMany({
+        where: {
+          event: {
+            Race: {
+              some: {
+                startDate: {
+                  startsWith: year.toString(),
+                },
+              },
+            },
+          },
+        },
+        select: {
+          points: true,
+          rider: {
+            select: {
+              id: true,
+              firstName: true,
+              lastName: true,
+              hometown: true,
+              country: true,
+              JoinRiderTeam: {
+                where: {
+                  team: {
+                    year: year,
+                  },
+                },
+                select: {
+                  team: {
+                    select: {
+                      name: true,
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      });
+
+      return results;
+    } catch (error) {
+      throw new Error(getDatabaseQueryErrorMessage(String(error)));
+    }
+  }
+
   async getEventResults(eventId: number) {
     try {
       const results = (await this.resultRepo.findMany({

@@ -14,4 +14,5 @@ export interface IResultDAO {
   assignCategoryToResult(
     params: AssignCategoryToResultArgs,
   ): Promise<JoinResultCategory | null>;
+  getResultsForYear(year: number): Promise<IResult[] | null>;
 }

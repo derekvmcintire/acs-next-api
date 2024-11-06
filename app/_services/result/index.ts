@@ -9,6 +9,7 @@ import {
   TransformedRace,
 } from "@/app/_types/result/types";
 import { getYearFromDateString } from "@/app/_utility/helper-functions";
+import { calculateTotalPoints } from "@/app/_utility/process-rankings-for-year";
 
 export default class ResultService {
   constructor(private resultDao: ResultDAO) {}
@@ -79,6 +80,20 @@ export default class ResultService {
     resultYears.sort((a, b) => a.year - b.year);
 
     return resultYears;
+  }
+
+  async getResultsForYear(year: number): Promise<IResult[] | null> {
+    try {
+      const rankings = (await this.resultDao.getResultsForYear(year)) || [];
+      return rankings;
+    } catch (error) {
+      throw new Error(String(error));
+    }
+  }
+
+  calculateRankings(allResultsForYear: IResult[]) {
+    const sortedRankings = calculateTotalPoints(allResultsForYear);
+    return sortedRankings;
   }
 
   // Class Method getResultsByRiderId
