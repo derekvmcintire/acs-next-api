@@ -1,5 +1,8 @@
 import { getDatabaseQueryErrorMessage } from "@/app/_constants/errors";
-import { IResultDAO } from "@/app/_types/result/database/IResultDAO";
+import {
+  IResultDAO,
+  getRiderResultsFilters,
+} from "@/app/_types/result/database/IResultDAO";
 import { IResultRepository } from "@/app/_types/result/database/IResultRepository";
 import {
   AssignCategoryToResultArgs,
@@ -11,13 +14,26 @@ export default class ResultDAO implements IResultDAO {
   constructor(private resultRepo: IResultRepository) {}
 
   // Public Class Method - getRiderResults
-  async getRiderResults(riderId: number) {
+  async getRiderResults({ year, riderId }: getRiderResultsFilters) {
     try {
       const results = (await this.resultRepo.findMany({
         where: {
-          riderId: riderId,
+          ...(riderId && { riderId }), // If riderId is provided, filter by it
+          // Optionally filter by year if provided
+          ...(year && {
+            event: {
+              Race: {
+                some: {
+                  startDate: {
+                    contains: `${year}-`, // Filters for races starting in the given year
+                  },
+                },
+              },
+            },
+          }),
         },
         include: {
+          rider: true,
           event: {
             include: {
               Race: {
@@ -31,53 +47,6 @@ export default class ResultDAO implements IResultDAO {
           noPlaceCodeType: true,
         },
       })) as IResult[];
-      return results;
-    } catch (error) {
-      throw new Error(getDatabaseQueryErrorMessage(String(error)));
-    }
-  }
-
-  async getResultsForYear(year: number) {
-    try {
-      const results = await this.resultRepo.findMany({
-        where: {
-          event: {
-            Race: {
-              some: {
-                startDate: {
-                  startsWith: year.toString(),
-                },
-              },
-            },
-          },
-        },
-        select: {
-          points: true,
-          rider: {
-            select: {
-              id: true,
-              firstName: true,
-              lastName: true,
-              hometown: true,
-              country: true,
-              JoinRiderTeam: {
-                where: {
-                  team: {
-                    year: year,
-                  },
-                },
-                select: {
-                  team: {
-                    select: {
-                      name: true,
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
-      });
 
       return results;
     } catch (error) {
@@ -153,7 +122,6 @@ export default class ResultDAO implements IResultDAO {
   }
 
   async assignCategoryToResult(joinData: AssignCategoryToResultArgs) {
-    console.log("****************args is************************: ", joinData);
     try {
       const newJoin = await this.resultRepo.createJoin({
         data: {

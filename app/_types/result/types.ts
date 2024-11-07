@@ -32,6 +32,12 @@ export interface IResult extends ResultRow {
   resultType?: IPickTypeRow | null;
   noPlaceCodeType?: IPickTypeRow | null;
   rider?: TransformedRider;
+  points?: number | null; // Ensure this matches the field you're getting from the database
+  JoinRiderTeam?: {
+    team: {
+      name: string;
+    };
+  }[]; // Array of teams that may be related to the rider
 }
 
 export interface TransformedRace extends Omit<BaseResult, "riderId"> {

@@ -84,7 +84,8 @@ export default class ResultService {
 
   async getResultsForYear(year: number): Promise<IResult[] | null> {
     try {
-      const rankings = (await this.resultDao.getResultsForYear(year)) || [];
+      const rankings =
+        (await this.resultDao.getRiderResults({ year: year })) || [];
       return rankings;
     } catch (error) {
       throw new Error(String(error));
@@ -99,9 +100,9 @@ export default class ResultService {
   // Class Method getResultsByRiderId
   async getResultsByRiderId(riderId: number): Promise<IRacerHistory> {
     try {
-      const rows: IResult[] = await this.resultDao.getRiderResults(
-        Number(riderId),
-      );
+      const rows: IResult[] = await this.resultDao.getRiderResults({
+        riderId: Number(riderId),
+      });
       const results = await this.mapResults(rows);
       return {
         riderId,
