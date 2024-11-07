@@ -37,13 +37,13 @@ export const createRaces = async (client) => {
       })
 
       const racers = await client.rider.findMany(getRandomPagination())
-      const places = Array.from({ length: NUMBER_OF_RIDERS }, (_, i) => i + 1);
+      const places = Array.from({ length: racers.length }, (_, i) => i + 1); // add one to account for zero index
 
       racers.forEach( async (racer) => {
-        const randomPlaceIndex = generateRandomNumber(places.length) - 1;
+        const randomPlaceIndex = (generateRandomNumber(places.length) - 1); // subtract one to account for zero index
         const randomPlace = places[randomPlaceIndex];
-        places.splice(randomPlaceIndex, 1);
-        const points = calculatePoints(NUMBER_OF_RIDERS, randomPlace);
+        places.splice(randomPlaceIndex, 1); // start at randomPlaceIndex and remove one value
+        const points = calculatePoints(racers.length, randomPlace);
         
         const result = {
           event: {connect: {id: createdRace.eventId}},
@@ -61,5 +61,6 @@ export const createRaces = async (client) => {
         })
 
       })
+
   }
 }

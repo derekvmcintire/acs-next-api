@@ -1,6 +1,6 @@
 /*
 ACS Point System
-Top 10% of finishers receive points.
+Top 20% of finishers receive points.
 */
 export function calculatePoints(totalRacers, position) {
   if (position < 1 || position > totalRacers) {
@@ -9,19 +9,19 @@ export function calculatePoints(totalRacers, position) {
     );
   }
 
-  // Determine the number of racers in the top 10%
-  const topFinishers = Math.ceil(totalRacers * 0.1);
+  // Determine the number of racers in the top 20%
+  const topFinishers = Math.ceil(totalRacers * 0.2);
 
   // Check if the position is within the top 10%
   if (position > topFinishers) {
-    return 0; // Positions outside the top 10% receive no points
+    return 0; // Positions outside the top 20% receive no points
   }
 
-  // Define the highest points for the top finisher and the lowest for the last position in top 10%
+  // Define the highest points for the top finisher and the lowest for the last position in top 20%
   const maxPoints = 100;
   const minPoints = 10;
 
-  // Calculate the decrement dynamically to distribute points across top 10%
+  // Calculate the decrement dynamically to distribute points across top 20%
   const pointDecrement = (maxPoints - minPoints) / (topFinishers - 1);
 
   // Calculate points for the position
