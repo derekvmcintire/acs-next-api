@@ -29,15 +29,13 @@ export async function getRankings(params: IGetRankingsParams) {
 
     const year = params.year || dayjs().year();
     const resultsForYear = await resultsService.getResultsForYear(year);
-    if (resultsForYear && resultsForYear[0]) {
-      console.log("got results for year: ", true);
-    }
 
     if (!resultsForYear) {
       throw new Error(`No Results Found for Year: ${year}`);
     }
+
     const rankings = riderService.calculateRankings(resultsForYear);
-    
+
     if (params.limit) {
       rankings.length = params.limit;
     }

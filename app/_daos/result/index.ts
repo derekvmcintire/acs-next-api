@@ -18,14 +18,14 @@ export default class ResultDAO implements IResultDAO {
     try {
       const results = (await this.resultRepo.findMany({
         where: {
-          ...(riderId && { riderId }), // If riderId is provided, filter by it
-          // Optionally filter by year if provided
+          ...(riderId && { riderId }), // filter by riderId if provided
           ...(year && {
+            // filter by year if provided
             event: {
               Race: {
                 some: {
                   startDate: {
-                    contains: `${year}-`, // Filters for races starting in the given year
+                    contains: `${year}-`, // filter for year in startDate
                   },
                 },
               },
@@ -54,6 +54,7 @@ export default class ResultDAO implements IResultDAO {
     }
   }
 
+  // Public class method getEventResults
   async getEventResults(eventId: number) {
     try {
       const results = (await this.resultRepo.findMany({
@@ -81,7 +82,7 @@ export default class ResultDAO implements IResultDAO {
     }
   }
 
-  // Public CLass Method countResultsByEventId
+  // Public class Method countResultsByEventId
   async countResultsByEventId(eventId: number) {
     try {
       const resultCount = (await this.resultRepo.count({
@@ -96,6 +97,7 @@ export default class ResultDAO implements IResultDAO {
     }
   }
 
+  // Public class method createResult
   async createResult(resultData: CreateResultArgs) {
     const { eventId, riderId } = resultData;
     if (!eventId || !riderId) {
@@ -121,6 +123,7 @@ export default class ResultDAO implements IResultDAO {
     }
   }
 
+  // Public class method assignCategoryToResult
   async assignCategoryToResult(joinData: AssignCategoryToResultArgs) {
     try {
       const newJoin = await this.resultRepo.createJoin({

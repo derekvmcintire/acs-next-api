@@ -1,5 +1,4 @@
 import {
-  expectedBuildFromMockSingleRiderResultTwentyOne,
   mockExpectedResultYears,
   mockGetRiderResultsQueryResponse,
   mockRacerHistory,
@@ -15,11 +14,7 @@ import {
 import ResultDAO from "@/app/_daos/result";
 import databaseClient from "@/app/_database/get-client";
 import ResultService from "@/app/_services/result";
-import {
-  IResultYear,
-  IRacerHistory,
-  TransformedRace,
-} from "@/app/_types/result/types";
+import { IResultYear, IRacerHistory } from "@/app/_types/result/types";
 import { getYearFromDateString } from "@/app/_utility/helper-functions";
 
 jest.mock("@/app/_daos/result");
@@ -40,29 +35,6 @@ describe("ResultService", () => {
     jest.clearAllMocks();
   });
 
-  describe("buildResult", () => {
-    it("should build a result object with all fields", async () => {
-      resultDaoMock.countResultsByEventId.mockResolvedValue(mockCount);
-
-      const result = await resultService.buildResult(
-        mockSingleRiderResultRowTwentyOne,
-      );
-      expect(result).toEqual<TransformedRace>(
-        expectedBuildFromMockSingleRiderResultTwentyOne,
-      );
-    });
-
-    it("should throw an error if countResultsByEventId fails", async () => {
-      resultDaoMock.countResultsByEventId.mockRejectedValue(
-        new Error("Database error"),
-      );
-
-      await expect(
-        resultService.buildResult(mockSingleRiderResultRowTwentyOne),
-      ).rejects.toThrow("Database error");
-    });
-  });
-
   describe("mapResults", () => {
     it("should map results into year buckets", async () => {
       resultDaoMock.countResultsByEventId.mockResolvedValue(mockCount);
@@ -70,7 +42,7 @@ describe("ResultService", () => {
         .mockReturnValueOnce(mockYearTwentyTwo)
         .mockReturnValueOnce(mockYearTwentyOne);
 
-      const result = await resultService.mapResults([
+      const result = await resultService.processResults([
         mockSingleRiderResultRowTwentyTwo,
         mockSingleRiderResultRowTwentyOne,
       ]);
