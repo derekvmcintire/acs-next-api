@@ -32,6 +32,7 @@ export interface IResult extends ResultRow {
   resultType?: IPickTypeRow | null;
   noPlaceCodeType?: IPickTypeRow | null;
   rider?: TransformedRider;
+  points?: number | null;
 }
 
 export interface TransformedRace extends Omit<BaseResult, "riderId"> {

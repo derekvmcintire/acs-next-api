@@ -6,6 +6,8 @@ import {
   RiderRow,
 } from "../../_types/rider/types";
 import { ITeam, JoinRiderTeamRow } from "@/app/_types/team/types";
+import { calculateTotalPoints } from "@/app/_utility/process-rankings-for-year";
+import { IResult } from "@/app/_types/result/types";
 
 export default class RiderService {
   // Constructor
@@ -64,6 +66,11 @@ export default class RiderService {
     return riders.map((rider: RiderRow) => {
       return this.#buildRider(rider);
     });
+  }
+
+  calculateRankings(allResultsForYear: IResult[]) {
+    const sortedRankings = calculateTotalPoints(allResultsForYear);
+    return sortedRankings;
   }
 
   // Public Class Method getRiders

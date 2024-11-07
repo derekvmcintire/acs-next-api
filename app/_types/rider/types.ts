@@ -37,6 +37,11 @@ export interface IRider extends BaseRider {
   wins?: number;
 }
 
+// used for rankings
+export type JoinRiderTeam = {
+  team: { name: string };
+};
+
 export interface TransformedRider extends BaseRider {
   firstName: string;
   lastName: string;
@@ -45,6 +50,7 @@ export interface TransformedRider extends BaseRider {
   strava: string;
   insta: string;
   about: string;
+  JoinRiderTeam?: JoinRiderTeam[];
 }
 
 // Request Types
@@ -54,6 +60,11 @@ export interface IGetRidersParams {
   name?: string;
   ids?: number[];
   id?: number;
+}
+
+export interface IGetRankingsParams {
+  limit?: number;
+  year?: number;
 }
 
 export interface AssignRiderToTeamParams {

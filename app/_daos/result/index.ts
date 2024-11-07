@@ -1,5 +1,8 @@
 import { getDatabaseQueryErrorMessage } from "@/app/_constants/errors";
-import { IResultDAO } from "@/app/_types/result/database/IResultDAO";
+import {
+  IResultDAO,
+  getRiderResultsFilters,
+} from "@/app/_types/result/database/IResultDAO";
 import { IResultRepository } from "@/app/_types/result/database/IResultRepository";
 import {
   AssignCategoryToResultArgs,
@@ -11,13 +14,26 @@ export default class ResultDAO implements IResultDAO {
   constructor(private resultRepo: IResultRepository) {}
 
   // Public Class Method - getRiderResults
-  async getRiderResults(riderId: number) {
+  async getRiderResults({ year, riderId }: getRiderResultsFilters) {
     try {
       const results = (await this.resultRepo.findMany({
         where: {
-          riderId: riderId,
+          ...(riderId && { riderId }), // filter by riderId if provided
+          ...(year && {
+            // filter by year if provided
+            event: {
+              Race: {
+                some: {
+                  startDate: {
+                    contains: `${year}-`, // filter for year in startDate
+                  },
+                },
+              },
+            },
+          }),
         },
         include: {
+          rider: true,
           event: {
             include: {
               Race: {
@@ -31,12 +47,14 @@ export default class ResultDAO implements IResultDAO {
           noPlaceCodeType: true,
         },
       })) as IResult[];
+
       return results;
     } catch (error) {
       throw new Error(getDatabaseQueryErrorMessage(String(error)));
     }
   }
 
+  // Public class method getEventResults
   async getEventResults(eventId: number) {
     try {
       const results = (await this.resultRepo.findMany({
@@ -64,7 +82,7 @@ export default class ResultDAO implements IResultDAO {
     }
   }
 
-  // Public CLass Method countResultsByEventId
+  // Public class Method countResultsByEventId
   async countResultsByEventId(eventId: number) {
     try {
       const resultCount = (await this.resultRepo.count({
@@ -79,6 +97,7 @@ export default class ResultDAO implements IResultDAO {
     }
   }
 
+  // Public class method createResult
   async createResult(resultData: CreateResultArgs) {
     const { eventId, riderId } = resultData;
     if (!eventId || !riderId) {
@@ -104,8 +123,8 @@ export default class ResultDAO implements IResultDAO {
     }
   }
 
+  // Public class method assignCategoryToResult
   async assignCategoryToResult(joinData: AssignCategoryToResultArgs) {
-    console.log("****************args is************************: ", joinData);
     try {
       const newJoin = await this.resultRepo.createJoin({
         data: {
