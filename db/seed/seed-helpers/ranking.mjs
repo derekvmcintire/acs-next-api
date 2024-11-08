@@ -2,31 +2,41 @@
 ACS Point System
 Top 20% of finishers receive points.
 */
+export const MIN_FINISHERS = 5;
+export const MIN_POINTS = 20;
+export const MAX_POINTS = 200;
+export const MAX_FINISHERS = 1000;
+export const POINT_SCALING_RANGE = MAX_POINTS - MIN_POINTS;
+
 export function calculatePoints(totalRacers, position) {
-  if (position < 1 || position > totalRacers) {
-    throw new Error(
-      "Position must be between 1 and the total number of racers.",
-    );
+  if (totalRacers < MIN_FINISHERS) {
+    return 0; // No points if there are fewer than 5 racers
   }
+  if (position < 1 || position > totalRacers) {
+    throw new Error('Position must be between 1 and the total number of racers.');
+  }
+
+  // Calculate maxPoints using logarithmic scaling
+  const logTotalRacers = Math.log(totalRacers + 1); // Adding 1 to avoid log(0)
+  const logMaxRacers = Math.log(MAX_FINISHERS + 1); // Same as above
+  const logScaledPoints = MIN_POINTS + (logTotalRacers / logMaxRacers) * POINT_SCALING_RANGE;
+
+  // Define the minimum points awarded to the last position in the top 20%
+  const minPoints = 10;
 
   // Determine the number of racers in the top 20%
   const topFinishers = Math.ceil(totalRacers * 0.2);
 
-  // Check if the position is within the top 10%
   if (position > topFinishers) {
-    return 0; // Positions outside the top 20% receive no points
+    return 0; // No points outside the top 20%
   }
 
-  // Define the highest points for the top finisher and the lowest for the last position in top 20%
-  const maxPoints = 100;
-  const minPoints = 10;
+  // Calculate the decrement to distribute points across the top finishers
+  const pointDecrement = (logScaledPoints - minPoints) / (topFinishers - 1);
 
-  // Calculate the decrement dynamically to distribute points across top 20%
-  const pointDecrement = (maxPoints - minPoints) / (topFinishers - 1);
-
-  // Calculate points for the position
-  const points = maxPoints - (position - 1) * pointDecrement;
-  return Math.round(points); // Round to nearest whole number for simplicity
+  // Calculate points based on position
+  const points = logScaledPoints - (position - 1) * pointDecrement;
+  return Math.round(points);
 }
 
 /*
