@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getInternalServerErrorMessage } from "@/app/_constants/errors";
 import { createRace, getRace } from "@/app/_controllers/event";
 import { CreateRaceArgs, GetRaceFilters } from "@/app/_types/event/types";
+import { Race } from "@prisma/client";
 
 export async function POST(request: NextRequest) {
   const { name, raceTypeId, startDate, endDate, location }: CreateRaceArgs =
@@ -25,10 +26,21 @@ export async function POST(request: NextRequest) {
 }
 
 export async function GET(request: NextRequest) {
+  const orderBy = request.nextUrl.searchParams.get("orderby") || undefined;
+  const direction = request.nextUrl.searchParams.get("direction") || undefined;
+
   const filters: GetRaceFilters = {
     eventName: request.nextUrl.searchParams.get("name") || undefined,
     eventId: Number(request.nextUrl.searchParams.get("eventid")) || undefined,
     location: request.nextUrl.searchParams.get("location") || undefined,
+    limit: Number(request.nextUrl.searchParams.get("limit")) || undefined,
+    orderBy:
+      orderBy && direction
+        ? {
+            column: orderBy as keyof Race,
+            direction: direction as "asc" | "desc",
+          }
+        : undefined,
   };
 
   const from = request.nextUrl.searchParams.get("from") || undefined;

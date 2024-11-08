@@ -94,9 +94,16 @@ export default class EventDAO implements IEventDAO {
   async getRace(filters: GetRaceFilters) {
     try {
       const where = this.buildRaceWhereClause(filters);
+
+      const orderBy = filters.orderBy
+        ? { [filters.orderBy.column]: filters.orderBy.direction }
+        : undefined;
+
       return await this.raceRepo.findMany({
         where,
+        orderBy,
         include: { event: true, raceType: true },
+        take: filters.limit,
       });
     } catch (error) {
       throw new Error(getDatabaseQueryErrorMessage(String(error)));

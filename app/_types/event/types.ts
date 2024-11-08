@@ -1,3 +1,4 @@
+import { Race } from "@prisma/client";
 import { IPickTypeRow } from "../database/types";
 
 // Base Types
@@ -47,6 +48,8 @@ export type GetRaceFilters = {
   id?: number;
   location?: string;
   startDateRange?: DateRangeFilter;
+  limit?: number;
+  orderBy?: { column: keyof Race; direction: "asc" | "desc" };
 };
 
 export interface RaceWhereInput {

@@ -2,6 +2,7 @@ import { buildMockRace } from '../../generators/results/build-race-results.mjs';
 import { NUMBER_OF_RACES, NUMBER_OF_RESULTS, NUMBER_OF_RIDERS } from '../constants.mjs';
 import { generateRandomNumber } from '../../generators/helper-functions.mjs';
 import { calculatePoints } from './ranking.mjs';
+import { COUNTRIES, CITIES } from '../../constants/hometowns.mjs';
 
 const getRandomPagination = () => {
   const start = generateRandomNumber((NUMBER_OF_RIDERS - NUMBER_OF_RESULTS)) - 1;
@@ -25,6 +26,8 @@ export const createRaces = async (client) => {
        const createdEvent = await client.event.create({
         data: event
       })
+
+      const location = `${CITIES[generateRandomNumber(CITIES.length - 1)]}, ${COUNTRIES[generateRandomNumber(COUNTRIES.length - 1)]}`
       
       const createdRace = await client.race.create({
         data: {
@@ -32,7 +35,7 @@ export const createRaces = async (client) => {
           raceType: {connect: {id: firstRaceType.id}},
           startDate: race.startDate,
           endDate: null,
-          location: race.name
+          location: location,
         }
       })
 
