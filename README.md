@@ -1,8 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Amature Cycling Stats
+
+This is a demo website that is currently under development. ACS is a website that 
+
+## Features
+
+This API is built using
+
+- [NextJS](https://www.nextjs.org)
+- [Prisma](https://www.https://www.prisma.io/)
+- [PostgreSQL](https://www.postgresql.org)
+- [NodeJs](https://www.nodejs.org/en)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Jest](https://jestjs.io/) setup with [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
+- ESLint setup with [eslint-config-mantine](https://github.com/mantinedev/eslint-config-mantine)
+
+## ACS UI
+
+- [ACS Front End](https://github.com/derekvmcintire/acs-next)
+
 
 ## Getting Started
 
-First, run the development server:
+### Seeding the Database
+
+```bash
+npm run seed
+# or
+yarn seed
+# or
+pnpm seed
+# or
+bun seed
+```
+
+### Run the development server
 
 ```bash
 npm run dev
