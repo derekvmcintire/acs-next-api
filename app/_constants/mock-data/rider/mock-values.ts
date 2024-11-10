@@ -17,7 +17,7 @@ export const mockSocials = {
   insta: "es",
 };
 export const mockCategory = {
-  discipline: "road",
+  disicpline: "road",
   category: 1,
 };
 export const mockHometown = {

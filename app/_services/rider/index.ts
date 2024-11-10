@@ -49,7 +49,7 @@ export default class RiderService {
         strava: rider.strava || "",
         insta: rider.insta || "",
       },
-      categories: [{ discipline: "road", category: 1 }],
+      categories: [{ disicpline: "road", category: 1 }],
       hometown: {
         country: rider.country,
         city: rider.hometown,

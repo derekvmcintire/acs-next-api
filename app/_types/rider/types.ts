@@ -12,7 +12,7 @@ export interface SubRiderSocials {
 }
 
 export interface SubRiderCategory {
-  discipline: string;
+  disicpline: string;
   category: number;
 }
 
@@ -86,24 +86,29 @@ export interface RiderRow {
   JoinRiderTeam?: JoinRiderTeamRow[] | null;
 }
 
+type InsensitiveStringSearch = { contains: string; mode?: "insensitive" }
+
 // Query Building Types
 export type RiderWhereInput = {
   id?: { in?: number[] };
   JoinRiderTeam?: {
     some: {
       team: {
-        name: string;
+        name: {
+          contains: string;
+          mode?: "insensitive" 
+        }
       };
     };
   };
   country?: string;
   OR?: Array<{
-    firstName?: { contains: string; mode?: "insensitive" };
-    lastName?: { contains: string; mode?: "insensitive" };
+    firstName?: InsensitiveStringSearch;
+    lastName?: InsensitiveStringSearch;
   }>;
   AND?: Array<{
-    firstName?: { contains: string; mode?: "insensitive" };
-    lastName?: { contains: string; mode?: "insensitive" };
+    firstName?: InsensitiveStringSearch;
+    lastName?: InsensitiveStringSearch;
     id?: { in?: number[] };
     JoinRiderTeam?: {
       some: {
@@ -114,8 +119,8 @@ export type RiderWhereInput = {
     };
     country?: string;
     OR?: Array<{
-      firstName?: { contains: string; mode?: "insensitive" };
-      lastName?: { contains: string; mode?: "insensitive" };
+      firstName?: InsensitiveStringSearch;
+      lastName?: InsensitiveStringSearch;
     }>;
   }>;
 };

@@ -11,6 +11,7 @@ export async function GET(request: NextRequest) {
     name: request.nextUrl.searchParams.get("name") || undefined,
     ids: ids ? ids.split(",").map(Number) : undefined,
   };
+
   try {
     const riders = await getMultipleRiders(params);
     return NextResponse.json(riders, { status: 200 });
