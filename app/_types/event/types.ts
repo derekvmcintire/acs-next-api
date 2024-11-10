@@ -52,13 +52,15 @@ export type GetRaceFilters = {
   orderBy?: { column: keyof Race; direction: "asc" | "desc" };
 };
 
+type InsensitiveStringSearch = { contains: string; mode?: "insensitive" }
+
 export interface RaceWhereInput {
   event?: {
-    AND?: Array<{ name: { contains: string; mode?: "insensitive" } }>;
+    AND?: Array<{ name: InsensitiveStringSearch }>;
   };
   eventId?: number;
   id?: number;
-  location?: { contains: string; mode?: "insensitive" };
+  location?: InsensitiveStringSearch;
   startDate?: { gte: string; lte: string };
 }
 
