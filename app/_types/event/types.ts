@@ -68,7 +68,9 @@ export type GetRaceArgs = {
   name: string;
 };
 
-export type GroupByOption = "month" | "quarter" | "year";
+export const GROUP_BY_OPTIONS = ["month", "quarter", "year"] as const;
+
+export type GroupByOption = (typeof GROUP_BY_OPTIONS)[number];
 
 export type GetRaceTotalsFilters = {
   startDateRange?: DateRangeFilter;
