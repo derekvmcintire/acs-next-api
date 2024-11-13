@@ -3,13 +3,25 @@ import { GetRaceTotalsFilters, GroupByOption } from "@/app/_types/event/types";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
-  function isValidGroupBy(value: string | null): value is GroupByOption {
-    return value === "month" || value === "quarter" || value === "year";
+  const isValidGroupBy = (value?: string): value is GroupByOption =>
+    value === "month" || value === "quarter" || value === "year";
+
+  const groupByParam = request.nextUrl.searchParams.get("groupby") || undefined;
+
+  const groupByParamIsValid = isValidGroupBy(groupByParam);
+
+  if (groupByParam && !groupByParamIsValid) {
+    return NextResponse.json(
+      {
+        error:
+          "Invalid GroupBy Param. GroupBy must only be 'month', 'quarter' or 'year'.",
+      },
+      { status: 400 },
+    );
   }
-  const groupByParam = request.nextUrl.searchParams.get("groupby");
 
   const filters: GetRaceTotalsFilters = {
-    groupBy: isValidGroupBy(groupByParam) ? groupByParam : undefined,
+    groupBy: groupByParamIsValid ? groupByParam : undefined,
   };
 
   const from = request.nextUrl.searchParams.get("from") || undefined;
