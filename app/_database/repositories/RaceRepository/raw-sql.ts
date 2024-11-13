@@ -16,7 +16,7 @@ export const getRaceTotalsGroupedByMonth = async ({
 }: GetGroupedRaceTotalsParams): Promise<RaceTotals[]> =>
   await prisma.$queryRaw`
   SELECT
-      DATE_TRUNC('month', TO_DATE("Race"."startDate", 'YYYY-MM-DD')) AS date,
+      DATE_TRUNC('month', TO_DATE("Race"."startDate", 'YYYY-MM-DD')) AS "startDate",
       COUNT(DISTINCT "Race".id)::INTEGER AS "totalRaces",
       COUNT("Result".id)::INTEGER AS "totalRiders"
   FROM "Race"
@@ -33,7 +33,7 @@ export const getRaceTotalsGroupedByQuarter = async ({
 }: GetGroupedRaceTotalsParams): Promise<RaceTotals[]> =>
   await prisma.$queryRaw`
   SELECT
-      DATE_TRUNC('quarter', TO_DATE("Race"."startDate", 'YYYY-MM-DD')) AS date,
+      DATE_TRUNC('quarter', TO_DATE("Race"."startDate", 'YYYY-MM-DD')) AS "startDate",
       COUNT(DISTINCT "Race".id)::INTEGER AS "totalRaces",
       COUNT("Result".id)::INTEGER AS "totalRiders"
   FROM "Race"
@@ -50,7 +50,7 @@ export const getRaceTotalsGroupedByYear = async ({
 }: GetGroupedRaceTotalsParams): Promise<RaceTotals[]> =>
   await prisma.$queryRaw`
   SELECT
-      DATE_TRUNC('year', TO_DATE("Race"."startDate", 'YYYY-MM-DD')) AS date,
+      DATE_TRUNC('year', TO_DATE("Race"."startDate", 'YYYY-MM-DD')) AS "startDate",
       COUNT(DISTINCT "Race".id)::INTEGER AS "totalRaces",
       COUNT("Result".id)::INTEGER AS "totalRiders"
   FROM "Race"
