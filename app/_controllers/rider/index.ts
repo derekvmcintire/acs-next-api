@@ -42,7 +42,7 @@ export async function getRankings(params: IGetRankingsParams) {
 
     return rankings;
   } catch (error) {
-    throw new Error(String(error));
+    throw new Error(`${(error as Error).message}`);
   }
 }
 
@@ -55,7 +55,7 @@ export async function getMultipleRiders(
 
     return riders;
   } catch (error) {
-    throw new Error(String(error));
+    throw new Error(`${(error as Error).message}`);
   }
 }
 
@@ -66,7 +66,7 @@ export async function getRiderById(id: number): Promise<IRider | null> {
 
     return rider;
   } catch (error) {
-    throw new Error(String(error));
+    throw new Error(`${(error as Error).message}`);
   }
 }
 
@@ -77,7 +77,7 @@ export async function createRider(riderData: RiderRow) {
 
     return rider;
   } catch (error) {
-    throw new Error(String(error));
+    throw new Error(`${(error as Error).message}`);
   }
 }
 
@@ -88,6 +88,6 @@ export async function assignRiderToTeam(data: AssignRiderToTeamParams) {
 
     return row;
   } catch (error) {
-    throw new Error(String(error));
+    throw new Error(`${(error as Error).message}`);
   }
 }

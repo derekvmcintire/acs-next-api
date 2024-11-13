@@ -30,7 +30,7 @@ export async function getResultsByRiderId(
     );
     return riderHistory;
   } catch (error) {
-    throw new Error(String(error));
+    throw new Error(`${(error as Error).message}`);
   }
 }
 
@@ -51,7 +51,7 @@ export async function getResultsByRaceId(
     const results = await resultService.getResultsByEventId(Number(event.id));
     return results;
   } catch (error) {
-    throw new Error(String(error));
+    throw new Error(`${(error as Error).message}`);
   }
 }
 
@@ -86,6 +86,6 @@ export async function createResult(
 
     return result;
   } catch (error) {
-    throw new Error(String(error));
+    throw new Error(`${(error as Error).message}`);
   }
 }

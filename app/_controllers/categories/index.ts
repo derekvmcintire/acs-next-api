@@ -14,6 +14,6 @@ export async function getCategories(): Promise<CategoryRow[]> {
     const categories = await categoryService.getCategories();
     return categories;
   } catch (error) {
-    throw new Error(String(error));
+    throw new Error(`${(error as Error).message}`);
   }
 }

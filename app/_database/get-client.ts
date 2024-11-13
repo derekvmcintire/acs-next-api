@@ -2,7 +2,11 @@ import { PrismaDatabaseClient } from "@/app/_database/PrismaDatabaseClient";
 import { PrismaClient } from "@prisma/client";
 
 // Ensure that the PrismaClient instance is available globally in development
-const prismaClient = globalThis.prisma || new PrismaClient();
+const prismaClient =
+  globalThis.prisma ||
+  new PrismaClient({
+    log: ["query", "info", "warn", "error"],
+  });
 
 if (process.env.NODE_ENV !== "production") {
   globalThis.prisma = prismaClient;

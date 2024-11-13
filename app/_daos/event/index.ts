@@ -6,6 +6,7 @@ import {
   CreateEventArgs,
   CreateRaceArgs,
   GetRaceFilters,
+  GetRaceTotalsFilters,
   IRace,
   RaceWhereInput,
 } from "@/app/_types/event/types";
@@ -27,7 +28,9 @@ export default class EventDAO implements IEventDAO {
 
       return newEvent;
     } catch (error) {
-      throw new Error(getDatabaseQueryErrorMessage(String(error)));
+      throw new Error(
+        getDatabaseQueryErrorMessage(`${(error as Error).message}`),
+      );
     }
   }
 
@@ -38,7 +41,9 @@ export default class EventDAO implements IEventDAO {
         include: { event: true, raceType: true },
       });
     } catch (error) {
-      throw new Error(getDatabaseQueryErrorMessage(String(error)));
+      throw new Error(
+        getDatabaseQueryErrorMessage(`${(error as Error).message}`),
+      );
     }
   }
 
@@ -64,7 +69,9 @@ export default class EventDAO implements IEventDAO {
 
       return this.getRaceById(newRace.id);
     } catch (error) {
-      throw new Error(getDatabaseQueryErrorMessage(String(error)));
+      throw new Error(
+        getDatabaseQueryErrorMessage(`${(error as Error).message}`),
+      );
     }
   }
 
@@ -106,7 +113,15 @@ export default class EventDAO implements IEventDAO {
         take: filters.limit,
       });
     } catch (error) {
-      throw new Error(getDatabaseQueryErrorMessage(String(error)));
+      throw new Error(
+        getDatabaseQueryErrorMessage(`${(error as Error).message}`),
+      );
     }
+  }
+
+  async getRaceTotalsGrouped(filters: GetRaceTotalsFilters) {
+    const totals = await this.raceRepo.getRaceTotalsGroupedRaw(filters);
+
+    return totals;
   }
 }

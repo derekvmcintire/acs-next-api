@@ -47,10 +47,14 @@ export default class RiderDAO implements IRiderDAO {
     id: (id) => ({ id: { in: [id] } }),
     teamName: (teamName) => ({
       JoinRiderTeam: {
-        some: { team: { name: {
-          contains: teamName,
-          mode: "insensitive"
-        } } },
+        some: {
+          team: {
+            name: {
+              contains: teamName,
+              mode: "insensitive",
+            },
+          },
+        },
       },
     }),
     country: (country) => ({ country: country }),
