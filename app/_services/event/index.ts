@@ -33,7 +33,7 @@ export default class EventService {
 
       return race;
     } catch (error) {
-      throw new Error(String(error));
+      throw new Error((error as Error).message);
     }
   }
 
@@ -43,7 +43,7 @@ export default class EventService {
 
       return totals;
     } catch (error) {
-      throw new Error(String(error));
+      throw new Error((error as Error).message);
     }
   }
 }

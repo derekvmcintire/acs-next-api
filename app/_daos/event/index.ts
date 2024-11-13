@@ -28,9 +28,7 @@ export default class EventDAO implements IEventDAO {
 
       return newEvent;
     } catch (error) {
-      throw new Error(
-        getDatabaseQueryErrorMessage(`${(error as Error).message}`),
-      );
+      throw new Error(getDatabaseQueryErrorMessage((error as Error).message));
     }
   }
 
@@ -41,9 +39,7 @@ export default class EventDAO implements IEventDAO {
         include: { event: true, raceType: true },
       });
     } catch (error) {
-      throw new Error(
-        getDatabaseQueryErrorMessage(`${(error as Error).message}`),
-      );
+      throw new Error(getDatabaseQueryErrorMessage((error as Error).message));
     }
   }
 
@@ -69,9 +65,7 @@ export default class EventDAO implements IEventDAO {
 
       return this.getRaceById(newRace.id);
     } catch (error) {
-      throw new Error(
-        getDatabaseQueryErrorMessage(`${(error as Error).message}`),
-      );
+      throw new Error(getDatabaseQueryErrorMessage((error as Error).message));
     }
   }
 
@@ -113,9 +107,7 @@ export default class EventDAO implements IEventDAO {
         take: filters.limit,
       });
     } catch (error) {
-      throw new Error(
-        getDatabaseQueryErrorMessage(`${(error as Error).message}`),
-      );
+      throw new Error(getDatabaseQueryErrorMessage((error as Error).message));
     }
   }
 

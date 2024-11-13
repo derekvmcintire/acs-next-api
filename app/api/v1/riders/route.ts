@@ -16,7 +16,10 @@ export async function GET(request: NextRequest) {
     const riders = await getMultipleRiders(params);
     return NextResponse.json(riders, { status: 200 });
   } catch (error) {
-    return NextResponse.json({ error: String(error) }, { status: 500 });
+    return NextResponse.json(
+      { error: (error as Error).message },
+      { status: 500 },
+    );
   }
 }
 
@@ -27,6 +30,9 @@ export async function POST(request: NextRequest) {
     const rider = await createRider(params);
     return NextResponse.json(rider, { status: 200 });
   } catch (error) {
-    return NextResponse.json({ error: String(error) }, { status: 500 });
+    return NextResponse.json(
+      { error: (error as Error).message },
+      { status: 500 },
+    );
   }
 }

@@ -19,7 +19,7 @@ export async function createRace(raceData: CreateRaceArgs) {
 
     return race;
   } catch (error) {
-    throw new Error(`${(error as Error).message}`);
+    throw new Error((error as Error).message);
   }
 }
 
@@ -30,7 +30,7 @@ export async function getRace(filters: GetRaceFilters) {
 
     return race;
   } catch (error) {
-    throw new Error(`${(error as Error).message}`);
+    throw new Error((error as Error).message);
   }
 }
 
@@ -41,6 +41,6 @@ export async function getRaceTotals(filters: GetRaceTotalsFilters) {
 
     return totals;
   } catch (error) {
-    throw new Error(`${(error as Error).message}`);
+    throw new Error((error as Error).message);
   }
 }
