@@ -1,5 +1,9 @@
 import EventDAO from "@/app/_daos/event";
-import { CreateRaceArgs, GetRaceFilters } from "@/app/_types/event/types";
+import {
+  CreateRaceArgs,
+  GetRaceFilters,
+  GetRaceTotalsFilters,
+} from "@/app/_types/event/types";
 import dayjs from "dayjs";
 
 export default class EventService {
@@ -26,9 +30,20 @@ export default class EventService {
   async getRace(filters: GetRaceFilters) {
     try {
       const race = await this.eventDao.getRace(filters);
+
       return race;
     } catch (error) {
-      throw new Error(String(error));
+      throw new Error((error as Error).message);
+    }
+  }
+
+  async getRaceTotals(filters: GetRaceTotalsFilters) {
+    try {
+      const totals = await this.eventDao.getRaceTotalsGrouped(filters);
+
+      return totals;
+    } catch (error) {
+      throw new Error((error as Error).message);
     }
   }
 }

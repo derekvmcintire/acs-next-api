@@ -25,7 +25,9 @@ describe("GET /api/rider/", () => {
 
   it("should return 500 on internal server error", async () => {
     const mockErrorMessage = "Error message";
-    jest.mocked(getMultipleRiders).mockRejectedValueOnce(mockErrorMessage);
+    jest
+      .mocked(getMultipleRiders)
+      .mockRejectedValueOnce(new Error(mockErrorMessage));
 
     const request = new NextRequest(mockGetAllRidersURL);
     const apiResponse = await GET(request);

@@ -2,9 +2,9 @@ import { Prisma, PrismaClient } from "@prisma/client";
 import { IRiderRepository } from "../_types/rider/database/IRiderRepository";
 import { IResultRepository } from "../_types/result/database/IResultRepository";
 import { IEventRepository } from "../_types/event/database/IEventRepository";
-import { IRaceRepository } from "../_types/event/database/IRaceRepository";
 import { IDatabaseClient } from "../_types/database/types";
 import { ICategoryRepository } from "../_types/category/database/ICategoryRepository";
+import { RaceRepository } from "./repositories/RaceRepository";
 
 export class PrismaDatabaseClient implements IDatabaseClient {
   constructor(private prisma: PrismaClient) {}
@@ -39,14 +39,8 @@ export class PrismaDatabaseClient implements IDatabaseClient {
     };
   }
 
-  get race(): IRaceRepository {
-    return {
-      create: (args: Prisma.RaceCreateArgs) => this.prisma.race.create(args),
-      findMany: (args: Prisma.RaceFindManyArgs) =>
-        this.prisma.race.findMany(args),
-      findUnique: (args: Prisma.RaceFindUniqueArgs) =>
-        this.prisma.race.findUnique(args),
-    };
+  get race() {
+    return RaceRepository(this.prisma);
   }
 
   get category(): ICategoryRepository {

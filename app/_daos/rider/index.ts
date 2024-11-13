@@ -47,10 +47,14 @@ export default class RiderDAO implements IRiderDAO {
     id: (id) => ({ id: { in: [id] } }),
     teamName: (teamName) => ({
       JoinRiderTeam: {
-        some: { team: { name: {
-          contains: teamName,
-          mode: "insensitive"
-        } } },
+        some: {
+          team: {
+            name: {
+              contains: teamName,
+              mode: "insensitive",
+            },
+          },
+        },
       },
     }),
     country: (country) => ({ country: country }),
@@ -97,7 +101,9 @@ export default class RiderDAO implements IRiderDAO {
       })) as RiderRow[];
       return riders;
     } catch (error) {
-      throw new Error(getDatabaseQueryErrorMessage(String(error)));
+      throw new Error(
+        getDatabaseQueryErrorMessage(`${(error as Error).message}`),
+      );
     }
   }
 
@@ -124,7 +130,9 @@ export default class RiderDAO implements IRiderDAO {
       })) as RiderRow;
       return rider;
     } catch (error) {
-      throw new Error(getDatabaseQueryErrorMessage(String(error)));
+      throw new Error(
+        getDatabaseQueryErrorMessage(`${(error as Error).message}`),
+      );
     }
   }
 
@@ -147,7 +155,9 @@ export default class RiderDAO implements IRiderDAO {
 
       return newRider;
     } catch (error) {
-      throw new Error(getDatabaseQueryErrorMessage(String(error)));
+      throw new Error(
+        getDatabaseQueryErrorMessage(`${(error as Error).message}`),
+      );
     }
   }
 
@@ -162,7 +172,9 @@ export default class RiderDAO implements IRiderDAO {
       });
       return newJoin;
     } catch (error) {
-      throw new Error(getDatabaseQueryErrorMessage(String(error)));
+      throw new Error(
+        getDatabaseQueryErrorMessage(`${(error as Error).message}`),
+      );
     }
   }
 }

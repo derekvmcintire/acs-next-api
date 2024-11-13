@@ -9,7 +9,7 @@ export default class CategoryService {
       const rows: CategoryRow[] = await this.categoryDao.getCategories();
       return rows;
     } catch (error) {
-      throw new Error(String(error));
+      throw new Error((error as Error).message);
     }
   }
 }

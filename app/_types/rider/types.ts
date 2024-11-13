@@ -86,7 +86,7 @@ export interface RiderRow {
   JoinRiderTeam?: JoinRiderTeamRow[] | null;
 }
 
-type InsensitiveStringSearch = { contains: string; mode?: "insensitive" }
+type InsensitiveStringSearch = { contains: string; mode?: "insensitive" };
 
 // Query Building Types
 export type RiderWhereInput = {
@@ -96,8 +96,8 @@ export type RiderWhereInput = {
       team: {
         name: {
           contains: string;
-          mode?: "insensitive" 
-        }
+          mode?: "insensitive";
+        };
       };
     };
   };

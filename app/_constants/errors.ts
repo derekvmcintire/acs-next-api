@@ -1,7 +1,7 @@
 export const getInternalServerErrorMessage = (error: string) =>
   `Internal Server ${error}`;
 export const getDatabaseQueryErrorMessage = (error: string) =>
-  `Database query ${error}`;
+  `Database query failed: ${error}`;
 export const getRiderNotFoundErrorMessage = (id: string) =>
   `Rider with id ${id} not found`;
 export const getResultsNotFoundErrorMessage = (riderId: string) =>

@@ -22,6 +22,9 @@ export async function GET(_request: NextRequest, context: GetRacePathParams) {
     }
     return NextResponse.json(results, { status: 200 });
   } catch (error) {
-    return NextResponse.json({ error: String(error) }, { status: 500 });
+    return NextResponse.json(
+      { error: (error as Error).message },
+      { status: 500 },
+    );
   }
 }

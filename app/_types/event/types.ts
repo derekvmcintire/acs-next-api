@@ -52,7 +52,7 @@ export type GetRaceFilters = {
   orderBy?: { column: keyof Race; direction: "asc" | "desc" };
 };
 
-type InsensitiveStringSearch = { contains: string; mode?: "insensitive" }
+type InsensitiveStringSearch = { contains: string; mode?: "insensitive" };
 
 export interface RaceWhereInput {
   event?: {
@@ -66,4 +66,17 @@ export interface RaceWhereInput {
 
 export type GetRaceArgs = {
   name: string;
+};
+
+export type GroupByOption = "month" | "quarter" | "year";
+
+export type GetRaceTotalsFilters = {
+  startDateRange?: DateRangeFilter;
+  groupBy?: GroupByOption;
+};
+
+export type RaceTotals = {
+  startDate?: Date;
+  totalRaces: number | null;
+  totalRiders: number | null;
 };

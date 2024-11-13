@@ -79,7 +79,7 @@ export default class RiderService {
       const riders: RiderRow[] = await this.riderDao.getRiders(params);
       return this.#mapRiders(riders);
     } catch (error) {
-      throw new Error(String(error));
+      throw new Error((error as Error).message);
     }
   }
 
@@ -91,7 +91,7 @@ export default class RiderService {
       }
       return this.#buildRider(rider);
     } catch (error) {
-      throw new Error(String(error));
+      throw new Error((error as Error).message);
     }
   }
 
@@ -101,7 +101,7 @@ export default class RiderService {
 
       return rider;
     } catch (error) {
-      throw new Error(String(error));
+      throw new Error((error as Error).message);
     }
   }
 
@@ -111,7 +111,7 @@ export default class RiderService {
 
       return row;
     } catch (error) {
-      throw new Error(String(error));
+      throw new Error((error as Error).message);
     }
   }
 }

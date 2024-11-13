@@ -55,7 +55,7 @@ export default class ResultService {
 
       return rankings;
     } catch (error) {
-      throw new Error(String(error));
+      throw new Error((error as Error).message);
     }
   }
 
@@ -77,7 +77,7 @@ export default class ResultService {
         results,
       };
     } catch (error) {
-      throw new Error(String(error));
+      throw new Error((error as Error).message);
     }
   }
 
@@ -89,7 +89,7 @@ export default class ResultService {
 
       return results;
     } catch (error) {
-      throw new Error(String(error));
+      throw new Error((error as Error).message);
     }
   }
 
@@ -99,7 +99,7 @@ export default class ResultService {
 
       return race;
     } catch (error) {
-      throw new Error(String(error));
+      throw new Error((error as Error).message);
     }
   }
 
@@ -109,7 +109,7 @@ export default class ResultService {
 
       return result;
     } catch (error) {
-      throw new Error(String(error));
+      throw new Error((error as Error).message);
     }
   }
 }

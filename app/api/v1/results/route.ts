@@ -19,7 +19,10 @@ export async function GET(request: NextRequest) {
     }
     return NextResponse.json(results, { status: 200 });
   } catch (error) {
-    return NextResponse.json({ error: String(error) }, { status: 500 });
+    return NextResponse.json(
+      { error: (error as Error).message },
+      { status: 500 },
+    );
   }
 }
 
@@ -51,6 +54,9 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(row, { status: 200 });
   } catch (error) {
-    return NextResponse.json({ error: String(error) }, { status: 500 });
+    return NextResponse.json(
+      { error: (error as Error).message },
+      { status: 500 },
+    );
   }
 }

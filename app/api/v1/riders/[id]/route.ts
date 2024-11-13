@@ -29,7 +29,7 @@ export async function GET(
     return NextResponse.json(rider, { status: 200 });
   } catch (error) {
     return NextResponse.json(
-      { error: getInternalServerErrorMessage(String(error)) },
+      { error: getInternalServerErrorMessage(`${(error as Error).message}`) },
       { status: 500 },
     );
   }

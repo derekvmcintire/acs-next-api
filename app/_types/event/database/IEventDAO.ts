@@ -2,8 +2,10 @@ import {
   BaseEvent,
   BaseRace,
   GetRaceFilters,
+  GetRaceTotalsFilters,
   IEvent,
   IRace,
+  RaceTotals,
 } from "@/app/_types/event/types";
 
 export interface IEventDAO {
@@ -11,4 +13,5 @@ export interface IEventDAO {
   createEvent(eventData: BaseEvent): Promise<IEvent>;
   getRace(filters: GetRaceFilters): Promise<IRace[]>;
   getRaceById(id: number): Promise<IRace | null>;
+  getRaceTotalsGrouped(filters: GetRaceTotalsFilters): Promise<RaceTotals[]>;
 }
