@@ -16,9 +16,9 @@ export const getRaceTotalsGroupedByMonth = async ({
 }: GetGroupedRaceTotalsParams): Promise<RaceTotals[]> =>
   await prisma.$queryRaw`
   SELECT
-      DATE_TRUNC('month', TO_DATE("Race"."startDate", 'YYYY-MM-DD')) AS date,
-      COUNT(DISTINCT "Race".id)::INTEGER AS totalRaces,
-      COUNT("Result".id)::INTEGER AS totalRiders
+      DATE_TRUNC('month', TO_DATE("Race"."startDate", 'YYYY-MM-DD')) AS "startDate",
+      COUNT(DISTINCT "Race".id)::INTEGER AS "totalRaces",
+      COUNT("Result".id)::INTEGER AS "totalRiders"
   FROM "Race"
   LEFT JOIN "Result" ON "Race"."eventId" = "Result"."eventId"
   WHERE TO_DATE("Race"."startDate", 'YYYY-MM-DD') BETWEEN TO_DATE(${dateRange.gte}, 'YYYY-MM-DD') AND TO_DATE(${dateRange.lte}, 'YYYY-MM-DD')
@@ -33,9 +33,9 @@ export const getRaceTotalsGroupedByQuarter = async ({
 }: GetGroupedRaceTotalsParams): Promise<RaceTotals[]> =>
   await prisma.$queryRaw`
   SELECT
-      DATE_TRUNC('quarter', TO_DATE("Race"."startDate", 'YYYY-MM-DD')) AS date,
-      COUNT(DISTINCT "Race".id)::INTEGER AS totalRaces,
-      COUNT("Result".id)::INTEGER AS totalRiders
+      DATE_TRUNC('quarter', TO_DATE("Race"."startDate", 'YYYY-MM-DD')) AS "startDate",
+      COUNT(DISTINCT "Race".id)::INTEGER AS "totalRaces",
+      COUNT("Result".id)::INTEGER AS "totalRiders"
   FROM "Race"
   LEFT JOIN "Result" ON "Race"."eventId" = "Result"."eventId"
   WHERE TO_DATE("Race"."startDate", 'YYYY-MM-DD') BETWEEN TO_DATE(${dateRange.gte}, 'YYYY-MM-DD') AND TO_DATE(${dateRange.lte}, 'YYYY-MM-DD')
@@ -50,9 +50,9 @@ export const getRaceTotalsGroupedByYear = async ({
 }: GetGroupedRaceTotalsParams): Promise<RaceTotals[]> =>
   await prisma.$queryRaw`
   SELECT
-      DATE_TRUNC('year', TO_DATE("Race"."startDate", 'YYYY-MM-DD')) AS date,
-      COUNT(DISTINCT "Race".id)::INTEGER AS totalRaces,
-      COUNT("Result".id)::INTEGER AS totalRiders
+      DATE_TRUNC('year', TO_DATE("Race"."startDate", 'YYYY-MM-DD')) AS "startDate",
+      COUNT(DISTINCT "Race".id)::INTEGER AS "totalRaces",
+      COUNT("Result".id)::INTEGER AS "totalRiders"
   FROM "Race"
   LEFT JOIN "Result" ON "Race"."eventId" = "Result"."eventId"
   WHERE TO_DATE("Race"."startDate", 'YYYY-MM-DD') BETWEEN TO_DATE(${dateRange.gte}, 'YYYY-MM-DD') AND TO_DATE(${dateRange.lte}, 'YYYY-MM-DD')
