@@ -56,7 +56,9 @@ describe("GET /api/result/", () => {
 
   it("should return 500 on internal server error", async () => {
     const mockErrorMessage = "Error message";
-    jest.mocked(getResultsByRiderId).mockRejectedValueOnce(mockErrorMessage);
+    jest
+      .mocked(getResultsByRiderId)
+      .mockRejectedValueOnce(new Error(mockErrorMessage));
 
     const request = new NextRequest(mockGetRiderResultsURL);
     const apiResponse = await GET(request);
@@ -111,7 +113,7 @@ describe("POST /api/result/", () => {
     expect(response.status).toBe(500);
     const data = await response.json();
     expect(data).toEqual({
-      error: `Error: ${mockErrorMessage}`,
+      error: `${mockErrorMessage}`,
     });
   });
 

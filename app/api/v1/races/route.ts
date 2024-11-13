@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(row, { status: 200 });
   } catch (error) {
     return NextResponse.json(
-      { error: getInternalServerErrorMessage((error as Error).message) },
+      { error: getInternalServerErrorMessage(`${(error as Error).message}`) },
       { status: 500 },
     );
   }
@@ -56,7 +56,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(row, { status: 200 });
   } catch (error) {
     return NextResponse.json(
-      { error: getInternalServerErrorMessage((error as Error).message) },
+      { error: getInternalServerErrorMessage(`${(error as Error).message}`) },
       { status: 500 },
     );
   }

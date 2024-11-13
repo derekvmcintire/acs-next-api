@@ -50,7 +50,9 @@ export default class ResultDAO implements IResultDAO {
 
       return results;
     } catch (error) {
-      throw new Error(getDatabaseQueryErrorMessage((error as Error).message));
+      throw new Error(
+        getDatabaseQueryErrorMessage(`${(error as Error).message}`),
+      );
     }
   }
 
@@ -78,7 +80,9 @@ export default class ResultDAO implements IResultDAO {
       })) as IResult[];
       return results;
     } catch (error) {
-      throw new Error(getDatabaseQueryErrorMessage((error as Error).message));
+      throw new Error(
+        getDatabaseQueryErrorMessage(`${(error as Error).message}`),
+      );
     }
   }
 
@@ -93,7 +97,9 @@ export default class ResultDAO implements IResultDAO {
 
       return resultCount;
     } catch (error) {
-      throw new Error(getDatabaseQueryErrorMessage((error as Error).message));
+      throw new Error(
+        getDatabaseQueryErrorMessage(`${(error as Error).message}`),
+      );
     }
   }
 
@@ -119,7 +125,9 @@ export default class ResultDAO implements IResultDAO {
       });
       return result;
     } catch (error) {
-      throw new Error(getDatabaseQueryErrorMessage((error as Error).message));
+      throw new Error(
+        getDatabaseQueryErrorMessage(`${(error as Error).message}`),
+      );
     }
   }
 
@@ -134,7 +142,9 @@ export default class ResultDAO implements IResultDAO {
       });
       return newJoin;
     } catch (error) {
-      throw new Error(getDatabaseQueryErrorMessage((error as Error).message));
+      throw new Error(
+        getDatabaseQueryErrorMessage(`${(error as Error).message}`),
+      );
     }
   }
 }

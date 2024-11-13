@@ -43,8 +43,8 @@ describe("POST /races", () => {
     const request = {
       json: jest.fn().mockResolvedValue(mockCreateRaceArgs),
     } as unknown as NextRequest;
-    const mockError = new Error("Database connection failed");
-    mockCreateRace.mockRejectedValue(mockError);
+    const mockErrorMessage = "Error message";
+    mockCreateRace.mockRejectedValueOnce(new Error(mockErrorMessage));
     mockGetInternalServerErrorMessage.mockReturnValue("Internal server error");
 
     const response = await POST(request);
@@ -52,7 +52,7 @@ describe("POST /races", () => {
     expect(response.status).toBe(500);
     expect(await response.json()).toEqual({ error: "Internal server error" });
     expect(getInternalServerErrorMessage).toHaveBeenCalledWith(
-      String(mockError),
+      mockErrorMessage,
     );
   });
 });
