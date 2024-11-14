@@ -1,13 +1,18 @@
 import EventDAO from "@/app/_daos/event";
+import ResultDAO from "@/app/_daos/result";
 import {
   CreateRaceArgs,
   GetRaceFilters,
   GetRaceTotalsFilters,
 } from "@/app/_types/event/types";
+import { GetRaceResultsFilters } from "@/app/_types/result/types";
 import dayjs from "dayjs";
 
 export default class EventService {
-  constructor(private eventDao: EventDAO) {}
+  constructor(
+    private eventDao: EventDAO,
+    private resultDao: ResultDAO,
+  ) {}
 
   async createRace(raceData: CreateRaceArgs) {
     const formattedStartDate = dayjs(raceData.startDate, "MM-DD-YYYY").format(
@@ -42,6 +47,27 @@ export default class EventService {
       const totals = await this.eventDao.getRaceTotalsGrouped(filters);
 
       return totals;
+    } catch (error) {
+      throw new Error((error as Error).message);
+    }
+  }
+
+  async getListOfRaceResults(filters: GetRaceResultsFilters) {
+    try {
+      const races = await this.eventDao.getListOfRaces(filters);
+      const eventIds = races.map((race) => race.eventId);
+      const results = await this.resultDao.getListOfResults(eventIds);
+
+      if (!results) {
+        throw new Error("Unable to retrieve results from list of race ids");
+      }
+
+      const listOfRaceResults = races.map((race) => ({
+        raceId: race.id,
+        results: results.filter((result) => result.eventId === race.eventId),
+      }));
+
+      return listOfRaceResults;
     } catch (error) {
       throw new Error((error as Error).message);
     }

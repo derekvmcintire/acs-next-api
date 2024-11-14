@@ -10,6 +10,7 @@ import {
   IRace,
   RaceWhereInput,
 } from "@/app/_types/event/types";
+import { GetRaceResultsFilters } from "@/app/_types/result/types";
 
 export default class EventDAO implements IEventDAO {
   // Constructor
@@ -123,5 +124,49 @@ export default class EventDAO implements IEventDAO {
     const totals = await this.raceRepo.getRaceTotalsGroupedRaw(filters);
 
     return totals;
+  }
+
+  async getListOfRaces(filters: GetRaceResultsFilters) {
+    try {
+      const raceIds = filters.ids;
+      const races = await this.raceRepo.findMany({
+        where: {
+          id: { in: raceIds },
+        },
+        select: {
+          id: true,
+          eventId: true,
+          event: {
+            select: {
+              id: true,
+              name: true,
+              Race: {
+                select: {
+                  id: true,
+                  eventId: true,
+                  raceTypeId: true,
+                  startDate: true,
+                  endDate: true,
+                  location: true,
+                  raceType: {
+                    select: {
+                      id: true,
+                      name: true,
+                      description: true,
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      });
+
+      return races;
+    } catch (error) {
+      throw new Error(
+        getDatabaseQueryErrorMessage(`${(error as Error).message}`),
+      );
+    }
   }
 }

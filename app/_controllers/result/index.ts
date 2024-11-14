@@ -17,7 +17,8 @@ const getResultService = (): ResultService => {
 
 const getEventService = (): EventService => {
   const eventDao = new EventDAO(databaseClient.event, databaseClient.race);
-  return new EventService(eventDao);
+  const resultDao = new ResultDAO(databaseClient.result);
+  return new EventService(eventDao, resultDao);
 };
 
 export async function getResultsByRiderId(
@@ -28,6 +29,7 @@ export async function getResultsByRiderId(
     const riderHistory = await resultService.getResultsByRiderId(
       Number(riderId),
     );
+
     return riderHistory;
   } catch (error) {
     throw new Error((error as Error).message);
@@ -49,6 +51,7 @@ export async function getResultsByRaceId(
 
     const resultService = getResultService();
     const results = await resultService.getResultsByEventId(Number(event.id));
+
     return results;
   } catch (error) {
     throw new Error((error as Error).message);

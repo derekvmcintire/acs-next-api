@@ -1,4 +1,5 @@
 import EventDAO from "@/app/_daos/event";
+import ResultDAO from "@/app/_daos/result";
 import databaseClient from "@/app/_database/get-client";
 import EventService from "@/app/_services/event";
 import {
@@ -6,10 +7,12 @@ import {
   GetRaceFilters,
   GetRaceTotalsFilters,
 } from "@/app/_types/event/types";
+import { GetRaceResultsFilters } from "@/app/_types/result/types";
 
 const getEventService = (): EventService => {
   const eventDao = new EventDAO(databaseClient.event, databaseClient.race);
-  return new EventService(eventDao);
+  const resultDao = new ResultDAO(databaseClient.result);
+  return new EventService(eventDao, resultDao);
 };
 
 export async function createRace(raceData: CreateRaceArgs) {
@@ -40,6 +43,17 @@ export async function getRaceTotals(filters: GetRaceTotalsFilters) {
     const totals = await eventService.getRaceTotals(filters);
 
     return totals;
+  } catch (error) {
+    throw new Error((error as Error).message);
+  }
+}
+
+export async function getListOfRaceResults(filters: GetRaceResultsFilters) {
+  try {
+    const eventService = getEventService();
+    const results = await eventService.getListOfRaceResults(filters);
+
+    return results;
   } catch (error) {
     throw new Error((error as Error).message);
   }
