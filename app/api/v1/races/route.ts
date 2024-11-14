@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getInternalServerErrorMessage } from "@/app/_constants/errors";
-import { createRace, getRace } from "@/app/_controllers/event";
+import {
+  createRace,
+  getRace as getListOfRaces,
+} from "@/app/_controllers/event";
 import { CreateRaceArgs, GetRaceFilters } from "@/app/_types/event/types";
 import { Race } from "@prisma/client";
 
@@ -26,10 +29,12 @@ export async function POST(request: NextRequest) {
 }
 
 export async function GET(request: NextRequest) {
+  const ids = request.nextUrl.searchParams.get("ids");
   const orderBy = request.nextUrl.searchParams.get("orderby") || undefined;
   const direction = request.nextUrl.searchParams.get("direction") || undefined;
 
   const filters: GetRaceFilters = {
+    ids: ids ? ids.split(",").map(Number) : undefined,
     eventName: request.nextUrl.searchParams.get("name") || undefined,
     eventId: Number(request.nextUrl.searchParams.get("eventid")) || undefined,
     location: request.nextUrl.searchParams.get("location") || undefined,
@@ -51,7 +56,7 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const row = await getRace(filters);
+    const row = await getListOfRaces(filters);
 
     return NextResponse.json(row, { status: 200 });
   } catch (error) {

@@ -45,10 +45,11 @@ export type DateRangeFilter = { from: string; to: string };
 export type GetRaceFilters = {
   eventName?: string;
   eventId?: number;
-  id?: number;
+  ids?: number[];
   location?: string;
   startDateRange?: DateRangeFilter;
   limit?: number;
+  resultLimit?: number;
   orderBy?: { column: keyof Race; direction: "asc" | "desc" };
 };
 
@@ -59,7 +60,7 @@ export interface RaceWhereInput {
     AND?: Array<{ name: InsensitiveStringSearch }>;
   };
   eventId?: number;
-  id?: number;
+  id?: number | { in: number[] };
   location?: InsensitiveStringSearch;
   startDate?: { gte: string; lte: string };
 }

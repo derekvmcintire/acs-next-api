@@ -27,9 +27,9 @@ export default class EventService {
     });
   }
 
-  async getRace(filters: GetRaceFilters) {
+  async getListOfRaces(filters: GetRaceFilters) {
     try {
-      const race = await this.eventDao.getRace(filters);
+      const race = await this.eventDao.getListOfRaces(filters);
 
       return race;
     } catch (error) {
@@ -42,6 +42,16 @@ export default class EventService {
       const totals = await this.eventDao.getRaceTotalsGrouped(filters);
 
       return totals;
+    } catch (error) {
+      throw new Error((error as Error).message);
+    }
+  }
+
+  async getListOfRaceResults(filters: GetRaceFilters) {
+    try {
+      const races = await this.eventDao.getListOfRaces(filters);
+
+      return races;
     } catch (error) {
       throw new Error((error as Error).message);
     }

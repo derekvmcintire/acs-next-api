@@ -93,6 +93,22 @@ export default class ResultService {
     }
   }
 
+  async getListOfResults(
+    eventIds: number[],
+    resultLimit?: number,
+  ): Promise<IResult[]> {
+    try {
+      const results = await this.resultDao.getListOfResults(
+        eventIds,
+        resultLimit,
+      );
+
+      return results;
+    } catch (error) {
+      throw new Error((error as Error).message);
+    }
+  }
+
   async createResult(resultData: CreateResultArgs) {
     try {
       const race = this.resultDao.createResult(resultData);

@@ -28,6 +28,7 @@ export async function getResultsByRiderId(
     const riderHistory = await resultService.getResultsByRiderId(
       Number(riderId),
     );
+
     return riderHistory;
   } catch (error) {
     throw new Error((error as Error).message);
@@ -39,7 +40,7 @@ export async function getResultsByRaceId(
 ): Promise<IResult[] | null> {
   try {
     const eventService = getEventService();
-    const race = await eventService.getRace({ id: raceId });
+    const race = await eventService.getListOfRaces({ ids: [raceId] });
 
     const { event } = race[0];
 
@@ -49,6 +50,7 @@ export async function getResultsByRaceId(
 
     const resultService = getResultService();
     const results = await resultService.getResultsByEventId(Number(event.id));
+
     return results;
   } catch (error) {
     throw new Error((error as Error).message);
