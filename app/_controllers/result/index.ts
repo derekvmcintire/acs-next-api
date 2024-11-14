@@ -41,7 +41,7 @@ export async function getResultsByRaceId(
 ): Promise<IResult[] | null> {
   try {
     const eventService = getEventService();
-    const race = await eventService.getRace({ id: raceId });
+    const race = await eventService.getListOfRaces({ ids: [raceId] });
 
     const { event } = race[0];
 

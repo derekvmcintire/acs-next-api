@@ -10,10 +10,8 @@ import {
   IRace,
   RaceWhereInput,
 } from "@/app/_types/event/types";
-import { GetRaceResultsFilters } from "@/app/_types/result/types";
 
 export default class EventDAO implements IEventDAO {
-  // Constructor
   constructor(
     private eventRepo: IEventRepository,
     private raceRepo: IRaceRepository,
@@ -78,6 +76,7 @@ export default class EventDAO implements IEventDAO {
 
   private buildRaceWhereClause(filters: GetRaceFilters) {
     const where: RaceWhereInput = {};
+
     if (filters.eventName) {
       const nameParts = filters.eventName.split(" ");
       where.event = {
@@ -86,20 +85,25 @@ export default class EventDAO implements IEventDAO {
         })),
       };
     }
+
     if (filters.eventId) where.eventId = filters.eventId;
-    if (filters.id) where.id = filters.id;
-    if (filters.location)
+    if (filters.ids && filters.ids.length > 0) {
+      where.id = { in: filters.ids };
+    }
+    if (filters.location) {
       where.location = { contains: filters.location, mode: "insensitive" };
+    }
     if (filters.startDateRange) {
       where.startDate = {
         gte: filters.startDateRange.from,
         lte: filters.startDateRange.to,
       };
     }
+
     return where;
   }
 
-  async getRace(filters: GetRaceFilters) {
+  async getListOfRaces(filters: GetRaceFilters) {
     try {
       const where = this.buildRaceWhereClause(filters);
 
@@ -124,49 +128,5 @@ export default class EventDAO implements IEventDAO {
     const totals = await this.raceRepo.getRaceTotalsGroupedRaw(filters);
 
     return totals;
-  }
-
-  async getListOfRaces(filters: GetRaceResultsFilters) {
-    try {
-      const raceIds = filters.ids;
-      const races = await this.raceRepo.findMany({
-        where: {
-          id: { in: raceIds },
-        },
-        select: {
-          id: true,
-          eventId: true,
-          event: {
-            select: {
-              id: true,
-              name: true,
-              Race: {
-                select: {
-                  id: true,
-                  eventId: true,
-                  raceTypeId: true,
-                  startDate: true,
-                  endDate: true,
-                  location: true,
-                  raceType: {
-                    select: {
-                      id: true,
-                      name: true,
-                      description: true,
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
-      });
-
-      return races;
-    } catch (error) {
-      throw new Error(
-        getDatabaseQueryErrorMessage(`${(error as Error).message}`),
-      );
-    }
   }
 }

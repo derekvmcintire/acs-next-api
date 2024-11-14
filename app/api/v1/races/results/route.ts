@@ -1,5 +1,5 @@
 import { getListOfRaceResults } from "@/app/_controllers/event";
-import { GetRaceResultsFilters } from "@/app/_types/result/types";
+import { GetRaceFilters } from "@/app/_types/event/types";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  const filters: GetRaceResultsFilters = {
+  const filters: GetRaceFilters = {
     ids: ids.split(",").map(Number),
   };
 

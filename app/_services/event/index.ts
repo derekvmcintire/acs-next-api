@@ -5,7 +5,6 @@ import {
   GetRaceFilters,
   GetRaceTotalsFilters,
 } from "@/app/_types/event/types";
-import { GetRaceResultsFilters } from "@/app/_types/result/types";
 import dayjs from "dayjs";
 
 export default class EventService {
@@ -32,9 +31,9 @@ export default class EventService {
     });
   }
 
-  async getRace(filters: GetRaceFilters) {
+  async getListOfRaces(filters: GetRaceFilters) {
     try {
-      const race = await this.eventDao.getRace(filters);
+      const race = await this.eventDao.getListOfRaces(filters);
 
       return race;
     } catch (error) {
@@ -52,7 +51,7 @@ export default class EventService {
     }
   }
 
-  async getListOfRaceResults(filters: GetRaceResultsFilters) {
+  async getListOfRaceResults(filters: GetRaceFilters) {
     try {
       const races = await this.eventDao.getListOfRaces(filters);
       const eventIds = races.map((race) => race.eventId);

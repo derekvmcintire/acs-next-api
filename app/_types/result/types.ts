@@ -61,7 +61,3 @@ export interface AssignCategoryToResultArgs {
   resultId: number;
   categoryId: number;
 }
-
-export type GetRaceResultsFilters = {
-  ids: number[];
-};
