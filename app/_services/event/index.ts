@@ -5,6 +5,7 @@ import {
   GetRaceFilters,
   GetRaceTotalsFilters,
 } from "@/app/_types/event/types";
+import { IResult } from "@/app/_types/result/types";
 import dayjs from "dayjs";
 
 export default class EventService {
@@ -63,7 +64,12 @@ export default class EventService {
 
       const listOfRaceResults = races.map((race) => ({
         raceId: race.id,
-        results: results.filter((result) => result.eventId === race.eventId),
+        results: results
+          .filter((result) => result.eventId === race.eventId)
+          .sort(
+            (a: IResult, b: IResult) =>
+              (a?.place ?? Infinity) - (b?.place ?? Infinity),
+          ), // sort results without a place at the end
       }));
 
       return listOfRaceResults;

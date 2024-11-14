@@ -3,10 +3,13 @@ import { GetRaceFilters } from "@/app/_types/event/types";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
-  const ids = request.nextUrl.searchParams.get("ids");
-
   const filters: GetRaceFilters = {
-    ids: ids ? ids.split(",").map(Number) : undefined,
+    location: request.nextUrl.searchParams.get("location") || undefined,
+    limit: Number(request.nextUrl.searchParams.get("limit")) || undefined,
+    orderBy: {
+      column: "startDate",
+      direction: "desc",
+    },
   };
 
   try {
