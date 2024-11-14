@@ -49,6 +49,7 @@ export type GetRaceFilters = {
   location?: string;
   startDateRange?: DateRangeFilter;
   limit?: number;
+  resultLimit?: number;
   orderBy?: { column: keyof Race; direction: "asc" | "desc" };
 };
 

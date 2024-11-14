@@ -148,12 +148,16 @@ export default class ResultDAO implements IResultDAO {
     }
   }
 
-  async getListOfResults(eventIds: number[]) {
+  async getListOfResults(eventIds: number[], limit?: number) {
     try {
       const results = await this.resultRepo.findMany({
         where: {
           eventId: { in: eventIds },
         },
+        orderBy: [
+          { eventId: "asc" }, // Group by eventId
+          { place: "asc" }, // Sort by place (nulls will appear last by default)
+        ],
         select: {
           id: true,
           eventId: true,
@@ -216,6 +220,7 @@ export default class ResultDAO implements IResultDAO {
             },
           },
         },
+        take: limit || 1000, // Limit results to reduce load (adjust as needed)
       });
 
       return results;

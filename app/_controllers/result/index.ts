@@ -17,8 +17,7 @@ const getResultService = (): ResultService => {
 
 const getEventService = (): EventService => {
   const eventDao = new EventDAO(databaseClient.event, databaseClient.race);
-  const resultDao = new ResultDAO(databaseClient.result);
-  return new EventService(eventDao, resultDao);
+  return new EventService(eventDao);
 };
 
 export async function getResultsByRiderId(

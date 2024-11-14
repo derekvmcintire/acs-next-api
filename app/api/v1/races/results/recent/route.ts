@@ -6,6 +6,8 @@ export async function GET(request: NextRequest) {
   const filters: GetRaceFilters = {
     location: request.nextUrl.searchParams.get("location") || undefined,
     limit: Number(request.nextUrl.searchParams.get("limit")) || undefined,
+    resultLimit:
+      Number(request.nextUrl.searchParams.get("resultlimit")) || undefined,
     orderBy: {
       column: "startDate",
       direction: "desc",
