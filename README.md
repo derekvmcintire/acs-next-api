@@ -19,7 +19,7 @@ Although there are a number of steps involved in generating documentation, the n
 ### Steps to update API Documentation
 
 #### Step 1. Make changes to Postman ACS V1 collection
-- This is the source of truth. The collection should reflect the folder structure of the API. So if you have a route in v1/results/recent/route.ts then the collection should have the same folder structure: CollectionName/results/recent/request
+- This is the source of truth. The collection directories should not be nested more than one deep, but they should reflect the folder structure of the API. So if you have a route in `v1/results/recent/route.ts` then the collection should have a folder named `/results/recent` and in that folder are the endpoints found in that route.
 - Add  semantic descriptions i.e. GET a list of recent Results or POST a new rider
 - Test the requests and make sure they work
 #### Step 2. Export as collection.json
@@ -27,16 +27,16 @@ Although there are a number of steps involved in generating documentation, the n
 - click Export
 - select “Collection v2.1”
 - click Export (this will download the file onto your computer)
-- rename the collection if necessary, and use .collection.json. It should be. ACSv1.collection.json
+- rename the collection if necessary, and use `.collection.json.` It should be. `ACSv1.collection.json`
 #### Step 3. Add the file to public directory
 - If updating existing documentation, remove old collection.json file and replace it with the new one
-- If creating new documentation, add it alongside the existing collections - ACSv2.collection.json
+- If creating new documentation, add it alongside the existing collections - `ACSv2.collection.json`
 #### Step 4. Update Script if necessary
-- If you are adding new documentation i.e. a new version of the API, you will need to update the script to create a new openapi.json file so it doesn’t overwrite the existing one, i.e. acsv2openapi.json. The script is located in /scripts/convertPostmanToOpenAPI.js
+- If you are adding new documentation i.e. a new version of the API, you will need to update the script to create a new openapi.json file so it doesn’t overwrite the existing one, i.e. acsv2openapi.json. The script is located in `/scripts/convertPostmanToOpenAPI.js`
 #### Step 5. Run the script
-- node scripts/convertPostmanToOpenAPI.js
+- ```node scripts/convertPostmanToOpenAPI.js```
 #### Step 6. Adjust the localhost
-- For now, you need to update the localhost in openapi.json to `http://localhost:8080` - We need to do this because postman is losing the local host when exporting the collection. I need to look into fixing this, possibly by using environment variables.
+- For now, you need to update the `localhost` in `openapi.json` to `http://localhost:8080` - We need to do this because postman is losing the local host when exporting the collection. I need to look into fixing this, possibly by using environment variables.
 
 ## Features
 
