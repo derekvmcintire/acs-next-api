@@ -4,7 +4,7 @@ import {
   createRace,
   getRace as getListOfRaces,
 } from "@/app/_controllers/event";
-import { CreateRaceArgs, GetRaceFilters } from "@/app/_types/event/types";
+import { CreateRaceArgs, GetRaceFilters, IRace } from "@/app/_types/event/types";
 import { Race } from "@prisma/client";
 
 export async function POST(request: NextRequest) {
@@ -56,7 +56,7 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const row = await getListOfRaces(filters);
+    const row: IRace[] = await getListOfRaces(filters);
 
     return NextResponse.json(row, { status: 200 });
   } catch (error) {

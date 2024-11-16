@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getResultsNotFoundErrorMessage } from "@/app/_constants/errors";
 import { getResultsByRaceId } from "@/app/_controllers/result";
+import { IResult } from "@/app/_types/result/types";
 
 export type GetRacePathParams = {
   params: Promise<{
@@ -13,7 +14,7 @@ export async function GET(_request: NextRequest, context: GetRacePathParams) {
   const { id } = await params;
 
   try {
-    const results = await getResultsByRaceId(Number(id));
+    const results: IResult[] | null = await getResultsByRaceId(Number(id));
     if (results === null) {
       return NextResponse.json(
         { error: getResultsNotFoundErrorMessage(String(id)) },

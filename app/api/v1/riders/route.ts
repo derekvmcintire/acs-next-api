@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createRider, getMultipleRiders } from "@/app/_controllers/rider";
-import { IGetRidersParams } from "@/app/_types/rider/types";
+import { IGetRidersParams, IRider } from "@/app/_types/rider/types";
 
 export async function GET(request: NextRequest) {
   const ids = request.nextUrl.searchParams.get("ids");
@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
   };
 
   try {
-    const riders = await getMultipleRiders(params);
+    const riders: IRider[] = await getMultipleRiders(params);
     return NextResponse.json(riders, { status: 200 });
   } catch (error) {
     return NextResponse.json(

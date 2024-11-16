@@ -4,13 +4,13 @@ import {
   CREATE_RESULT_INVALID_REQUEST,
   getResultsNotFoundErrorMessage,
 } from "@/app/_constants/errors";
-import { CreateResultArgs } from "@/app/_types/result/types";
+import { CreateResultArgs, CreatedResult, IRacerHistory } from "@/app/_types/result/types";
 
 export async function GET(request: NextRequest) {
   const riderId = request.nextUrl.searchParams.get("riderId");
 
   try {
-    const results = await getResultsByRiderId(Number(riderId));
+    const results: IRacerHistory | null = await getResultsByRiderId(Number(riderId));
     if (results === null) {
       return NextResponse.json(
         { error: getResultsNotFoundErrorMessage(String(riderId)) },
@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const row = await createResult({
+    const row: CreatedResult = await createResult({
       eventId: Number(eventId),
       riderId: Number(riderId),
       resultTypeId: Number(resultTypeId),

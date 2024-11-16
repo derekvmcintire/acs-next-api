@@ -3,6 +3,7 @@ import {
   getRiderNotFoundErrorMessage,
 } from "@/app/_constants/errors";
 import { getRiderById } from "@/app/_controllers/rider";
+import { IRider } from "@/app/_types/rider/types";
 import { NextRequest, NextResponse } from "next/server";
 
 export type GetRiderByRiderIdParams = {
@@ -19,7 +20,7 @@ export async function GET(
   const { id } = await params;
 
   try {
-    const rider = await getRiderById(Number(id));
+    const rider: IRider | null = await getRiderById(Number(id));
     if (!rider) {
       return NextResponse.json(
         { error: getRiderNotFoundErrorMessage(String(id)) },
