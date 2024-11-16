@@ -30,6 +30,7 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   const ids = request.nextUrl.searchParams.get("ids");
+  //@TODO: ensure orderBy is an accepted column
   const orderBy = request.nextUrl.searchParams.get("orderby") || undefined;
   const direction = request.nextUrl.searchParams.get("direction") || undefined;
 
