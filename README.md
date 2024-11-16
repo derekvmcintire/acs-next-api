@@ -1,6 +1,8 @@
 # Amature Cycling Stats
 
-This is a demo website that is currently under development. ACS is a website that 
+This is a demo website that is currently under development.
+
+[API Documentation](https://documenter.getpostman.com/view/14169268/2sAYBPkZhC) is hosted through [Postman](https://www.postman.com/).
 
 ## Features
 
