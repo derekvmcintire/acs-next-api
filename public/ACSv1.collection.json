@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "3618662d-b7d8-4452-a01d-84c001e6f778",
 		"name": "ACS V1",
-		"description": "Amature Cycling Stats API Documentation\n\nThe ACS API is wrtten using NextJS and Prisma",
+		"description": "Amature Cycling Stats API Documentation\n\nThe ACS API is wrtten using NextJS and Prisma.\n\nThis documentation was created generated as a Postman Collection, and converted to OpenAPI spec using Postman2OpenAPI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "14169268"
 	},
@@ -17,12 +17,12 @@
 							"name": "results",
 							"item": [
 								{
-									"name": "/races/[id]/results",
+									"name": "a list of Results for a single Race",
 									"request": {
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "http://localhost:8080/api/latest/races/502/results",
+											"raw": "http://localhost:8080/api/latest/races/5/results",
 											"protocol": "http",
 											"host": [
 												"localhost"
@@ -32,25 +32,25 @@
 												"api",
 												"latest",
 												"races",
-												"502",
+												"5",
 												"results"
 											]
 										},
-										"description": "Get a single race by id"
+										"description": "/races/\\[id\\]/results"
 									},
 									"response": []
 								}
 							],
-							"description": "races/\\[id\\]/results"
+							"description": "Next JS App Router Directory"
 						}
 					],
-					"description": "/races/\\[id\\]"
+					"description": "Next JS App Router Directory"
 				},
 				{
 					"name": "categories",
 					"item": [
 						{
-							"name": "races/categories",
+							"name": "a list of all Categories",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -68,12 +68,12 @@
 										"categories"
 									]
 								},
-								"description": "Get a list of all categories"
+								"description": "races/categories"
 							},
 							"response": []
 						}
 					],
-					"description": "races/categories"
+					"description": "Next JS App Router Directory"
 				},
 				{
 					"name": "results",
@@ -82,7 +82,7 @@
 							"name": "recent",
 							"item": [
 								{
-									"name": "races/results/recent",
+									"name": "a list of recent Results",
 									"request": {
 										"method": "GET",
 										"header": [],
@@ -124,21 +124,21 @@
 												}
 											]
 										},
-										"description": "Get a list of the most recent races with results. You can limit the. number of races or results that are returned. You can also filter by location."
+										"description": "races/results/recent\n\nGet a list of the most recent races with results. You can limit the. number of races or results that are returned. You can also filter by location."
 									},
 									"response": []
 								}
 							],
-							"description": "races/results/recent"
+							"description": "Next JS App Router Directory"
 						}
 					],
-					"description": "races/results"
+					"description": "Next JS App Router Directory"
 				},
 				{
 					"name": "totals",
 					"item": [
 						{
-							"name": "/races/totals",
+							"name": "a total count of Races and Results",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -173,15 +173,15 @@
 										}
 									]
 								},
-								"description": "Get the total count of races and results for a given time period."
+								"description": "/races/totals\n\nGet the total count of races and results for a given time period, grouped by either 'month', 'quarter' or 'year'."
 							},
 							"response": []
 						}
 					],
-					"description": "races/totals"
+					"description": "Next JS App Router Directory"
 				},
 				{
-					"name": "/races",
+					"name": "a list of Races",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -232,12 +232,12 @@
 								}
 							]
 						},
-						"description": "Get a list of races."
+						"description": "/races\n\nGet a list of races."
 					},
 					"response": []
 				},
 				{
-					"name": "/races",
+					"name": "a new Race",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -263,18 +263,18 @@
 								"races"
 							]
 						},
-						"description": "Create a race."
+						"description": "/races\n\nCreate a race."
 					},
 					"response": []
 				}
 			],
-			"description": "/races"
+			"description": "Next JS App Router Directory"
 		},
 		{
 			"name": "results",
 			"item": [
 				{
-					"name": "/results",
+					"name": "a new Result",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -300,12 +300,12 @@
 								"results"
 							]
 						},
-						"description": "Create a new result."
+						"description": "/results\n\nCreate a new result."
 					},
 					"response": []
 				},
 				{
-					"name": "/results",
+					"name": "a list of Results for a single Rider",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -329,12 +329,12 @@
 								}
 							]
 						},
-						"description": "Get results for a single rider.\n\n@TODO this endpoint will be updated to /riders/\\[id\\]/results"
+						"description": "/results\n\nGet results for a single rider.\n\n@TODO this endpoint will be updated to /riders/\\[id\\]/results"
 					},
 					"response": []
 				}
 			],
-			"description": "/results"
+			"description": "Next JS App Router Directory"
 		},
 		{
 			"name": "riders",
@@ -343,7 +343,7 @@
 					"name": "[id]",
 					"item": [
 						{
-							"name": "/riders/[id]",
+							"name": "a single Rider",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -361,17 +361,18 @@
 										"1"
 									]
 								},
-								"description": "Get a single Rider."
+								"description": "/riders/\\[id\\]\n\nGet a single Rider."
 							},
 							"response": []
 						}
-					]
+					],
+					"description": "Nest JS App Router Directory"
 				},
 				{
 					"name": "rankings",
 					"item": [
 						{
-							"name": "/riders/rankings",
+							"name": "a list of Riders by Rank",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -401,14 +402,15 @@
 										}
 									]
 								},
-								"description": "Get a list of riders by rank. Returns a list of riders who have accumulated the most points within a calendar year in descending order. Defaults to the current calendar year."
+								"description": "/riders/rankings\n\nGet a list of riders by rank. Returns a list of riders who have accumulated the most points within a calendar year in descending order. Defaults to the current calendar year."
 							},
 							"response": []
 						}
-					]
+					],
+					"description": "Next JS App Router Directory"
 				},
 				{
-					"name": "/riders",
+					"name": "a new Rider",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -434,11 +436,12 @@
 								"riders"
 							]
 						},
-						"description": "Create a new rider."
+						"description": "/riders\n\nCreate a new rider."
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "Next JS App Router Directory"
 		}
 	]
 }

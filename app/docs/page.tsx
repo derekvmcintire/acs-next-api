@@ -1,6 +1,9 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import openapiJson from "../../public/openapi.json"; // Adjust the path based on the location of your JSON file
+import React from "react";
+import './theme.css';
 
 const SwaggerUI = dynamic(
   () => import("swagger-ui-react").then((mod) => mod.default),
@@ -12,13 +15,7 @@ const ApiDocs = () => {
     <div className="swagger-container">
       <h1>API Documentation</h1>
       <SwaggerUI
-        url="/openapi.yaml"
-        theme={{
-          colors: {
-            primaryColor: "#1d72b8",
-            secondaryColor: "#f7f7f7",
-          },
-        }}
+        spec={openapiJson}
       />
     </div>
   );

@@ -2,26 +2,26 @@
   "openapi": "3.0.3",
   "info": {
     "title": "ACS V1",
-    "description": "Amature Cycling Stats API Documentation\n\nThe ACS API is wrtten using NextJS and Prisma",
+    "description": "Amature Cycling Stats API Documentation\n\nThe ACS API is wrtten using NextJS and Prisma.\n\nThis documentation was created generated as a Postman Collection, and converted to OpenAPI spec using Postman2OpenAPI",
     "version": "1.0.0",
     "contact": {}
   },
   "servers": [
     {
-      "url": "http://localhost"
+      "url": "http://localhost:8080"
     }
   ],
   "paths": {
-    "/api/latest/races/502/results": {
+    "/api/latest/races/5/results": {
       "get": {
         "tags": [
           "races",
           "[id]",
           "results"
         ],
-        "summary": "/races/[id]/results",
-        "description": "Get a single race by id",
-        "operationId": "racesIdResults",
+        "summary": "a list of Results for a single Race",
+        "description": "/races/\\[id\\]/results",
+        "operationId": "aListOfResultsForASingleRace",
         "responses": {
           "200": {
             "description": ""
@@ -35,9 +35,9 @@
           "races",
           "categories"
         ],
-        "summary": "races/categories",
-        "description": "Get a list of all categories",
-        "operationId": "racesCategories",
+        "summary": "a list of all Categories",
+        "description": "races/categories",
+        "operationId": "aListOfAllCategories",
         "responses": {
           "200": {
             "description": ""
@@ -52,9 +52,9 @@
           "results1",
           "recent"
         ],
-        "summary": "races/results/recent",
-        "description": "Get a list of the most recent races with results. You can limit the. number of races or results that are returned. You can also filter by location.",
-        "operationId": "racesResultsRecent",
+        "summary": "a list of recent Results",
+        "description": "races/results/recent\n\nGet a list of the most recent races with results. You can limit the. number of races or results that are returned. You can also filter by location.",
+        "operationId": "aListOfRecentResults",
         "parameters": [
           {
             "name": "limit",
@@ -105,9 +105,9 @@
           "races",
           "totals"
         ],
-        "summary": "/races/totals",
-        "description": "Get the total count of races and results for a given time period.",
-        "operationId": "racesTotals",
+        "summary": "a total count of Races and Results",
+        "description": "/races/totals\n\nGet the total count of races and results for a given time period, grouped by either 'month', 'quarter' or 'year'.",
+        "operationId": "aTotalCountOfRacesAndResults",
         "parameters": [
           {
             "name": "from",
@@ -149,9 +149,9 @@
         "tags": [
           "races"
         ],
-        "summary": "/races",
-        "description": "Get a list of races.",
-        "operationId": "races",
+        "summary": "a list of Races",
+        "description": "/races\n\nGet a list of races.",
+        "operationId": "aListOfRaces",
         "parameters": [
           {
             "name": "limit",
@@ -218,9 +218,9 @@
         "tags": [
           "races"
         ],
-        "summary": "/races",
-        "description": "Create a race.",
-        "operationId": "races1",
+        "summary": "a new Race",
+        "description": "/races\n\nCreate a race.",
+        "operationId": "aNewRace",
         "requestBody": {
           "content": {
             "application/json": {
@@ -250,7 +250,7 @@
                 }
               },
               "examples": {
-                "/races": {
+                "a new Race": {
                   "value": {
                     "endDate": null,
                     "location": "Northfield, MA",
@@ -275,9 +275,9 @@
         "tags": [
           "results12"
         ],
-        "summary": "/results",
-        "description": "Create a new result.",
-        "operationId": "results",
+        "summary": "a new Result",
+        "description": "/results\n\nCreate a new result.",
+        "operationId": "aNewResult",
         "requestBody": {
           "content": {
             "application/json": {
@@ -319,7 +319,7 @@
                 }
               },
               "examples": {
-                "/results": {
+                "a new Result": {
                   "value": {
                     "eventId": 1,
                     "lap": 1,
@@ -347,9 +347,9 @@
         "tags": [
           "results12"
         ],
-        "summary": "/results",
-        "description": "Get results for a single rider.\n\n@TODO this endpoint will be updated to /riders/\\[id\\]/results",
-        "operationId": "results1",
+        "summary": "a list of Results for a single Rider",
+        "description": "/results\n\nGet results for a single rider.\n\n@TODO this endpoint will be updated to /riders/\\[id\\]/results",
+        "operationId": "aListOfResultsForASingleRider",
         "parameters": [
           {
             "name": "riderId",
@@ -374,9 +374,9 @@
           "riders",
           "[id]1"
         ],
-        "summary": "/riders/[id]",
-        "description": "Get a single Rider.",
-        "operationId": "ridersId",
+        "summary": "a single Rider",
+        "description": "/riders/\\[id\\]\n\nGet a single Rider.",
+        "operationId": "aSingleRider",
         "responses": {
           "200": {
             "description": ""
@@ -390,9 +390,9 @@
           "riders",
           "rankings"
         ],
-        "summary": "/riders/rankings",
-        "description": "Get a list of riders by rank. Returns a list of riders who have accumulated the most points within a calendar year in descending order. Defaults to the current calendar year.",
-        "operationId": "ridersRankings",
+        "summary": "a list of Riders by Rank",
+        "description": "/riders/rankings\n\nGet a list of riders by rank. Returns a list of riders who have accumulated the most points within a calendar year in descending order. Defaults to the current calendar year.",
+        "operationId": "aListOfRidersByRank",
         "parameters": [
           {
             "name": "limit",
@@ -425,9 +425,9 @@
         "tags": [
           "riders"
         ],
-        "summary": "/riders",
-        "description": "Create a new rider.",
-        "operationId": "riders",
+        "summary": "a new Rider",
+        "description": "/riders\n\nCreate a new rider.",
+        "operationId": "aNewRider",
         "requestBody": {
           "content": {
             "application/json": {
@@ -473,7 +473,7 @@
                 }
               },
               "examples": {
-                "/riders": {
+                "a new Rider": {
                   "value": {
                     "about": "It reaaaallly bothered me.",
                     "country": "USA",
@@ -501,44 +501,47 @@
   "tags": [
     {
       "name": "races",
-      "description": "/races"
+      "description": "Next JS App Router Directory"
     },
     {
       "name": "[id]",
-      "description": "/races/\\[id\\]"
+      "description": "Next JS App Router Directory"
     },
     {
       "name": "results",
-      "description": "races/\\[id\\]/results"
+      "description": "Next JS App Router Directory"
     },
     {
       "name": "categories",
-      "description": "races/categories"
+      "description": "Next JS App Router Directory"
     },
     {
       "name": "results1",
-      "description": "races/results"
+      "description": "Next JS App Router Directory"
     },
     {
       "name": "recent",
-      "description": "races/results/recent"
+      "description": "Next JS App Router Directory"
     },
     {
       "name": "totals",
-      "description": "races/totals"
+      "description": "Next JS App Router Directory"
     },
     {
       "name": "results12",
-      "description": "/results"
+      "description": "Next JS App Router Directory"
     },
     {
-      "name": "riders"
+      "name": "riders",
+      "description": "Next JS App Router Directory"
     },
     {
-      "name": "[id]1"
+      "name": "[id]1",
+      "description": "Nest JS App Router Directory"
     },
     {
-      "name": "rankings"
+      "name": "rankings",
+      "description": "Next JS App Router Directory"
     }
   ]
 }
