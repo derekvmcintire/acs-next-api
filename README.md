@@ -2,7 +2,41 @@
 
 This is a demo website that is currently under development.
 
-[API Documentation](https://documenter.getpostman.com/view/14169268/2sAYBPkZhC) is hosted through [Postman](https://www.postman.com/).
+## Documentation
+
+Documentation
+
+Swagger Documentation can be found [here](http://localhost:8080/docs)
+
+I considered several options for documentation and finally settled on using Swagger UI that uses an OpenAPI json spec. I had initially used a CLI tool to auto-generate an openapi.yaml file, but after upgrading to the NextJS App router, this no longer worked. I searched for a CLI tool that would auto-generate a .yaml file or .json I could serve to my Swagger component, but was unable to find one that worked without adding a huge amount of annotations to my code.
+
+I was skeptical about being able to maintain proper annotations or a manual .yaml file with the complex data structures that this API returns, so I decided to use Postman to generate documentation automatically. I was already using Postman for testing my endpoints and had a well organized and described collection of all my endpoints. The only issue was that Postman does not generate documentation in the OpenAPI format, they use what they call their Collections format. They have their own UI which worked fairly well, but it didn’t look as nice or intuitive as the Swagger UI, and would not be able to be directly hosted within my NextJS app.
+
+So I searched for a tool to convert a Postman collection to OpenAPI and found there were a few options. I settled on using Postman2OpenAPI, which is used as a javascript library. I then wrote a script so that I can execute this process from the command line when I want to update the documentation.
+
+Although there are a number of steps involved in generating documentation, the nice thing is there is a single source of truth for the data models. You define the request shape in postman, and postman uses the actual shape of the data returned from the endpoint to generate the openapi spec. I prefer this to manually maintaining data shapes in multiple places. In the future, an improvement would be to use a tool that uses the existing typescript definitions to generate the documentation directly, but I was unable to find a tool that worked this way with the NextJS App Router. The one that was closest was `next-rest-framework` but it required significant refactoring of routes, which didn't immediately work for me and it seems like it is not widely used yet, but could be a good option in the future.
+
+### Steps to update API Documentation
+
+#### Step 1. Make changes to Postman ACS V1 collection
+- This is the source of truth. The collection should reflect the folder structure of the API. So if you have a route in v1/results/recent/route.ts then the collection should have the same folder structure: CollectionName/results/recent/request
+- Add  semantic descriptions i.e. GET a list of recent Results or POST a new rider
+- Test the requests and make sure they work
+#### Step 2. Export as collection.json
+- click the three dots next to the collection name
+- click Export
+- select “Collection v2.1”
+- click Export (this will download the file onto your computer)
+- rename the collection if necessary, and use .collection.json. It should be. ACSv1.collection.json
+#### Step 3. Add the file to public directory
+- If updating existing documentation, remove old collection.json file and replace it with the new one
+- If creating new documentation, add it alongside the existing collections - ACSv2.collection.json
+#### Step 4. Update Script if necessary
+- If you are adding new documentation i.e. a new version of the API, you will need to update the script to create a new openapi.json file so it doesn’t overwrite the existing one, i.e. acsv2openapi.json. The script is located in /scripts/convertPostmanToOpenAPI.js
+#### Step 5. Run the script
+- node scripts/convertPostmanToOpenAPI.js
+#### Step 6. Adjust the localhost
+- For now, you need to update the localhost in openapi.json to `http://localhost:8080` - We need to do this because postman is losing the local host when exporting the collection. I need to look into fixing this, possibly by using environment variables.
 
 ## Features
 
