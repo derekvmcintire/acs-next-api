@@ -4,7 +4,11 @@ import {
   createRace,
   getRace as getListOfRaces,
 } from "@/app/_controllers/event";
-import { CreateRaceArgs, GetRaceFilters, IRace } from "@/app/_types/event/types";
+import {
+  CreateRaceArgs,
+  GetRaceFilters,
+  IRace,
+} from "@/app/_types/event/types";
 import { Race } from "@prisma/client";
 
 export async function POST(request: NextRequest) {

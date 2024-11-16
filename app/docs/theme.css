@@ -1682,7 +1682,7 @@
   justify-content: flex-start;
   align-items: center;
   padding: 8px;
-  min-width: 600px;
+  border: none;
  }
 
  /* Wrapper around path and description */
@@ -1700,3 +1700,11 @@
  .btn-clear {
   margin-left: 8px;;
  }
+
+ button[aria-label="Try it out"] {
+  display: none;
+}
+
+.swagger-ui .opblock-post button[aria-label="Try it out"] {
+  display: none;
+}
