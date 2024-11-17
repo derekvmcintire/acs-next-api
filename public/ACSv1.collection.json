@@ -1,192 +1,22 @@
 {
 	"info": {
 		"_postman_id": "3618662d-b7d8-4452-a01d-84c001e6f778",
-		"name": "ACS V1",
+		"name": "Amature Cycling Stats V1",
 		"description": "Amature Cycling Stats API Documentation\n\nThe ACS API is wrtten using NextJS and Prisma.\n\nThis documentation was created generated as a Postman Collection, and converted to OpenAPI spec using Postman2OpenAPI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "14169268"
 	},
 	"item": [
 		{
-			"name": "races",
+			"name": "Races",
 			"item": [
-				{
-					"name": "[id]",
-					"item": [
-						{
-							"name": "results",
-							"item": [
-								{
-									"name": "a list of Results for a single Race",
-									"request": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "http://localhost:8080/api/latest/races/5/results",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "8080",
-											"path": [
-												"api",
-												"latest",
-												"races",
-												"5",
-												"results"
-											]
-										},
-										"description": "/races/\\[id\\]/results"
-									},
-									"response": []
-								}
-							],
-							"description": "Next JS App Router Directory"
-						}
-					],
-					"description": "Next JS App Router Directory"
-				},
-				{
-					"name": "categories",
-					"item": [
-						{
-							"name": "a list of all Categories",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8080/api/latest/races/categories",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"api",
-										"latest",
-										"races",
-										"categories"
-									]
-								},
-								"description": "races/categories"
-							},
-							"response": []
-						}
-					],
-					"description": "Next JS App Router Directory"
-				},
-				{
-					"name": "results",
-					"item": [
-						{
-							"name": "recent",
-							"item": [
-								{
-									"name": "a list of recent Results",
-									"request": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "http://localhost:8080/api/latest/races/results/recent?limit=2&resultlimit=3",
-											"protocol": "http",
-											"host": [
-												"localhost"
-											],
-											"port": "8080",
-											"path": [
-												"api",
-												"latest",
-												"races",
-												"results",
-												"recent"
-											],
-											"query": [
-												{
-													"key": "limit",
-													"value": "2",
-													"description": "number: limit the number of races returned"
-												},
-												{
-													"key": "resultlimit",
-													"value": "3",
-													"description": "number: limit the number of results returned for each race"
-												},
-												{
-													"key": "location",
-													"value": "kyiv",
-													"description": "string: filter by location",
-													"disabled": true
-												},
-												{
-													"key": "",
-													"value": "",
-													"disabled": true
-												}
-											]
-										},
-										"description": "races/results/recent\n\nGet a list of the most recent races with results. You can limit the. number of races or results that are returned. You can also filter by location."
-									},
-									"response": []
-								}
-							],
-							"description": "Next JS App Router Directory"
-						}
-					],
-					"description": "Next JS App Router Directory"
-				},
-				{
-					"name": "totals",
-					"item": [
-						{
-							"name": "a total count of Races and Results",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8080/api/latest/races/totals?from=2024-01-01&to=2024-09-01&groupby=month",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"api",
-										"latest",
-										"races",
-										"totals"
-									],
-									"query": [
-										{
-											"key": "from",
-											"value": "2024-01-01",
-											"description": "YYY-MM-DD: start of date range"
-										},
-										{
-											"key": "to",
-											"value": "2024-09-01",
-											"description": "YYY-MM-DD: end of date range"
-										},
-										{
-											"key": "groupby",
-											"value": "month",
-											"description": "month | quarter | year"
-										}
-									]
-								},
-								"description": "/races/totals\n\nGet the total count of races and results for a given time period, grouped by either 'month', 'quarter' or 'year'."
-							},
-							"response": []
-						}
-					],
-					"description": "Next JS App Router Directory"
-				},
 				{
 					"name": "a list of Races",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/latest/races?limit=100&name=vol&orderby=id&direction=asc",
+							"raw": "http://localhost:8080/api/v1/races?limit=100&name=vol&orderby=id&direction=asc",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -194,7 +24,7 @@
 							"port": "8080",
 							"path": [
 								"api",
-								"latest",
+								"v1",
 								"races"
 							],
 							"query": [
@@ -220,13 +50,13 @@
 								},
 								{
 									"key": "ids",
-									"value": "1,2,3,4,5",
+									"value": "",
 									"description": "number[]: a listof race ids",
 									"disabled": true
 								},
 								{
 									"key": "eventid",
-									"value": "15",
+									"value": "",
 									"description": "number: an event id",
 									"disabled": true
 								}
@@ -251,7 +81,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/latest/races",
+							"raw": "http://localhost:8080/api/v1/races",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -259,11 +89,145 @@
 							"port": "8080",
 							"path": [
 								"api",
-								"latest",
+								"v1",
 								"races"
 							]
 						},
 						"description": "/races\n\nCreate a race."
+					},
+					"response": []
+				},
+				{
+					"name": "a list of all Categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/races/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"races",
+								"categories"
+							]
+						},
+						"description": "races/categories"
+					},
+					"response": []
+				},
+				{
+					"name": "a total count of Races and Results",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/races/totals?from=2024-01-01&to=2024-09-01&groupby=month",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"races",
+								"totals"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "2024-01-01",
+									"description": "YYY-MM-DD: start of date range"
+								},
+								{
+									"key": "to",
+									"value": "2024-09-01",
+									"description": "YYY-MM-DD: end of date range"
+								},
+								{
+									"key": "groupby",
+									"value": "month",
+									"description": "month | quarter | year"
+								}
+							]
+						},
+						"description": "/races/totals\n\nGet the total count of races and results for a given time period, grouped by either 'month', 'quarter' or 'year'."
+					},
+					"response": []
+				},
+				{
+					"name": "a list of Results for a single Race",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/races/5/results",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"races",
+								"5",
+								"results"
+							]
+						},
+						"description": "/races/\\[id\\]/results"
+					},
+					"response": []
+				},
+				{
+					"name": "a list of recent Results",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/races/results/recent?limit=2&resultlimit=3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"races",
+								"results",
+								"recent"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "2",
+									"description": "number: limit the number of races returned"
+								},
+								{
+									"key": "resultlimit",
+									"value": "3",
+									"description": "number: limit the number of results returned for each race"
+								},
+								{
+									"key": "location",
+									"value": "",
+									"description": "string: filter by location",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						},
+						"description": "races/results/recent\n\nGet a list of the most recent races with results. You can limit the. number of races or results that are returned. You can also filter by location."
 					},
 					"response": []
 				}
@@ -271,7 +235,7 @@
 			"description": "Next JS App Router Directory"
 		},
 		{
-			"name": "results",
+			"name": "Results",
 			"item": [
 				{
 					"name": "a new Result",
@@ -288,7 +252,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/latest/results",
+							"raw": "http://localhost:8080/api/v1/results",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -296,7 +260,7 @@
 							"port": "8080",
 							"path": [
 								"api",
-								"latest",
+								"v1",
 								"results"
 							]
 						},
@@ -337,78 +301,8 @@
 			"description": "Next JS App Router Directory"
 		},
 		{
-			"name": "riders",
+			"name": "Riders",
 			"item": [
-				{
-					"name": "[id]",
-					"item": [
-						{
-							"name": "a single Rider",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8080/api/v1/riders/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"api",
-										"v1",
-										"riders",
-										"1"
-									]
-								},
-								"description": "/riders/\\[id\\]\n\nGet a single Rider."
-							},
-							"response": []
-						}
-					],
-					"description": "Nest JS App Router Directory"
-				},
-				{
-					"name": "rankings",
-					"item": [
-						{
-							"name": "a list of Riders by Rank",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8080/api/v1/riders/rankings?limit=10&year=2024",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"api",
-										"v1",
-										"riders",
-										"rankings"
-									],
-									"query": [
-										{
-											"key": "limit",
-											"value": "10",
-											"description": "number: limit the number of ranings returned"
-										},
-										{
-											"key": "year",
-											"value": "2024",
-											"description": "number: a calendar year"
-										}
-									]
-								},
-								"description": "/riders/rankings\n\nGet a list of riders by rank. Returns a list of riders who have accumulated the most points within a calendar year in descending order. Defaults to the current calendar year."
-							},
-							"response": []
-						}
-					],
-					"description": "Next JS App Router Directory"
-				},
 				{
 					"name": "a new Rider",
 					"request": {
@@ -424,7 +318,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/latest/riders",
+							"raw": "http://localhost:8080/api/v1/riders",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -432,11 +326,101 @@
 							"port": "8080",
 							"path": [
 								"api",
-								"latest",
+								"v1",
 								"riders"
 							]
 						},
 						"description": "/riders\n\nCreate a new rider."
+					},
+					"response": []
+				},
+				{
+					"name": "a single Rider",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/riders/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"riders",
+								"1"
+							]
+						},
+						"description": "/riders/\\[id\\]\n\nGet a single Rider."
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/latest/riders/1/teams",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"teamId\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/riders/1/teams",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"riders",
+								"1",
+								"teams"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "a list of Riders by Rank",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/riders/rankings?limit=10&year=2024",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"riders",
+								"rankings"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "number: limit the number of ranings returned"
+								},
+								{
+									"key": "year",
+									"value": "2024",
+									"description": "number: a calendar year"
+								}
+							]
+						},
+						"description": "/riders/rankings\n\nGet a list of riders by rank. Returns a list of riders who have accumulated the most points within a calendar year in descending order. Defaults to the current calendar year."
 					},
 					"response": []
 				}

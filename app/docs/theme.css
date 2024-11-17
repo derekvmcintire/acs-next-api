@@ -1529,18 +1529,18 @@
 /**
  * Swagger UI Theme Overrides
  *
- * Theme: Newspaper
+ * Theme: Muted
  * Author: Mark Ostrander
  * Github: https://github.com/ostranme/swagger-ui-themes
  */
 
  .swagger-ui .opblock.opblock-post {
    border-color: #DADFE1;
-   background: rgba(34, 34, 34, .1);
+   background: rgba(246, 246, 246, .1);
  }
 
  .swagger-ui .opblock.opblock-post .opblock-summary-method {
-   background: #222222;
+   background: #64908A;
  }
 
  .swagger-ui .opblock.opblock-post .opblock-summary {
@@ -1549,11 +1549,11 @@
 
  .swagger-ui .opblock.opblock-put {
    border-color: #DADFE1;
-   background: rgba(34, 34, 34, .1);
+   background: rgba(246, 246, 246, .1);
  }
 
  .swagger-ui .opblock.opblock-put .opblock-summary-method {
-   background: #222222;
+   background: #633B63;
  }
 
  .swagger-ui .opblock.opblock-put .opblock-summary {
@@ -1562,11 +1562,11 @@
 
  .swagger-ui .opblock.opblock-delete {
    border-color: #DADFE1;
-   background: rgba(34, 34, 34, .1);
+   background: rgba(246, 246, 246, .1);
  }
 
  .swagger-ui .opblock.opblock-delete .opblock-summary-method {
-   background: #222222;
+   background: #C1786A;
  }
 
  .swagger-ui .opblock.opblock-delete .opblock-summary {
@@ -1575,11 +1575,11 @@
 
  .swagger-ui .opblock.opblock-get {
    border-color: #DADFE1;
-   background: rgba(34, 34, 34, .1);
+   background: rgba(246, 246, 246, .1);
  }
 
  .swagger-ui .opblock.opblock-get .opblock-summary-method {
-   background: #222222;
+   background: #3F778E;
  }
 
  .swagger-ui .opblock.opblock-get .opblock-summary {
@@ -1588,11 +1588,11 @@
 
  .swagger-ui .opblock.opblock-patch {
    border-color: #DADFE1;
-   background: rgba(34, 34, 34, .1);
+   background: rgba(246, 246, 246, .1);
  }
 
  .swagger-ui .opblock.opblock-patch .opblock-summary-method {
-   background: #222222;
+   background: #C1976A;
  }
 
  .swagger-ui .opblock.opblock-patch .opblock-summary {
@@ -1601,11 +1601,11 @@
 
  .swagger-ui .opblock.opblock-head {
    border-color: #DADFE1;
-   background: rgba(34, 34, 34, .1);
+   background: rgba(246, 246, 246, .1);
  }
 
  .swagger-ui .opblock.opblock-head .opblock-summary-method {
-   background: #222222;
+   background: #C1976A;
  }
 
  .swagger-ui .opblock.opblock-head .opblock-summary {
@@ -1614,11 +1614,11 @@
 
  .swagger-ui .opblock.opblock-options {
    border-color: #DADFE1;
-   background: rgba(34, 34, 34, .1);
+   background: rgba(246, 246, 246, .1);
  }
 
  .swagger-ui .opblock.opblock-options .opblock-summary-method {
-   background: #222222;
+   background: #3F778E;
  }
 
  .swagger-ui .opblock.opblock-options .opblock-summary {
@@ -1627,8 +1627,9 @@
 
  .swagger-ui .topbar {
    padding: 8px 30px;
-   background-color: #222222;
+   background-color: #6F7E88;
  }
+
  .swagger-ui .topbar .download-url-wrapper input[type=text] {
    min-width: 350px;
    margin: 0;
@@ -1645,7 +1646,7 @@
    border-radius: 0 4px 4px 0;
    background: #DADFE1;
    font-family: Titillium Web, sans-serif;
-   color: #222222;
+   color: #6F7E88;
  }
 
  .swagger-ui .info a {
@@ -1653,58 +1654,20 @@
    -webkit-transition: all .4s;
    transition: all .4s;
    font-family: Open Sans, sans-serif;
-   color: #222222;
+   color: #6F7E88;
  }
 
  .swagger-ui .info a:hover {
-   color: #222222;
+   color: #6F7E88;
  }
 
  .swagger-ui .btn.authorize {
    line-height: 1;
    display: inline;
-   color: #222222;
-   border-color: #222222;
+   color: #6F7E88;
+   border-color: #6F7E88;
  }
+
  .swagger-ui .btn.authorize svg {
-   fill: #222222;
+   fill: #6F7E88;
  }
-
- .swagger-ui .opblock .opblock-summary {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
- }
-
- /* Wrapper around method button and path and description */
- .opblock-summary-control {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 8px;
-  border: none;
- }
-
- /* Wrapper around path and description */
- .opblock-summary-path-description-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start; 
- }
-
- /* "Try it out" button */
- .try-out {
-  margin-left: 8px;
- }
-
- .btn-clear {
-  margin-left: 8px;;
- }
-
- button[aria-label="Try it out"] {
-  display: none;
-}
-
-.swagger-ui .opblock-post button[aria-label="Try it out"] {
-  display: none;
-}
