@@ -8,6 +8,8 @@ Documentation
 
 Swagger Documentation can be found [here](http://localhost:8080/docs)
 
+![Screenshot 2024-11-16 at 7 19 03 PM](https://github.com/user-attachments/assets/4a4720d8-c16a-432c-846e-0cc32e97518d)
+
 I considered several options for documentation and finally settled on using Swagger UI that uses an OpenAPI json spec. I had initially used a CLI tool to auto-generate an openapi.yaml file, but after upgrading to the NextJS App router, this no longer worked. I searched for a CLI tool that would auto-generate a .yaml file or .json I could serve to my Swagger component, but was unable to find one that worked without adding a huge amount of annotations to my code.
 
 I was skeptical about being able to maintain proper annotations or a manual .yaml file with the complex data structures that this API returns, so I decided to use Postman to generate documentation automatically. I was already using Postman for testing my endpoints and had a well organized and described collection of all my endpoints. The only issue was that Postman does not generate documentation in the OpenAPI format, they use what they call their Collections format. They have their own UI which worked fairly well, but it didn’t look as nice or intuitive as the Swagger UI, and would not be able to be directly hosted within my NextJS app.
