@@ -9,11 +9,6 @@ const getCategoryService = (): CategoryService => {
 };
 
 export async function getCategories(): Promise<CategoryRow[]> {
-  try {
-    const categoryService = getCategoryService();
-    const categories = await categoryService.getCategories();
-    return categories;
-  } catch (error) {
-    throw new Error((error as Error).message);
-  }
+  const categoryService = getCategoryService();
+  return await categoryService.getCategories();
 }
