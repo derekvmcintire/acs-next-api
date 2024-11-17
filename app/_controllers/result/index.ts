@@ -9,6 +9,7 @@ import {
 } from "@/app/_types/result/types";
 import EventService from "@/app/_services/event";
 import EventDAO from "@/app/_daos/event";
+import { ResultCategoryFacadeService } from "@/app/_services/facade-services/result-category";
 
 const getResultService = (): ResultService => {
   const resultDao = new ResultDAO(databaseClient.result);
@@ -20,74 +21,37 @@ const getEventService = (): EventService => {
   return new EventService(eventDao);
 };
 
+const getResultCategoryFacadeService = (): ResultCategoryFacadeService => {
+  const resultService = getResultService();
+  return new ResultCategoryFacadeService(resultService);
+};
+
 export async function getResultsByRiderId(
   riderId: number,
 ): Promise<IRacerHistory | null> {
-  try {
-    const resultService = getResultService();
-    const riderHistory = await resultService.getResultsByRiderId(
-      Number(riderId),
-    );
-
-    return riderHistory;
-  } catch (error) {
-    throw new Error((error as Error).message);
-  }
+  const resultService = getResultService();
+  return resultService.getResultsByRiderId(Number(riderId));
 }
 
 export async function getResultsByRaceId(
   raceId: number,
 ): Promise<IResult[] | null> {
-  try {
-    const eventService = getEventService();
-    const race = await eventService.getListOfRaces({ ids: [raceId] });
+  const eventService = getEventService();
+  const race = await eventService.getListOfRaces({ ids: [raceId] });
 
-    const { event } = race[0];
+  const { event } = race[0];
 
-    if (!event || !event?.id) {
-      throw new Error(`Failed to get event id from race id: ${raceId}`);
-    }
-
-    const resultService = getResultService();
-    const results = await resultService.getResultsByEventId(Number(event.id));
-
-    return results;
-  } catch (error) {
-    throw new Error((error as Error).message);
+  if (!event || !event?.id) {
+    throw new Error(`Failed to get event id from race id: ${raceId}`);
   }
+
+  const resultService = getResultService();
+  return resultService.getResultsByEventId(Number(event.id));
 }
 
 export async function createResult(
   resultData: CreateResultArgs,
 ): Promise<CreatedResult> {
-  try {
-    const resultService = getResultService();
-    const result = await resultService.createResult(resultData);
-
-    if (!result || !result.id) {
-      throw new Error("Failed to create result");
-    }
-
-    const { categories } = resultData;
-
-    if (categories && categories.length > 0) {
-      categories.forEach((id) => {
-        if (!result.id) {
-          throw new Error("No result id available");
-        }
-
-        const success = resultService.assignCategoryToResult({
-          resultId: result.id,
-          categoryId: Number(id),
-        });
-        if (!success) {
-          throw new Error("Failed to create entry in JoinResultCategory");
-        }
-      });
-    }
-
-    return result;
-  } catch (error) {
-    throw new Error((error as Error).message);
-  }
+  const resultCategoryFacadeService = getResultCategoryFacadeService();
+  return resultCategoryFacadeService.createResultWithCategory(resultData);
 }

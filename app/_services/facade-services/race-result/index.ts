@@ -1,5 +1,5 @@
-import EventService from "../event";
-import ResultService from "../result";
+import EventService from "../../event";
+import ResultService from "../../result";
 import { GetRaceFilters, IRace } from "@/app/_types/event/types";
 import { IResult } from "@/app/_types/result/types";
 
