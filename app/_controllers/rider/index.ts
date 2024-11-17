@@ -34,7 +34,7 @@ export async function getRankings(params: IGetRankingsParams) {
       throw new Error(`No Results Found for Year: ${year}`);
     }
 
-    const rankings = riderService.calculateRankings(resultsForYear);
+    const rankings = riderService.calculateRiderRankings(resultsForYear);
 
     if (params.limit) {
       rankings.length = params.limit;

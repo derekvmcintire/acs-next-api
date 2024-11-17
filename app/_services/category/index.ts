@@ -5,6 +5,6 @@ export default class CategoryService {
   constructor(private categoryDao: ICategoryDAO) {}
 
   async getCategories(): Promise<CategoryRow[]> {
-    return await this.categoryDao.getCategories();
+    return this.categoryDao.getCategories();
   }
 }
