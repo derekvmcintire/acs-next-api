@@ -9,7 +9,7 @@ import {
   GetRaceTotalsFilters,
   IRace,
 } from "@/app/_types/event/types";
-import { buildRaceWhereClause } from "./utility";
+import { getListOfRacesQueryConfig } from "./queries/get-list-of-races-query";
 
 export default class EventDAO implements IEventDAO {
   constructor(
@@ -18,7 +18,7 @@ export default class EventDAO implements IEventDAO {
   ) {}
 
   async createEvent(eventData: CreateEventArgs) {
-    return await this.eventRepo.create({
+    return this.eventRepo.create({
       data: {
         name: eventData.name,
       },
@@ -26,7 +26,7 @@ export default class EventDAO implements IEventDAO {
   }
 
   async getRaceById(id: number): Promise<IRace | null> {
-    return await this.raceRepo.findUnique({
+    return this.raceRepo.findUnique({
       where: { id },
       include: { event: true, raceType: true },
     });
@@ -55,20 +55,10 @@ export default class EventDAO implements IEventDAO {
   }
 
   async getListOfRaces(filters: GetRaceFilters) {
-    const where = buildRaceWhereClause(filters);
-    const orderBy = filters.orderBy
-      ? { [filters.orderBy.column]: filters.orderBy.direction }
-      : undefined;
-
-    return await this.raceRepo.findMany({
-      where,
-      orderBy,
-      include: { event: true, raceType: true },
-      take: filters.limit,
-    });
+    return this.raceRepo.findMany(getListOfRacesQueryConfig(filters));
   }
 
   async getRaceTotalsGrouped(filters: GetRaceTotalsFilters) {
-    return await this.raceRepo.getRaceTotalsGroupedRaw(filters);
+    return this.raceRepo.getRaceTotalsGroupedRaw(filters);
   }
 }

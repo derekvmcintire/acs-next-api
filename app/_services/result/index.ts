@@ -98,7 +98,7 @@ export default class ResultService {
     resultLimit?: number,
   ): Promise<IResult[]> {
     try {
-      const results = await this.resultDao.getListOfResults(
+      const results = await this.resultDao.getListOfRaceResults(
         eventIds,
         resultLimit,
       );
