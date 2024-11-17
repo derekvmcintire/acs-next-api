@@ -1,0 +1,544 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "ACS V1",
+    "description": "Amature Cycling Stats API Documentation\n\nThe ACS API is wrtten using NextJS and Prisma",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "servers": [
+    {
+      "url": "http://localhost"
+    }
+  ],
+  "paths": {
+    "/api/latest/races/502/results": {
+      "get": {
+        "tags": [
+          "races",
+          "[id]",
+          "results"
+        ],
+        "summary": "/races/[id]/results",
+        "description": "Get a single race by id",
+        "operationId": "racesIdResults",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/latest/races/categories": {
+      "get": {
+        "tags": [
+          "races",
+          "categories"
+        ],
+        "summary": "races/categories",
+        "description": "Get a list of all categories",
+        "operationId": "racesCategories",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/latest/races/results/recent": {
+      "get": {
+        "tags": [
+          "races",
+          "results1",
+          "recent"
+        ],
+        "summary": "races/results/recent",
+        "description": "Get a list of the most recent races with results. You can limit the. number of races or results that are returned. You can also filter by location.",
+        "operationId": "racesResultsRecent",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "2"
+            },
+            "description": "number: limit the number of races returned"
+          },
+          {
+            "name": "resultlimit",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "3"
+            },
+            "description": "number: limit the number of results returned for each race"
+          },
+          {
+            "name": "location",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "kyiv"
+            },
+            "description": "string: filter by location"
+          },
+          {
+            "name": "",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/latest/races/totals": {
+      "get": {
+        "tags": [
+          "races",
+          "totals"
+        ],
+        "summary": "/races/totals",
+        "description": "Get the total count of races and results for a given time period.",
+        "operationId": "racesTotals",
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "2024-01-01"
+            },
+            "description": "YYY-MM-DD: start of date range"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "2024-09-01"
+            },
+            "description": "YYY-MM-DD: end of date range"
+          },
+          {
+            "name": "groupby",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "month"
+            },
+            "description": "month | quarter | year"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/latest/races": {
+      "get": {
+        "tags": [
+          "races"
+        ],
+        "summary": "/races",
+        "description": "Get a list of races.",
+        "operationId": "races",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "100"
+            },
+            "description": "number: limit the number of races returned"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "vol"
+            },
+            "description": "string: filter by event name"
+          },
+          {
+            "name": "orderby",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "id"
+            },
+            "description": "id | eventId | startDate"
+          },
+          {
+            "name": "direction",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "asc"
+            },
+            "description": "asc | desc"
+          },
+          {
+            "name": "ids",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "1,2,3,4,5"
+            },
+            "description": "number[]: a listof race ids"
+          },
+          {
+            "name": "eventid",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "15"
+            },
+            "description": "number: an event id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "races"
+        ],
+        "summary": "/races",
+        "description": "Create a race.",
+        "operationId": "races1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "endDate": {
+                    "nullable": true,
+                    "example": null
+                  },
+                  "location": {
+                    "type": "string",
+                    "example": "Northfield, MA"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Killerwat Grass Crit"
+                  },
+                  "raceTypeId": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "startDate": {
+                    "type": "string",
+                    "example": "Fri Apr 12 2024"
+                  }
+                }
+              },
+              "examples": {
+                "/races": {
+                  "value": {
+                    "endDate": null,
+                    "location": "Northfield, MA",
+                    "name": "Killerwat Grass Crit",
+                    "raceTypeId": 1,
+                    "startDate": "Fri Apr 12 2024"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/latest/results": {
+      "post": {
+        "tags": [
+          "results12"
+        ],
+        "summary": "/results",
+        "description": "Create a new result.",
+        "operationId": "results",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "eventId": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "lap": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "noPlaceCodeTypeId": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "place": {
+                    "type": "number",
+                    "example": 4
+                  },
+                  "points": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "resultTypeId": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "riderId": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "time": {
+                    "type": "string",
+                    "example": ""
+                  }
+                }
+              },
+              "examples": {
+                "/results": {
+                  "value": {
+                    "eventId": 1,
+                    "lap": 1,
+                    "noPlaceCodeTypeId": 1,
+                    "place": 4,
+                    "points": 1,
+                    "resultTypeId": 1,
+                    "riderId": 1,
+                    "time": ""
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/results": {
+      "get": {
+        "tags": [
+          "results12"
+        ],
+        "summary": "/results",
+        "description": "Get results for a single rider.\n\n@TODO this endpoint will be updated to /riders/\\[id\\]/results",
+        "operationId": "results1",
+        "parameters": [
+          {
+            "name": "riderId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "4"
+            },
+            "description": "number: a rider id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/riders/1": {
+      "get": {
+        "tags": [
+          "riders",
+          "[id]1"
+        ],
+        "summary": "/riders/[id]",
+        "description": "Get a single Rider.",
+        "operationId": "ridersId",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/v1/riders/rankings": {
+      "get": {
+        "tags": [
+          "riders",
+          "rankings"
+        ],
+        "summary": "/riders/rankings",
+        "description": "Get a list of riders by rank. Returns a list of riders who have accumulated the most points within a calendar year in descending order. Defaults to the current calendar year.",
+        "operationId": "ridersRankings",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "10"
+            },
+            "description": "number: limit the number of ranings returned"
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "2024"
+            },
+            "description": "number: a calendar year"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/latest/riders": {
+      "post": {
+        "tags": [
+          "riders"
+        ],
+        "summary": "/riders",
+        "description": "Create a new rider.",
+        "operationId": "riders",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "about": {
+                    "type": "string",
+                    "example": "It reaaaallly bothered me."
+                  },
+                  "country": {
+                    "type": "string",
+                    "example": "USA"
+                  },
+                  "dob": {
+                    "type": "string",
+                    "example": "1990-01-01"
+                  },
+                  "firstName": {
+                    "type": "string",
+                    "example": "Mipper"
+                  },
+                  "hometown": {
+                    "type": "string",
+                    "example": "New York, NY"
+                  },
+                  "insta": {
+                    "type": "string",
+                    "example": "portamip"
+                  },
+                  "lastName": {
+                    "type": "string",
+                    "example": "Mopperson"
+                  },
+                  "photo": {
+                    "type": "string",
+                    "example": "https://www.procyclingstats.com/images/riders/bp/bf/julian-alaphilippe-2024.jpeg"
+                  },
+                  "strava": {
+                    "type": "string",
+                    "example": "87935790234"
+                  }
+                }
+              },
+              "examples": {
+                "/riders": {
+                  "value": {
+                    "about": "It reaaaallly bothered me.",
+                    "country": "USA",
+                    "dob": "1990-01-01",
+                    "firstName": "Mipper",
+                    "hometown": "New York, NY",
+                    "insta": "portamip",
+                    "lastName": "Mopperson",
+                    "photo": "https://www.procyclingstats.com/images/riders/bp/bf/julian-alaphilippe-2024.jpeg",
+                    "strava": "87935790234"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "races",
+      "description": "/races"
+    },
+    {
+      "name": "[id]",
+      "description": "/races/\\[id\\]"
+    },
+    {
+      "name": "results",
+      "description": "races/\\[id\\]/results"
+    },
+    {
+      "name": "categories",
+      "description": "races/categories"
+    },
+    {
+      "name": "results1",
+      "description": "races/results"
+    },
+    {
+      "name": "recent",
+      "description": "races/results/recent"
+    },
+    {
+      "name": "totals",
+      "description": "races/totals"
+    },
+    {
+      "name": "results12",
+      "description": "/results"
+    },
+    {
+      "name": "riders"
+    },
+    {
+      "name": "[id]1"
+    },
+    {
+      "name": "rankings"
+    }
+  ]
+}

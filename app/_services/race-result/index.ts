@@ -3,7 +3,7 @@ import ResultService from "../result";
 import { GetRaceFilters, IRace } from "@/app/_types/event/types";
 import { IResult } from "@/app/_types/result/types";
 
-type RaceResults = {
+export type RaceResults = {
   raceId: number;
   results: IResult[];
 };

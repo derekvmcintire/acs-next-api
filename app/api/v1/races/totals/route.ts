@@ -3,6 +3,7 @@ import {
   GROUP_BY_OPTIONS,
   GetRaceTotalsFilters,
   GroupByOption,
+  RaceTotals,
 } from "@/app/_types/event/types";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -36,7 +37,7 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const results = await getRaceTotals(filters);
+    const results: RaceTotals[] = await getRaceTotals(filters);
     if (results === null) {
       return NextResponse.json(
         { error: "Error getting race totals" },

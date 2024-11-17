@@ -1,4 +1,5 @@
 import { getListOfRaceResults } from "@/app/_controllers/event";
+import { RaceResults } from "@/app/_services/race-result";
 import { GetRaceFilters } from "@/app/_types/event/types";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -15,7 +16,7 @@ export async function GET(request: NextRequest) {
   };
 
   try {
-    const results = await getListOfRaceResults(filters);
+    const results: RaceResults[] = await getListOfRaceResults(filters);
     if (results === null) {
       return NextResponse.json(
         { error: "Unable to find results for the given races" },
