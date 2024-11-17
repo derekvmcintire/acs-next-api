@@ -28,32 +28,14 @@ export default class EventService {
   }
 
   async getListOfRaces(filters: GetRaceFilters) {
-    try {
-      const race = await this.eventDao.getListOfRaces(filters);
-
-      return race;
-    } catch (error) {
-      throw new Error((error as Error).message);
-    }
+    return this.eventDao.getListOfRaces(filters);
   }
 
   async getRaceTotals(filters: GetRaceTotalsFilters) {
-    try {
-      const totals = await this.eventDao.getRaceTotalsGrouped(filters);
-
-      return totals;
-    } catch (error) {
-      throw new Error((error as Error).message);
-    }
+    return this.eventDao.getRaceTotalsGrouped(filters);
   }
 
   async getListOfRaceResults(filters: GetRaceFilters) {
-    try {
-      const races = await this.eventDao.getListOfRaces(filters);
-
-      return races;
-    } catch (error) {
-      throw new Error((error as Error).message);
-    }
+    return this.eventDao.getListOfRaces(filters);
   }
 }

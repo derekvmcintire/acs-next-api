@@ -13,7 +13,7 @@ export const flattenResult = (result: IResult): TransformedRace => {
       ? result?.event?.Race[0]
       : null;
 
-  const build = {
+  return {
     id: race?.id,
     name: result?.event?.name || "",
     place: result?.place || undefined,
@@ -30,6 +30,4 @@ export const flattenResult = (result: IResult): TransformedRace => {
     endDate: race && race?.endDate ? race?.endDate : null,
     location: race && race?.location ? race?.location : null,
   };
-
-  return build;
 };

@@ -1,4 +1,3 @@
-import { getDatabaseQueryErrorMessage } from "@/app/_constants/errors";
 import { IRiderDAO } from "@/app/_types/rider/database/IRiderDAO";
 import { IRiderRepository } from "@/app/_types/rider/database/IRiderRepository";
 import {

@@ -49,83 +49,41 @@ export default class ResultService {
   }
 
   async getResultsForYear(year: number): Promise<IResult[] | null> {
-    try {
-      const rankings =
-        (await this.resultDao.getRiderResults({ year: year })) || [];
-
-      return rankings;
-    } catch (error) {
-      throw new Error((error as Error).message);
-    }
+    return (await this.resultDao.getRiderResults({ year: year })) || [];
   }
 
   calculateRankings(results: IResult[]) {
-    const sortedRankings = calculateTotalPoints(results);
-
-    return sortedRankings;
+    return calculateTotalPoints(results);
   }
 
   async getResultsByRiderId(riderId: number): Promise<IRacerHistory> {
-    try {
-      const rows: IResult[] = await this.resultDao.getRiderResults({
-        riderId: Number(riderId),
-      });
-      const results = await this.processResults(rows);
+    const rows: IResult[] = await this.resultDao.getRiderResults({
+      riderId: Number(riderId),
+    });
+    const results = await this.processResults(rows);
 
-      return {
-        riderId,
-        results,
-      };
-    } catch (error) {
-      throw new Error((error as Error).message);
-    }
+    return {
+      riderId,
+      results,
+    };
   }
 
   async getResultsByEventId(eventId: number): Promise<IResult[]> {
-    try {
-      const results: IResult[] = await this.resultDao.getEventResults(
-        Number(eventId),
-      );
-
-      return results;
-    } catch (error) {
-      throw new Error((error as Error).message);
-    }
+    return this.resultDao.getEventResults(Number(eventId));
   }
 
   async getListOfResults(
     eventIds: number[],
     resultLimit?: number,
   ): Promise<IResult[]> {
-    try {
-      const results = await this.resultDao.getListOfRaceResults(
-        eventIds,
-        resultLimit,
-      );
-
-      return results;
-    } catch (error) {
-      throw new Error((error as Error).message);
-    }
+    return this.resultDao.getListOfRaceResults(eventIds, resultLimit);
   }
 
   async createResult(resultData: CreateResultArgs) {
-    try {
-      const race = this.resultDao.createResult(resultData);
-
-      return race;
-    } catch (error) {
-      throw new Error((error as Error).message);
-    }
+    return this.resultDao.createResult(resultData);
   }
 
   async assignCategoryToResult(args: AssignCategoryToResultArgs) {
-    try {
-      const result = this.resultDao.assignCategoryToResult(args);
-
-      return result;
-    } catch (error) {
-      throw new Error((error as Error).message);
-    }
+    return this.resultDao.assignCategoryToResult(args);
   }
 }
