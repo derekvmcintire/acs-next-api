@@ -39,9 +39,6 @@ export function calculateTotalPoints(results: IResult[]): RiderTotalPoints[] {
 
   const aggregatedResults = Object.values(pointsMap);
   aggregatedResults.sort((a, b) => b.totalPoints - a.totalPoints);
-  if (aggregatedResults && aggregatedResults[0]) {
-    console.log("returnin: ", aggregatedResults[0]);
-  }
 
   return aggregatedResults;
 }
