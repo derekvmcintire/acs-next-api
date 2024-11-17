@@ -9,7 +9,7 @@ import {
   GetRaceTotalsFilters,
   IRace,
 } from "@/app/_types/event/types";
-import { buildRaceWhereClause } from "./utility";
+import { getListOfRacesQueryConfig } from "./queries/get-list-of-races-query";
 
 export default class EventDAO implements IEventDAO {
   constructor(
@@ -41,11 +41,9 @@ export default class EventDAO implements IEventDAO {
 
     const newRace = await this.raceRepo.create({
       data: {
-        eventId: raceData.eventId,
+        ...raceData,
+        eventId: raceData.eventId as number,
         raceTypeId: raceData.raceTypeId as number,
-        startDate: raceData.startDate,
-        endDate: raceData.endDate,
-        location: raceData.location,
       },
     });
 
@@ -55,17 +53,7 @@ export default class EventDAO implements IEventDAO {
   }
 
   async getListOfRaces(filters: GetRaceFilters) {
-    const where = buildRaceWhereClause(filters);
-    const orderBy = filters.orderBy
-      ? { [filters.orderBy.column]: filters.orderBy.direction }
-      : undefined;
-
-    return await this.raceRepo.findMany({
-      where,
-      orderBy,
-      include: { event: true, raceType: true },
-      take: filters.limit,
-    });
+    return await this.raceRepo.findMany(getListOfRacesQueryConfig(filters));
   }
 
   async getRaceTotalsGrouped(filters: GetRaceTotalsFilters) {
