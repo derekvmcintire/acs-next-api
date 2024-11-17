@@ -5,12 +5,11 @@ import { CategoryRow } from "@/app/_types/category/types";
 
 export async function GET() {
   try {
-    const row: CategoryRow[] = await getCategories();
-
-    return NextResponse.json(row, { status: 200 });
+    const categories: CategoryRow[] = await getCategories();
+    return NextResponse.json(categories, { status: 200 });
   } catch (error) {
     return NextResponse.json(
-      { error: getInternalServerErrorMessage(`${(error as Error).message}`) },
+      { error: getInternalServerErrorMessage((error as Error).message) },
       { status: 500 },
     );
   }
