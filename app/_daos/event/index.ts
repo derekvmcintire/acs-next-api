@@ -18,7 +18,7 @@ export default class EventDAO implements IEventDAO {
   ) {}
 
   async createEvent(eventData: CreateEventArgs) {
-    return await this.eventRepo.create({
+    return this.eventRepo.create({
       data: {
         name: eventData.name,
       },
@@ -26,7 +26,7 @@ export default class EventDAO implements IEventDAO {
   }
 
   async getRaceById(id: number): Promise<IRace | null> {
-    return await this.raceRepo.findUnique({
+    return this.raceRepo.findUnique({
       where: { id },
       include: { event: true, raceType: true },
     });
@@ -41,9 +41,11 @@ export default class EventDAO implements IEventDAO {
 
     const newRace = await this.raceRepo.create({
       data: {
-        ...raceData,
-        eventId: raceData.eventId as number,
+        eventId: raceData.eventId,
         raceTypeId: raceData.raceTypeId as number,
+        startDate: raceData.startDate,
+        endDate: raceData.endDate,
+        location: raceData.location,
       },
     });
 
@@ -53,10 +55,10 @@ export default class EventDAO implements IEventDAO {
   }
 
   async getListOfRaces(filters: GetRaceFilters) {
-    return await this.raceRepo.findMany(getListOfRacesQueryConfig(filters));
+    return this.raceRepo.findMany(getListOfRacesQueryConfig(filters));
   }
 
   async getRaceTotalsGrouped(filters: GetRaceTotalsFilters) {
-    return await this.raceRepo.getRaceTotalsGroupedRaw(filters);
+    return this.raceRepo.getRaceTotalsGroupedRaw(filters);
   }
 }

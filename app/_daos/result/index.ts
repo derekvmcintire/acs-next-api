@@ -44,8 +44,14 @@ export default class ResultDAO implements IResultDAO {
 
     return this.resultRepo.create({
       data: {
-        ...resultData,
+        eventId: eventId,
+        riderId: riderId,
+        resultTypeId: resultData.resultTypeId,
         noPlaceCodeTypeId: resultData?.noPlaceCodeTypeId || 0,
+        lap: resultData.lap,
+        place: resultData.place,
+        time: resultData.time,
+        points: resultData.points,
       },
     });
   }
