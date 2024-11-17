@@ -2,9 +2,7 @@
 
 This is a demo website that is currently under development.
 
-## Documentation
-
-Documentation
+## Documentation=
 
 Swagger Documentation can be found [here](http://localhost:8080/docs)
 
