@@ -1,5 +1,5 @@
 import { getListOfRaceResults } from "@/app/_controllers/event";
-import { RaceResults } from "@/app/_services/race-result";
+import { RaceResults } from "@/app/_services/facade-services/race-result";
 import { GetRaceFilters } from "@/app/_types/event/types";
 import { NextRequest, NextResponse } from "next/server";
 

@@ -23,71 +23,43 @@ const getResultService = (): ResultService => {
 };
 
 export async function getRankings(params: IGetRankingsParams) {
-  try {
-    const riderService = getRiderService();
-    const resultsService = getResultService();
+  const riderService = getRiderService();
+  const resultsService = getResultService();
 
-    const year = params.year || dayjs().year();
-    const resultsForYear = await resultsService.getResultsForYear(year);
+  const year = params.year || dayjs().year();
+  const resultsForYear = await resultsService.getResultsForYear(year);
 
-    if (!resultsForYear) {
-      throw new Error(`No Results Found for Year: ${year}`);
-    }
-
-    const rankings = riderService.calculateRiderRankings(resultsForYear);
-
-    if (params.limit) {
-      rankings.length = params.limit;
-    }
-
-    return rankings;
-  } catch (error) {
-    throw new Error((error as Error).message);
+  if (!resultsForYear) {
+    throw new Error(`No Results Found for Year: ${year}`);
   }
+
+  const rankings = riderService.calculateRiderRankings(resultsForYear);
+
+  if (params.limit) {
+    return rankings.splice(0, params.limit);
+  }
+
+  return rankings;
 }
 
 export async function getMultipleRiders(
   params: IGetRidersParams,
 ): Promise<IRider[]> {
-  try {
-    const riderService = getRiderService();
-    const riders = await riderService.getRiders(params);
-
-    return riders;
-  } catch (error) {
-    throw new Error((error as Error).message);
-  }
+  const riderService = getRiderService();
+  return riderService.getRiders(params);
 }
 
 export async function getRiderById(id: number): Promise<IRider | null> {
-  try {
-    const riderService = getRiderService();
-    const rider = await riderService.getRiderById(Number(id));
-
-    return rider;
-  } catch (error) {
-    throw new Error((error as Error).message);
-  }
+  const riderService = getRiderService();
+  return riderService.getRiderById(Number(id));
 }
 
 export async function createRider(riderData: RiderRow) {
-  try {
-    const riderService = getRiderService();
-    const rider = await riderService.createRider(riderData);
-
-    return rider;
-  } catch (error) {
-    throw new Error((error as Error).message);
-  }
+  const riderService = getRiderService();
+  return riderService.createRider(riderData);
 }
 
 export async function assignRiderToTeam(data: AssignRiderToTeamParams) {
-  try {
-    const riderService = getRiderService();
-    const row = await riderService.assignRiderToTeam(data);
-
-    return row;
-  } catch (error) {
-    throw new Error((error as Error).message);
-  }
+  const riderService = getRiderService();
+  return riderService.assignRiderToTeam(data);
 }

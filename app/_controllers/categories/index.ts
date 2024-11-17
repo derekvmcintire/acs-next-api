@@ -10,5 +10,5 @@ const getCategoryService = (): CategoryService => {
 
 export async function getCategories(): Promise<CategoryRow[]> {
   const categoryService = getCategoryService();
-  return await categoryService.getCategories();
+  return categoryService.getCategories();
 }
