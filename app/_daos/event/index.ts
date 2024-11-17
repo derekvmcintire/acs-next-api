@@ -8,8 +8,8 @@ import {
   GetRaceFilters,
   GetRaceTotalsFilters,
   IRace,
-  RaceWhereInput,
 } from "@/app/_types/event/types";
+import { buildRaceWhereClause } from "./utility";
 
 export default class EventDAO implements IEventDAO {
   constructor(
@@ -18,32 +18,18 @@ export default class EventDAO implements IEventDAO {
   ) {}
 
   async createEvent(eventData: CreateEventArgs) {
-    try {
-      const newEvent = await this.eventRepo.create({
-        data: {
-          name: eventData.name,
-        },
-      });
-
-      return newEvent;
-    } catch (error) {
-      throw new Error(
-        getDatabaseQueryErrorMessage(`${(error as Error).message}`),
-      );
-    }
+    return await this.eventRepo.create({
+      data: {
+        name: eventData.name,
+      },
+    });
   }
 
   async getRaceById(id: number): Promise<IRace | null> {
-    try {
-      return await this.raceRepo.findUnique({
-        where: { id },
-        include: { event: true, raceType: true },
-      });
-    } catch (error) {
-      throw new Error(
-        getDatabaseQueryErrorMessage(`${(error as Error).message}`),
-      );
-    }
+    return await this.raceRepo.findUnique({
+      where: { id },
+      include: { event: true, raceType: true },
+    });
   }
 
   async createRace(raceData: CreateRaceArgs): Promise<IRace | null> {
@@ -53,80 +39,36 @@ export default class EventDAO implements IEventDAO {
       );
     }
 
-    try {
-      const newRace = await this.raceRepo.create({
-        data: {
-          eventId: raceData.eventId,
-          raceTypeId: raceData.raceTypeId as number,
-          startDate: raceData.startDate,
-          endDate: raceData.endDate,
-          location: raceData.location,
-        },
-      });
+    const newRace = await this.raceRepo.create({
+      data: {
+        eventId: raceData.eventId,
+        raceTypeId: raceData.raceTypeId as number,
+        startDate: raceData.startDate,
+        endDate: raceData.endDate,
+        location: raceData.location,
+      },
+    });
 
-      if (!newRace?.id) throw new Error("Database failed to return id");
+    if (!newRace?.id) throw new Error("Database failed to return id");
 
-      return this.getRaceById(newRace.id);
-    } catch (error) {
-      throw new Error(
-        getDatabaseQueryErrorMessage(`${(error as Error).message}`),
-      );
-    }
-  }
-
-  private buildRaceWhereClause(filters: GetRaceFilters) {
-    const where: RaceWhereInput = {};
-
-    if (filters.eventName) {
-      const nameParts = filters.eventName.split(" ");
-      where.event = {
-        AND: nameParts.map((name) => ({
-          name: { contains: name, mode: "insensitive" },
-        })),
-      };
-    }
-
-    if (filters.eventId) where.eventId = filters.eventId;
-    if (filters.ids && filters.ids.length > 0) {
-      where.id = { in: filters.ids };
-    }
-    if (filters.location) {
-      where.location = { contains: filters.location, mode: "insensitive" };
-    }
-    if (filters.startDateRange) {
-      where.startDate = {
-        gte: filters.startDateRange.from,
-        lte: filters.startDateRange.to,
-      };
-    }
-
-    return where;
+    return this.getRaceById(newRace.id);
   }
 
   async getListOfRaces(filters: GetRaceFilters) {
-    try {
-      const where = this.buildRaceWhereClause(filters);
+    const where = buildRaceWhereClause(filters);
+    const orderBy = filters.orderBy
+      ? { [filters.orderBy.column]: filters.orderBy.direction }
+      : undefined;
 
-      const orderBy = filters.orderBy
-        ? { [filters.orderBy.column]: filters.orderBy.direction }
-        : undefined;
-
-      return await this.raceRepo.findMany({
-        where,
-        orderBy,
-        include: { event: true, raceType: true },
-        take: filters.limit,
-      });
-    } catch (error) {
-      throw new Error(
-        getDatabaseQueryErrorMessage(`${(error as Error).message}`),
-      );
-    }
+    return await this.raceRepo.findMany({
+      where,
+      orderBy,
+      include: { event: true, raceType: true },
+      take: filters.limit,
+    });
   }
 
   async getRaceTotalsGrouped(filters: GetRaceTotalsFilters) {
-    const totals = await this.raceRepo.getRaceTotalsGroupedRaw(filters);
-
-    return totals;
+    return await this.raceRepo.getRaceTotalsGroupedRaw(filters);
   }
 }
