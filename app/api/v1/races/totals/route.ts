@@ -1,18 +1,13 @@
 import { getRaceTotals } from "@/app/_controllers/event";
 import {
-  GROUP_BY_OPTIONS,
   GetRaceTotalsFilters,
-  GroupByOption,
   RaceTotals,
+  isValidGroupBy,
 } from "@/app/_types/event/types";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
-  const isValidGroupBy = (value?: string): value is GroupByOption =>
-    GROUP_BY_OPTIONS.includes(value as GroupByOption);
-
   const groupByParam = request.nextUrl.searchParams.get("groupby") || undefined;
-
   const groupByParamIsValid = isValidGroupBy(groupByParam);
 
   if (groupByParam && !groupByParamIsValid) {

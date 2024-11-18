@@ -69,9 +69,18 @@ export type GetRaceArgs = {
   name: string;
 };
 
+// tuple of read only options
 export const GROUP_BY_OPTIONS = ["month", "quarter", "year"] as const;
-
+// union type created from above options
 export type GroupByOption = (typeof GROUP_BY_OPTIONS)[number];
+// validation check
+export const isValidGroupBy = (value?: string): value is GroupByOption =>
+  GROUP_BY_OPTIONS.includes(value as GroupByOption);
+
+export const ORDER_BY_OPTIONS = ["id", "eventId", "startDate"] as const;
+export type OrderByOption = (typeof ORDER_BY_OPTIONS)[number];
+export const isValidOrderBy = (value?: string): value is OrderByOption =>
+  ORDER_BY_OPTIONS.includes(value as OrderByOption);
 
 export type GetRaceTotalsFilters = {
   startDateRange?: DateRangeFilter;
