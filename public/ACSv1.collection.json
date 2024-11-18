@@ -16,7 +16,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/races?limit=100&name=vol&orderby=id&direction=asc",
+							"raw": "http://localhost:8080/api/v1/races?name=vol&orderby=id&direction=asc&limit=2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -28,11 +28,6 @@
 								"races"
 							],
 							"query": [
-								{
-									"key": "limit",
-									"value": "100",
-									"description": "number: limit the number of races returned"
-								},
 								{
 									"key": "name",
 									"value": "vol",
@@ -59,12 +54,117 @@
 									"value": "",
 									"description": "number: an event id",
 									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "2"
 								}
 							]
 						},
 						"description": "/races\n\nGet a list of races."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "a list of Races",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/races?name=vol&orderby=id&direction=asc&limit=2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"races"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "vol",
+											"description": "string: filter by event name"
+										},
+										{
+											"key": "orderby",
+											"value": "id",
+											"description": "id | eventId | startDate"
+										},
+										{
+											"key": "direction",
+											"value": "asc",
+											"description": "asc | desc"
+										},
+										{
+											"key": "ids",
+											"value": "",
+											"description": "number[]: a listof race ids",
+											"disabled": true
+										},
+										{
+											"key": "eventid",
+											"value": "",
+											"description": "number: an event id",
+											"disabled": true
+										},
+										{
+											"key": "limit",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "access-control-allow-headers",
+									"value": "Content-Type"
+								},
+								{
+									"key": "access-control-allow-methods",
+									"value": "GET, POST, OPTIONS"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "x-middleware-rewrite",
+									"value": "/api/v1/races?name=vol&orderby=id&direction=asc&limit=2"
+								},
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 18 Nov 2024 01:22:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 34,\n        \"eventId\": 34,\n        \"raceTypeId\": 1,\n        \"startDate\": \"2022-05-24\",\n        \"endDate\": null,\n        \"location\": \"Tampere, Tunisia\",\n        \"event\": {\n            \"id\": 34,\n            \"name\": \"Volta Ciclista a Teseney\"\n        },\n        \"raceType\": {\n            \"id\": 1,\n            \"name\": \"Road\",\n            \"description\": \"Road Race Type\"\n        }\n    },\n    {\n        \"id\": 38,\n        \"eventId\": 38,\n        \"raceTypeId\": 1,\n        \"startDate\": \"2021-03-07\",\n        \"endDate\": null,\n        \"location\": \"Prague, Croatia\",\n        \"event\": {\n            \"id\": 38,\n            \"name\": \"Volta Ciclista a Shahdol\"\n        },\n        \"raceType\": {\n            \"id\": 1,\n            \"name\": \"Road\",\n            \"description\": \"Road Race Type\"\n        }\n    }\n]"
+						}
+					]
 				},
 				{
 					"name": "a new Race",
@@ -95,7 +195,84 @@
 						},
 						"description": "/races\n\nCreate a race."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "a new Race",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n      \"name\": \"Killerwat Grass Crit\",\n      \"raceTypeId\": 1,\n      \"startDate\": \"Fri Apr 12 2024\",\n      \"endDate\": null,\n      \"location\": \"Northfield, MA\"\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/races",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"races"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "access-control-allow-headers",
+									"value": "Content-Type"
+								},
+								{
+									"key": "access-control-allow-methods",
+									"value": "GET, POST, OPTIONS"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "x-middleware-rewrite",
+									"value": "/api/v1/races"
+								},
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 18 Nov 2024 01:23:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 507,\n    \"eventId\": 508,\n    \"raceTypeId\": 1,\n    \"startDate\": \"2024-04-12\",\n    \"endDate\": null,\n    \"location\": \"Northfield, MA\",\n    \"event\": {\n        \"id\": 508,\n        \"name\": \"Killerwat Grass Crit\"\n    },\n    \"raceType\": {\n        \"id\": 1,\n        \"name\": \"Road\",\n        \"description\": \"Road Race Type\"\n    }\n}"
+						}
+					]
 				},
 				{
 					"name": "a list of all Categories",
@@ -118,7 +295,76 @@
 						},
 						"description": "races/categories"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "a list of all Categories",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/races/categories",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"races",
+										"categories"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "access-control-allow-headers",
+									"value": "Content-Type"
+								},
+								{
+									"key": "access-control-allow-methods",
+									"value": "GET, POST, OPTIONS"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "x-middleware-rewrite",
+									"value": "/api/v1/races/categories"
+								},
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 18 Nov 2024 01:23:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men Under 14\",\n        \"description\": \"Gran Fondo age group from 1 to 13 for Men\"\n    },\n    {\n        \"id\": 2,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women 30-34\",\n        \"description\": \"Gran Fondo age group from 30 to 34 for Women\"\n    },\n    {\n        \"id\": 3,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women 35-39\",\n        \"description\": \"Gran Fondo age group from 35 to 39 for Women\"\n    },\n    {\n        \"id\": 4,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary 30-34\",\n        \"description\": \"Gran Fondo age group from 30 to 34 for Non Binary\"\n    },\n    {\n        \"id\": 5,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary 35-39\",\n        \"description\": \"Gran Fondo age group from 35 to 39 for Non Binary\"\n    },\n    {\n        \"id\": 6,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary 25-29\",\n        \"description\": \"Gran Fondo age group from 25 to 29 for Non Binary\"\n    },\n    {\n        \"id\": 7,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men 35-39\",\n        \"description\": \"Gran Fondo age group from 35 to 39 for Men\"\n    },\n    {\n        \"id\": 8,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men 40-44\",\n        \"description\": \"Gran Fondo age group from 40 to 44 for Men\"\n    },\n    {\n        \"id\": 9,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men 30-34\",\n        \"description\": \"Gran Fondo age group from 30 to 34 for Men\"\n    },\n    {\n        \"id\": 10,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men 19-24\",\n        \"description\": \"Gran Fondo age group from 19 to 24 for Men\"\n    },\n    {\n        \"id\": 11,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men 50-54\",\n        \"description\": \"Gran Fondo age group from 50 to 54 for Men\"\n    },\n    {\n        \"id\": 12,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women 55-59\",\n        \"description\": \"Gran Fondo age group from 55 to 59 for Women\"\n    },\n    {\n        \"id\": 13,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary 14-16\",\n        \"description\": \"Gran Fondo age group from 14 to 16 for Non Binary\"\n    },\n    {\n        \"id\": 14,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary 40-44\",\n        \"description\": \"Gran Fondo age group from 40 to 44 for Non Binary\"\n    },\n    {\n        \"id\": 15,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women 60-64\",\n        \"description\": \"Gran Fondo age group from 60 to 64 for Women\"\n    },\n    {\n        \"id\": 16,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women 50-54\",\n        \"description\": \"Gran Fondo age group from 50 to 54 for Women\"\n    },\n    {\n        \"id\": 17,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary 55-59\",\n        \"description\": \"Gran Fondo age group from 55 to 59 for Non Binary\"\n    },\n    {\n        \"id\": 18,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women 65-69\",\n        \"description\": \"Gran Fondo age group from 64 to 69 for Women\"\n    },\n    {\n        \"id\": 19,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary 50-54\",\n        \"description\": \"Gran Fondo age group from 50 to 54 for Non Binary\"\n    },\n    {\n        \"id\": 20,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men 60-64\",\n        \"description\": \"Gran Fondo age group from 60 to 64 for Men\"\n    },\n    {\n        \"id\": 21,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men 45-49\",\n        \"description\": \"Gran Fondo age group from 45 to 49 for Men\"\n    },\n    {\n        \"id\": 22,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary 60-64\",\n        \"description\": \"Gran Fondo age group from 60 to 64 for Non Binary\"\n    },\n    {\n        \"id\": 24,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary 65-69\",\n        \"description\": \"Gran Fondo age group from 64 to 69 for Non Binary\"\n    },\n    {\n        \"id\": 25,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women 70-74\",\n        \"description\": \"Gran Fondo age group from 70 to 74 for Women\"\n    },\n    {\n        \"id\": 27,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women 45-49\",\n        \"description\": \"Gran Fondo age group from 45 to 49 for Women\"\n    },\n    {\n        \"id\": 29,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary 70-74\",\n        \"description\": \"Gran Fondo age group from 70 to 74 for Non Binary\"\n    },\n    {\n        \"id\": 33,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women 75 and Over\",\n        \"description\": \"Gran Fondo age group from 75 to 999 for Women\"\n    },\n    {\n        \"id\": 38,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary Under 23\",\n        \"description\": \"Gran Fondo age group from 1 to 22 for Non Binary\"\n    },\n    {\n        \"id\": 43,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men Open\",\n        \"description\": \"Gran Fondo age group from 1 to 999 for Men\"\n    },\n    {\n        \"id\": 49,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women 35+\",\n        \"description\": \"Gran Fondo age group from 35 to 999 for Women\"\n    },\n    {\n        \"id\": 54,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women 45+\",\n        \"description\": \"Gran Fondo age group from 45 to 999 for Women\"\n    },\n    {\n        \"id\": 62,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men 60+\",\n        \"description\": \"Gran Fondo age group from 60 to 999 for Men\"\n    },\n    {\n        \"id\": 66,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women 70+\",\n        \"description\": \"Gran Fondo age group from 70 to 999 for Women\"\n    },\n    {\n        \"id\": 73,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men 70+\",\n        \"description\": \"Gran Fondo age group from 70 to 999 for Men\"\n    },\n    {\n        \"id\": 81,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women Cat 1\",\n        \"description\": \"Gran Fondo age group from 1 to 999 for Women\"\n    },\n    {\n        \"id\": 88,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women 17-18\",\n        \"description\": \"Gran Fondo age group from 17 to 18 for Women\"\n    },\n    {\n        \"id\": 90,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men Cat 3\",\n        \"description\": \"Gran Fondo age group from 1 to 999 for Men\"\n    },\n    {\n        \"id\": 98,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary Novice\",\n        \"description\": \"Gran Fondo age group from 1 to 999 for Non Binary\"\n    },\n    {\n        \"id\": 102,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women 40-44\",\n        \"description\": \"Gran Fondo age group from 40 to 44 for Women\"\n    },\n    {\n        \"id\": 23,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women 14-16\",\n        \"description\": \"Gran Fondo age group from 14 to 16 for Women\"\n    },\n    {\n        \"id\": 26,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men 55-59\",\n        \"description\": \"Gran Fondo age group from 55 to 59 for Men\"\n    },\n    {\n        \"id\": 28,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men 65-69\",\n        \"description\": \"Gran Fondo age group from 64 to 69 for Men\"\n    },\n    {\n        \"id\": 31,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men 70-74\",\n        \"description\": \"Gran Fondo age group from 70 to 74 for Men\"\n    },\n    {\n        \"id\": 34,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men 75 and Over\",\n        \"description\": \"Gran Fondo age group from 75 to 999 for Men\"\n    },\n    {\n        \"id\": 37,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary Open\",\n        \"description\": \"Gran Fondo age group from 1 to 999 for Non Binary\"\n    },\n    {\n        \"id\": 42,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men Under 23\",\n        \"description\": \"Gran Fondo age group from 1 to 22 for Men\"\n    },\n    {\n        \"id\": 48,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men Juniors\",\n        \"description\": \"Gran Fondo age group from 1 to 17 for Men\"\n    },\n    {\n        \"id\": 56,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men 35+\",\n        \"description\": \"Gran Fondo age group from 35 to 999 for Men\"\n    },\n    {\n        \"id\": 60,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men 55+\",\n        \"description\": \"Gran Fondo age group from 55 to 999 for Men\"\n    },\n    {\n        \"id\": 70,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary 50+\",\n        \"description\": \"Gran Fondo age group from 50 to 999 for Non Binary\"\n    },\n    {\n        \"id\": 76,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men Cat 1\",\n        \"description\": \"Gran Fondo age group from 1 to 999 for Men\"\n    },\n    {\n        \"id\": 86,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary Cat 2\",\n        \"description\": \"Gran Fondo age group from 1 to 999 for Non Binary\"\n    },\n    {\n        \"id\": 92,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary Pro\",\n        \"description\": \"Gran Fondo age group from 1 to 999 for Non Binary\"\n    },\n    {\n        \"id\": 30,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women Under 14\",\n        \"description\": \"Gran Fondo age group from 1 to 13 for Women\"\n    },\n    {\n        \"id\": 35,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary Juniors\",\n        \"description\": \"Gran Fondo age group from 1 to 17 for Non Binary\"\n    },\n    {\n        \"id\": 39,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary 75 and Over\",\n        \"description\": \"Gran Fondo age group from 75 to 999 for Non Binary\"\n    },\n    {\n        \"id\": 45,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary 30+\",\n        \"description\": \"Gran Fondo age group from 30 to 999 for Non Binary\"\n    },\n    {\n        \"id\": 50,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women Under 23\",\n        \"description\": \"Gran Fondo age group from 1 to 22 for Women\"\n    },\n    {\n        \"id\": 57,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men 40+\",\n        \"description\": \"Gran Fondo age group from 40 to 999 for Men\"\n    },\n    {\n        \"id\": 63,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women 50+\",\n        \"description\": \"Gran Fondo age group from 50 to 999 for Women\"\n    },\n    {\n        \"id\": 69,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary 60+\",\n        \"description\": \"Gran Fondo age group from 60 to 999 for Non Binary\"\n    },\n    {\n        \"id\": 79,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary Cat 1\",\n        \"description\": \"Gran Fondo age group from 1 to 999 for Non Binary\"\n    },\n    {\n        \"id\": 87,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women Cat 3\",\n        \"description\": \"Gran Fondo age group from 1 to 999 for Women\"\n    },\n    {\n        \"id\": 96,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men Novice\",\n        \"description\": \"Gran Fondo age group from 1 to 999 for Men\"\n    },\n    {\n        \"id\": 32,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men 17-18\",\n        \"description\": \"Gran Fondo age group from 17 to 18 for Men\"\n    },\n    {\n        \"id\": 36,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary 45-49\",\n        \"description\": \"Gran Fondo age group from 45 to 49 for Non Binary\"\n    },\n    {\n        \"id\": 41,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men 30+\",\n        \"description\": \"Gran Fondo age group from 30 to 999 for Men\"\n    },\n    {\n        \"id\": 47,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women Open\",\n        \"description\": \"Gran Fondo age group from 1 to 999 for Women\"\n    },\n    {\n        \"id\": 51,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary 35+\",\n        \"description\": \"Gran Fondo age group from 35 to 999 for Non Binary\"\n    },\n    {\n        \"id\": 58,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary 40+\",\n        \"description\": \"Gran Fondo age group from 40 to 999 for Non Binary\"\n    },\n    {\n        \"id\": 64,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men 45+\",\n        \"description\": \"Gran Fondo age group from 45 to 999 for Men\"\n    },\n    {\n        \"id\": 72,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary 80+\",\n        \"description\": \"Gran Fondo age group from 80 to 999 for Non Binary\"\n    },\n    {\n        \"id\": 78,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men Pro\",\n        \"description\": \"Gran Fondo age group from 1 to 999 for Men\"\n    },\n    {\n        \"id\": 84,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women Cat 2\",\n        \"description\": \"Gran Fondo age group from 1 to 999 for Women\"\n    },\n    {\n        \"id\": 97,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary Cat 4\",\n        \"description\": \"Gran Fondo age group from 1 to 999 for Non Binary\"\n    },\n    {\n        \"id\": 100,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men 14-16\",\n        \"description\": \"Gran Fondo age group from 14 to 16 for Men\"\n    },\n    {\n        \"id\": 40,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women 19-24\",\n        \"description\": \"Gran Fondo age group from 19 to 24 for Women\"\n    },\n    {\n        \"id\": 46,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women 30+\",\n        \"description\": \"Gran Fondo age group from 30 to 999 for Women\"\n    },\n    {\n        \"id\": 55,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women 40+\",\n        \"description\": \"Gran Fondo age group from 40 to 999 for Women\"\n    },\n    {\n        \"id\": 61,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary 45+\",\n        \"description\": \"Gran Fondo age group from 45 to 999 for Non Binary\"\n    },\n    {\n        \"id\": 68,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women 55+\",\n        \"description\": \"Gran Fondo age group from 55 to 999 for Women\"\n    },\n    {\n        \"id\": 77,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women 80+\",\n        \"description\": \"Gran Fondo age group from 80 to 999 for Women\"\n    },\n    {\n        \"id\": 85,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women Pro\",\n        \"description\": \"Gran Fondo age group from 1 to 999 for Women\"\n    },\n    {\n        \"id\": 91,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men Cat 4\",\n        \"description\": \"Gran Fondo age group from 1 to 999 for Men\"\n    },\n    {\n        \"id\": 44,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women 25-29\",\n        \"description\": \"Gran Fondo age group from 25 to 29 for Women\"\n    },\n    {\n        \"id\": 53,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women Juniors\",\n        \"description\": \"Gran Fondo age group from 1 to 17 for Women\"\n    },\n    {\n        \"id\": 59,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary 55+\",\n        \"description\": \"Gran Fondo age group from 55 to 999 for Non Binary\"\n    },\n    {\n        \"id\": 67,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women 60+\",\n        \"description\": \"Gran Fondo age group from 60 to 999 for Women\"\n    },\n    {\n        \"id\": 74,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary 70+\",\n        \"description\": \"Gran Fondo age group from 70 to 999 for Non Binary\"\n    },\n    {\n        \"id\": 83,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary Pro\",\n        \"description\": \"Gran Fondo age group from 1 to 999 for Non Binary\"\n    },\n    {\n        \"id\": 94,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary Cat 3\",\n        \"description\": \"Gran Fondo age group from 1 to 999 for Non Binary\"\n    },\n    {\n        \"id\": 99,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men 25-29\",\n        \"description\": \"Gran Fondo age group from 25 to 29 for Men\"\n    },\n    {\n        \"id\": 52,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary 17-18\",\n        \"description\": \"Gran Fondo age group from 17 to 18 for Non Binary\"\n    },\n    {\n        \"id\": 65,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men 50+\",\n        \"description\": \"Gran Fondo age group from 50 to 999 for Men\"\n    },\n    {\n        \"id\": 71,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men 80+\",\n        \"description\": \"Gran Fondo age group from 80 to 999 for Men\"\n    },\n    {\n        \"id\": 75,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women Pro\",\n        \"description\": \"Gran Fondo age group from 1 to 999 for Women\"\n    },\n    {\n        \"id\": 82,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men Pro\",\n        \"description\": \"Gran Fondo age group from 1 to 999 for Men\"\n    },\n    {\n        \"id\": 95,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women Cat 4\",\n        \"description\": \"Gran Fondo age group from 1 to 999 for Women\"\n    },\n    {\n        \"id\": 101,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary 19-24\",\n        \"description\": \"Gran Fondo age group from 19 to 24 for Non Binary\"\n    },\n    {\n        \"id\": 80,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Non Binary Under 14\",\n        \"description\": \"Gran Fondo age group from 1 to 13 for Non Binary\"\n    },\n    {\n        \"id\": 89,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Men Cat 2\",\n        \"description\": \"Gran Fondo age group from 1 to 999 for Men\"\n    },\n    {\n        \"id\": 93,\n        \"disicpline\": \"Gran Fondo\",\n        \"name\": \"Women Novice\",\n        \"description\": \"Gran Fondo age group from 1 to 999 for Women\"\n    }\n]"
+						}
+					]
 				},
 				{
 					"name": "a total count of Races and Results",
@@ -158,7 +404,93 @@
 						},
 						"description": "/races/totals\n\nGet the total count of races and results for a given time period, grouped by either 'month', 'quarter' or 'year'."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "a total count of Races and Results",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/races/totals?from=2024-01-01&to=2024-09-01&groupby=month",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"races",
+										"totals"
+									],
+									"query": [
+										{
+											"key": "from",
+											"value": "2024-01-01",
+											"description": "YYY-MM-DD: start of date range"
+										},
+										{
+											"key": "to",
+											"value": "2024-09-01",
+											"description": "YYY-MM-DD: end of date range"
+										},
+										{
+											"key": "groupby",
+											"value": "month",
+											"description": "month | quarter | year"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "access-control-allow-headers",
+									"value": "Content-Type"
+								},
+								{
+									"key": "access-control-allow-methods",
+									"value": "GET, POST, OPTIONS"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "x-middleware-rewrite",
+									"value": "/api/v1/races/totals?from=2024-01-01&to=2024-09-01&groupby=month"
+								},
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 18 Nov 2024 01:23:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"startDate\": \"2024-01-01T05:00:00.000Z\",\n        \"totalRaces\": 6,\n        \"totalRiders\": 205\n    },\n    {\n        \"startDate\": \"2024-02-01T05:00:00.000Z\",\n        \"totalRaces\": 11,\n        \"totalRiders\": 379\n    },\n    {\n        \"startDate\": \"2024-03-01T05:00:00.000Z\",\n        \"totalRaces\": 8,\n        \"totalRiders\": 272\n    },\n    {\n        \"startDate\": \"2024-04-01T04:00:00.000Z\",\n        \"totalRaces\": 14,\n        \"totalRiders\": 315\n    },\n    {\n        \"startDate\": \"2024-05-01T04:00:00.000Z\",\n        \"totalRaces\": 1,\n        \"totalRiders\": 37\n    },\n    {\n        \"startDate\": \"2024-06-01T04:00:00.000Z\",\n        \"totalRaces\": 6,\n        \"totalRiders\": 203\n    },\n    {\n        \"startDate\": \"2024-07-01T04:00:00.000Z\",\n        \"totalRaces\": 9,\n        \"totalRiders\": 300\n    },\n    {\n        \"startDate\": \"2024-08-01T04:00:00.000Z\",\n        \"totalRaces\": 11,\n        \"totalRiders\": 385\n    }\n]"
+						}
+					]
 				},
 				{
 					"name": "a list of Results for a single Race",
@@ -182,7 +514,77 @@
 						},
 						"description": "/races/\\[id\\]/results"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "a list of Results for a single Race",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/races/5/results",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"races",
+										"5",
+										"results"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "access-control-allow-headers",
+									"value": "Content-Type"
+								},
+								{
+									"key": "access-control-allow-methods",
+									"value": "GET, POST, OPTIONS"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "x-middleware-rewrite",
+									"value": "/api/v1/races/5/results"
+								},
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 18 Nov 2024 01:24:09 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 152,\n        \"eventId\": 5,\n        \"riderId\": 19,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 1,\n        \"time\": \"\",\n        \"points\": 115,\n        \"rider\": {\n            \"id\": 19,\n            \"firstName\": \"Spedvagon\",\n            \"lastName\": \"De Minus\",\n            \"dob\": \"Mon Jan 15 2001\",\n            \"country\": \"Ukraine\",\n            \"hometown\": \"Chiang Mai\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/ec/florian-senechal-2024.jpg\",\n            \"strava\": \"996863\",\n            \"insta\": \"pl\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 161,\n        \"eventId\": 5,\n        \"riderId\": 17,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 4,\n        \"time\": \"\",\n        \"points\": 70,\n        \"rider\": {\n            \"id\": 17,\n            \"firstName\": \"Biniam\",\n            \"lastName\": \"McRothair\",\n            \"dob\": \"Thu Jul 12 1990\",\n            \"country\": \"Australia\",\n            \"hometown\": \"Metz\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/ff/lorena-wiebes-2024-n2.jpeg\",\n            \"strava\": \"4708197\",\n            \"insta\": \"na\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 170,\n        \"eventId\": 5,\n        \"riderId\": 41,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 19,\n        \"time\": \"\",\n        \"points\": 0,\n        \"rider\": {\n            \"id\": 41,\n            \"firstName\": \"Magnus\",\n            \"lastName\": \"Ghekiere\",\n            \"dob\": \"Wed Jan 09 1985\",\n            \"country\": \"Norway\",\n            \"hometown\": \"Uddevella\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/ca/egan-bernal-2024.jpg\",\n            \"strava\": \"9645046\",\n            \"insta\": \"zovqkuqdqpqazl\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 179,\n        \"eventId\": 5,\n        \"riderId\": 24,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 2,\n        \"time\": \"\",\n        \"points\": 100,\n        \"rider\": {\n            \"id\": 24,\n            \"firstName\": \"Murbo\",\n            \"lastName\": \"Barder\",\n            \"dob\": \"Wed May 09 1984\",\n            \"country\": \"Guatemala\",\n            \"hometown\": \"Cordoba\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/ea/enric-mas-2024.jpeg\",\n            \"strava\": \"1266622\",\n            \"insta\": \"agifgzyfzoqhx\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 144,\n        \"eventId\": 5,\n        \"riderId\": 8,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 33,\n        \"time\": \"\",\n        \"points\": 0,\n        \"rider\": {\n            \"id\": 8,\n            \"firstName\": \"Katarzyna\",\n            \"lastName\": \"Paceclim\",\n            \"dob\": \"Wed Aug 30 1995\",\n            \"country\": \"Norway\",\n            \"hometown\": \"Zagreb\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/eb/mattia-cattaneo-2024.jpeg\",\n            \"strava\": \"6701426\",\n            \"insta\": \"nkwl\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 153,\n        \"eventId\": 5,\n        \"riderId\": 20,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 37,\n        \"time\": \"\",\n        \"points\": 0,\n        \"rider\": {\n            \"id\": 20,\n            \"firstName\": \"Mathieu\",\n            \"lastName\": \"Cornt\",\n            \"dob\": \"Fri May 18 1990\",\n            \"country\": \"Puerto Rico\",\n            \"hometown\": \"Hoi An\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/fb/kasper-asgreen-2024.jpeg\",\n            \"strava\": \"4682464\",\n            \"insta\": \"qtm\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 162,\n        \"eventId\": 5,\n        \"riderId\": 34,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 27,\n        \"time\": \"\",\n        \"points\": 0,\n        \"rider\": {\n            \"id\": 34,\n            \"firstName\": \"Xandro\",\n            \"lastName\": \"Sormano\",\n            \"dob\": \"Thu Aug 24 2006\",\n            \"country\": \"Greece\",\n            \"hometown\": \"Reykjavik\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/eb/jens-keukeleire-2023.jpeg\",\n            \"strava\": \"6278699\",\n            \"insta\": \"llcuzaagyc\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 171,\n        \"eventId\": 5,\n        \"riderId\": 28,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 28,\n        \"time\": \"\",\n        \"points\": 0,\n        \"rider\": {\n            \"id\": 28,\n            \"firstName\": \"Xandro\",\n            \"lastName\": \"Terravelo\",\n            \"dob\": \"Tue Feb 15 2005\",\n            \"country\": \"Jordan\",\n            \"hometown\": \"Metz\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/aa/remco-evenepoel-2024.jpeg\",\n            \"strava\": \"8189011\",\n            \"insta\": \"jldyumobpgwcp\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 180,\n        \"eventId\": 5,\n        \"riderId\": 39,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 10,\n        \"time\": \"\",\n        \"points\": 0,\n        \"rider\": {\n            \"id\": 39,\n            \"firstName\": \"Marte\",\n            \"lastName\": \"Rickymas\",\n            \"dob\": \"Mon Mar 27 2006\",\n            \"country\": \"Wales\",\n            \"hometown\": \"Reykjavik\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/eb/mattia-cattaneo-2024.jpeg\",\n            \"strava\": \"9912067\",\n            \"insta\": \"fgt\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 150,\n        \"eventId\": 5,\n        \"riderId\": 16,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 8,\n        \"time\": \"\",\n        \"points\": 10,\n        \"rider\": {\n            \"id\": 16,\n            \"firstName\": \"Matej\",\n            \"lastName\": \"Kamna\",\n            \"dob\": \"Tue May 06 1997\",\n            \"country\": \"Belarus\",\n            \"hometown\": \"Asmara\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/cc/rigoberto-uran-2024.jpeg\",\n            \"strava\": \"8372609\",\n            \"insta\": \"z\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 160,\n        \"eventId\": 5,\n        \"riderId\": 31,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 31,\n        \"time\": \"\",\n        \"points\": 0,\n        \"rider\": {\n            \"id\": 31,\n            \"firstName\": \"Dynamo\",\n            \"lastName\": \"Torqueheed\",\n            \"dob\": \"Fri May 18 2001\",\n            \"country\": \"Norway\",\n            \"hometown\": \"Rijeka\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/eb/mattia-cattaneo-2024.jpeg\",\n            \"strava\": \"3172617\",\n            \"insta\": \"wieajqaxc\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 168,\n        \"eventId\": 5,\n        \"riderId\": 38,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 26,\n        \"time\": \"\",\n        \"points\": 0,\n        \"rider\": {\n            \"id\": 38,\n            \"firstName\": \"Geraint\",\n            \"lastName\": \"Alafilippo\",\n            \"dob\": \"Mon Jan 31 2005\",\n            \"country\": \"Panama\",\n            \"hometown\": \"Tibooburra\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/ea/enric-mas-2024.jpeg\",\n            \"strava\": \"4181190\",\n            \"insta\": \"juhxht\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 177,\n        \"eventId\": 5,\n        \"riderId\": 25,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 30,\n        \"time\": \"\",\n        \"points\": 0,\n        \"rider\": {\n            \"id\": 25,\n            \"firstName\": \"Demi\",\n            \"lastName\": \"Squiban\",\n            \"dob\": \"Sun Jul 21 1991\",\n            \"country\": \"Chile\",\n            \"hometown\": \"Prague\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/eb/jens-keukeleire-2023.jpeg\",\n            \"strava\": \"6696292\",\n            \"insta\": \"hulmdau\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 151,\n        \"eventId\": 5,\n        \"riderId\": 11,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 11,\n        \"time\": \"\",\n        \"points\": 0,\n        \"rider\": {\n            \"id\": 11,\n            \"firstName\": \"Mattias\",\n            \"lastName\": \"McRothair\",\n            \"dob\": \"Fri Nov 15 1991\",\n            \"country\": \"Peru\",\n            \"hometown\": \"Vimmerby\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/bd/merhawi-kudus-2024.png\",\n            \"strava\": \"6361228\",\n            \"insta\": \"fiesujbkwk\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 156,\n        \"eventId\": 5,\n        \"riderId\": 32,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 9,\n        \"time\": \"\",\n        \"points\": 0,\n        \"rider\": {\n            \"id\": 32,\n            \"firstName\": \"Zephyr\",\n            \"lastName\": \"Tourbolet\",\n            \"dob\": \"Mon Apr 23 1984\",\n            \"country\": \"Scotland\",\n            \"hometown\": \"Broken Hill\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/fa/michael-morkov-2024.jpg\",\n            \"strava\": \"1591863\",\n            \"insta\": \"xvcyvkovdic\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 165,\n        \"eventId\": 5,\n        \"riderId\": 15,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 7,\n        \"time\": \"\",\n        \"points\": 25,\n        \"rider\": {\n            \"id\": 15,\n            \"firstName\": \"Sepp\",\n            \"lastName\": \"Markrus\",\n            \"dob\": \"Sat Oct 20 1984\",\n            \"country\": \"Puerto Rico\",\n            \"hometown\": \"Passe de Kourizo\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/df/matteo-jorgenson-2024.jpeg\",\n            \"strava\": \"9797010\",\n            \"insta\": \"oedhxommck\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 178,\n        \"eventId\": 5,\n        \"riderId\": 29,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 35,\n        \"time\": \"\",\n        \"points\": 0,\n        \"rider\": {\n            \"id\": 29,\n            \"firstName\": \"Mattias\",\n            \"lastName\": \"Siverkov\",\n            \"dob\": \"Sat Aug 27 1988\",\n            \"country\": \"Estonia\",\n            \"hometown\": \"Grenada\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/fc/lotte-kopecky-2024-n2.jpeg\",\n            \"strava\": \"3054718\",\n            \"insta\": \"aquzntsg\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 148,\n        \"eventId\": 5,\n        \"riderId\": 9,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 16,\n        \"time\": \"\",\n        \"points\": 0,\n        \"rider\": {\n            \"id\": 9,\n            \"firstName\": \"Thalita\",\n            \"lastName\": \"Van Vleumower\",\n            \"dob\": \"Thu Feb 27 1986\",\n            \"country\": \"Croatia\",\n            \"hometown\": \"Fox Glacier\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/dd/geraint-thomas-2024.jpg\",\n            \"strava\": \"1619538\",\n            \"insta\": \"ndrgahaxqungq\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 155,\n        \"eventId\": 5,\n        \"riderId\": 26,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 20,\n        \"time\": \"\",\n        \"points\": 0,\n        \"rider\": {\n            \"id\": 26,\n            \"firstName\": \"Filippo\",\n            \"lastName\": \"Paceclim\",\n            \"dob\": \"Mon Mar 02 1987\",\n            \"country\": \"Indonesia\",\n            \"hometown\": \"Rijeka\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/eb/mattia-cattaneo-2024.jpeg\",\n            \"strava\": \"4358756\",\n            \"insta\": \"gdxyfxuiyrghvn\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 164,\n        \"eventId\": 5,\n        \"riderId\": 36,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 17,\n        \"time\": \"\",\n        \"points\": 0,\n        \"rider\": {\n            \"id\": 36,\n            \"firstName\": \"Enric\",\n            \"lastName\": \"Giauman\",\n            \"dob\": \"Wed Sep 28 2005\",\n            \"country\": \"Slovenia\",\n            \"hometown\": \"Tampere\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/ce/grace-brown-2022-n2.jpg\",\n            \"strava\": \"9281875\",\n            \"insta\": \"axde\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 175,\n        \"eventId\": 5,\n        \"riderId\": 35,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 34,\n        \"time\": \"\",\n        \"points\": 0,\n        \"rider\": {\n            \"id\": 35,\n            \"firstName\": \"Harold\",\n            \"lastName\": \"Koolkoolkool\",\n            \"dob\": \"Sat Jun 05 2004\",\n            \"country\": \"Sweden\",\n            \"hometown\": \"Seoni\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/ee/neilson-powless-2024.jpeg\",\n            \"strava\": \"4893701\",\n            \"insta\": \"efatihvkf\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 145,\n        \"eventId\": 5,\n        \"riderId\": 13,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 3,\n        \"time\": \"\",\n        \"points\": 85,\n        \"rider\": {\n            \"id\": 13,\n            \"firstName\": \"Katarzyna\",\n            \"lastName\": \"Lancia-pneumatici\",\n            \"dob\": \"Fri Nov 05 1999\",\n            \"country\": \"Greece\",\n            \"hometown\": \"Malaga\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/dd/geraint-thomas-2024.jpg\",\n            \"strava\": \"4413982\",\n            \"insta\": \"n\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 154,\n        \"eventId\": 5,\n        \"riderId\": 22,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 36,\n        \"time\": \"\",\n        \"points\": 0,\n        \"rider\": {\n            \"id\": 22,\n            \"firstName\": \"Jhonatan\",\n            \"lastName\": \"Cuss\",\n            \"dob\": \"Thu Oct 19 2000\",\n            \"country\": \"Scotland\",\n            \"hometown\": \"Flinders Rangers\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/ae/marianne-vos-2024.png\",\n            \"strava\": \"7086712\",\n            \"insta\": \"vfsohk\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 163,\n        \"eventId\": 5,\n        \"riderId\": 12,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 32,\n        \"time\": \"\",\n        \"points\": 0,\n        \"rider\": {\n            \"id\": 12,\n            \"firstName\": \"Zestnor\",\n            \"lastName\": \"Galb\",\n            \"dob\": \"Tue Oct 21 2003\",\n            \"country\": \"Hungary\",\n            \"hometown\": \"Burlington\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/df/matteo-jorgenson-2024.jpeg\",\n            \"strava\": \"3226592\",\n            \"insta\": \"gxwlqavyphohkc\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 172,\n        \"eventId\": 5,\n        \"riderId\": 42,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 13,\n        \"time\": \"\",\n        \"points\": 0,\n        \"rider\": {\n            \"id\": 42,\n            \"firstName\": \"Matteo\",\n            \"lastName\": \"Arrow\",\n            \"dob\": \"Mon Jun 04 1990\",\n            \"country\": \"Kenya\",\n            \"hometown\": \"Florence\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/bd/marc-soler-2024-n2.jpeg\",\n            \"strava\": \"127532\",\n            \"insta\": \"tjv\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 146,\n        \"eventId\": 5,\n        \"riderId\": 21,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 12,\n        \"time\": \"\",\n        \"points\": 0,\n        \"rider\": {\n            \"id\": 21,\n            \"firstName\": \"Xandro\",\n            \"lastName\": \"Chabbo\",\n            \"dob\": \"Thu Mar 09 2006\",\n            \"country\": \"Burundi\",\n            \"hometown\": \"Hamburg\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/dc/ben-healy-2024.jpeg\",\n            \"strava\": \"7355646\",\n            \"insta\": \"c\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 159,\n        \"eventId\": 5,\n        \"riderId\": 33,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 15,\n        \"time\": \"\",\n        \"points\": 0,\n        \"rider\": {\n            \"id\": 33,\n            \"firstName\": \"Fem\",\n            \"lastName\": \"Johanndort\",\n            \"dob\": \"Sun Nov 14 1993\",\n            \"country\": \"Lithuania\",\n            \"hometown\": \"Bled\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/cf/amber-kraak-2024.jpg\",\n            \"strava\": \"2005234\",\n            \"insta\": \"zxgmcqzzzme\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 166,\n        \"eventId\": 5,\n        \"riderId\": 40,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 18,\n        \"time\": \"\",\n        \"points\": 0,\n        \"rider\": {\n            \"id\": 40,\n            \"firstName\": \"Sonic\",\n            \"lastName\": \"Rowerowski\",\n            \"dob\": \"Fri Oct 01 2004\",\n            \"country\": \"Bulgaria\",\n            \"hometown\": \"Dublin\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/ea/enric-mas-2024.jpeg\",\n            \"strava\": \"9902889\",\n            \"insta\": \"utmhbermbmzgar\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 174,\n        \"eventId\": 5,\n        \"riderId\": 43,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 29,\n        \"time\": \"\",\n        \"points\": 0,\n        \"rider\": {\n            \"id\": 43,\n            \"firstName\": \"Antonia\",\n            \"lastName\": \"Ciccolo\",\n            \"dob\": \"Sat Jul 07 1990\",\n            \"country\": \"Panama\",\n            \"hometown\": \"Burlington\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/fa/michael-morkov-2024.jpg\",\n            \"strava\": \"298111\",\n            \"insta\": \"phpo\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 147,\n        \"eventId\": 5,\n        \"riderId\": 14,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 21,\n        \"time\": \"\",\n        \"points\": 0,\n        \"rider\": {\n            \"id\": 14,\n            \"firstName\": \"Harold\",\n            \"lastName\": \"Vons\",\n            \"dob\": \"Fri Aug 22 2003\",\n            \"country\": \"Malaysia\",\n            \"hometown\": \"Dao Timmi\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/ca/egan-bernal-2024.jpg\",\n            \"strava\": \"6623078\",\n            \"insta\": \"gkweanhw\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 158,\n        \"eventId\": 5,\n        \"riderId\": 27,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 6,\n        \"time\": \"\",\n        \"points\": 40,\n        \"rider\": {\n            \"id\": 27,\n            \"firstName\": \"Cecilie\",\n            \"lastName\": \"Gavia\",\n            \"dob\": \"Tue Mar 01 1994\",\n            \"country\": \"Peru\",\n            \"hometown\": \"Broken Hill\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/ab/tobias-halland-johannessen-2024.png\",\n            \"strava\": \"2461522\",\n            \"insta\": \"ckhoqbgvmbhkfbp\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 167,\n        \"eventId\": 5,\n        \"riderId\": 23,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 14,\n        \"time\": \"\",\n        \"points\": 0,\n        \"rider\": {\n            \"id\": 23,\n            \"firstName\": \"Cecilie\",\n            \"lastName\": \"Gamma\",\n            \"dob\": \"Mon May 12 1997\",\n            \"country\": \"Wales\",\n            \"hometown\": \"Ulsan\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/ea/enric-mas-2024.jpeg\",\n            \"strava\": \"1162576\",\n            \"insta\": \"mteheltvajsgkfn\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 173,\n        \"eventId\": 5,\n        \"riderId\": 18,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 24,\n        \"time\": \"\",\n        \"points\": 0,\n        \"rider\": {\n            \"id\": 18,\n            \"firstName\": \"Katarzyna\",\n            \"lastName\": \"Kamna\",\n            \"dob\": \"Thu Feb 26 2004\",\n            \"country\": \"Germany\",\n            \"hometown\": \"Brussels\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/eb/mattia-cattaneo-2024.jpeg\",\n            \"strava\": \"353540\",\n            \"insta\": \"dvzhiwiecarrgzj\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 149,\n        \"eventId\": 5,\n        \"riderId\": 10,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 25,\n        \"time\": \"\",\n        \"points\": 0,\n        \"rider\": {\n            \"id\": 10,\n            \"firstName\": \"Harold\",\n            \"lastName\": \"Gamma\",\n            \"dob\": \"Sun Aug 05 2001\",\n            \"country\": \"Croatia\",\n            \"hometown\": \"Dao Timmi\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/cc/rigoberto-uran-2024.jpeg\",\n            \"strava\": \"7898112\",\n            \"insta\": \"fclhne\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 157,\n        \"eventId\": 5,\n        \"riderId\": 30,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 22,\n        \"time\": \"\",\n        \"points\": 0,\n        \"rider\": {\n            \"id\": 30,\n            \"firstName\": \"Nielson\",\n            \"lastName\": \"Tacktheritrix\",\n            \"dob\": \"Wed Mar 29 2000\",\n            \"country\": \"UK\",\n            \"hometown\": \"Dublin\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/df/matteo-jorgenson-2024.jpeg\",\n            \"strava\": \"5447158\",\n            \"insta\": \"qokpuhzkyxgf\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 169,\n        \"eventId\": 5,\n        \"riderId\": 37,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 23,\n        \"time\": \"\",\n        \"points\": 0,\n        \"rider\": {\n            \"id\": 37,\n            \"firstName\": \"Thymen\",\n            \"lastName\": \"Madyuas\",\n            \"dob\": \"Tue Feb 06 1990\",\n            \"country\": \"Nicaragua\",\n            \"hometown\": \"Debark\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/ea/alberto-bettiol-2024-n2-n3.jpg\",\n            \"strava\": \"7899573\",\n            \"insta\": \"aoylnn\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    },\n    {\n        \"id\": 176,\n        \"eventId\": 5,\n        \"riderId\": 44,\n        \"resultTypeId\": 1,\n        \"noPlaceCodeTypeId\": 1,\n        \"lap\": null,\n        \"place\": 5,\n        \"time\": \"\",\n        \"points\": 55,\n        \"rider\": {\n            \"id\": 44,\n            \"firstName\": \"Cyclistopher\",\n            \"lastName\": \"Velocepede\",\n            \"dob\": \"Sun Jan 14 2001\",\n            \"country\": \"Greece\",\n            \"hometown\": \"Mildura\",\n            \"photo\": \"https://www.procyclingstats.com/images/riders/bp/eb/jens-keukeleire-2023.jpeg\",\n            \"strava\": \"9209250\",\n            \"insta\": \"hxutcmnydtyyiih\",\n            \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n        },\n        \"event\": {\n            \"id\": 5,\n            \"name\": \"Dao Timmi Shahdol\",\n            \"Race\": [\n                {\n                    \"id\": 5,\n                    \"eventId\": 5,\n                    \"raceTypeId\": 1,\n                    \"startDate\": \"2021-06-27\",\n                    \"endDate\": null,\n                    \"location\": \"Antalya, Lithuania\",\n                    \"raceType\": {\n                        \"id\": 1,\n                        \"name\": \"Road\",\n                        \"description\": \"Road Race Type\"\n                    }\n                }\n            ]\n        },\n        \"resultType\": {\n            \"id\": 1,\n            \"name\": \"default\",\n            \"description\": \"Default Result Type\"\n        },\n        \"noPlaceCodeType\": {\n            \"id\": 1,\n            \"name\": \"NA\",\n            \"description\": \"Participant Placed\"\n        }\n    }\n]"
+						}
+					]
 				},
 				{
 					"name": "a list of recent Results",
@@ -229,7 +631,100 @@
 						},
 						"description": "races/results/recent\n\nGet a list of the most recent races with results. You can limit the. number of races or results that are returned. You can also filter by location."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "a list of recent Results",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/races/results/recent?limit=2&resultlimit=3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"races",
+										"results",
+										"recent"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "2",
+											"description": "number: limit the number of races returned"
+										},
+										{
+											"key": "resultlimit",
+											"value": "3",
+											"description": "number: limit the number of results returned for each race"
+										},
+										{
+											"key": "location",
+											"value": "",
+											"description": "string: filter by location",
+											"disabled": true
+										},
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "access-control-allow-headers",
+									"value": "Content-Type"
+								},
+								{
+									"key": "access-control-allow-methods",
+									"value": "GET, POST, OPTIONS"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "x-middleware-rewrite",
+									"value": "/api/v1/races/results/recent?limit=2&resultlimit=3"
+								},
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 18 Nov 2024 01:24:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"raceId\": 150,\n        \"results\": [\n            {\n                \"id\": 5222,\n                \"eventId\": 150,\n                \"riderId\": 48,\n                \"resultTypeId\": 1,\n                \"noPlaceCodeTypeId\": 1,\n                \"lap\": null,\n                \"place\": 1,\n                \"time\": \"\",\n                \"points\": 114,\n                \"rider\": {\n                    \"id\": 48,\n                    \"firstName\": \"Laurens\",\n                    \"lastName\": \"Grimay\",\n                    \"dob\": \"Mon Jun 10 1985\",\n                    \"country\": \"Greece\",\n                    \"hometown\": \"Modena\",\n                    \"photo\": \"https://www.procyclingstats.com/images/riders/bp/ee/neilson-powless-2024.jpeg\",\n                    \"strava\": \"3734063\",\n                    \"insta\": \"groxqsfmpy\",\n                    \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n                },\n                \"event\": {\n                    \"id\": 150,\n                    \"name\": \"Djado Plateau a Al Malaqi\",\n                    \"Race\": [\n                        {\n                            \"id\": 150,\n                            \"eventId\": 150,\n                            \"raceTypeId\": 1,\n                            \"startDate\": \"2024-11-06\",\n                            \"endDate\": null,\n                            \"location\": \"Akola, Ukraine\",\n                            \"raceType\": {\n                                \"id\": 1,\n                                \"name\": \"Road\",\n                                \"description\": \"Road Race Type\"\n                            }\n                        }\n                    ]\n                },\n                \"resultType\": {\n                    \"id\": 1,\n                    \"name\": \"default\",\n                    \"description\": \"Default Result Type\"\n                },\n                \"noPlaceCodeType\": {\n                    \"id\": 1,\n                    \"name\": \"NA\",\n                    \"description\": \"Participant Placed\"\n                }\n            },\n            {\n                \"id\": 5206,\n                \"eventId\": 150,\n                \"riderId\": 35,\n                \"resultTypeId\": 1,\n                \"noPlaceCodeTypeId\": 1,\n                \"lap\": null,\n                \"place\": 2,\n                \"time\": \"\",\n                \"points\": 99,\n                \"rider\": {\n                    \"id\": 35,\n                    \"firstName\": \"Harold\",\n                    \"lastName\": \"Koolkoolkool\",\n                    \"dob\": \"Sat Jun 05 2004\",\n                    \"country\": \"Sweden\",\n                    \"hometown\": \"Seoni\",\n                    \"photo\": \"https://www.procyclingstats.com/images/riders/bp/ee/neilson-powless-2024.jpeg\",\n                    \"strava\": \"4893701\",\n                    \"insta\": \"efatihvkf\",\n                    \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n                },\n                \"event\": {\n                    \"id\": 150,\n                    \"name\": \"Djado Plateau a Al Malaqi\",\n                    \"Race\": [\n                        {\n                            \"id\": 150,\n                            \"eventId\": 150,\n                            \"raceTypeId\": 1,\n                            \"startDate\": \"2024-11-06\",\n                            \"endDate\": null,\n                            \"location\": \"Akola, Ukraine\",\n                            \"raceType\": {\n                                \"id\": 1,\n                                \"name\": \"Road\",\n                                \"description\": \"Road Race Type\"\n                            }\n                        }\n                    ]\n                },\n                \"resultType\": {\n                    \"id\": 1,\n                    \"name\": \"default\",\n                    \"description\": \"Default Result Type\"\n                },\n                \"noPlaceCodeType\": {\n                    \"id\": 1,\n                    \"name\": \"NA\",\n                    \"description\": \"Participant Placed\"\n                }\n            },\n            {\n                \"id\": 5225,\n                \"eventId\": 150,\n                \"riderId\": 49,\n                \"resultTypeId\": 1,\n                \"noPlaceCodeTypeId\": 1,\n                \"lap\": null,\n                \"place\": 3,\n                \"time\": \"\",\n                \"points\": 84,\n                \"rider\": {\n                    \"id\": 49,\n                    \"firstName\": \"Cecilie\",\n                    \"lastName\": \"Markrus\",\n                    \"dob\": \"Thu Apr 26 2001\",\n                    \"country\": \"Guatemala\",\n                    \"hometown\": \"Broken Hill\",\n                    \"photo\": \"https://www.procyclingstats.com/images/riders/bp/aa/richard-carapaz-2024.jpeg\",\n                    \"strava\": \"1599291\",\n                    \"insta\": \"g\",\n                    \"about\": \"They think I'm just some dumb hick. They said that to me, at a dinner!\"\n                },\n                \"event\": {\n                    \"id\": 150,\n                    \"name\": \"Djado Plateau a Al Malaqi\",\n                    \"Race\": [\n                        {\n                            \"id\": 150,\n                            \"eventId\": 150,\n                            \"raceTypeId\": 1,\n                            \"startDate\": \"2024-11-06\",\n                            \"endDate\": null,\n                            \"location\": \"Akola, Ukraine\",\n                            \"raceType\": {\n                                \"id\": 1,\n                                \"name\": \"Road\",\n                                \"description\": \"Road Race Type\"\n                            }\n                        }\n                    ]\n                },\n                \"resultType\": {\n                    \"id\": 1,\n                    \"name\": \"default\",\n                    \"description\": \"Default Result Type\"\n                },\n                \"noPlaceCodeType\": {\n                    \"id\": 1,\n                    \"name\": \"NA\",\n                    \"description\": \"Participant Placed\"\n                }\n            }\n        ]\n    },\n    {\n        \"raceId\": 490,\n        \"results\": []\n    }\n]"
+						}
+					]
 				}
 			],
 			"description": "Next JS App Router Directory"
@@ -266,7 +761,84 @@
 						},
 						"description": "/results\n\nCreate a new result."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "a new Result",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n      \"eventId\": 1,\n      \"resultTypeId\": 1,\n      \"riderId\": 1,\n      \"noPlaceCodeTypeId\": 1,\n      \"lap\": 1,\n      \"place\": 4,\n      \"time\": \"\",\n      \"points\": 1\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/results",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"results"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "access-control-allow-headers",
+									"value": "Content-Type"
+								},
+								{
+									"key": "access-control-allow-methods",
+									"value": "GET, POST, OPTIONS"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "x-middleware-rewrite",
+									"value": "/api/v1/results"
+								},
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 18 Nov 2024 01:24:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 17190,\n    \"eventId\": 1,\n    \"riderId\": 1,\n    \"resultTypeId\": 1,\n    \"noPlaceCodeTypeId\": 1,\n    \"lap\": 1,\n    \"place\": 4,\n    \"time\": null,\n    \"points\": 1\n}"
+						}
+					]
 				},
 				{
 					"name": "a list of Results for a single Rider",
@@ -295,7 +867,82 @@
 						},
 						"description": "/results\n\nGet results for a single rider.\n\n@TODO this endpoint will be updated to /riders/\\[id\\]/results"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "a list of Results for a single Rider",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/results?riderId=52",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"results"
+									],
+									"query": [
+										{
+											"key": "riderId",
+											"value": "52",
+											"description": "number: a rider id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "access-control-allow-headers",
+									"value": "Content-Type"
+								},
+								{
+									"key": "access-control-allow-methods",
+									"value": "GET, POST, OPTIONS"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "x-middleware-rewrite",
+									"value": "/api/v1/results?riderId=52"
+								},
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 18 Nov 2024 01:25:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"riderId\": 52,\n    \"results\": [\n        {\n            \"year\": 2024,\n            \"races\": [\n                {\n                    \"id\": 504,\n                    \"name\": \"myracev2\",\n                    \"place\": 1,\n                    \"time\": \"23:40.93\",\n                    \"points\": 99,\n                    \"noPlaceCode\": \"NA\",\n                    \"lap\": 1,\n                    \"resultType\": \"default\",\n                    \"eventId\": 505,\n                    \"category\": \"1\",\n                    \"type\": \"Road\",\n                    \"startDate\": \"2024-10-03\",\n                    \"endDate\": null,\n                    \"location\": \"sumwhere, europe\",\n                    \"racers\": 20\n                }\n            ]\n        }\n    ]\n}"
+						}
+					]
 				}
 			],
 			"description": "Next JS App Router Directory"
@@ -332,7 +979,84 @@
 						},
 						"description": "/riders\n\nCreate a new rider."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "a new Rider",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"firstName\": \"Mipper\",\n  \"lastName\": \"Mopperson\",\n  \"dob\": \"1990-01-01\",\n  \"country\": \"USA\",\n  \"hometown\": \"New York, NY\",\n  \"photo\": \"https://www.procyclingstats.com/images/riders/bp/bf/julian-alaphilippe-2024.jpeg\",\n  \"strava\": \"87935790234\",\n  \"insta\": \"portamip\",\n  \"about\": \"It reaaaallly bothered me.\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/riders",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"riders"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "access-control-allow-headers",
+									"value": "Content-Type"
+								},
+								{
+									"key": "access-control-allow-methods",
+									"value": "GET, POST, OPTIONS"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "x-middleware-rewrite",
+									"value": "/api/v1/riders"
+								},
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 18 Nov 2024 01:25:55 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 74,\n    \"firstName\": \"Mipper\",\n    \"lastName\": \"Mopperson\",\n    \"dob\": \"1990-01-01\",\n    \"country\": \"USA\",\n    \"hometown\": \"New York, NY\",\n    \"photo\": \"https://www.procyclingstats.com/images/riders/bp/bf/julian-alaphilippe-2024.jpeg\",\n    \"strava\": \"87935790234\",\n    \"insta\": \"portamip\",\n    \"about\": \"It reaaaallly bothered me.\"\n}"
+						}
+					]
 				},
 				{
 					"name": "a single Rider",
@@ -355,7 +1079,76 @@
 						},
 						"description": "/riders/\\[id\\]\n\nGet a single Rider."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "a single Rider",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/riders/4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"riders",
+										"4"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "access-control-allow-headers",
+									"value": "Content-Type"
+								},
+								{
+									"key": "access-control-allow-methods",
+									"value": "GET, POST, OPTIONS"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "x-middleware-rewrite",
+									"value": "/api/v1/riders/4"
+								},
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 18 Nov 2024 01:26:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 4,\n    \"currentTeam\": \"TJ Maxx Equipo\",\n    \"name\": {\n        \"first\": \"Geraint\",\n        \"last\": \"Kamna\"\n    },\n    \"teams\": [\n        {\n            \"year\": 2024,\n            \"name\": \"TJ Maxx Equipo\",\n            \"id\": 3,\n            \"url\": \"\",\n            \"description\": \"TJ Maxx Equipo is a racing community. We help each other keep things dialed on and off the bike to realize one another's  athletic goals.\"\n        }\n    ],\n    \"socials\": {\n        \"strava\": \"715907\",\n        \"insta\": \"j\"\n    },\n    \"categories\": [\n        {\n            \"disicpline\": \"road\",\n            \"category\": 1\n        }\n    ],\n    \"hometown\": {\n        \"country\": \"Syria\",\n        \"city\": \"Copenhagen\"\n    },\n    \"dob\": \"Sat Jun 27 1998\",\n    \"photo\": \"https://www.procyclingstats.com/images/riders/bp/ca/egan-bernal-2024.jpg\",\n    \"wins\": 43\n}"
+						}
+					]
 				},
 				{
 					"name": "http://localhost:8080/api/latest/riders/1/teams",
@@ -387,7 +1180,86 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "http://localhost:8080/api/latest/riders/1/teams",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"teamId\": 2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/riders/4/teams",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"riders",
+										"4",
+										"teams"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "access-control-allow-headers",
+									"value": "Content-Type"
+								},
+								{
+									"key": "access-control-allow-methods",
+									"value": "GET, POST, OPTIONS"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "x-middleware-rewrite",
+									"value": "/api/v1/riders/4/teams"
+								},
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 18 Nov 2024 01:27:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 56,\n    \"riderId\": 4,\n    \"teamId\": 2\n}"
+						}
+					]
 				},
 				{
 					"name": "a list of Riders by Rank",
@@ -422,7 +1294,181 @@
 						},
 						"description": "/riders/rankings\n\nGet a list of riders by rank. Returns a list of riders who have accumulated the most points within a calendar year in descending order. Defaults to the current calendar year."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "a list of Riders by Rank",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/riders/rankings?limit=5&year=2024",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"riders",
+										"rankings"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "5",
+											"description": "number: limit the number of ranings returned"
+										},
+										{
+											"key": "year",
+											"value": "2024",
+											"description": "number: a calendar year"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "access-control-allow-headers",
+									"value": "Content-Type"
+								},
+								{
+									"key": "access-control-allow-methods",
+									"value": "GET, POST, OPTIONS"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "x-middleware-rewrite",
+									"value": "/api/v1/riders/rankings?limit=5&year=2024"
+								},
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 18 Nov 2024 01:27:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"totalPoints\": 1373,\n        \"riderId\": 25,\n        \"firstName\": \"Demi\",\n        \"lastName\": \"Squiban\",\n        \"hometown\": \"Prague\",\n        \"country\": \"Chile\"\n    },\n    {\n        \"totalPoints\": 1227,\n        \"riderId\": 34,\n        \"firstName\": \"Xandro\",\n        \"lastName\": \"Sormano\",\n        \"hometown\": \"Reykjavik\",\n        \"country\": \"Greece\"\n    },\n    {\n        \"totalPoints\": 1181,\n        \"riderId\": 18,\n        \"firstName\": \"Katarzyna\",\n        \"lastName\": \"Kamna\",\n        \"hometown\": \"Brussels\",\n        \"country\": \"Germany\"\n    },\n    {\n        \"totalPoints\": 1153,\n        \"riderId\": 31,\n        \"firstName\": \"Dynamo\",\n        \"lastName\": \"Torqueheed\",\n        \"hometown\": \"Rijeka\",\n        \"country\": \"Norway\"\n    },\n    {\n        \"totalPoints\": 1128,\n        \"riderId\": 19,\n        \"firstName\": \"Spedvagon\",\n        \"lastName\": \"De Minus\",\n        \"hometown\": \"Chiang Mai\",\n        \"country\": \"Ukraine\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "a list of Results for a single RIder",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/riders/52/results",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"riders",
+								"52",
+								"results"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "a list of Results for a single RIder",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/riders/52/results",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"riders",
+										"52",
+										"results"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "access-control-allow-headers",
+									"value": "Content-Type"
+								},
+								{
+									"key": "access-control-allow-methods",
+									"value": "GET, POST, OPTIONS"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "x-middleware-rewrite",
+									"value": "/api/v1/riders/52/results"
+								},
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 18 Nov 2024 01:48:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"riderId\": 52,\n    \"results\": [\n        {\n            \"year\": 2024,\n            \"races\": [\n                {\n                    \"id\": 504,\n                    \"name\": \"myracev2\",\n                    \"place\": 1,\n                    \"time\": \"23:40.93\",\n                    \"points\": 99,\n                    \"noPlaceCode\": \"NA\",\n                    \"lap\": 1,\n                    \"resultType\": \"default\",\n                    \"eventId\": 505,\n                    \"category\": \"1\",\n                    \"type\": \"Road\",\n                    \"startDate\": \"2024-10-03\",\n                    \"endDate\": null,\n                    \"location\": \"sumwhere, europe\",\n                    \"racers\": 20\n                }\n            ]\n        }\n    ]\n}"
+						}
+					]
 				}
 			],
 			"description": "Next JS App Router Directory"
