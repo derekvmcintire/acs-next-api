@@ -8,6 +8,7 @@ import {
   CreateRaceArgs,
   GetRaceFilters,
   IRace,
+  isValidOrderBy,
 } from "@/app/_types/event/types";
 import { Race } from "@prisma/client";
 
@@ -34,8 +35,19 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   const ids = request.nextUrl.searchParams.get("ids");
-  //@TODO: ensure orderBy is an accepted column
   const orderBy = request.nextUrl.searchParams.get("orderby") || undefined;
+  const orderByParamIsValid = isValidOrderBy(orderBy);
+
+  if (orderBy && !orderByParamIsValid) {
+    return NextResponse.json(
+      {
+        error:
+          "Invalid OrderBy Param. OrderBy must only be 'id', 'eventId' or 'startDate'.",
+      },
+      { status: 400 },
+    );
+  }
+
   const direction = request.nextUrl.searchParams.get("direction") || undefined;
 
   const filters: GetRaceFilters = {
