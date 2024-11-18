@@ -1376,6 +1376,99 @@
 							"body": "[\n    {\n        \"totalPoints\": 1373,\n        \"riderId\": 25,\n        \"firstName\": \"Demi\",\n        \"lastName\": \"Squiban\",\n        \"hometown\": \"Prague\",\n        \"country\": \"Chile\"\n    },\n    {\n        \"totalPoints\": 1227,\n        \"riderId\": 34,\n        \"firstName\": \"Xandro\",\n        \"lastName\": \"Sormano\",\n        \"hometown\": \"Reykjavik\",\n        \"country\": \"Greece\"\n    },\n    {\n        \"totalPoints\": 1181,\n        \"riderId\": 18,\n        \"firstName\": \"Katarzyna\",\n        \"lastName\": \"Kamna\",\n        \"hometown\": \"Brussels\",\n        \"country\": \"Germany\"\n    },\n    {\n        \"totalPoints\": 1153,\n        \"riderId\": 31,\n        \"firstName\": \"Dynamo\",\n        \"lastName\": \"Torqueheed\",\n        \"hometown\": \"Rijeka\",\n        \"country\": \"Norway\"\n    },\n    {\n        \"totalPoints\": 1128,\n        \"riderId\": 19,\n        \"firstName\": \"Spedvagon\",\n        \"lastName\": \"De Minus\",\n        \"hometown\": \"Chiang Mai\",\n        \"country\": \"Ukraine\"\n    }\n]"
 						}
 					]
+				},
+				{
+					"name": "a list of Results for a single RIder",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/riders/52/results",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"riders",
+								"52",
+								"results"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "a list of Results for a single RIder",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/riders/52/results",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"riders",
+										"52",
+										"results"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "access-control-allow-headers",
+									"value": "Content-Type"
+								},
+								{
+									"key": "access-control-allow-methods",
+									"value": "GET, POST, OPTIONS"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "x-middleware-rewrite",
+									"value": "/api/v1/riders/52/results"
+								},
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 18 Nov 2024 01:48:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"riderId\": 52,\n    \"results\": [\n        {\n            \"year\": 2024,\n            \"races\": [\n                {\n                    \"id\": 504,\n                    \"name\": \"myracev2\",\n                    \"place\": 1,\n                    \"time\": \"23:40.93\",\n                    \"points\": 99,\n                    \"noPlaceCode\": \"NA\",\n                    \"lap\": 1,\n                    \"resultType\": \"default\",\n                    \"eventId\": 505,\n                    \"category\": \"1\",\n                    \"type\": \"Road\",\n                    \"startDate\": \"2024-10-03\",\n                    \"endDate\": null,\n                    \"location\": \"sumwhere, europe\",\n                    \"racers\": 20\n                }\n            ]\n        }\n    ]\n}"
+						}
+					]
 				}
 			],
 			"description": "Next JS App Router Directory"

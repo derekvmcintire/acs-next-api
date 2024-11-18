@@ -8175,6 +8175,244 @@
           }
         }
       }
+    },
+    "/api/v1/riders/52/results": {
+      "get": {
+        "tags": [
+          "Riders"
+        ],
+        "summary": "a list of Results for a single RIder",
+        "description": "a list of Results for a single RIder",
+        "operationId": "aListOfResultsForASingleRider1",
+        "responses": {
+          "200": {
+            "description": "a list of Results for a single RIder",
+            "headers": {
+              "Connection": {
+                "schema": {
+                  "type": "string",
+                  "example": "keep-alive"
+                }
+              },
+              "Date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Mon, 18 Nov 2024 01:48:27 GMT"
+                }
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string",
+                  "example": "timeout=5"
+                }
+              },
+              "Transfer-Encoding": {
+                "schema": {
+                  "type": "string",
+                  "example": "chunked"
+                }
+              },
+              "access-control-allow-headers": {
+                "schema": {
+                  "type": "string",
+                  "example": "Content-Type"
+                }
+              },
+              "access-control-allow-methods": {
+                "schema": {
+                  "type": "string",
+                  "example": "GET, POST, OPTIONS"
+                }
+              },
+              "access-control-allow-origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              },
+              "vary": {
+                "schema": {
+                  "type": "string",
+                  "example": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch"
+                }
+              },
+              "x-middleware-rewrite": {
+                "schema": {
+                  "type": "string",
+                  "example": "/api/v1/riders/52/results"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "races": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "category": {
+                                  "type": "string",
+                                  "example": "1"
+                                },
+                                "endDate": {
+                                  "nullable": true,
+                                  "example": null
+                                },
+                                "eventId": {
+                                  "type": "number",
+                                  "example": 505
+                                },
+                                "id": {
+                                  "type": "number",
+                                  "example": 504
+                                },
+                                "lap": {
+                                  "type": "number",
+                                  "example": 1
+                                },
+                                "location": {
+                                  "type": "string",
+                                  "example": "sumwhere, europe"
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "example": "myracev2"
+                                },
+                                "noPlaceCode": {
+                                  "type": "string",
+                                  "example": "NA"
+                                },
+                                "place": {
+                                  "type": "number",
+                                  "example": 1
+                                },
+                                "points": {
+                                  "type": "number",
+                                  "example": 99
+                                },
+                                "racers": {
+                                  "type": "number",
+                                  "example": 20
+                                },
+                                "resultType": {
+                                  "type": "string",
+                                  "example": "default"
+                                },
+                                "startDate": {
+                                  "type": "string",
+                                  "example": "2024-10-03"
+                                },
+                                "time": {
+                                  "type": "string",
+                                  "example": "23:40.93"
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "example": "Road"
+                                }
+                              }
+                            },
+                            "example": [
+                              {
+                                "category": "1",
+                                "endDate": null,
+                                "eventId": 505,
+                                "id": 504,
+                                "lap": 1,
+                                "location": "sumwhere, europe",
+                                "name": "myracev2",
+                                "noPlaceCode": "NA",
+                                "place": 1,
+                                "points": 99,
+                                "racers": 20,
+                                "resultType": "default",
+                                "startDate": "2024-10-03",
+                                "time": "23:40.93",
+                                "type": "Road"
+                              }
+                            ]
+                          },
+                          "year": {
+                            "type": "number",
+                            "example": 2024
+                          }
+                        }
+                      },
+                      "example": [
+                        {
+                          "races": [
+                            {
+                              "category": "1",
+                              "endDate": null,
+                              "eventId": 505,
+                              "id": 504,
+                              "lap": 1,
+                              "location": "sumwhere, europe",
+                              "name": "myracev2",
+                              "noPlaceCode": "NA",
+                              "place": 1,
+                              "points": 99,
+                              "racers": 20,
+                              "resultType": "default",
+                              "startDate": "2024-10-03",
+                              "time": "23:40.93",
+                              "type": "Road"
+                            }
+                          ],
+                          "year": 2024
+                        }
+                      ]
+                    },
+                    "riderId": {
+                      "type": "number",
+                      "example": 52
+                    }
+                  }
+                },
+                "examples": {
+                  "a list of Results for a single RIder": {
+                    "value": {
+                      "results": [
+                        {
+                          "races": [
+                            {
+                              "category": "1",
+                              "endDate": null,
+                              "eventId": 505,
+                              "id": 504,
+                              "lap": 1,
+                              "location": "sumwhere, europe",
+                              "name": "myracev2",
+                              "noPlaceCode": "NA",
+                              "place": 1,
+                              "points": 99,
+                              "racers": 20,
+                              "resultType": "default",
+                              "startDate": "2024-10-03",
+                              "time": "23:40.93",
+                              "type": "Road"
+                            }
+                          ],
+                          "year": 2024
+                        }
+                      ],
+                      "riderId": 52
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "tags": [
