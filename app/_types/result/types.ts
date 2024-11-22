@@ -61,3 +61,9 @@ export interface AssignCategoryToResultArgs {
   resultId: number;
   categoryId: number;
 }
+
+export type AddResultsRequest = {
+  race: any;
+  results: string;
+  categories: any[];
+}

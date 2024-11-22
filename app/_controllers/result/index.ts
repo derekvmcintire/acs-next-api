@@ -2,6 +2,7 @@ import databaseClient from "@/app/_database/get-client";
 import ResultDAO from "@/app/_daos/result";
 import ResultService from "@/app/_services/result";
 import {
+  AddResultsRequest,
   CreateResultArgs,
   CreatedResult,
   IRacerHistory,
@@ -54,4 +55,46 @@ export async function createResult(
 ): Promise<CreatedResult> {
   const resultCategoryFacadeService = getResultCategoryFacadeService();
   return resultCategoryFacadeService.createResultWithCategory(resultData);
+}
+
+export async function addResultsToRace(resultData: AddResultsRequest) {
+  const parsedResults = parseResults(results);
+  const totalRacers = parsedResults.length;
+
+
+
+      // process results
+    // 1. import package
+    // 
+
+    // code from client
+  //   const parsedResults = parseResults(results);
+  // const totalRacers = parsedResults.length;
+  // const finalizedResults = await Promise.all(
+  //   parsedResults.map(async (result: PreparedResult) => {
+  //     const position = result?.place || 0;
+  //     if (totalRacers && position) {
+  //       const points = calculatePoints({ totalRacers, position: Number(position) });
+  //       result.points = points || 0;
+  //     }
+  //     const finalizedResult = await processPreparedResult(result, race, categories);
+  //     return finalizedResult;
+  //   })
+  // );
+
+  // export const processPreparedResult = async (
+  //   result: PreparedResult,
+  //   race: GetRacesResponse,
+  //   categories: string[]
+  // ): Promise<CreateResultReturn> => {
+  //   const riderId =
+  //     (await fetchRiderIdFromResult(result)) || (await createNewRiderIdFromResult(result));
+  
+  //   if (!riderId) {
+  //     throw new Error('Problem getting rider id');
+  //   }
+  
+  //   return Promise.resolve(processResult(result, race, riderId, categories));
+  // };
+  
 }
