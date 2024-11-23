@@ -67,3 +67,19 @@ export type AddResultsRequest = {
   results: string;
   categories: number[];
 };
+
+export type AddResultsReturnSummary = {
+  total: number;
+  successful: number;
+  failed: number;
+};
+
+export type AddResultsReturnDetails = {
+  createdResults: CreatedResult[];
+  errors: string[];
+};
+
+export type AddResultsReturn = {
+  summary: AddResultsReturnSummary;
+  details: AddResultsReturnDetails;
+};

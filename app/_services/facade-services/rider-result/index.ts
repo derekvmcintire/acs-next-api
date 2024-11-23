@@ -6,6 +6,7 @@ import {
 } from "cycling-results-parser";
 import {
   AddResultsRequest,
+  AddResultsReturn,
   CreateResultArgs,
   CreatedResult,
 } from "@/app/_types/result/types";
@@ -228,7 +229,9 @@ export class RiderResultFacadeService {
    * @param requestData - The request containing event details, results, and categories.
    * @returns A summary and details of the operation, including errors.
    */
-  async addResultsToRace(requestData: AddResultsRequest) {
+  async addResultsToRace(
+    requestData: AddResultsRequest,
+  ): Promise<AddResultsReturn> {
     const { categories, eventId, results } = requestData;
 
     const parsedResults = this.parseRawResults(results);
