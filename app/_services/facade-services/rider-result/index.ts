@@ -70,7 +70,7 @@ export class RiderResultFacadeService {
       lastName,
       dob: null,
       country: null,
-      hometown: String(result.hometown) || "",
+      hometown: result?.hometown ? String(result.hometown) : "",
       photo: null,
       strava: null,
       insta: null,
@@ -112,56 +112,142 @@ export class RiderResultFacadeService {
   }
 
   /**
+   * Parses raw results data into a structured array of `PreparedResult` objects.
+   * @param rawResults - Raw results string.
+   * @returns An array of parsed results.
+   * @throws Error if no valid results are found.
+   */
+  private parseRawResults(rawResults: string): PreparedResult[] {
+    const parsedResults = parseResults(rawResults) || [];
+    console.log(
+      `
+      *******************************
+      PARSED RESULTS
+      ******************************
+    `,
+      parsedResults,
+    );
+    if (parsedResults.length < 1) {
+      throw new Error("No valid results to process.");
+    }
+    return parsedResults;
+  }
+
+  /**
+   * Processes a single parsed result, including finding or creating the rider
+   * and creating the result with associated data.
+   * @param result - The parsed result data.
+   * @param eventId - The ID of the event the result is for.
+   * @param categories - List of category IDs the result belongs to.
+   * @param totalRacers - Total number of participants in the race.
+   * @returns The created result object.
+   */
+  private async processSingleResult(
+    result: PreparedResult,
+    eventId: number,
+    categories: string[],
+    totalRacers: number,
+  ): Promise<any> {
+    const { name } = result;
+
+    if (!name) {
+      throw new Error("No rider name found in the result.");
+    }
+
+    // Find or create rider
+    const existingRider = await this.findExistingRider(String(name));
+    const rider = existingRider || (await this.createNewRider(result));
+
+    const place = Number(result?.place) || 0;
+
+    // Prepare data for creating a new result
+    const resultData: CreateResultArgs = {
+      eventId,
+      riderId: rider.id,
+      place,
+      time: result?.time ? String(result.time) : "",
+      points: this.calculatePoints(totalRacers, place),
+      resultTypeId: 1, // Placeholder, adapt based on actual logic.
+      noPlaceCodeTypeId: 1, // Placeholder, adapt based on actual logic.
+      lap: 1, // Placeholder, adapt based on actual logic.
+      categories: categories.map(Number),
+    };
+
+    // Create the result in the database
+    const createdResult = await this.resultService.createResult(resultData);
+
+    // Assign the created result to specified categories
+    await this.assignResultToCategories(Number(createdResult.id), categories);
+
+    return createdResult;
+  }
+
+  /**
+   * Processes all parsed results, creating them in the database and handling errors.
+   * @param parsedResults - Array of parsed results.
+   * @param eventId - The ID of the event the results are for.
+   * @param categories - List of category IDs the results belong to.
+   * @returns An object containing created results and any errors encountered.
+   */
+  private async processResults(
+    parsedResults: PreparedResult[],
+    eventId: number,
+    categories: string[],
+  ): Promise<{ createdResults: any[]; errors: string[] }> {
+    const totalRacers = parsedResults.length;
+
+    const createdResults: any[] = [];
+    const errors: string[] = [];
+
+    await Promise.all(
+      parsedResults.map(async (result) => {
+        try {
+          const createdResult = await this.processSingleResult(
+            result,
+            eventId,
+            categories,
+            totalRacers,
+          );
+          createdResults.push(createdResult);
+        } catch (error) {
+          errors.push(
+            `Error processing result for rider ${result.name}: ${
+              (error as Error).message
+            }`,
+          );
+        }
+      }),
+    );
+
+    return { createdResults, errors };
+  }
+
+  /**
    * Adds a list of results to a race.
    * @param requestData - The request containing event details, results, and categories.
-   * @returns A list of created results.
+   * @returns A summary and details of the operation, including errors.
    */
   async addResultsToRace(requestData: AddResultsRequest) {
     const { categories, eventId, results } = requestData;
 
-    // Parse raw results (e.g., CSV or tab-separated data) into JavaScript objects.
-    const parsedResults = parseResults(results);
+    const parsedResults = this.parseRawResults(results);
 
-    const createdResults = await Promise.all(
-      parsedResults.map(async (result: PreparedResult) => {
-        const { name } = result;
-
-        if (!name) {
-          throw new Error("No rider name found in the result.");
-        }
-
-        // Attempt to find an existing rider or create a new one.
-        const existingRider = await this.findExistingRider(String(name));
-        const rider = existingRider || (await this.createNewRider(result));
-
-        const place = Number(result?.place) || 0;
-
-        // Prepare data for creating a new result.
-        const resultData: CreateResultArgs = {
-          eventId,
-          riderId: rider.id,
-          place,
-          time: String(result.time) || "",
-          points: this.calculatePoints(parsedResults.length, place),
-          resultTypeId: 1, // Placeholder, adapt based on actual logic.
-          noPlaceCodeTypeId: 1, // Placeholder, adapt based on actual logic.
-          lap: 1, // Placeholder, adapt based on actual logic.
-          categories,
-        };
-
-        // Create the result in the database.
-        const createdResult = await this.resultService.createResult(resultData);
-
-        // Assign the created result to specified categories.
-        await this.assignResultToCategories(
-          Number(createdResult.id),
-          categories,
-        );
-
-        return createdResult;
-      }),
+    const { createdResults, errors } = await this.processResults(
+      parsedResults,
+      eventId,
+      categories,
     );
 
-    return createdResults;
+    return {
+      summary: {
+        total: parsedResults.length,
+        successful: createdResults.length,
+        failed: errors.length,
+      },
+      details: {
+        createdResults,
+        errors,
+      },
+    };
   }
 }
