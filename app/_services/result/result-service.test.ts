@@ -35,21 +35,6 @@ describe("ResultService", () => {
     jest.clearAllMocks();
   });
 
-  describe("mapResults", () => {
-    it.skip("should map results into year buckets", async () => {
-      resultDaoMock.countResultsByEventId.mockResolvedValue(mockCount);
-      (getYearFromDateString as jest.Mock)
-        .mockReturnValueOnce(mockYearTwentyTwo)
-        .mockReturnValueOnce(mockYearTwentyOne);
-
-      const result = await resultService._mapResultsByYear([
-        mockSingleRiderResultRowTwentyTwo,
-        mockSingleRiderResultRowTwentyOne,
-      ]);
-      expect(result).toEqual<IResultYear[]>(mockExpectedResultYears);
-    });
-  });
-
   describe("getResultsByRiderId", () => {
     it("should return IRacerHistory with mapped results", async () => {
       resultDaoMock.getRiderResults.mockResolvedValue(

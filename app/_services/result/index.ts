@@ -19,7 +19,7 @@ export default class ResultService {
    * @param results - Array of result objects to be mapped by year.
    * @returns A promise resolving to an array of yearly result groups, where each year contains its associated races.
    */
-  async _mapResultsByYear(results: IResult[]): Promise<IResultYear[]> {
+  private async mapResultsByYear(results: IResult[]): Promise<IResultYear[]> {
     const yearMap = new Map<number, TransformedRace[]>(); // Use Map for efficient grouping by year
 
     // Process each result, transforming it and assigning it to its corresponding year
@@ -79,7 +79,7 @@ export default class ResultService {
     });
 
     // Map results into yearly groupings
-    const results = await this._mapResultsByYear(rows);
+    const results = await this.mapResultsByYear(rows);
 
     return {
       riderId,
