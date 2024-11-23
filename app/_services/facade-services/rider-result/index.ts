@@ -123,14 +123,7 @@ export class RiderResultFacadeService {
    */
   private parseRawResults(rawResults: string): PreparedResult[] {
     const parsedResults = parseResults(rawResults) || [];
-    console.log(
-      `
-      *******************************
-      PARSED RESULTS
-      ******************************
-    `,
-      parsedResults,
-    );
+
     if (parsedResults.length < 1) {
       throw new Error("No valid results to process.");
     }
