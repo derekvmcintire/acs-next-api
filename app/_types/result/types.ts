@@ -63,7 +63,7 @@ export interface AssignCategoryToResultArgs {
 }
 
 export type AddResultsRequest = {
-  race: any;
+  eventId: number;
   results: string;
   categories: any[];
-}
+};

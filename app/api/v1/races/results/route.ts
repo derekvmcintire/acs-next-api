@@ -35,18 +35,20 @@ export async function POST(request: NextRequest) {
     const requestBody: AddResultsRequest = await request.json(); // @TODO confirm requestBody type
 
     // destructure params
-    const { race, results, categories } = requestBody;
+    const { eventId, results, categories } = requestBody;
 
-    if (!race || !results || !categories) {
+    if (!eventId || !results || !categories) {
       return NextResponse.json(
-        { error: 'Invalid request to create a result, must include race, results and categories' },
+        {
+          error:
+            "Invalid request to create a result, must include race, results and categories",
+        },
         { status: 400 },
       );
     }
 
-    const response = addResultsToRace({ race, results, categories })
+    const response = addResultsToRace({ eventId, results, categories });
     return NextResponse.json(response, { status: 200 });
-
   } catch (error) {
     return NextResponse.json(
       { error: (error as Error).message },

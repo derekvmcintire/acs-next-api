@@ -14,7 +14,7 @@ import { flattenResult } from "./utility/map-result";
 export default class ResultService {
   constructor(private resultDao: ResultDAO) {}
 
-  async processResults(results: IResult[]): Promise<IResultYear[]> {
+  async _mapResultsByYear(results: IResult[]): Promise<IResultYear[]> {
     const yearMap = new Map<number, TransformedRace[]>(); // Use Map instead of Record
 
     await Promise.all(
@@ -60,7 +60,7 @@ export default class ResultService {
     const rows: IResult[] = await this.resultDao.getRiderResults({
       riderId: Number(riderId),
     });
-    const results = await this.processResults(rows);
+    const results = await this._mapResultsByYear(rows);
 
     return {
       riderId,

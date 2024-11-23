@@ -11,6 +11,9 @@ import {
 import EventService from "@/app/_services/event";
 import EventDAO from "@/app/_daos/event";
 import { ResultCategoryFacadeService } from "@/app/_services/facade-services/result-category";
+import RiderService from "@/app/_services/rider";
+import RiderDAO from "@/app/_daos/rider";
+import { RiderResultFacadeService } from "@/app/_services/facade-services/rider-result";
 
 const getResultService = (): ResultService => {
   const resultDao = new ResultDAO(databaseClient.result);
@@ -20,6 +23,17 @@ const getResultService = (): ResultService => {
 const getEventService = (): EventService => {
   const eventDao = new EventDAO(databaseClient.event, databaseClient.race);
   return new EventService(eventDao);
+};
+
+const getRiderService = (): RiderService => {
+  const riderDao = new RiderDAO(databaseClient.rider);
+  return new RiderService(riderDao);
+};
+
+const getRiderResultFacadeService = (): RiderResultFacadeService => {
+  const riderService = getRiderService();
+  const resultService = getResultService();
+  return new RiderResultFacadeService(riderService, resultService);
 };
 
 const getResultCategoryFacadeService = (): ResultCategoryFacadeService => {
@@ -57,44 +71,9 @@ export async function createResult(
   return resultCategoryFacadeService.createResultWithCategory(resultData);
 }
 
-export async function addResultsToRace(resultData: AddResultsRequest) {
-  const parsedResults = parseResults(results);
-  const totalRacers = parsedResults.length;
+export async function addResultsToRace(requestData: AddResultsRequest) {
+  const riderResultFacadeService = getRiderResultFacadeService();
+  const result = await riderResultFacadeService.addResultsToRace(requestData);
 
-
-
-      // process results
-    // 1. import package
-    // 
-
-    // code from client
-  //   const parsedResults = parseResults(results);
-  // const totalRacers = parsedResults.length;
-  // const finalizedResults = await Promise.all(
-  //   parsedResults.map(async (result: PreparedResult) => {
-  //     const position = result?.place || 0;
-  //     if (totalRacers && position) {
-  //       const points = calculatePoints({ totalRacers, position: Number(position) });
-  //       result.points = points || 0;
-  //     }
-  //     const finalizedResult = await processPreparedResult(result, race, categories);
-  //     return finalizedResult;
-  //   })
-  // );
-
-  // export const processPreparedResult = async (
-  //   result: PreparedResult,
-  //   race: GetRacesResponse,
-  //   categories: string[]
-  // ): Promise<CreateResultReturn> => {
-  //   const riderId =
-  //     (await fetchRiderIdFromResult(result)) || (await createNewRiderIdFromResult(result));
-  
-  //   if (!riderId) {
-  //     throw new Error('Problem getting rider id');
-  //   }
-  
-  //   return Promise.resolve(processResult(result, race, riderId, categories));
-  // };
-  
+  return result;
 }
