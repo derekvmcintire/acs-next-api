@@ -2,6 +2,7 @@ import ResultDAO from "@/app/_daos/result";
 import {
   AssignCategoryToResultArgs,
   CreateResultArgs,
+  CreatedResult,
   IRacerHistory,
   IResult,
   IResultYear,
@@ -9,6 +10,7 @@ import {
 } from "@/app/_types/result/types";
 import { getYearFromDateString } from "@/app/_utility/helper-functions";
 import { flattenResult } from "./utility/map-result";
+import { JoinResultCategory } from "@prisma/client";
 
 export default class ResultService {
   constructor(private resultDao: ResultDAO) {}
@@ -117,7 +119,7 @@ export default class ResultService {
    * @param resultData - The data required to create the result.
    * @returns A promise resolving to the created result object.
    */
-  async createResult(resultData: CreateResultArgs) {
+  async createResult(resultData: CreateResultArgs): Promise<CreatedResult> {
     return this.resultDao.createResult(resultData);
   }
 
@@ -127,7 +129,9 @@ export default class ResultService {
    * @param args - The arguments specifying the result ID and category ID.
    * @returns A promise resolving to the created association.
    */
-  async assignCategoryToResult(args: AssignCategoryToResultArgs) {
+  async assignCategoryToResult(
+    args: AssignCategoryToResultArgs,
+  ): Promise<JoinResultCategory | null> {
     return this.resultDao.assignCategoryToResult(args);
   }
 }
