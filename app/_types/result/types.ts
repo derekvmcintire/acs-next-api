@@ -61,3 +61,25 @@ export interface AssignCategoryToResultArgs {
   resultId: number;
   categoryId: number;
 }
+
+export type AddResultsRequest = {
+  eventId: number;
+  results: string;
+  categories: number[];
+};
+
+export type AddResultsReturnSummary = {
+  total: number;
+  successful: number;
+  failed: number;
+};
+
+export type AddResultsReturnDetails = {
+  createdResults: CreatedResult[];
+  errors: string[];
+};
+
+export type AddResultsReturn = {
+  summary: AddResultsReturnSummary;
+  details: AddResultsReturnDetails;
+};

@@ -1,9 +1,6 @@
 import {
-  mockExpectedResultYears,
   mockGetRiderResultsQueryResponse,
   mockRacerHistory,
-  mockSingleRiderResultRowTwentyOne,
-  mockSingleRiderResultRowTwentyTwo,
 } from "@/app/_constants/mock-data/result/mock-models";
 import {
   mockCount,
@@ -14,7 +11,7 @@ import {
 import ResultDAO from "@/app/_daos/result";
 import databaseClient from "@/app/_database/get-client";
 import ResultService from "@/app/_services/result";
-import { IResultYear, IRacerHistory } from "@/app/_types/result/types";
+import { IRacerHistory } from "@/app/_types/result/types";
 import { getYearFromDateString } from "@/app/_utility/helper-functions";
 
 jest.mock("@/app/_daos/result");
@@ -33,21 +30,6 @@ describe("ResultService", () => {
     ) as jest.Mocked<ResultDAO>;
     resultService = new ResultService(resultDaoMock);
     jest.clearAllMocks();
-  });
-
-  describe("mapResults", () => {
-    it("should map results into year buckets", async () => {
-      resultDaoMock.countResultsByEventId.mockResolvedValue(mockCount);
-      (getYearFromDateString as jest.Mock)
-        .mockReturnValueOnce(mockYearTwentyTwo)
-        .mockReturnValueOnce(mockYearTwentyOne);
-
-      const result = await resultService.processResults([
-        mockSingleRiderResultRowTwentyTwo,
-        mockSingleRiderResultRowTwentyOne,
-      ]);
-      expect(result).toEqual<IResultYear[]>(mockExpectedResultYears);
-    });
   });
 
   describe("getResultsByRiderId", () => {

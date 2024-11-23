@@ -1,6 +1,7 @@
 import { CreateResultArgs } from "@/app/_types/result/types";
 import ResultService from "../../result";
 
+//@TODO maybe deprecate this class in favor of RiderResultFacadeSErvice.createResultWithCategory
 export class ResultCategoryFacadeService {
   constructor(private resultService: ResultService) {}
 
