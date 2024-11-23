@@ -206,7 +206,7 @@ describe("RiderResultFacadeService", () => {
   describe("addResultsToRace", () => {
     it("should process results and return a summary", async () => {
       const eventId = 25;
-      const categories = ["99"];
+      const categories = [99];
       (parseResults as jest.Mock).mockReturnValueOnce(mockParsedResults);
       service["processResults"] = jest.fn().mockResolvedValueOnce({
         createdResults: [{ id: 1 }, { id: 2 }],
@@ -236,7 +236,7 @@ describe("RiderResultFacadeService", () => {
   describe("processResults", () => {
     it("should process all results and handle errors", async () => {
       const eventId = 25;
-      const categories = ["99"];
+      const categories = [99];
       const parsedResults = mockParsedResults;
 
       service["processSingleResult"] = jest

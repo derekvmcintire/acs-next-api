@@ -57,7 +57,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const response = await addResultsToRace({ eventId: Number(eventId), results, categories: categories.map(Number) });
+    const response = await addResultsToRace({
+      eventId: Number(eventId),
+      results,
+      categories: categories.map(Number),
+    });
 
     return NextResponse.json(response, { status: 200 });
   } catch (error) {

@@ -4,7 +4,11 @@ import {
   calculatePoints,
   parseResults,
 } from "cycling-results-parser";
-import { AddResultsRequest, CreateResultArgs, CreatedResult } from "@/app/_types/result/types";
+import {
+  AddResultsRequest,
+  CreateResultArgs,
+  CreatedResult,
+} from "@/app/_types/result/types";
 import RiderService from "../../rider";
 import { IRider, RiderRow } from "@/app/_types/rider/types";
 
