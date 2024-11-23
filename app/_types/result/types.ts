@@ -65,5 +65,5 @@ export interface AssignCategoryToResultArgs {
 export type AddResultsRequest = {
   eventId: number;
   results: string;
-  categories: any[];
+  categories: number[];
 };

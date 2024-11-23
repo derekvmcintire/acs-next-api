@@ -4,9 +4,9 @@ import {
   calculatePoints,
   parseResults,
 } from "cycling-results-parser";
-import { AddResultsRequest, CreateResultArgs } from "@/app/_types/result/types";
+import { AddResultsRequest, CreateResultArgs, CreatedResult } from "@/app/_types/result/types";
 import RiderService from "../../rider";
-import { RiderRow } from "@/app/_types/rider/types";
+import { IRider, RiderRow } from "@/app/_types/rider/types";
 
 export interface FullName {
   firstName: string;
@@ -53,7 +53,7 @@ export class RiderResultFacadeService {
    * @param name - Full name of the rider.
    * @returns The existing rider or `null` if no match is found.
    */
-  async findExistingRider(name: string): Promise<any | null> {
+  async findExistingRider(name: string): Promise<IRider | null> {
     const riders = await this.riderService.getRiders({ name });
     return riders?.[0] || null;
   }
@@ -95,7 +95,7 @@ export class RiderResultFacadeService {
    */
   private async assignResultToCategories(
     resultId: number,
-    categories: string[],
+    categories: number[],
   ): Promise<void> {
     if (!resultId) {
       throw new Error("Result ID is undefined during category assignment.");
@@ -104,7 +104,7 @@ export class RiderResultFacadeService {
     const assignments = categories.map(async (categoryId) => {
       return this.resultService.assignCategoryToResult({
         resultId,
-        categoryId: Number(categoryId),
+        categoryId,
       });
     });
 
@@ -145,9 +145,9 @@ export class RiderResultFacadeService {
   private async processSingleResult(
     result: PreparedResult,
     eventId: number,
-    categories: string[],
+    categories: number[],
     totalRacers: number,
-  ): Promise<any> {
+  ): Promise<CreatedResult> {
     const { name } = result;
 
     if (!name) {
@@ -157,6 +157,10 @@ export class RiderResultFacadeService {
     // Find or create rider
     const existingRider = await this.findExistingRider(String(name));
     const rider = existingRider || (await this.createNewRider(result));
+
+    if (!rider?.id) {
+      throw new Error("Error finding or creating rider");
+    }
 
     const place = Number(result?.place) || 0;
 
@@ -170,7 +174,7 @@ export class RiderResultFacadeService {
       resultTypeId: 1, // Placeholder, adapt based on actual logic.
       noPlaceCodeTypeId: 1, // Placeholder, adapt based on actual logic.
       lap: 1, // Placeholder, adapt based on actual logic.
-      categories: categories.map(Number),
+      categories,
     };
 
     // Create the result in the database
@@ -192,11 +196,11 @@ export class RiderResultFacadeService {
   private async processResults(
     parsedResults: PreparedResult[],
     eventId: number,
-    categories: string[],
-  ): Promise<{ createdResults: any[]; errors: string[] }> {
+    categories: number[],
+  ): Promise<{ createdResults: CreatedResult[]; errors: string[] }> {
     const totalRacers = parsedResults.length;
 
-    const createdResults: any[] = [];
+    const createdResults: CreatedResult[] = [];
     const errors: string[] = [];
 
     await Promise.all(
